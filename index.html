@@ -257,26 +257,68 @@
         </div>
     </section>
 
-    <!-- Expertise Section -->
-    <section class="expertise">
-        <h2>Our Expertise Across Technology Ecosystem</h2>
-        <div class="tabs">
-            <button class="active">GenAI and Cloud</button>
-            <button>Languages & Frameworks</button>
-            <button>SQL Databases</button>
-            <button>NoSQL Databases</button>
-            <button>Integrations</button>
-            <button>Cloud Native & Microservices Architecture</button>
-            <button>Serverless</button>
-            <button>Automation Testing</button>
+    <!-- Expertise Section: Concentric Orbital Arc Tech System -->
+    <section class="expertise" id="expertiseSection">
+        <div class="expertise-header">
+            <span class="eyebrow">• TECH STACK & ECOSYSTEM</span>
+            <h2>Our Expertise Across Technology Ecosystem</h2>
+            <p>Accelerating digital transformation with industry-standard frameworks, cloud platforms, and modern AI toolchains.</p>
         </div>
-        <div id="logo-loop-container" class="partners-loop-wrapper">
-            <div class="partners">
-                <div class="partner-card">aws partner network</div>
-                <div class="partner-card">Azure Machine Learning</div>
-                <div class="partner-card">Google Cloud Platform</div>
-                <div class="partner-card">Amazon SageMaker</div>
-                <div class="partner-card">Vertex AI</div>
+
+        <div class="tech-tabs-outer-container">
+            <div class="tech-tabs-wrapper">
+                <button class="tech-tab-btn active" data-tab="0">GenAI & Cloud</button>
+                <button class="tech-tab-btn" data-tab="1">Languages & Frameworks</button>
+                <button class="tech-tab-btn" data-tab="2">SQL Databases</button>
+                <button class="tech-tab-btn" data-tab="3">NoSQL Databases</button>
+                <button class="tech-tab-btn" data-tab="4">Integrations</button>
+                <button class="tech-tab-btn" data-tab="5">Cloud Native & Microservices</button>
+                <button class="tech-tab-btn" data-tab="6">Serverless</button>
+                <button class="tech-tab-btn" data-tab="7">Automation Testing</button>
+            </div>
+        </div>
+
+        <!-- Concentric Semi-Circle Arc Arena -->
+        <div class="orbital-arena" id="orbitalArena">
+            <!-- SVG Semi-Circle Background Paths (Equal 120px Spacing) -->
+            <svg class="orbital-svg" viewBox="0 0 840 440" preserveAspectRatio="xMidYMax meet">
+                <defs>
+                    <radialGradient id="innerArcGrad" cx="50%" cy="100%" r="100%">
+                        <stop offset="0%" stop-color="#f3ebff" stop-opacity="0.85" />
+                        <stop offset="70%" stop-color="#f8fafc" stop-opacity="0.2" />
+                        <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+                    </radialGradient>
+                    <radialGradient id="outerArcGrad" cx="50%" cy="100%" r="100%">
+                        <stop offset="0%" stop-color="#f8f5ff" stop-opacity="0.5" />
+                        <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+                    </radialGradient>
+                    <radialGradient id="outermostArcGrad" cx="50%" cy="100%" r="100%">
+                        <stop offset="0%" stop-color="#fcf9ff" stop-opacity="0.3" />
+                        <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+                    </radialGradient>
+                </defs>
+
+                <!-- Outermost Semi-Circle Arc (R = 420px) -->
+                <path d="M 0 440 A 420 420 0 0 1 840 440 Z" fill="url(#outermostArcGrad)" />
+                <path d="M 0 440 A 420 420 0 0 1 840 440" fill="none" stroke="rgba(155, 81, 224, 0.25)" stroke-width="1.6" />
+
+                <!-- Middle Semi-Circle Arc (R = 300px, Gap = 120px) -->
+                <path d="M 120 440 A 300 300 0 0 1 720 440 Z" fill="url(#outerArcGrad)" />
+                <path d="M 120 440 A 300 300 0 0 1 720 440" fill="none" stroke="rgba(155, 81, 224, 0.45)" stroke-width="1.8" />
+
+                <!-- Inner Semi-Circle Arc (R = 180px, Gap = 120px) -->
+                <path d="M 240 440 A 180 180 0 0 1 600 440 Z" fill="url(#innerArcGrad)" />
+                <path d="M 240 440 A 180 180 0 0 1 600 440" fill="none" stroke="rgba(155, 81, 224, 0.65)" stroke-width="2" />
+            </svg>
+
+            <!-- Dynamic Orbiting Tech Logo Nodes -->
+            <div class="orbital-nodes-container" id="orbitalNodesContainer">
+                <!-- Dynamically populated via JS -->
+            </div>
+
+            <!-- Central Category Title inside inner semi-circle -->
+            <div class="orbital-center-hub" id="orbitalCenterHub">
+                <span class="center-hub-title" id="centerHubTitle">GenAI & Cloud</span>
             </div>
         </div>
     </section>

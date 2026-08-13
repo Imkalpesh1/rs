@@ -152,4 +152,303 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     });
+
+    // 3. Tech Ecosystem Tab Switching & Dynamic Icon Rendering
+    function initTechEcosystem() {
+        const techData = [
+            {
+                category: "GenAI and Cloud",
+                items: [
+                    { name: "AWS", logo: "https://api.iconify.design/logos/aws.svg" },
+                    { name: "Azure Machine Learning", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" },
+                    { name: "Google Cloud Platform", logo: "https://api.iconify.design/logos/google-cloud.svg" },
+                    { name: "Amazon SageMaker", logo: "https://api.iconify.design/simple-icons/amazonaws.svg" },
+                    { name: "Vertex AI", logo: "assets/vertex-ai.png" }
+                ]
+            },
+            {
+                category: "Languages & Frameworks",
+                items: [
+                    { name: "C#", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" },
+                    { name: "Go", logo: "https://api.iconify.design/logos/go.svg" },
+                    { name: "GraphQL", logo: "https://api.iconify.design/logos/graphql.svg" },
+                    { name: "Node.js", logo: "https://api.iconify.design/logos/nodejs-icon.svg" },
+                    { name: "Python", logo: "https://api.iconify.design/logos/python.svg" }
+                ]
+            },
+            {
+                category: "SQL Databases",
+                items: [
+                    { name: "Amazon Aurora", logo: "https://api.iconify.design/logos/aws-aurora.svg" },
+                    { name: "Azure Cosmos DB", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" },
+                    { name: "MariaDB", logo: "https://api.iconify.design/logos/mariadb-icon.svg" },
+                    { name: "PostgreSQL", logo: "https://api.iconify.design/logos/postgresql.svg" },
+                    { name: "Microsoft SQL Server", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg" }
+                ]
+            },
+            {
+                category: "NoSQL Databases",
+                items: [
+                    { name: "Amazon Redshift", logo: "https://api.iconify.design/logos/aws-redshift.svg" },
+                    { name: "Cassandra", logo: "https://api.iconify.design/logos/cassandra.svg" },
+                    { name: "Elasticsearch", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/elasticsearch/elasticsearch-original.svg" },
+                    { name: "MongoDB", logo: "https://api.iconify.design/logos/mongodb-icon.svg" },
+                    { name: "Neo4j", logo: "https://api.iconify.design/logos/neo4j.svg" }
+                ]
+            },
+            {
+                category: "Integrations",
+                items: [
+                    { name: "Google Maps", logo: "https://api.iconify.design/logos/google-maps.svg" },
+                    { name: "Heap", logo: "https://api.iconify.design/logos/heap.svg" },
+                    { name: "Optimizely", logo: "https://api.iconify.design/logos/optimizely-icon.svg" },
+                    { name: "Stripe", logo: "https://api.iconify.design/logos/stripe.svg" },
+                    { name: "Twilio", logo: "https://api.iconify.design/logos/twilio-icon.svg" }
+                ]
+            },
+            {
+                category: "Cloud Native & Microservices",
+                items: [
+                    { name: "Amazon EKS", logo: "https://api.iconify.design/logos/aws-eks.svg" },
+                    { name: "Docker", logo: "https://api.iconify.design/logos/docker-icon.svg" },
+                    { name: "Envoy", logo: "https://api.iconify.design/logos/envoy-icon.svg" },
+                    { name: "Istio", logo: "https://api.iconify.design/simple-icons/istio.svg" },
+                    { name: "Kubernetes", logo: "https://api.iconify.design/logos/kubernetes.svg" }
+                ]
+            },
+            {
+                category: "Serverless",
+                items: [
+                    { name: "Amazon Athena", logo: "https://api.iconify.design/logos/aws-athena.svg" },
+                    { name: "Auth0", logo: "https://api.iconify.design/logos/auth0-icon.svg" },
+                    { name: "AWS Lambda", logo: "https://api.iconify.design/logos/aws-lambda.svg" },
+                    { name: "Azure Functions", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" },
+                    { name: "Google Cloud Functions", logo: "https://api.iconify.design/logos/google-cloud-functions.svg" }
+                ]
+            },
+            {
+                category: "Automation Testing",
+                items: [
+                    { name: "Cucumber", logo: "https://api.iconify.design/logos/cucumber.svg" },
+                    { name: "Jest", logo: "https://api.iconify.design/logos/jest.svg" },
+                    { name: "Protractor", logo: "https://api.iconify.design/logos/protractor.svg" },
+                    { name: "Selenium", logo: "https://api.iconify.design/logos/selenium.svg" },
+                    { name: "Swagger", logo: "https://api.iconify.design/logos/swagger.svg" }
+                ]
+            }
+        ];
+
+        const tabs = document.querySelectorAll(".tech-tab-btn");
+        const container = document.getElementById("orbitalNodesContainer");
+        const arena = document.getElementById("orbitalArena");
+        const hubTitle = document.getElementById("centerHubTitle");
+        if (!container || !tabs.length || !arena) return;
+
+        // Base Arc Positions for 5 Tech items along SVG concentric semi-circles (3-Tier Height Rhythm)
+        const nodeConfigs = [
+            { baseAngle: 142, radiusRatio: 0.3571 }, // Upper-Left Mid Arc (R = 300px)
+            { baseAngle: 152, radiusRatio: 0.2143 }, // Lower-Left Inner Arc (R = 180px)
+            { baseAngle: 90,  radiusRatio: 0.3571 }, // Top Apex Mid Arc (R = 300px)
+            { baseAngle: 28,  radiusRatio: 0.2143 }, // Lower-Right Inner Arc (R = 180px)
+            { baseAngle: 38,  radiusRatio: 0.3571 }  // Upper-Right Mid Arc (R = 300px)
+        ];
+
+        let currentCategoryIndex = 0;
+        let animationFrameId = null;
+
+        function updatePositions(timestamp) {
+            const width = arena.clientWidth || 840;
+            const height = arena.clientHeight || 440;
+            const centerX = width / 2;
+            const centerY = height; // Exact baseline anchor
+
+            const nodes = container.querySelectorAll(".orbital-node");
+            nodes.forEach((node, i) => {
+                if (node.classList.contains("transitioning")) return;
+
+                const cfg = nodeConfigs[i % nodeConfigs.length];
+                const radius = width * cfg.radiusRatio;
+                // Continuous revolving oscillation angle
+                const delta = Math.sin(timestamp * 0.0012 + i * 1.3) * 2.8;
+                const angleRad = (cfg.baseAngle + delta) * (Math.PI / 180);
+
+                const x = centerX + radius * Math.cos(angleRad);
+                const y = centerY - radius * Math.sin(angleRad);
+
+                node.style.left = `${x}px`;
+                node.style.top = `${y}px`;
+            });
+
+            animationFrameId = requestAnimationFrame(updatePositions);
+        }
+
+        function renderCategory(index) {
+            currentCategoryIndex = index;
+            const data = techData[index] || techData[0];
+
+            // 1. Trigger Pulse Wave on SVG Semi-Circles
+            const svgEl = arena.querySelector(".orbital-svg");
+            if (svgEl) {
+                svgEl.classList.add("pulse-wave");
+                setTimeout(() => svgEl.classList.remove("pulse-wave"), 450);
+            }
+
+            // 2. Animate Central Category Title (Smooth blur & slide-up morph)
+            if (hubTitle) {
+                hubTitle.style.transition = 'opacity 0.18s ease, transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), filter 0.18s ease';
+                hubTitle.style.opacity = '0';
+                hubTitle.style.filter = 'blur(4px)';
+                hubTitle.style.transform = 'translateY(-6px)';
+
+                setTimeout(() => {
+                    hubTitle.innerText = data.category;
+                    hubTitle.style.transform = 'translateY(6px)';
+                    setTimeout(() => {
+                        hubTitle.style.transition = 'opacity 0.32s ease, transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), filter 0.32s ease';
+                        hubTitle.style.opacity = '1';
+                        hubTitle.style.filter = 'blur(0px)';
+                        hubTitle.style.transform = 'translateY(0)';
+                    }, 30);
+                }, 160);
+            }
+
+            // 3. Animate Out Existing Circular Badges (Smooth dissolve float)
+            const existingNodes = container.querySelectorAll(".orbital-node");
+            existingNodes.forEach((node, i) => {
+                node.classList.add("transitioning");
+                node.style.transition = `opacity 0.2s ease ${i * 25}ms, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1) ${i * 25}ms, filter 0.2s ease`;
+                node.style.opacity = '0';
+                node.style.filter = 'blur(4px)';
+                node.style.transform = 'translate(-50%, -62%) scale(0.85)';
+            });
+
+            // 4. Render New Badges with Apple Spring Float-In
+            setTimeout(() => {
+                container.innerHTML = data.items.map((item, i) => `
+                    <div class="orbital-node" data-index="${i}">
+                        <img src="${item.logo}" alt="${item.name} Logo" class="orbital-node-icon" loading="lazy">
+                        <span class="orbital-tooltip">${item.name}</span>
+                    </div>
+                `).join('');
+
+                const width = arena.clientWidth || 840;
+                const height = arena.clientHeight || 440;
+                const centerX = width / 2;
+                const centerY = height;
+
+                const newNodes = container.querySelectorAll(".orbital-node");
+                newNodes.forEach((node, i) => {
+                    const cfg = nodeConfigs[i % nodeConfigs.length];
+                    const radius = width * cfg.radiusRatio;
+                    const angleRad = cfg.baseAngle * (Math.PI / 180);
+                    const x = centerX + radius * Math.cos(angleRad);
+                    const y = centerY - radius * Math.sin(angleRad);
+
+                    node.style.left = `${x}px`;
+                    node.style.top = `${y}px`;
+                    node.style.opacity = '0';
+                    node.style.filter = 'blur(3px)';
+                    node.style.transform = 'translate(-50%, -38%) scale(0.82)';
+
+                    setTimeout(() => {
+                        node.style.transition = 'opacity 0.38s ease, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.25), filter 0.38s ease';
+                        node.style.opacity = '1';
+                        node.style.filter = 'blur(0px)';
+                        node.style.transform = 'translate(-50%, -50%) scale(1)';
+                    }, i * 35 + 30);
+                });
+            }, 190);
+        }
+
+        // Auto-Play Timer & Smooth Auto-Scroll Logic
+        let autoPlayTimer = null;
+        const AUTO_PLAY_DELAY = 4500; // 4.5 seconds per tab
+
+        function selectCategoryTab(index, isUserAction = false) {
+            tabs.forEach(t => t.classList.remove("active"));
+            if (tabs[index]) {
+                tabs[index].classList.add("active");
+                // Smoothly scroll active tab into center view
+                tabs[index].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            }
+            renderCategory(index);
+
+            if (isUserAction) {
+                restartAutoPlayTimer(8000); // Pause for 8s on manual click
+            }
+        }
+
+        function startAutoPlayTimer() {
+            stopAutoPlayTimer();
+            autoPlayTimer = setInterval(() => {
+                const nextIdx = (currentCategoryIndex + 1) % techData.length;
+                selectCategoryTab(nextIdx, false);
+            }, AUTO_PLAY_DELAY);
+        }
+
+        function stopAutoPlayTimer() {
+            if (autoPlayTimer) {
+                clearInterval(autoPlayTimer);
+                autoPlayTimer = null;
+            }
+        }
+
+        function restartAutoPlayTimer(delay = 8000) {
+            stopAutoPlayTimer();
+            autoPlayTimer = setTimeout(() => {
+                startAutoPlayTimer();
+            }, delay);
+        }
+
+        tabs.forEach((tab, idx) => {
+            tab.addEventListener("click", function () {
+                selectCategoryTab(idx, true);
+            });
+        });
+
+        // Mouse Drag-to-Scroll Support for .tech-tabs-wrapper
+        const tabsWrapper = document.querySelector(".tech-tabs-wrapper");
+        if (tabsWrapper) {
+            let isDragging = false;
+            let startX, scrollLeft;
+
+            tabsWrapper.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                tabsWrapper.classList.add('active-drag');
+                startX = e.pageX - tabsWrapper.offsetLeft;
+                scrollLeft = tabsWrapper.scrollLeft;
+                stopAutoPlayTimer();
+            });
+
+            tabsWrapper.addEventListener('mouseleave', () => {
+                if (isDragging) {
+                    isDragging = false;
+                    tabsWrapper.classList.remove('active-drag');
+                    restartAutoPlayTimer(6000);
+                }
+            });
+
+            tabsWrapper.addEventListener('mouseup', () => {
+                if (isDragging) {
+                    isDragging = false;
+                    tabsWrapper.classList.remove('active-drag');
+                    restartAutoPlayTimer(6000);
+                }
+            });
+
+            tabsWrapper.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                e.preventDefault();
+                const x = e.pageX - tabsWrapper.offsetLeft;
+                const walk = (x - startX) * 1.8;
+                tabsWrapper.scrollLeft = scrollLeft - walk;
+            });
+        }
+
+        // Initial Render, auto-play timer and continuous orbit physics
+        selectCategoryTab(0, false);
+        startAutoPlayTimer();
+        requestAnimationFrame(updatePositions);
+    }
+    initTechEcosystem();
 });

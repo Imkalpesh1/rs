@@ -1006,79 +1006,259 @@ p {
     margin-bottom: 2rem;
 }
 
-/* Expertise */
+/* Expertise Section */
 .expertise {
-    padding: 5.5rem 6%;
+    padding: 6.5rem 6%;
     text-align: center;
     background-color: #ffffff;
+    position: relative;
 }
 
-.tabs {
+.expertise-header {
+    max-width: 820px;
+    margin: 0 auto 3rem;
+}
+
+.expertise-header .eyebrow {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--primary-purple);
+    margin-bottom: 0.75rem;
+    display: inline-block;
+}
+
+.expertise-header h2 {
+    font-size: clamp(2rem, 3.5vw, 2.75rem);
+    font-weight: 700;
+    color: #0f172a;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.75rem;
+}
+
+.expertise-header p {
+    color: #64748b;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* Unified Apple-Style Segmented Control Bar for Tech Tabs */
+.tech-tabs-outer-container {
+    position: relative;
+    max-width: 960px;
+    margin: 0 auto 1.5rem auto;
+    padding: 0 1rem;
+}
+
+.tech-tabs-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(241, 245, 249, 0.85);
+    border: 1px solid rgba(226, 232, 240, 0.9);
+    border-radius: 9999px;
+    padding: 4px;
+    backdrop-filter: blur(12px);
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 16px rgba(0, 0, 0, 0.02);
+    cursor: grab;
+    user-select: none;
+}
+
+.tech-tabs-wrapper.active-drag {
+    cursor: grabbing;
+    scroll-behavior: auto;
+}
+
+.tech-tabs-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+.tech-tab-btn {
+    background: transparent;
+    border: none;
+    color: #64748b;
+    padding: 0.52rem 1.15rem;
+    border-radius: 9999px;
+    font-size: 0.825rem;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    user-select: none;
+    flex-shrink: 0;
+}
+
+.tech-tab-btn:hover {
+    color: #1e293b;
+    background: rgba(255, 255, 255, 0.6);
+}
+
+.tech-tab-btn.active {
+    background: #ffffff;
+    color: #6d28d9;
+    font-weight: 600;
+    box-shadow: 0 3px 12px rgba(109, 40, 217, 0.16), 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.tech-tab-btn:active {
+    transform: scale(0.96);
+}
+
+/* Concentric Semi-Circle Arc Arena */
+.orbital-arena {
+    position: relative;
+    width: 100%;
+    max-width: 860px;
+    height: 440px;
+    margin: 0 auto;
+    overflow: hidden;
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
-    gap: 2rem;
-    border-bottom: 1px solid var(--border-color);
-    margin-top: 2rem;
-    margin-bottom: 3.5rem;
-    padding-bottom: 0.75rem;
+    align-items: flex-end;
+    padding-bottom: 10px;
 }
 
-.tabs button {
-    background: none;
-    border: none;
-    font-size: 0.95rem;
-    color: #64748b;
+/* SVG Semi-Circle Backgrounds */
+.orbital-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    transition: filter 0.4s ease;
+}
+
+.orbital-svg.pulse-wave {
+    filter: drop-shadow(0 0 12px rgba(155, 81, 224, 0.5));
+}
+
+/* Nodes Container */
+.orbital-nodes-container {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+/* Perfect Circular Orbiting Badges (Logo only inside circle) */
+.orbital-node {
+    position: absolute;
+    pointer-events: auto;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 1.5px solid rgba(155, 81, 224, 0.28);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 24px rgba(155, 81, 224, 0.16), 0 3px 8px rgba(0, 0, 0, 0.04);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     cursor: pointer;
-    font-weight: 500;
-    padding-bottom: 0.75rem;
-    position: relative;
-    transition: color 0.2s ease;
+    user-select: none;
+    z-index: 5;
 }
 
-.tabs button:hover {
-    color: var(--primary-purple);
+.orbital-node:hover {
+    transform: translate(-50%, -50%) scale(1.15) !important;
+    border-color: var(--primary-purple);
+    box-shadow: 0 16px 36px rgba(155, 81, 224, 0.32);
+    z-index: 20;
 }
 
-.tabs button.active {
-    color: var(--primary-purple);
+.orbital-node:active {
+    transform: translate(-50%, -50%) scale(0.95) !important;
+}
+
+.orbital-node-icon {
+    width: 46px;
+    height: 46px;
+    object-fit: contain;
+    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.08));
+    transition: transform 0.3s ease;
+}
+
+.orbital-node:hover .orbital-node-icon {
+    transform: scale(1.1);
+}
+
+/* Floating Custom Hover Tooltip */
+.orbital-tooltip {
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%) translateY(6px);
+    background: #0f172a;
+    color: #ffffff;
+    padding: 0.38rem 0.85rem;
+    border-radius: 8px;
+    font-size: 0.78rem;
     font-weight: 600;
+    white-space: nowrap;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 30;
 }
 
-.tabs button.active::after {
+.orbital-tooltip::after {
     content: '';
     position: absolute;
-    bottom: -0.75rem;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background-color: var(--primary-purple);
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px 5px 0 5px;
+    border-style: solid;
+    border-color: #0f172a transparent transparent transparent;
 }
 
-.partners-loop-wrapper {
-    width: 100%;
-    margin-top: 1.5rem;
-    position: relative;
-    overflow: hidden;
-    padding: 10px 0;
+.orbital-node:hover .orbital-tooltip {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
 }
 
-.partners {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 3.5rem;
-    flex-wrap: wrap;
+/* Central Category Title inside inner semi-circle */
+.orbital-center-hub {
+    position: absolute;
+    bottom: 38px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    pointer-events: none;
+    text-align: center;
 }
 
-.partner-card {
-    font-weight: 600;
-    color: #475569;
-    font-size: 1.05rem;
-    padding: 0.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+.center-hub-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #6d28d9;
+    letter-spacing: -0.015em;
+    white-space: nowrap;
+    text-shadow: 0 2px 12px rgba(109, 40, 217, 0.2);
+    display: inline-block;
+}
+
+@media (max-width: 768px) {
+    .orbital-arena {
+        height: 460px;
+    }
+    .ring-outer { width: 680px; height: 680px; }
+    .ring-mid { width: 480px; height: 480px; }
+    .ring-inner { width: 300px; height: 300px; }
+    .orbital-node {
+        width: 78px;
+        height: 78px;
+        padding: 6px 4px;
+    }
+    .orbital-node-icon { width: 30px; height: 30px; margin-bottom: 2px; }
+    .orbital-node-label { font-size: 0.65rem; max-width: 68px; }
+    .center-hub-title { font-size: 0.95rem; }
 }
 
 /* Thinking Industry */
