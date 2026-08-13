@@ -479,6 +479,11 @@ document.addEventListener("DOMContentLoaded", function () {
                     thinkingCardVideo.play();
                     thinkingVideoCard.classList.add("is-playing");
                     if (videoActionText) videoActionText.innerText = "Pause Video";
+                } else {
+                    thinkingCardVideo.pause();
+                    thinkingVideoCard.classList.remove("is-playing");
+                    if (videoActionText) videoActionText.innerText = "Watch Video";
+                }
             });
         }
     }
