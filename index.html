@@ -7,6 +7,9 @@
     <title>RSI - Digital Product Engineering</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/LogoLoop.css">
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
 </head>
 
 <body>
@@ -61,55 +64,61 @@
         </div>
     </section>
 
-    <!-- Hero Section 2 White Creative Layout (RSi Logo Palette) -->
+    <!-- Hero Section 2 White Creative Layout (Reference Image Match) -->
     <section class="hero-2-white">
         <div class="hero-2-white-container">
             <div class="hero-2-white-header">
                 <div class="section-label">• ACCELERATING DIGITAL INNOVATION</div>
-                <h2>A global consulting partner dedicated to building <span class="badge-icon purple-icon">⚡</span> <span class="highlight-text">smarter</span> and <span class="badge-icon dark-icon">💡</span> <span class="highlight-text-purple">more adaptive</span> future-ready products</h2>
+                <h2>A global consulting partner dedicated to building <span class="pill-highlight">smarter</span> and <span class="pill-highlight purple-pill">more adaptive</span> future-ready products</h2>
             </div>
 
             <div class="hero-2-grid">
-                <!-- Left Large RSi Purple Card -->
-                <div class="grid-card purple-card">
-                    <div class="card-brand">RSi</div>
-                    <div class="card-hero-img-box">
-                        <img src="image/service.png" alt="Digital Product Engineering" class="blue-card-img">
+                <!-- Card 1: Left Light Grey Card -->
+                <div class="grid-card card-light-grey">
+                    <div class="card-img-container">
+                        <img src="image/service.png" alt="Digital Product Engineering" class="card-inner-img">
+                        <button class="plus-btn" aria-label="Add">+</button>
                     </div>
-                    <div class="floating-white-card">
-                        <div class="metric-num">120+</div>
-                        <p class="metric-desc">Collaborating with leading AI and cloud technology providers</p>
+                    <div class="card-metric-block">
+                        <div class="metric-large">120+</div>
+                        <p class="card-subtext">Collaborating with leading AI and cloud technology providers</p>
                     </div>
                 </div>
 
-                <!-- Middle Soft Purple Card -->
-                <div class="grid-card gray-card">
-                    <div class="card-label">Commitment to measurable impact</div>
-                    <div class="metric-large">100%</div>
-                    <div class="avatar-stack">
-                        <span class="avatar av-1">👩‍💻</span>
-                        <span class="avatar av-2">👨‍💼</span>
-                        <span class="avatar av-3">👩‍🔬</span>
-                        <span class="avatar av-4">👨‍💻</span>
+                <!-- Card 2: Middle Lime Accent Card -->
+                <div class="grid-card card-lime-accent">
+                    <div class="card-top-row">
+                        <div class="avatar-stack">
+                            <span class="avatar av-1">👩‍💻</span>
+                            <span class="avatar av-2">👨‍💼</span>
+                            <span class="avatar av-3">👩‍🔬</span>
+                            <span class="avatar av-4">👨‍💻</span>
+                        </div>
+                        <button class="arrow-circle-btn" aria-label="Learn More">↗</button>
                     </div>
-                    <blockquote class="card-quote">
-                        "Their automation strategy completely reshaped how we work. It’s efficient, intelligent, and seamless."
-                    </blockquote>
+                    <div class="card-metric-block">
+                        <div class="metric-large">100%</div>
+                        <p class="card-subtext">invoice validation accuracy & faster cycle times</p>
+                    </div>
                 </div>
 
-                <!-- Right Column (Stacked Cards) -->
+                <!-- Right Column Stacked Cards -->
                 <div class="grid-card-stack">
-                    <!-- Top Right RSi Purple Card -->
-                    <div class="grid-card rsi-accent-card">
-                        <div class="card-label">Data Points</div>
-                        <div class="metric-large">520k+</div>
-                        <p class="card-subtext">Analyzed monthly to power smarter business strategies.</p>
+                    <!-- Card 3: Top Right Light Grey Card with Orb -->
+                    <div class="grid-card card-light-grey orb-card">
+                        <div class="orb-graphic"></div>
+                        <div class="card-metric-block">
+                            <div class="metric-large">520k+</div>
+                            <p class="card-subtext">processes automated monthly to power smarter strategies</p>
+                        </div>
                     </div>
 
-                    <!-- Bottom Right Black Card -->
-                    <div class="grid-card black-card">
-                        <div class="card-label">Global Impact</div>
-                        <div class="metric-large-light">20+</div>
+                    <!-- Card 4: Bottom Right Dark Card -->
+                    <div class="grid-card card-dark-slate">
+                        <div class="card-metric-block flex-row">
+                            <div class="metric-large-white">20+</div>
+                            <p class="card-subtext-white">weeks - average deployment per domain</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -166,7 +175,8 @@
         <div class="service-offerings-header">
             <span class="eyebrow">• EXPERTISE & SOLUTIONS</span>
             <h2>Comprehensive Service Offerings</h2>
-            <p>End-to-end digital engineering and AI transformation capabilities designed to help modern enterprises innovate faster and scale with confidence.</p>
+            <p>End-to-end digital engineering and AI transformation capabilities designed to help modern enterprises
+                innovate faster and scale with confidence.</p>
         </div>
 
         <div class="services-container">
@@ -215,7 +225,9 @@
                     <img src="image/service.png" alt="Engineering Team at Work" id="serviceDisplayImg">
                 </div>
                 <h3 class="service-title-display" id="serviceDisplayTitle">Innovation Consulting & Digital Advisory</h3>
-                <p class="service-desc-display" id="serviceDisplayDesc">We enable global enterprises to evaluate their technology architecture, identify strategic AI opportunities, and define clear digital roadmaps from idea validation to production execution.</p>
+                <p class="service-desc-display" id="serviceDisplayDesc">We enable global enterprises to evaluate their
+                    technology architecture, identify strategic AI opportunities, and define clear digital roadmaps from
+                    idea validation to production execution.</p>
                 <div class="tags-container" id="serviceDisplayTags">
                     <span class="pill">R&D & Prototyping</span>
                     <span class="pill">Product Portfolio Assessments</span>
@@ -258,12 +270,14 @@
             <button>Serverless</button>
             <button>Automation Testing</button>
         </div>
-        <div class="partners">
-            <div class="partner-card">aws partner network</div>
-            <div class="partner-card">Azure Machine Learning</div>
-            <div class="partner-card">Google Cloud Platform</div>
-            <div class="partner-card">Amazon SageMaker</div>
-            <div class="partner-card">Vertex AI</div>
+        <div id="logo-loop-container" class="partners-loop-wrapper">
+            <div class="partners">
+                <div class="partner-card">aws partner network</div>
+                <div class="partner-card">Azure Machine Learning</div>
+                <div class="partner-card">Google Cloud Platform</div>
+                <div class="partner-card">Amazon SageMaker</div>
+                <div class="partner-card">Vertex AI</div>
+            </div>
         </div>
     </section>
 
@@ -458,6 +472,7 @@
         </div>
     </footer>
 
+    <script src="js/LogoLoopApp.js" defer></script>
     <script src="js/main.js" defer></script>
     <script src="js/gradient-blinds.js" defer></script>
 </body>
