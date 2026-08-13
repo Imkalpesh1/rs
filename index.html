@@ -69,7 +69,9 @@
         <div class="hero-2-white-container">
             <div class="hero-2-white-header">
                 <div class="section-label">• ACCELERATING DIGITAL INNOVATION</div>
-                <h2>A global consulting partner dedicated to building <span class="pill-highlight">smarter</span> and <span class="pill-highlight purple-pill">more adaptive</span> future-ready products</h2>
+                <h2>A global consulting partner dedicated to building <span class="pill-highlight">smarter</span> and
+                    <span class="pill-highlight purple-pill">more adaptive</span> future-ready products
+                </h2>
             </div>
 
             <div class="hero-2-grid">
@@ -174,7 +176,7 @@
     <section class="service-offerings">
         <div class="service-offerings-header">
             <span class="eyebrow">• EXPERTISE & SOLUTIONS</span>
-            <h2>Comprehensive Service Offerings</h2>
+            <h2>Service Offerings</h2>
             <p>End-to-end digital engineering and AI transformation capabilities designed to help modern enterprises
                 innovate faster and scale with confidence.</p>
         </div>
@@ -327,37 +329,77 @@
     <section class="thinking-industry">
         <div class="section-header flex-header">
             <div>
+                <span class="eyebrow">• THOUGHT LEADERSHIP & INSIGHTS</span>
                 <h2>Thinking that moves the industry</h2>
-                <p>orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
-                    and scrambled it to make a type specimen book.</p>
+                <p>Explore cutting-edge research, tech talks, and strategic whitepapers from our engineering and AI leaders powering global digital transformation.</p>
             </div>
-            <a href="#" class="btn btn-purple">Lorem Ipsum</a>
+            <a href="#" class="btn btn-purple">Explore All Insights</a>
         </div>
         <div class="thinking-grid">
-            <div class="thinking-card">
+            <!-- Card 1: Tech Talk -->
+            <div class="thinking-card tech-talk-card">
                 <div class="card-img-container">
-                    <span class="tag tag-dark">Tech Talk</span>
-                    <img src="image/techtalk.png" alt="Tech Talk">
+                    <span class="tag tag-dark">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-right:4px; vertical-align:-1px;"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg>
+                        Tech Talk
+                    </span>
+                    <img src="image/techtalk.png" alt="Tech Talk: Multi-Agent AI Systems">
+                    <div class="card-img-overlay"></div>
                 </div>
-                <h3>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</h3>
-                <a href="#" class="learn-more">Learn more</a>
+                <div class="thinking-card-body">
+                    <h3>Architecting Resilient Multi-Agent AI Systems for Enterprise Scale</h3>
+                    <p>Learn how modern cloud-native architectures harness generative AI workflows and autonomous agents to automate complex business processes.</p>
+                    <a href="#" class="learn-more">
+                        <span>Read Insight</span>
+                        <svg class="arrow-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </a>
+                </div>
             </div>
-            <div class="thinking-card">
+
+            <!-- Card 2: Video Card -->
+            <div class="thinking-card video-card" id="thinkingVideoCard">
                 <div class="card-img-container">
-                    <span class="tag tag-light">Video</span>
-                    <img src="image/video.png" alt="Video">
+                    <span class="tag tag-video">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-right:4px; vertical-align:-1px;"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+                        Watch Video
+                    </span>
+                    <img src="image/video.png" alt="Video: 90-Day AI Transformation" class="video-poster-img">
+                    <video src="image/bg video.mp4" loop muted playsinline class="thinking-card-video" id="thinkingCardVideo"></video>
+                    <div class="video-play-overlay">
+                        <button class="video-play-btn" id="thinkingPlayBtn" aria-label="Play Video">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                        </button>
+                        <span class="video-duration">03:45</span>
+                    </div>
                 </div>
-                <h3>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</h3>
-                <a href="#" class="learn-more">Learn more</a>
+                <div class="thinking-card-body">
+                    <h3>The 90-Day AI Transformation Blueprint: From Idea to Execution</h3>
+                    <p>Watch our tech leaders demonstrate how EXIQO AI Studio accelerates deployment from proof-of-concept to production ROI with OptimaAI platform.</p>
+                    <a href="#" class="learn-more">
+                        <span id="videoActionText">Watch Video</span>
+                        <svg class="arrow-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </a>
+                </div>
             </div>
-            <div class="thinking-card">
+
+            <!-- Card 3: White Paper -->
+            <div class="thinking-card whitepaper-card">
                 <div class="card-img-container">
-                    <span class="tag tag-dark">White Paper</span>
-                    <img src="image/whitepaper.png" alt="White Paper">
+                    <span class="tag tag-dark">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-right:4px; vertical-align:-1px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                        White Paper
+                    </span>
+                    <img src="image/whitepaper.png" alt="White Paper: Product Modernization">
+                    <div class="card-img-overlay"></div>
                 </div>
-                <h3>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</h3>
-                <a href="#" class="learn-more">Learn more</a>
+                <div class="thinking-card-body">
+                    <h3>Next-Gen Product Modernization: Decoupling Monoliths into Microservices</h3>
+                    <p>Discover strategic frameworks and actionable blueprints for modernizing legacy platforms into cloud-first microservices without disruption.</p>
+                    <a href="#" class="learn-more">
+                        <span>Download Paper</span>
+                        <svg class="arrow-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -365,65 +407,84 @@
     <!-- Other Services Section -->
     <section class="other-services">
         <div class="section-header flex-header">
-            <h2>Our Other Services Powering Your<br>Product Engineering Journey</h2>
+            <div>
+                <span class="eyebrow">• SPECIALIZED CAPABILITIES</span>
+                <h2>Our Other Services Powering Your<br>Product Engineering Journey</h2>
+                <p class="section-subtext">Complementary engineering capabilities to scale your digital architecture, optimize data ecosystems, and ensure resilient enterprise operations.</p>
+            </div>
             <div class="carousel-nav">
-                <button class="nav-btn" aria-label="Previous">←</button>
-                <button class="nav-btn" aria-label="Next">→</button>
+                <button class="nav-btn prev-btn" id="carouselPrevBtn" aria-label="Previous Services">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                </button>
+                <button class="nav-btn next-btn" id="carouselNextBtn" aria-label="Next Services">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </button>
             </div>
         </div>
-        <div class="services-carousel">
+        <div class="services-carousel" id="servicesCarousel">
+            <!-- Card 1: Cloud & DevOps -->
             <div class="carousel-card">
-                <div class="icon">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--primary-purple)"
-                        stroke-width="2">
+                <div class="icon-box">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z" />
                     </svg>
                 </div>
-                <h3>Cloud & DevOps</h3>
-                <p>Accelerate innovation and deployment with our cloud-native solutions and DevOps practices. Optimize
-                    your infrastructure for scalability and efficiency.</p>
-                <a href="#" class="know-more">Know More</a>
+                <h3>Cloud & DevOps Engineering</h3>
+                <p>Accelerate continuous deployment with resilient multi-cloud architectures, Kubernetes orchestration, zero-downtime CI/CD pipelines, and automated FinOps.</p>
+                <a href="#" class="know-more">
+                    <span>Explore Cloud Services</span>
+                    <svg class="link-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
             </div>
-            <div class="carousel-card active-purple">
-                <div class="icon">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2">
-                        <rect x="3" y="3" width="7" height="7" />
-                        <rect x="14" y="3" width="7" height="7" />
-                        <rect x="14" y="14" width="7" height="7" />
-                        <rect x="3" y="14" width="7" height="7" />
+
+            <!-- Card 2: Data & AI -->
+            <div class="carousel-card">
+                <div class="icon-box">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="7" height="7" rx="1.5" />
+                        <rect x="14" y="3" width="7" height="7" rx="1.5" />
+                        <rect x="14" y="14" width="7" height="7" rx="1.5" />
+                        <rect x="3" y="14" width="7" height="7" rx="1.5" />
                     </svg>
                 </div>
-                <h3>Data and AI</h3>
-                <p>Accelerate innovation and deployment with our cloud-native solutions and DevOps practices. Optimize
-                    your infrastructure for scalability and efficiency.</p>
-                <a href="#" class="know-more">Know More</a>
+                <h3>Data & Enterprise AI</h3>
+                <p>Transform raw data into real-time intelligence with scalable enterprise data lakes, predictive analytics, Databricks, and custom LLM workflows.</p>
+                <a href="#" class="know-more">
+                    <span>Explore Data & AI</span>
+                    <svg class="link-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
             </div>
+
+            <!-- Card 3: Automation & Digital Ops -->
             <div class="carousel-card">
-                <div class="icon">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--primary-purple)"
-                        stroke-width="2">
+                <div class="icon-box">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="12" cy="12" r="3" />
-                        <path
-                            d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
                     </svg>
                 </div>
-                <h3>Automation and<br>Digital Ops</h3>
-                <p>Accelerate innovation and deployment with our cloud-native solutions and DevOps practices. Optimize
-                    your infrastructure for scalability and efficiency.</p>
-                <a href="#" class="know-more">Know More</a>
+                <h3>Automation & Digital Ops</h3>
+                <p>Eliminate manual operational bottlenecks using Intelligent Process Automation (IPA), robotic workflows, and self-healing infrastructure.</p>
+                <a href="#" class="know-more">
+                    <span>Explore Automation</span>
+                    <svg class="link-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
             </div>
+
+            <!-- Card 4: Quality Engineering -->
             <div class="carousel-card">
-                <div class="icon">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--primary-purple)"
-                        stroke-width="2">
+                <div class="icon-box">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
                         <polyline points="22 4 12 14.01 9 11.01" />
                     </svg>
                 </div>
-                <h3>Quality<br>Engineering</h3>
-                <p>Accelerate innovation and deployment with our cloud-native solutions and DevOps practices. Optimize
-                    your infrastructure for scalability and efficiency.</p>
-                <a href="#" class="know-more">Know More</a>
+                <h3>Quality Engineering & QA</h3>
+                <p>Ensure zero-defect software releases through AI-powered test automation suites, performance stress testing, and continuous security audits.</p>
+                <a href="#" class="know-more">
+                    <span>Explore Quality Ops</span>
+                    <svg class="link-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
             </div>
         </div>
     </section>

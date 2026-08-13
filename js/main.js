@@ -451,4 +451,49 @@ document.addEventListener("DOMContentLoaded", function () {
         requestAnimationFrame(updatePositions);
     }
     initTechEcosystem();
+
+    // 3. Thinking Section Video Card Hover & Click Play Logic
+    const thinkingVideoCard = document.getElementById("thinkingVideoCard");
+    const thinkingCardVideo = document.getElementById("thinkingCardVideo");
+    const thinkingPlayBtn = document.getElementById("thinkingPlayBtn");
+    const videoActionText = document.getElementById("videoActionText");
+
+    if (thinkingVideoCard && thinkingCardVideo) {
+        thinkingVideoCard.addEventListener("mouseenter", function () {
+            thinkingCardVideo.play().then(() => {
+                thinkingVideoCard.classList.add("is-playing");
+            }).catch(err => {
+                console.log("Autoplay blocked on video hover:", err);
+            });
+        });
+
+        thinkingVideoCard.addEventListener("mouseleave", function () {
+            thinkingCardVideo.pause();
+            thinkingVideoCard.classList.remove("is-playing");
+        });
+
+        if (thinkingPlayBtn) {
+            thinkingPlayBtn.addEventListener("click", function (e) {
+                e.stopPropagation();
+                if (thinkingCardVideo.paused) {
+                    thinkingCardVideo.play();
+                    thinkingVideoCard.classList.add("is-playing");
+                    if (videoActionText) videoActionText.innerText = "Pause Video";
+            });
+        }
+    }
+
+    // 4. Other Services Carousel Navigation Controls
+    const servicesCarousel = document.getElementById("servicesCarousel");
+    const carouselPrevBtn = document.getElementById("carouselPrevBtn");
+    const carouselNextBtn = document.getElementById("carouselNextBtn");
+
+    if (servicesCarousel && carouselPrevBtn && carouselNextBtn) {
+        carouselNextBtn.addEventListener("click", function () {
+            servicesCarousel.scrollBy({ left: 320, behavior: "smooth" });
+        });
+        carouselPrevBtn.addEventListener("click", function () {
+            servicesCarousel.scrollBy({ left: -320, behavior: "smooth" });
+        });
+    }
 });
