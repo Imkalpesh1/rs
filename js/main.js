@@ -83,81 +83,137 @@ document.addEventListener("DOMContentLoaded", function () {
         animate();
     }
 
-    // 2. Service Offerings Dynamic Tab Switching Logic
+    // 2. Service Offerings Apple Accordion & Stage Showcase System
     const serviceData = [
         {
-            title: "Generative AI & Enterprise AI Engineering",
-            desc: "Designing, building, and deploying production-ready GenAI platforms, custom LLMs, RAG architectures, and autonomous AI agents tailored for your business domain.",
-            tags: ["GenAI & LLM Integration", "RAG & Knowledge Graphs", "Autonomous AI Agents", "MLOps & Fine-Tuning", "AI Governance & Safety"]
+            title: "Innovation Consulting & Digital Advisory",
+            desc: "We enable global enterprises to evaluate their <strong>technology architecture</strong>, identify strategic <strong>AI opportunities</strong>, and define clear <strong>digital roadmaps</strong> from idea validation to production execution.",
+            tags: ["R&D & Prototyping", "Product Portfolio Assessments", "Strategy Workshops", "Business Transformation", "Design Thinking Workshops", "AI Adoption Blueprints", "Cloud & Data Strategy"],
+            image: "image/service.png"
         },
         {
-            title: "Custom Software Product Engineering",
-            desc: "End-to-end product development lifecycle services from concept and MVP build to full-scale platform modernization, microservices, and SaaS architecture.",
-            tags: ["Full-Stack SaaS Development", "Microservices Architecture", "API Engineering", "Legacy System Modernization", "Cloud-Native Apps"]
+            title: "Product & Platform Engineering",
+            desc: "End-to-end <strong>product development lifecycle</strong> services from concept and <strong>MVP build</strong> to full-scale <strong>platform modernization</strong>, microservices, and <strong>SaaS architecture</strong>.",
+            tags: ["Full-Stack SaaS Development", "Microservices Architecture", "API Engineering", "Legacy System Modernization", "Cloud-Native Apps"],
+            image: "image/case1.png"
         },
         {
-            title: "Cloud Native & DevOps Engineering",
-            desc: "Accelerating modern cloud infrastructure management, Kubernetes orchestration, zero-downtime CI/CD pipelines, and automated FinOps optimization.",
-            tags: ["AWS / Azure / GCP Cloud", "Kubernetes & Containers", "CI/CD & GitOps Automation", "FinOps & Cloud Cost Optimization", "Infrastructure as Code"]
+            title: "Product Modernization",
+            desc: "Re-architecting <strong>legacy monoliths</strong> into <strong>cloud-native microservices</strong>, optimizing <strong>database performance</strong>, and updating user experience toolchains.",
+            tags: ["Cloud Migration", "Monolith Refactoring", "API Gateway Setup", "Performance Optimization", "Tech Stack Upgrade"],
+            image: "image/case2.png"
         },
         {
-            title: "Data Engineering & Analytics",
-            desc: "Building scalable enterprise data lakes, real-time streaming data pipelines, automated ETL/ELT workflows, and executive analytics dashboards.",
-            tags: ["Enterprise Data Lakes", "Real-Time Data Streaming", "Snowflake & Databricks", "Automated ETL/ELT", "Predictive Analytics"]
+            title: "Sustenance & Support",
+            desc: "Providing <strong>24/7/365 operational maintenance</strong>, proactive monitoring, <strong>security patching</strong>, <strong>SLA-backed bug fixes</strong>, and continuous product enhancements.",
+            tags: ["24/7 Managed Ops", "SLA Assurance", "Security Patching", "Bug Fixing & Support", "Continuous Optimization"],
+            image: "image/case3.png"
         },
         {
-            title: "UI/UX & Product Design Thinking",
-            desc: "Crafting intuitive, accessible, high-conversion user interfaces backed by user research, design systems, and rapid interactive prototyping.",
-            tags: ["Design Systems & UI Kits", "User Research & Testing", "Interactive Prototyping", "Design Thinking Workshops", "WCAG Accessibility"]
+            title: "Electronic Data Automation [EDA]",
+            desc: "Automating complex <strong>document extraction</strong>, semiconductor & hardware <strong>workflow automation</strong>, and automated data pipelines using <strong>AI and vision models</strong>.",
+            tags: ["EDA Workflow Automation", "Document Processing AI", "Semiconductor Design Tech", "Pipeline Automation", "Data Parsing"],
+            image: "image/exiqo.png"
         },
         {
-            title: "Quality Engineering & Test Automation",
-            desc: "Ensuring zero-defect software releases through automated regression suites, continuous performance testing, and cybersecurity audit integration.",
-            tags: ["Automated Regression", "Performance Testing", "Cybersecurity Audits", "API & Integration Testing", "CI/CD Test Pipelines"]
+            title: "Quality Assurance & Testing",
+            desc: "Ensuring <strong>zero-defect software releases</strong> through <strong>automated regression suites</strong>, continuous performance testing, and <strong>cybersecurity audit integration</strong>.",
+            tags: ["Automated Regression", "Performance Testing", "Cybersecurity Audits", "API & Integration Testing", "CI/CD Test Pipelines"],
+            image: "image/whitepaper.png"
         },
         {
             title: "Rapid Application Development [RAD]",
-            desc: "Accelerating time-to-market using low-code/no-code platforms, modular component libraries, and agile sprint delivery frameworks.",
-            tags: ["Low-Code Platforms", "Rapid MVP Delivery", "Agile Sprints", "Modular Architecture", "Cross-Platform Apps"]
+            desc: "Accelerating <strong>time-to-market</strong> using <strong>low-code/no-code platforms</strong>, modular component libraries, and <strong>agile sprint delivery frameworks</strong>.",
+            tags: ["Low-Code Platforms", "Rapid MVP Delivery", "Agile Sprints", "Modular Architecture", "Cross-Platform Apps"],
+            image: "image/hero.jpg"
         },
         {
             title: "Digital Adoption Platform [DAP]",
-            desc: "Maximizing software adoption and user onboarding efficiency with in-app guidance, interactive walkthroughs, and real-time usage analytics.",
-            tags: ["Interactive Walkthroughs", "User Analytics", "In-App Onboarding", "Change Management", "Workflow Automation"]
+            desc: "Maximizing <strong>software adoption</strong> and user onboarding efficiency with <strong>in-app guidance</strong>, interactive walkthroughs, and <strong>real-time usage analytics</strong>.",
+            tags: ["Interactive Walkthroughs", "User Analytics", "In-App Onboarding", "Change Management", "Workflow Automation"],
+            image: "image/techtalk.png"
         },
         {
             title: "CTO-as-a-Service",
-            desc: "Providing high-level strategic technology leadership, AI architecture guidance, vendor selection, and engineering team scaling on demand.",
-            tags: ["Fractional CTO Leadership", "Tech Architecture Audits", "Team Scaling & Mentorship", "Vendor & Tool Evaluation", "IP Protection"]
+            desc: "Providing high-level <strong>strategic technology leadership</strong>, AI architecture guidance, <strong>vendor selection</strong>, and engineering team scaling on demand.",
+            tags: ["Fractional CTO Leadership", "Tech Architecture Audits", "Team Scaling & Mentorship", "Vendor & Tool Evaluation", "IP Protection"],
+            image: "image/video.png"
         }
     ];
 
-    const tabItems = document.querySelectorAll(".service-tab-item");
-    const titleDisplay = document.getElementById("serviceDisplayTitle");
-    const descDisplay = document.getElementById("serviceDisplayDesc");
-    const tagsDisplay = document.getElementById("serviceDisplayTags");
+    function initAppleShowcase() {
+        const accordionList = document.getElementById("appleAccordionList");
+        const stageBadge = document.getElementById("appleStageBadge");
+        const stageImg = document.getElementById("appleStageImg");
+        const stageTitle = document.getElementById("appleStageTitle");
+        const stageTags = document.getElementById("appleStageTags");
 
-    tabItems.forEach(tab => {
-        tab.addEventListener("click", function () {
-            tabItems.forEach(t => t.classList.remove("active"));
-            this.classList.add("active");
+        if (!accordionList) return;
 
-            const index = parseInt(this.getAttribute("data-service")) || 0;
-            const data = serviceData[index];
+        let activeIndex = 0;
 
-            if (data && titleDisplay && descDisplay && tagsDisplay) {
-                titleDisplay.innerText = data.title;
-                descDisplay.innerText = data.desc;
-                tagsDisplay.innerHTML = data.tags.map(tag => `<span class="pill">${tag}</span>`).join("");
+        function updateStage(data) {
+            if (stageBadge) stageBadge.innerText = "Featured Capability";
+            if (stageTitle) stageTitle.innerText = data.title;
+            if (stageTags) {
+                stageTags.innerHTML = data.tags.map(t => `<span class="glass-pill">${t}</span>`).join("");
             }
-        });
-    });
+            if (stageImg) {
+                stageImg.style.opacity = "0.3";
+                stageImg.style.transform = "scale(0.97)";
+                setTimeout(() => {
+                    stageImg.src = data.image;
+                    stageImg.style.opacity = "1";
+                    stageImg.style.transform = "scale(1)";
+                }, 150);
+            }
+        }
+
+        function renderAccordion() {
+            accordionList.innerHTML = serviceData.map((item, idx) => {
+                const isActive = idx === activeIndex;
+                if (isActive) {
+                    return `
+                        <div class="apple-accordion-item active" data-index="${idx}">
+                            <div class="apple-accordion-body">
+                                <p class="apple-accordion-desc">${item.desc}</p>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    return `
+                        <div class="apple-accordion-item" data-index="${idx}">
+                            <div class="apple-accordion-header">
+                                <span class="apple-accordion-icon">+</span>
+                                <span class="apple-accordion-title-text">${item.title}</span>
+                            </div>
+                        </div>
+                    `;
+                }
+            }).join('');
+
+            accordionList.querySelectorAll(".apple-accordion-item").forEach(el => {
+                el.addEventListener("click", function () {
+                    const idx = parseInt(this.getAttribute("data-index"));
+                    if (activeIndex === idx) return;
+                    activeIndex = idx;
+                    renderAccordion();
+                    updateStage(serviceData[idx]);
+                });
+            });
+        }
+
+        renderAccordion();
+        updateStage(serviceData[0]);
+    }
+
+    initAppleShowcase();
 
     // 3. Tech Ecosystem Tab Switching & Dynamic Icon Rendering
     function initTechEcosystem() {
         const techData = [
             {
-                category: "GenAI and Cloud",
+                category: "GenAI & Cloud",
                 items: [
                     { name: "AWS", logo: "https://api.iconify.design/logos/aws.svg" },
                     { name: "Azure Machine Learning", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" },
@@ -257,6 +313,9 @@ document.addEventListener("DOMContentLoaded", function () {
         let animationFrameId = null;
 
         function updatePositions(timestamp) {
+            if (!timestamp) timestamp = performance.now();
+            const time = timestamp * 0.0015;
+
             const width = arena.clientWidth || 840;
             const height = arena.clientHeight || 440;
             const centerX = width / 2;
@@ -264,16 +323,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const nodes = container.querySelectorAll(".orbital-node");
             nodes.forEach((node, i) => {
-                if (node.classList.contains("transitioning")) return;
+                if (node.classList.contains("transitioning") || node.matches(':hover')) return;
 
                 const cfg = nodeConfigs[i % nodeConfigs.length];
                 const radius = width * cfg.radiusRatio;
-                // Continuous revolving oscillation angle
-                const delta = Math.sin(timestamp * 0.0012 + i * 1.3) * 2.8;
-                const angleRad = (cfg.baseAngle + delta) * (Math.PI / 180);
+
+                // Visible revolving orbit oscillation along semi-circle arc + organic vertical float
+                const angleDelta = Math.sin(time + i * 1.4) * 6.5; // 6.5 degree arc sweep
+                const floatY = Math.cos(time * 1.2 + i * 1.7) * 5; // 5px vertical float
+
+                const angleRad = (cfg.baseAngle + angleDelta) * (Math.PI / 180);
 
                 const x = centerX + radius * Math.cos(angleRad);
-                const y = centerY - radius * Math.sin(angleRad);
+                const y = (centerY - radius * Math.sin(angleRad)) + floatY;
 
                 node.style.left = `${x}px`;
                 node.style.top = `${y}px`;
@@ -360,16 +422,29 @@ document.addEventListener("DOMContentLoaded", function () {
             }, 190);
         }
 
-        // Auto-Play Timer & Smooth Auto-Scroll Logic
-        let autoPlayTimer = null;
-        const AUTO_PLAY_DELAY = 4500; // 4.5 seconds per tab
+        // Container-only horizontal auto-scroll (NEVER causes main window vertical scroll jump)
+        function scrollTabHorizontalContainer(tabElement) {
+            const wrapper = document.querySelector(".tech-tabs-wrapper");
+            if (!wrapper || !tabElement) return;
+
+            const tabOffsetLeft = tabElement.offsetLeft;
+            const tabWidth = tabElement.offsetWidth;
+            const wrapperWidth = wrapper.clientWidth;
+
+            const targetScroll = tabOffsetLeft - (wrapperWidth / 2) + (tabWidth / 2);
+
+            wrapper.scrollTo({
+                left: Math.max(0, targetScroll),
+                behavior: 'smooth'
+            });
+        }
 
         function selectCategoryTab(index, isUserAction = false) {
             tabs.forEach(t => t.classList.remove("active"));
             if (tabs[index]) {
                 tabs[index].classList.add("active");
-                // Smoothly scroll active tab into center view
-                tabs[index].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                // Scroll container horizontally only; NEVER trigger main window vertical scroll
+                scrollTabHorizontalContainer(tabs[index]);
             }
             renderCategory(index);
 
@@ -398,6 +473,21 @@ document.addEventListener("DOMContentLoaded", function () {
             autoPlayTimer = setTimeout(() => {
                 startAutoPlayTimer();
             }, delay);
+        }
+
+        // Viewport Intersection Observer: Auto-play ONLY when section is visible on screen
+        const sectionEl = document.getElementById("expertiseSection");
+        if (sectionEl && 'IntersectionObserver' in window) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        startAutoPlayTimer();
+                    } else {
+                        stopAutoPlayTimer();
+                    }
+                });
+            }, { threshold: 0.2 });
+            observer.observe(sectionEl);
         }
 
         tabs.forEach((tab, idx) => {

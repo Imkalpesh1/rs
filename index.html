@@ -3,9 +3,9 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RSI - Digital Product Engineering</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/geomanist" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/LogoLoop.css">
     <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
@@ -181,63 +181,24 @@
                 innovate faster and scale with confidence.</p>
         </div>
 
-        <div class="services-container">
-            <div class="services-list-wrapper">
-                <div class="service-tab-item active" data-service="0">
-                    <span>Innovation Consulting & Digital Advisory</span>
-                    <span class="tab-num">01</span>
-                </div>
-                <div class="service-tab-item" data-service="1">
-                    <span>Product & Platform Engineering</span>
-                    <span class="tab-num">02</span>
-                </div>
-                <div class="service-tab-item" data-service="2">
-                    <span>Product Modernization</span>
-                    <span class="tab-num">03</span>
-                </div>
-                <div class="service-tab-item" data-service="3">
-                    <span>Sustenance & Support</span>
-                    <span class="tab-num">04</span>
-                </div>
-                <div class="service-tab-item" data-service="4">
-                    <span>Electronic Data Automation [EDA]</span>
-                    <span class="tab-num">05</span>
-                </div>
-                <div class="service-tab-item" data-service="5">
-                    <span>Quality Assurance & Testing</span>
-                    <span class="tab-num">06</span>
-                </div>
-                <div class="service-tab-item" data-service="6">
-                    <span>Rapid Application Development [RAD]</span>
-                    <span class="tab-num">07</span>
-                </div>
-                <div class="service-tab-item" data-service="7">
-                    <span>Digital Adoption Platform [DAP]</span>
-                    <span class="tab-num">08</span>
-                </div>
-                <div class="service-tab-item" data-service="8">
-                    <span>CTO-as-a-Service</span>
-                    <span class="tab-num">09</span>
-                </div>
+        <div class="apple-showcase-container">
+            <!-- Left Side Interactive Accordion List -->
+            <div class="apple-accordion-list" id="appleAccordionList">
+                <!-- Dynamically populated via JS for seamless interactive accordion morph -->
             </div>
 
-            <div class="service-details-card">
-                <div class="service-img-wrapper">
-                    <span class="service-badge">Featured Solution</span>
-                    <img src="image/service.png" alt="Engineering Team at Work" id="serviceDisplayImg">
-                </div>
-                <h3 class="service-title-display" id="serviceDisplayTitle">Innovation Consulting & Digital Advisory</h3>
-                <p class="service-desc-display" id="serviceDisplayDesc">We enable global enterprises to evaluate their
-                    technology architecture, identify strategic AI opportunities, and define clear digital roadmaps from
-                    idea validation to production execution.</p>
-                <div class="tags-container" id="serviceDisplayTags">
-                    <span class="pill">R&D & Prototyping</span>
-                    <span class="pill">Product Portfolio Assessments</span>
-                    <span class="pill">Strategy Workshops</span>
-                    <span class="pill">Business Transformation</span>
-                    <span class="pill">Design Thinking Workshops</span>
-                    <span class="pill">AI Adoption Blueprints</span>
-                    <span class="pill">Cloud & Data Strategy</span>
+            <!-- Right Side Visual Stage Canvas (Apple Visual Showcase with Bottom-Left Title & Pills Overlay) -->
+            <div class="apple-stage-card">
+                <div class="apple-stage-img-wrapper">
+                    <span class="apple-stage-badge" id="appleStageBadge">Featured Capability</span>
+                    <img src="image/service.png" alt="Service Showcase" id="appleStageImg" class="apple-stage-img">
+                    <div class="apple-stage-gradient-overlay"></div>
+                    <div class="apple-stage-bottom-overlay">
+                        <h3 class="apple-stage-bottom-title" id="appleStageTitle">Innovation Consulting & Digital Advisory</h3>
+                        <div class="apple-stage-bottom-tags" id="appleStageTags">
+                            <!-- Dynamically populated pills -->
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
