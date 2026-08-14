@@ -1,4 +1,4 @@
-function initMainApp() {
+document.addEventListener("DOMContentLoaded", function () {
     // 1. Hero Section Video & Canvas Fallback Logic
     const video = document.getElementById("heroVideo");
     const canvas = document.getElementById("heroCanvas");
@@ -300,18 +300,17 @@ function initMainApp() {
         const hubTitle = document.getElementById("centerHubTitle");
         if (!container || !tabs.length || !arena) return;
 
-        const AUTO_PLAY_DELAY = 6000;
-        let autoPlayTimer = null;
+        // Base Arc Positions for 5 Tech items along SVG concentric semi-circles (3-Tier Height Rhythm)
+        const nodeConfigs = [
+            { baseAngle: 142, radiusRatio: 0.3571 }, // Upper-Left Mid Arc (R = 300px)
+            { baseAngle: 152, radiusRatio: 0.2143 }, // Lower-Left Inner Arc (R = 180px)
+            { baseAngle: 90,  radiusRatio: 0.3571 }, // Top Apex Mid Arc (R = 300px)
+            { baseAngle: 28,  radiusRatio: 0.2143 }, // Lower-Right Inner Arc (R = 180px)
+            { baseAngle: 38,  radiusRatio: 0.3571 }  // Upper-Right Mid Arc (R = 300px)
+        ];
+
         let currentCategoryIndex = 0;
         let animationFrameId = null;
-
-        const nodeConfigs = [
-            { baseAngle: 142, radiusRatio: 0.3571 },
-            { baseAngle: 152, radiusRatio: 0.2143 },
-            { baseAngle: 90,  radiusRatio: 0.3571 },
-            { baseAngle: 28,  radiusRatio: 0.2143 },
-            { baseAngle: 38,  radiusRatio: 0.3571 }
-        ];
 
         function updatePositions(timestamp) {
             if (!timestamp) timestamp = performance.now();
@@ -536,14 +535,12 @@ function initMainApp() {
             });
         }
 
+        // Initial Render, auto-play timer and continuous orbit physics
         selectCategoryTab(0, false);
         startAutoPlayTimer();
         requestAnimationFrame(updatePositions);
     }
-    
-    try { initAppleShowcase(); } catch (err) { console.error("Showcase error:", err); }
-    try { initTechEcosystem(); } catch (err) { console.error("TechEcosystem error:", err); }
-    try { initCardStack(); } catch (err) { console.error("CardStack error:", err); }
+    initTechEcosystem();
 
     // 3. Thinking Section Video Card Hover & Click Play Logic
     const thinkingVideoCard = document.getElementById("thinkingVideoCard");
@@ -581,251 +578,17 @@ function initMainApp() {
         }
     }
 
-    // 4. React Bits 3D Stack Component & 3-Scroll Fly-To-Back Engine
-    function initCardStack() {
-        const stackContainer = document.getElementById("stackContainer");
-        const wrapper = document.getElementById("otherServicesWrapper");
-        const section = document.getElementById("otherServicesSection");
-        const prevBtn = document.getElementById("carouselPrevBtn");
-        const nextBtn = document.getElementById("carouselNextBtn");
+    // 4. Other Services Carousel Navigation Controls
+    const servicesCarousel = document.getElementById("servicesCarousel");
+    const carouselPrevBtn = document.getElementById("carouselPrevBtn");
+    const carouselNextBtn = document.getElementById("carouselNextBtn");
 
-        if (!stackContainer) return;
-
-        const cardEls = Array.from(stackContainer.querySelectorAll(".stack-card"));
-        if (cardEls.length < 4) return;
-
-        // Base deck order mapping for step S (0..3)
-        // Step 0: Card 1 on top ([3, 2, 1, 0])
-        // Step 1: Card 2 on top ([0, 3, 2, 1])
-        // Step 2: Card 3 on top ([1, 0, 3, 2])
-        // Step 3: Card 4 on top ([2, 1, 0, 3])
-        function getDeckForStep(step) {
-            const backCards = [];
-            for (let i = 0; i < step; i++) backCards.push(i);
-            const frontCards = [];
-            for (let i = step; i < 4; i++) frontCards.push(i);
-
-            // Return array from bottom (pos 0) to top (pos 3)
-            return [...backCards.reverse(), ...frontCards.reverse()];
-        }
-
-        let currentStep = 0; // 0, 1, 2, or 3
-        const rotations = [-6, 5, -3, 6];
-        let isAnimating = false;
-
-        function applyDeckTransforms(step, animated = true) {
-            currentStep = Math.max(0, Math.min(3, step));
-            const deck = getDeckForStep(currentStep); // deck[0] = bottom, deck[3] = top
-            const total = deck.length;
-
-            deck.forEach((cardIdx, pos) => {
-                const cardEl = cardEls[cardIdx];
-                const reversePos = total - 1 - pos; // 0 for top card, 3 for bottom card
-                const rotZ = rotations[cardIdx % rotations.length] + (reversePos * 3.5);
-                const scale = 1 - (reversePos * 0.05);
-                const translateY = reversePos * 14;
-                const zIndex = pos + 1;
-
-                cardEl.style.transition = animated 
-                    ? 'transform 0.55s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s ease, border-color 0.35s ease' 
-                    : 'none';
-                cardEl.style.zIndex = zIndex;
-                cardEl.style.transform = `translateY(${translateY}px) scale(${scale}) rotate(${rotZ}deg)`;
-            });
-        }
-
-        // Exact React Bits <Stack /> Slide-Left & Spring-To-Back Engine
-        function animateSendTopToBack(targetStep) {
-            if (isAnimating) return;
-            isAnimating = true;
-
-            const currentDeck = getDeckForStep(currentStep);
-            const topCardIdx = currentDeck[currentDeck.length - 1];
-            const topCardEl = cardEls[topCardIdx];
-
-            // Phase 1: Top card slides out to the LEFT with rotation (matching React Bits)
-            topCardEl.style.zIndex = "10";
-            topCardEl.style.transition = "transform 0.32s cubic-bezier(0.22, 1, 0.36, 1)";
-            topCardEl.style.transform = "translateX(-160px) translateY(12px) rotate(-14deg) scale(0.96)";
-
-            setTimeout(() => {
-                // Phase 2: Drop z-index to bottom (1) and slide into place behind the stack deck
-                currentStep = Math.max(0, Math.min(3, targetStep));
-                const newDeck = getDeckForStep(currentStep);
-                const total = newDeck.length;
-
-                newDeck.forEach((cardIdx, pos) => {
-                    const cardEl = cardEls[cardIdx];
-                    const reversePos = total - 1 - pos; // 0 for top card, 3 for bottom card
-                    const rotZ = rotations[cardIdx % rotations.length] + (reversePos * 3.5);
-                    const scale = 1 - (reversePos * 0.05);
-                    const translateY = reversePos * 14;
-                    const zIndex = pos + 1;
-
-                    if (cardIdx === topCardIdx) {
-                        cardEl.style.zIndex = "1";
-                        cardEl.style.transition = "transform 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.15)";
-                        cardEl.style.transform = `translateY(${translateY}px) scale(${scale}) rotate(${rotZ}deg)`;
-                    } else {
-                        cardEl.style.zIndex = zIndex;
-                        cardEl.style.transition = "transform 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.15)";
-                        cardEl.style.transform = `translateY(${translateY}px) scale(${scale}) rotate(${rotZ}deg)`;
-                    }
-                });
-
-                setTimeout(() => {
-                    isAnimating = false;
-                }, 400);
-            }, 220);
-        }
-
-        function setDeckStep(step) {
-            const nextStep = Math.max(0, Math.min(3, step));
-            if (nextStep === currentStep) return;
-
-            if (nextStep > currentStep) {
-                animateSendTopToBack(nextStep);
-            } else {
-                applyDeckTransforms(nextStep, true);
-            }
-        }
-
-        // Drag & Swipe Engine for TOP Card
-        let isDragging = false;
-        let startX = 0, startY = 0;
-        let deltaX = 0, deltaY = 0;
-        let activeTopCardEl = null;
-
-        cardEls.forEach((cardEl) => {
-            cardEl.addEventListener("mousedown", handleDragStart);
-            cardEl.addEventListener("touchstart", handleDragStart, { passive: true });
+    if (servicesCarousel && carouselPrevBtn && carouselNextBtn) {
+        carouselNextBtn.addEventListener("click", function () {
+            servicesCarousel.scrollBy({ left: 320, behavior: "smooth" });
         });
-
-        function handleDragStart(e) {
-            if (e.target.closest("a") || isAnimating) return;
-
-            const currentDeck = getDeckForStep(currentStep);
-            const topIdx = currentDeck[currentDeck.length - 1];
-            activeTopCardEl = cardEls[topIdx];
-            isDragging = true;
-
-            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-            startX = clientX;
-            startY = clientY;
-            deltaX = 0;
-            deltaY = 0;
-
-            activeTopCardEl.classList.add("is-dragging");
-            activeTopCardEl.style.transition = "none";
-
-            window.addEventListener("mousemove", handleDragMove);
-            window.addEventListener("touchmove", handleDragMove, { passive: false });
-            window.addEventListener("mouseup", handleDragEnd);
-            window.addEventListener("touchend", handleDragEnd);
-        }
-
-        function handleDragMove(e) {
-            if (!isDragging || !activeTopCardEl) return;
-            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-
-            deltaX = clientX - startX;
-            deltaY = clientY - startY;
-
-            if (e.cancelable && (Math.abs(deltaX) > 5 || Math.abs(deltaY) > 5)) {
-                e.preventDefault();
-            }
-
-            const rotZ = -6 + (deltaX * 0.08);
-            const rotX = deltaY * -0.05;
-
-            activeTopCardEl.style.transform = `translate(${deltaX}px, ${deltaY}px) rotate(${rotZ}deg) rotateX(${rotX}deg) scale(1.03)`;
-        }
-
-        function handleDragEnd() {
-            if (!isDragging || !activeTopCardEl) return;
-            isDragging = false;
-            activeTopCardEl.classList.remove("is-dragging");
-
-            window.removeEventListener("mousemove", handleDragMove);
-            window.removeEventListener("touchmove", handleDragMove);
-            window.removeEventListener("mouseup", handleDragEnd);
-            window.removeEventListener("touchend", handleDragEnd);
-
-            const dist = Math.hypot(deltaX, deltaY);
-            if (dist > 30 || Math.abs(deltaX) > 25 || Math.abs(deltaY) > 25) {
-                activeTopCardEl.style.transition = "transform 0.3s ease-out";
-                activeTopCardEl.style.transform = `translate(${deltaX * 1.6}px, ${deltaY * 1.6}px) rotate(${deltaX * 0.12}deg) scale(0.9)`;
-                setTimeout(() => {
-                    if (currentStep < 3) setDeckStep(currentStep + 1);
-                    else applyDeckTransforms(3, true);
-                }, 150);
-            } else {
-                if (currentStep < 3) setDeckStep(currentStep + 1);
-                else applyDeckTransforms(3, true);
-            }
-        }
-
-        // Direct Mouse Wheel Scroll (Scroll Down -> Move Next Card to Top)
-        if (section) {
-            let wheelCooling = false;
-            section.addEventListener("wheel", (e) => {
-                if (wheelCooling) return;
-
-                if (e.deltaY > 10 && currentStep < 3) {
-                    wheelCooling = true;
-                    setDeckStep(currentStep + 1);
-                    setTimeout(() => { wheelCooling = false; }, 380);
-                } else if (e.deltaY < -10 && currentStep > 0) {
-                    wheelCooling = true;
-                    setDeckStep(currentStep - 1);
-                    setTimeout(() => { wheelCooling = false; }, 380);
-                }
-            }, { passive: true });
-        }
-
-        // Window Scroll Runway Tracker: Exactly 3 Scroll Transitions (Step 0 -> 1 -> 2 -> 3)
-        if (wrapper) {
-            window.addEventListener("scroll", () => {
-                const rect = wrapper.getBoundingClientRect();
-                const totalDist = rect.height - window.innerHeight;
-
-                if (totalDist > 0 && rect.top <= 10 && rect.bottom >= window.innerHeight - 10) {
-                    const scrollDist = Math.max(0, -rect.top);
-                    const progress = Math.min(1, scrollDist / totalDist);
-
-                    // 3 Equal Scroll Transitions across 4 Cards:
-                    // 0% - 28%: Card 1 (Step 0)
-                    // 28% - 62%: Card 2 (Step 1 - 1st Scroll)
-                    // 62% - 88%: Card 3 (Step 2 - 2nd Scroll)
-                    // 88% - 100%: Card 4 (Step 3 - 3rd Scroll)
-                    let targetStep = 0;
-                    if (progress >= 0.88) {
-                        targetStep = 3;
-                    } else if (progress >= 0.62) {
-                        targetStep = 2;
-                    } else if (progress >= 0.28) {
-                        targetStep = 1;
-                    }
-
-                    if (targetStep !== currentStep) {
-                        setDeckStep(targetStep);
-                    }
-                }
-            }, { passive: true });
-        }
-
-        // Nav Arrow Buttons
-        if (nextBtn) nextBtn.addEventListener("click", () => setDeckStep(currentStep + 1));
-        if (prevBtn) prevBtn.addEventListener("click", () => setDeckStep(currentStep - 1));
-
-        applyDeckTransforms(0, false);
+        carouselPrevBtn.addEventListener("click", function () {
+            servicesCarousel.scrollBy({ left: -320, behavior: "smooth" });
+        });
     }
-}
-
-if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initMainApp);
-} else {
-    initMainApp();
-}
+});
