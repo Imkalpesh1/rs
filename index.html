@@ -64,7 +64,7 @@
         </div>
     </section>
 
-    <!-- Hero Section 2 White Creative Layout (Reference Image Match) -->
+    <!-- Hero Section 2 – Redesigned Stats Bento -->
     <section class="hero-2-white">
         <div class="hero-2-white-container">
             <div class="hero-2-white-header">
@@ -75,20 +75,23 @@
             </div>
 
             <div class="hero-2-grid">
-                <!-- Card 1: Left Light Grey Card -->
-                <div class="grid-card card-light-grey">
+
+                <!-- Card 1: Image + metric -->
+                <div class="grid-card card-light-grey gc-tall">
                     <div class="card-img-container">
                         <img src="image/service.png" alt="Digital Product Engineering" class="card-inner-img">
-                        <button class="plus-btn" aria-label="Add">+</button>
+                        <div class="card-img-scrim"></div>
+                        <button class="plus-btn" aria-label="Explore">+</button>
                     </div>
                     <div class="card-metric-block">
+                        <div class="metric-chip">AI & Cloud Partners</div>
                         <div class="metric-large">120+</div>
-                        <p class="card-subtext">Collaborating with leading AI and cloud technology providers</p>
+                        <p class="card-subtext">Collaborating with world-leading AI and cloud technology providers</p>
                     </div>
                 </div>
 
-                <!-- Card 2: Middle Lime Accent Card -->
-                <div class="grid-card card-lime-accent">
+                <!-- Card 2: Purple gradient + 100% -->
+                <div class="grid-card card-purple-glow gc-tall">
                     <div class="card-top-row">
                         <div class="avatar-stack">
                             <span class="avatar av-1">👩‍💻</span>
@@ -98,30 +101,39 @@
                         </div>
                         <button class="arrow-circle-btn" aria-label="Learn More">↗</button>
                     </div>
+                    <div class="purple-orb-animated"></div>
                     <div class="card-metric-block">
-                        <div class="metric-large">100%</div>
-                        <p class="card-subtext">invoice validation accuracy & faster cycle times</p>
+                        <div class="metric-chip chip-light">Invoice Accuracy</div>
+                        <div class="metric-large metric-white">100%</div>
+                        <p class="card-subtext card-subtext-muted">Validation accuracy &amp; faster invoice cycle times</p>
                     </div>
                 </div>
 
-                <!-- Right Column Stacked Cards -->
+                <!-- Right column: two stacked cards -->
                 <div class="grid-card-stack">
-                    <!-- Card 3: Top Right Light Grey Card with Orb -->
-                    <div class="grid-card card-light-grey orb-card">
+
+                    <!-- Card 3: Orb + 520k -->
+                    <div class="grid-card card-soft-slate orb-card gc-top">
                         <div class="orb-graphic"></div>
                         <div class="card-metric-block">
+                            <div class="metric-chip">Monthly Automations</div>
                             <div class="metric-large">520k+</div>
-                            <p class="card-subtext">processes automated monthly to power smarter strategies</p>
+                            <p class="card-subtext">Processes automated monthly to power smarter strategies</p>
                         </div>
                     </div>
 
-                    <!-- Card 4: Bottom Right Dark Card -->
-                    <div class="grid-card card-dark-slate">
+                    <!-- Card 4: Dark + 20+ -->
+                    <div class="grid-card card-dark-slate gc-bottom">
+                        <div class="dark-card-glow"></div>
                         <div class="card-metric-block flex-row">
-                            <div class="metric-large-white">20+</div>
-                            <p class="card-subtext-white">weeks - average deployment per domain</p>
+                            <div class="dark-metric-left">
+                                <div class="metric-chip chip-dim">Avg. Deployment</div>
+                                <div class="metric-large-white">20+</div>
+                            </div>
+                            <p class="card-subtext-white">weeks&nbsp;— average deployment timeline per domain</p>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -449,8 +461,9 @@
 
     <!-- Pre-Footer Banner -->
     <section class="pre-footer" id="preFooterSection">
-        <div id="gradientBlindsCanvasContainer" class="gradient-blinds-container"></div>
-        <div class="pre-footer-content">
+        <!-- MoltenMetal WebGL2 background -->
+        <div id="moltenMetalContainer" style="position:absolute;inset:0;width:100%;height:100%;overflow:hidden;z-index:0;"></div>
+        <div class="pre-footer-content" style="position:relative;z-index:1;">
             <h2>Ready to Engineer Your<br>Digital Future with R Systems?</h2>
             <a href="#" class="btn btn-white">Let's Start a Conversation</a>
         </div>
@@ -535,7 +548,34 @@
 
     <script src="js/LogoLoopApp.js" defer></script>
     <script src="js/main.js" defer></script>
-    <script src="js/gradient-blinds.js" defer></script>
+    <script src="js/molten-metal.js"></script>
+    <script>
+      (function () {
+        var container = document.getElementById('moltenMetalContainer');
+        if (container && window.initMoltenMetal) {
+          window.initMoltenMetal(container, {
+            color1:           '#1a003a',
+            color2:           '#7B2FF7',
+            color3:           '#e8b4ff',
+            speed:            0.3,
+            scale:            3.5,
+            detail:           4,
+            glow:             1.8,
+            coreSize:         0.12,
+            swirl:            1.2,
+            fold:             -0.18,
+            blackPoint:       0.04,
+            brightness:       1.4,
+            colorMode:        'molten',
+            grain:            true,
+            grainIntensity:   0.04,
+            mouseInteraction: true,
+            mouseStrength:    0.25,
+            opacity:          1.0
+          });
+        }
+      })();
+    </script>
 </body>
 
 </html>
