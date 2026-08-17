@@ -1,21 +1,63 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // 1. Hero Section Video & Canvas Fallback Logic
+    // 0. Page Preloader Progress Handler
+    const preloader = document.getElementById("pagePreloader");
+    const preloaderBar = document.getElementById("preloaderBar");
+    const preloaderPercent = document.getElementById("preloaderPercent");
+
+    if (preloader) {
+        let progress = 0;
+        const progressInterval = setInterval(() => {
+            if (progress < 90) {
+                progress += Math.floor(Math.random() * 8) + 5;
+                if (progress > 90) progress = 90;
+                if (preloaderBar) preloaderBar.style.width = progress + "%";
+                if (preloaderPercent) preloaderPercent.innerText = progress + "%";
+            }
+        }, 80);
+
+        function finishPreloader() {
+            clearInterval(progressInterval);
+            if (preloaderBar) preloaderBar.style.width = "100%";
+            if (preloaderPercent) preloaderPercent.innerText = "100%";
+            setTimeout(() => {
+                preloader.classList.add("loaded");
+            }, 350);
+        }
+
+        if (document.readyState === "complete") {
+            finishPreloader();
+        } else {
+            window.addEventListener("load", finishPreloader);
+            setTimeout(finishPreloader, 2500);
+        }
+    }
+
+    // Floating Glass Header Scroll Dynamics
+    const header = document.querySelector(".header");
+    if (header) {
+        window.addEventListener("scroll", function () {
+            if (window.scrollY > 40) {
+                header.classList.add("scrolled");
+            } else {
+                header.classList.remove("scrolled");
+            }
+        });
+    }
+
+    // 1. Hero Section Video Initialization
     const video = document.getElementById("heroVideo");
     const canvas = document.getElementById("heroCanvas");
 
     if (video) {
+        video.muted = true;
+        video.style.display = 'block';
         const playPromise = video.play();
         if (playPromise !== undefined) {
             playPromise.catch(function (error) {
-                console.log("Autoplay blocked or file not found. Activating tech canvas animation fallback.");
+                console.log("Autoplay check:", error);
                 initHeroCanvas();
             });
         }
-
-        video.addEventListener('error', function () {
-            video.style.display = 'none';
-            initHeroCanvas();
-        });
     } else {
         initHeroCanvas();
     }
@@ -89,55 +131,55 @@ document.addEventListener("DOMContentLoaded", function () {
             title: "Innovation Consulting & Digital Advisory",
             desc: "We enable global enterprises to evaluate their <strong>technology architecture</strong>, identify strategic <strong>AI opportunities</strong>, and define clear <strong>digital roadmaps</strong> from idea validation to production execution.",
             tags: ["R&D & Prototyping", "Product Portfolio Assessments", "Strategy Workshops", "Business Transformation", "Design Thinking Workshops", "AI Adoption Blueprints", "Cloud & Data Strategy"],
-            image: "image/service.png"
+            image: "image/image-1.avif"
         },
         {
             title: "Product & Platform Engineering",
             desc: "End-to-end <strong>product development lifecycle</strong> services from concept and <strong>MVP build</strong> to full-scale <strong>platform modernization</strong>, microservices, and <strong>SaaS architecture</strong>.",
             tags: ["Full-Stack SaaS Development", "Microservices Architecture", "API Engineering", "Legacy System Modernization", "Cloud-Native Apps"],
-            image: "image/case1.png"
+            image: "image/image-2.avif"
         },
         {
             title: "Product Modernization",
             desc: "Re-architecting <strong>legacy monoliths</strong> into <strong>cloud-native microservices</strong>, optimizing <strong>database performance</strong>, and updating user experience toolchains.",
             tags: ["Cloud Migration", "Monolith Refactoring", "API Gateway Setup", "Performance Optimization", "Tech Stack Upgrade"],
-            image: "image/case2.png"
+            image: "image/image-3.avif"
         },
         {
             title: "Sustenance & Support",
             desc: "Providing <strong>24/7/365 operational maintenance</strong>, proactive monitoring, <strong>security patching</strong>, <strong>SLA-backed bug fixes</strong>, and continuous product enhancements.",
             tags: ["24/7 Managed Ops", "SLA Assurance", "Security Patching", "Bug Fixing & Support", "Continuous Optimization"],
-            image: "image/case3.png"
+            image: "image/image-4.avif"
         },
         {
             title: "Electronic Data Automation [EDA]",
             desc: "Automating complex <strong>document extraction</strong>, semiconductor & hardware <strong>workflow automation</strong>, and automated data pipelines using <strong>AI and vision models</strong>.",
             tags: ["EDA Workflow Automation", "Document Processing AI", "Semiconductor Design Tech", "Pipeline Automation", "Data Parsing"],
-            image: "image/exiqo.png"
+            image: "image/image-5.avif"
         },
         {
             title: "Quality Assurance & Testing",
             desc: "Ensuring <strong>zero-defect software releases</strong> through <strong>automated regression suites</strong>, continuous performance testing, and <strong>cybersecurity audit integration</strong>.",
             tags: ["Automated Regression", "Performance Testing", "Cybersecurity Audits", "API & Integration Testing", "CI/CD Test Pipelines"],
-            image: "image/whitepaper.png"
+            image: "image/image-6.avif"
         },
         {
             title: "Rapid Application Development [RAD]",
             desc: "Accelerating <strong>time-to-market</strong> using <strong>low-code/no-code platforms</strong>, modular component libraries, and <strong>agile sprint delivery frameworks</strong>.",
             tags: ["Low-Code Platforms", "Rapid MVP Delivery", "Agile Sprints", "Modular Architecture", "Cross-Platform Apps"],
-            image: "image/hero.jpg"
+            image: "image/image-7.avif"
         },
         {
             title: "Digital Adoption Platform [DAP]",
             desc: "Maximizing <strong>software adoption</strong> and user onboarding efficiency with <strong>in-app guidance</strong>, interactive walkthroughs, and <strong>real-time usage analytics</strong>.",
             tags: ["Interactive Walkthroughs", "User Analytics", "In-App Onboarding", "Change Management", "Workflow Automation"],
-            image: "image/techtalk.png"
+            image: "image/image-8.avif"
         },
         {
             title: "CTO-as-a-Service",
             desc: "Providing high-level <strong>strategic technology leadership</strong>, AI architecture guidance, <strong>vendor selection</strong>, and engineering team scaling on demand.",
             tags: ["Fractional CTO Leadership", "Tech Architecture Audits", "Team Scaling & Mentorship", "Vendor & Tool Evaluation", "IP Protection"],
-            image: "image/video.png"
+            image: "image/image-9.avif"
         }
     ];
 

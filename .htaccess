@@ -1,0 +1,23 @@
+# Turn on Rewrite Engine
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Serve index.html as default directory index
+    DirectoryIndex index.html
+
+    # Redirect external requests from /index.html to / (Folder Root)
+    RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /([^/]+/)*index\.html\ HTTP/
+    RewriteRule ^(.*)index\.html$ /$1 [R=301,L]
+
+    # Hide .html extension from URLs if file exists
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME}\.html -f
+    RewriteRule ^([^\.]+)$ $1.html [NC,L]
+</IfModule>
+
+# Prevent directory listing
+Options -Indexes
+
+# UTF-8 Encoding
+AddDefaultCharset UTF-8
