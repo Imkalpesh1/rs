@@ -280,20 +280,22 @@ document.addEventListener("DOMContentLoaded", function () {
                     renderAccordion();
                     updateStage(serviceData[idx]);
 
-                    // Smoothly scroll active item into clear view below fixed header on mobile
-                    setTimeout(() => {
-                        const activeEl = accordionList.querySelector(`.apple-accordion-item[data-index="${idx}"]`);
-                        if (activeEl) {
-                            const headerOffset = 90;
-                            const elementPosition = activeEl.getBoundingClientRect().top;
-                            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                    // Smoothly scroll active item into clear view below fixed header ONLY on mobile
+                    if (window.innerWidth <= 640) {
+                        setTimeout(() => {
+                            const activeEl = accordionList.querySelector(`.apple-accordion-item[data-index="${idx}"]`);
+                            if (activeEl) {
+                                const headerOffset = 90;
+                                const elementPosition = activeEl.getBoundingClientRect().top;
+                                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
-                            window.scrollTo({
-                                top: offsetPosition,
-                                behavior: "smooth"
-                            });
-                        }
-                    }, 50);
+                                window.scrollTo({
+                                    top: offsetPosition,
+                                    behavior: "smooth"
+                                });
+                            }
+                        }, 50);
+                    }
                 });
             });
         }
@@ -448,6 +450,51 @@ document.addEventListener("DOMContentLoaded", function () {
             if (svgEl) {
                 svgEl.classList.add("pulse-wave");
                 setTimeout(() => svgEl.classList.remove("pulse-wave"), 450);
+            }
+
+            // Render Mobile Tech Pyramid (3 in Line 1, 2 in Line 2, tap for name display)
+            const row1 = document.getElementById("mobileTechRow1");
+            const row2 = document.getElementById("mobileTechRow2");
+            const labelText = document.getElementById("mobileTechLabelText");
+
+            if (row1 && row2 && data.items) {
+                const items1 = data.items.slice(0, 3);
+                const items2 = data.items.slice(3, 5);
+
+                row1.innerHTML = items1.map((item, i) => `
+                    <button class="mobile-tech-sq-btn ${i === 0 ? 'active' : ''}" data-name="${item.name}" aria-label="${item.name}">
+                        <img src="${item.logo}" alt="${item.name} Logo" class="mobile-tech-sq-logo" loading="lazy">
+                    </button>
+                `).join('');
+
+                row2.innerHTML = items2.map((item, i) => `
+                    <button class="mobile-tech-sq-btn" data-name="${item.name}" aria-label="${item.name}">
+                        <img src="${item.logo}" alt="${item.name} Logo" class="mobile-tech-sq-logo" loading="lazy">
+                    </button>
+                `).join('');
+
+                if (labelText && data.items[0]) {
+                    labelText.innerText = data.items[0].name;
+                }
+
+                const container = document.getElementById("mobileTechContainer");
+                if (container) {
+                    container.querySelectorAll(".mobile-tech-sq-btn").forEach(btn => {
+                        btn.addEventListener("click", () => {
+                            container.querySelectorAll(".mobile-tech-sq-btn").forEach(b => b.classList.remove("active"));
+                            btn.classList.add("active");
+                            if (labelText) {
+                                labelText.style.opacity = '0';
+                                labelText.style.transform = 'translateY(4px)';
+                                setTimeout(() => {
+                                    labelText.innerText = btn.getAttribute("data-name");
+                                    labelText.style.opacity = '1';
+                                    labelText.style.transform = 'translateY(0)';
+                                }, 120);
+                            }
+                        });
+                    });
+                }
             }
 
             // 2. Animate Central Category Title (Smooth blur & slide-up morph)
@@ -751,4 +798,235 @@ document.addEventListener("DOMContentLoaded", function () {
     initAutoScrollCarousel(".services-carousel", ".carousel-card", 3800);
     initAutoScrollCarousel(".case-grid", ".case-card", 4200);
     initAutoScrollCarousel(".exiqo-grid", ".exiqo-card", 4000);
+
+    // Specular Light WebGL Shader Controller (from React Bits SpecularButton)
+    function initSpecularEffects() {
+        if (typeof window.OGL === 'undefined') {
+            setTimeout(initSpecularEffects, 100);
+            return;
+        }
+
+        const { Renderer, Program, Mesh, Triangle, Color } = window.OGL;
+        const PAD = 20;
+
+        const VERT = `#version 300 es
+in vec2 position;
+void main() {
+  gl_Position = vec4(position, 0.0, 1.0);
+}
+`;
+
+        const FRAG = `#version 300 es
+precision highp float;
+
+uniform vec2 uCenter;
+uniform vec2 uHalfSize;
+uniform float uRadius;
+uniform float uAngle;
+uniform float uPx;
+uniform vec3 uLineColor;
+uniform vec3 uBaseColor;
+uniform float uIntensity;
+uniform float uShineSize;
+uniform float uShineFade;
+uniform float uThickness;
+uniform float uBaseWidth;
+
+out vec4 fragColor;
+
+float sdRoundedRect(vec2 p, vec2 b, float r) {
+  vec2 q = abs(p) - b + r;
+  return length(max(q, 0.0)) + min(max(q.x, q.y), 0.0) - r;
+}
+
+float shapeSDF(vec2 p) { return sdRoundedRect(p, uHalfSize, uRadius); }
+
+float gaussianLine(float d, float sigma) {
+  float x = d / (sigma + 1e-6);
+  float k = mix(1.0, 1.6, smoothstep(0.0, 1.5, x));
+  return exp(-k * x * x);
+}
+
+void main() {
+  vec2 p = gl_FragCoord.xy - uCenter;
+  float d = shapeSDF(p);
+  vec2 L = vec2(cos(uAngle), sin(uAngle));
+
+  float base = (1.0 - smoothstep(0.0, uBaseWidth, abs(d))) * 0.45;
+
+  vec2 nEll = normalize(p / (uHalfSize * uHalfSize) + 1e-6);
+  float phi = acos(clamp(abs(dot(nEll, L)), 0.0, 1.0));
+  float rim = 1.0 - smoothstep(uShineSize - uShineFade, uShineSize + uShineFade + 1e-4, phi);
+  float line = gaussianLine(d, uThickness);
+  float edgeClamp = 1.0 - smoothstep(0.5 * uPx, 3.0 * uPx, abs(d));
+  float hi = line * rim * edgeClamp * uIntensity;
+
+  vec3 col = uBaseColor * base + uLineColor * hi;
+  float a = clamp(base + hi, 0.0, 1.0);
+  fragColor = vec4(col, a);
+}
+`;
+
+        function createSpecular(el, options = {}) {
+            const config = Object.assign({
+                radius: 16,
+                lineColor: '#ffffff',
+                baseColor: '#9b51e0',
+                intensity: 1.3,
+                shineSize: 15,
+                shineFade: 35,
+                thickness: 1.5,
+                speed: 0.35,
+                followMouse: true,
+                proximity: 300,
+                autoAnimate: false
+            }, options);
+
+            const fx = document.createElement('div');
+            fx.className = 'specular-fx-layer';
+            fx.style.position = 'absolute';
+            fx.style.inset = '-20px';
+            fx.style.pointerEvents = 'none';
+            fx.style.zIndex = '3';
+            el.style.position = 'relative';
+            el.appendChild(fx);
+
+            const dpr = window.devicePixelRatio || 1;
+            const renderer = new Renderer({ alpha: true, premultipliedAlpha: true, antialias: true, dpr });
+            const gl = renderer.gl;
+            gl.clearColor(0, 0, 0, 0);
+            gl.enable(gl.BLEND);
+            gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+
+            const geometry = new Triangle(gl);
+            if (geometry.attributes.uv) delete geometry.attributes.uv;
+
+            const program = new Program(gl, {
+                vertex: VERT,
+                fragment: FRAG,
+                uniforms: {
+                    uCenter: { value: [0, 0] },
+                    uHalfSize: { value: [1, 1] },
+                    uRadius: { value: 0 },
+                    uAngle: { value: 2.4 },
+                    uPx: { value: dpr },
+                    uLineColor: { value: [1, 1, 1] },
+                    uBaseColor: { value: [0.32, 0.32, 0.32] },
+                    uIntensity: { value: 1 },
+                    uShineSize: { value: 0.17 },
+                    uShineFade: { value: 0.7 },
+                    uThickness: { value: 1.5 },
+                    uBaseWidth: { value: dpr }
+                }
+            });
+
+            const mesh = new Mesh(gl, { geometry, program });
+            fx.appendChild(gl.canvas);
+            gl.canvas.style.display = 'block';
+            gl.canvas.style.width = '100%';
+            gl.canvas.style.height = '100%';
+
+            const sizeRef = { w: 1, h: 1 };
+            const resize = () => {
+                const rect = el.getBoundingClientRect();
+                const w = rect.width;
+                const h = rect.height;
+                sizeRef.w = w;
+                sizeRef.h = h;
+                renderer.setSize(w + PAD * 2, h + PAD * 2);
+                program.uniforms.uCenter.value = [(PAD + w / 2) * dpr, (PAD + h / 2) * dpr];
+                program.uniforms.uHalfSize.value = [(w / 2) * dpr, (h / 2) * dpr];
+            };
+            const ro = new ResizeObserver(resize);
+            ro.observe(el);
+            resize();
+
+            let pointerAngle = null;
+            let proximityT = 0;
+            const onPointerMove = e => {
+                const rect = el.getBoundingClientRect();
+                const cx = rect.left + rect.width / 2;
+                const cy = rect.top + rect.height / 2;
+                const dx = Math.max(rect.left - e.clientX, 0, e.clientX - rect.right);
+                const dy = Math.max(rect.top - e.clientY, 0, e.clientY - rect.bottom);
+                const dist = Math.hypot(dx, dy);
+
+                if (dist === 0) {
+                    const nx = (e.clientX - cx) / (rect.width / 2);
+                    const ny = (cy - e.clientY) / (rect.height / 2);
+                    pointerAngle = Math.atan2(2 / rect.height, -2 / rect.width) + nx * 0.3 + ny * 0.15;
+                } else {
+                    pointerAngle = Math.atan2(cy - e.clientY, e.clientX - cx);
+                }
+                const t = Math.max(0, 1 - dist / Math.max(config.proximity, 1));
+                proximityT = t * t * (3 - 2 * t);
+            };
+            const hoverTarget = config.parentHoverEl || el;
+            window.addEventListener('pointermove', onPointerMove);
+
+            hoverTarget.addEventListener('mouseenter', () => {
+                proximityT = 1;
+            });
+            hoverTarget.addEventListener('mouseleave', () => {
+                proximityT = 0;
+            });
+
+            let angle = 2.4;
+            let idleAngle = 2.4;
+            let bright = 0;
+            let last = performance.now();
+            let raf = 0;
+
+            const lineC = new Color();
+            const baseC = new Color();
+
+            const update = now => {
+                raf = requestAnimationFrame(update);
+                const dt = Math.min((now - last) / 1000, 0.05);
+                last = now;
+
+                idleAngle += config.speed * dt;
+                const steer = config.followMouse && pointerAngle != null && (!config.autoAnimate || proximityT > 0);
+                const target = steer ? pointerAngle : idleAngle;
+                const diff = ((target - angle + Math.PI * 3) % (Math.PI * 2)) - Math.PI;
+                angle += diff * (1 - Math.exp(-dt * 7));
+
+                const brightTarget = config.autoAnimate ? 1 : proximityT;
+                bright += (brightTarget - bright) * (1 - Math.exp(-dt * 8));
+
+                lineC.set(config.lineColor);
+                baseC.set(config.baseColor);
+                program.uniforms.uAngle.value = angle;
+                program.uniforms.uRadius.value = Math.min(config.radius, Math.min(sizeRef.w, sizeRef.h) / 2) * dpr;
+                program.uniforms.uLineColor.value = [lineC.r, lineC.g, lineC.b];
+                program.uniforms.uBaseColor.value = [baseC.r, baseC.g, baseC.b];
+                program.uniforms.uIntensity.value = config.intensity * bright;
+                program.uniforms.uShineSize.value = (config.shineSize * Math.PI) / 180;
+                program.uniforms.uShineFade.value = (config.shineFade * Math.PI) / 180;
+                program.uniforms.uThickness.value = config.thickness * dpr;
+                renderer.render({ scene: mesh });
+            };
+            raf = requestAnimationFrame(update);
+        }
+
+        // Attach Specular Light Effect EXCLUSIVELY to Case Study Tags (Pill Radius)
+        document.querySelectorAll('.case-card').forEach(card => {
+            const tag = card.querySelector('.tag');
+            if (tag) {
+                createSpecular(tag, {
+                    radius: 15,
+                    lineColor: '#ffffff',
+                    baseColor: '#ffffff',
+                    intensity: 1.6,
+                    shineSize: 22,
+                    shineFade: 40,
+                    thickness: 1.6,
+                    parentHoverEl: card,
+                    proximity: 400
+                });
+            }
+        });
+    }
+
+    initSpecularEffects();
 });
