@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RSI - Digital Product Engineering</title>
     <link href="https://fonts.cdnfonts.com/css/geomanist" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -65,7 +66,38 @@
                 </svg>
             </button>
         </div>
+        <!-- Mobile Menu Toggle Button -->
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle Mobile Menu">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        </button>
     </header>
+
+    <!-- Mobile Navigation Drawer Overlay & Drawer -->
+    <div class="mobile-drawer-overlay" id="mobileDrawerOverlay"></div>
+    <div class="mobile-nav-drawer" id="mobileNavDrawer">
+        <div class="mobile-drawer-header">
+            <img src="image/rsi_logo.png" alt="RSi Logo" class="mobile-drawer-logo">
+            <button class="mobile-drawer-close" id="mobileDrawerClose" aria-label="Close Menu">✕</button>
+        </div>
+        <div class="mobile-drawer-links">
+            <a href="#" class="mobile-nav-link">ExiQO</a>
+            <a href="#" class="mobile-nav-link">Who We Serve</a>
+            <div class="mobile-dropdown-accordion">
+                <span class="mobile-nav-link">What We Do</span>
+                <div class="mobile-sub-links">
+                    <a href="#">Digital Product Engineering</a>
+                    <a href="#">Cloud & Modernization</a>
+                    <a href="#">Generative AI & Data</a>
+                </div>
+            </div>
+            <a href="#" class="mobile-nav-link">Who We Are</a>
+            <a href="#" class="mobile-nav-link">Our Insight</a>
+            <a href="#" class="mobile-nav-link">Investors</a>
+            <a href="#contact" class="btn-mobile-contact">Contact Us</a>
+        </div>
+    </div>
 
     <!-- Hero Section 1 -->
     <section class="hero-1">

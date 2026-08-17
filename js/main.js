@@ -44,6 +44,32 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    // Mobile Navigation Drawer Toggle
+    const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+    const mobileNavDrawer = document.getElementById("mobileNavDrawer");
+    const mobileDrawerOverlay = document.getElementById("mobileDrawerOverlay");
+    const mobileDrawerClose = document.getElementById("mobileDrawerClose");
+
+    function openMobileDrawer() {
+        if (mobileNavDrawer) mobileNavDrawer.classList.add("active");
+        if (mobileDrawerOverlay) mobileDrawerOverlay.classList.add("active");
+        document.body.style.overflow = "hidden";
+    }
+
+    function closeMobileDrawer() {
+        if (mobileNavDrawer) mobileNavDrawer.classList.remove("active");
+        if (mobileDrawerOverlay) mobileDrawerOverlay.classList.remove("active");
+        document.body.style.overflow = "";
+    }
+
+    if (mobileMenuBtn) mobileMenuBtn.addEventListener("click", openMobileDrawer);
+    if (mobileDrawerClose) mobileDrawerClose.addEventListener("click", closeMobileDrawer);
+    if (mobileDrawerOverlay) mobileDrawerOverlay.addEventListener("click", closeMobileDrawer);
+
+    document.querySelectorAll(".mobile-nav-drawer a").forEach(link => {
+        link.addEventListener("click", closeMobileDrawer);
+    });
+
     // 1. Hero Section Video Initialization
     const video = document.getElementById("heroVideo");
     const canvas = document.getElementById("heroCanvas");
@@ -217,8 +243,20 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (isActive) {
                     return `
                         <div class="apple-accordion-item active" data-index="${idx}">
+                            <div class="apple-accordion-header">
+                                <span class="apple-accordion-icon">−</span>
+                                <span class="apple-accordion-title-text">${item.title}</span>
+                            </div>
                             <div class="apple-accordion-body">
                                 <p class="apple-accordion-desc">${item.desc}</p>
+                                <div class="mobile-accordion-media">
+                                    <div class="mobile-img-wrapper">
+                                        <img src="${item.image}" alt="${item.title}" class="mobile-accordion-img">
+                                    </div>
+                                    <div class="mobile-accordion-tags">
+                                        ${item.tags.map(t => `<span class="glass-pill">${t}</span>`).join("")}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     `;
@@ -241,6 +279,21 @@ document.addEventListener("DOMContentLoaded", function () {
                     activeIndex = idx;
                     renderAccordion();
                     updateStage(serviceData[idx]);
+
+                    // Smoothly scroll active item into clear view below fixed header on mobile
+                    setTimeout(() => {
+                        const activeEl = accordionList.querySelector(`.apple-accordion-item[data-index="${idx}"]`);
+                        if (activeEl) {
+                            const headerOffset = 90;
+                            const elementPosition = activeEl.getBoundingClientRect().top;
+                            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                            window.scrollTo({
+                                top: offsetPosition,
+                                behavior: "smooth"
+                            });
+                        }
+                    }, 50);
                 });
             });
         }
@@ -633,4 +686,69 @@ document.addEventListener("DOMContentLoaded", function () {
             servicesCarousel.scrollBy({ left: -320, behavior: "smooth" });
         });
     }
+
+    // 5. Auto-Scroll & 1-by-1 Snap Controller for Card Carousels
+    function initAutoScrollCarousel(containerSelector, itemSelector, intervalMs) {
+        const container = document.querySelector(containerSelector);
+        if (!container) return;
+
+        let autoScrollTimer = null;
+        let isUserInteracting = false;
+
+        function getCardWidth() {
+            const item = container.querySelector(itemSelector);
+            if (!item) return 300;
+            const gap = parseInt(window.getComputedStyle(container).gap) || 16;
+            return item.offsetWidth + gap;
+        }
+
+        function scrollNext() {
+            if (isUserInteracting) return;
+            const cardWidth = getCardWidth();
+            const maxScrollLeft = container.scrollWidth - container.clientWidth;
+            
+            if (container.scrollLeft >= maxScrollLeft - 10) {
+                container.scrollTo({ left: 0, behavior: "smooth" });
+            } else {
+                container.scrollBy({ left: cardWidth, behavior: "smooth" });
+            }
+        }
+
+        function startAutoScroll() {
+            stopAutoScroll();
+            autoScrollTimer = setInterval(scrollNext, intervalMs || 3500);
+        }
+
+        function stopAutoScroll() {
+            if (autoScrollTimer) clearInterval(autoScrollTimer);
+        }
+
+        container.addEventListener("touchstart", () => {
+            isUserInteracting = true;
+            stopAutoScroll();
+        }, { passive: true });
+
+        container.addEventListener("touchend", () => {
+            setTimeout(() => {
+                isUserInteracting = false;
+                startAutoScroll();
+            }, 3500);
+        });
+
+        container.addEventListener("mouseenter", () => {
+            isUserInteracting = true;
+            stopAutoScroll();
+        });
+
+        container.addEventListener("mouseleave", () => {
+            isUserInteracting = false;
+            startAutoScroll();
+        });
+
+        startAutoScroll();
+    }
+
+    initAutoScrollCarousel(".services-carousel", ".carousel-card", 3800);
+    initAutoScrollCarousel(".case-grid", ".case-card", 4200);
+    initAutoScrollCarousel(".exiqo-grid", ".exiqo-card", 4000);
 });
