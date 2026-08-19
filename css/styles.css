@@ -325,7 +325,11 @@ p {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.35rem 5%;
+    padding-top: 1.35rem;
+    padding-bottom: 1.35rem;
+    padding-left: calc(max(2rem, (100% - 1280px) / 2 + 2rem));
+    padding-right: calc(max(2rem, (100% - 1280px) / 2 + 2rem));
+    box-sizing: border-box;
     z-index: 1000;
     background: transparent;
     border-bottom: none;
@@ -341,7 +345,10 @@ p {
     background: rgba(255, 255, 255, 0.96);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    padding: 0.85rem 5%;
+    padding-top: 0.85rem;
+    padding-bottom: 0.85rem;
+    padding-left: calc(max(2rem, (100% - 1280px) / 2 + 2rem));
+    padding-right: calc(max(2rem, (100% - 1280px) / 2 + 2rem));
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
     border-bottom: 1px solid rgba(226, 232, 240, 0.8);
 }
@@ -552,7 +559,10 @@ p {
 /* Hero Section 1 (Exact Reference Match with Giant SVG Logo Mask Video) */
 .hero-1 {
     display: flex;
-    padding: 7.5rem 6% 3.5rem;
+    padding-top: 7.5rem;
+    padding-bottom: 3.5rem;
+    padding-left: calc(max(2rem, (100% - 1280px) / 2 + 2rem));
+    padding-right: calc(max(2rem, (100% - 1280px) / 2 + 2rem));
     align-items: center;
     justify-content: space-between;
     background: #ffffff;
@@ -646,7 +656,10 @@ p {
 
 /* Hero Section 2 Bento Grid (Harmonized RSi Brand Style) */
 .hero-2-white {
-    padding: 5.5rem 6%;
+    padding-top: 5.5rem;
+    padding-bottom: 5.5rem;
+    padding-left: calc(max(2rem, (100% - 1280px) / 2 + 2rem));
+    padding-right: calc(max(2rem, (100% - 1280px) / 2 + 2rem));
     background-color: #ffffff;
     position: relative;
 }
@@ -1363,10 +1376,14 @@ p {
 
 /* Service Offerings Premium UI */
 .service-offerings {
-    padding: 6.5rem 6%;
+    padding-top: 6.5rem;
+    padding-bottom: 6.5rem;
+    padding-left: calc(max(2rem, (100% - 1280px) / 2 + 2rem));
+    padding-right: calc(max(2rem, (100% - 1280px) / 2 + 2rem));
     background: #f8fafc;
     color: #0f172a;
     position: relative;
+    box-sizing: border-box;
 }
 
 .service-offerings-header {
@@ -1657,7 +1674,10 @@ p {
 .exiqo-section {
     background: #09090b;
     color: #ffffff;
-    padding: 6.5rem 6%;
+    padding-top: 6.5rem;
+    padding-bottom: 6.5rem;
+    padding-left: calc(max(2rem, (100% - 1280px) / 2 + 2rem));
+    padding-right: calc(max(2rem, (100% - 1280px) / 2 + 2rem));
     position: relative;
     overflow: hidden;
     min-height: 500px;
@@ -1706,7 +1726,10 @@ p {
 
 /* Expertise Section */
 .expertise {
-    padding: 6.5rem 6%;
+    padding-top: 6.5rem;
+    padding-bottom: 6.5rem;
+    padding-left: calc(max(2rem, (100% - 1280px) / 2 + 2rem));
+    padding-right: calc(max(2rem, (100% - 1280px) / 2 + 2rem));
     text-align: center;
     background-color: #ffffff;
     position: relative;
@@ -1966,7 +1989,10 @@ p {
 
 /* Thinking Industry */
 .thinking-industry {
-    padding: 6rem 6%;
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+    padding-left: calc(max(2rem, (100% - 1280px) / 2 + 2rem));
+    padding-right: calc(max(2rem, (100% - 1280px) / 2 + 2rem));
     background: #ffffff;
     position: relative;
     overflow: hidden;
@@ -2264,7 +2290,10 @@ p {
 
 /* Other Services Carousel */
 .other-services {
-    padding: 6rem 6%;
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+    padding-left: calc(max(2rem, (100% - 1280px) / 2 + 2rem));
+    padding-right: calc(max(2rem, (100% - 1280px) / 2 + 2rem));
     background-color: #ffffff;
     position: relative;
 }
@@ -2431,7 +2460,10 @@ p {
     position: relative;
     background-color: #030207;
     text-align: center;
-    padding: 7.5rem 6%;
+    padding-top: 7.5rem;
+    padding-bottom: 7.5rem;
+    padding-left: calc(max(2rem, (100% - 1280px) / 2 + 2rem));
+    padding-right: calc(max(2rem, (100% - 1280px) / 2 + 2rem));
     color: #ffffff;
     display: flex;
     flex-direction: column;
@@ -2478,8 +2510,12 @@ p {
 .footer {
     background-color: #09050d;
     color: #94a3b8;
-    padding: 5.5rem 6% 3.5rem;
+    padding-top: 5.5rem;
+    padding-bottom: 3.5rem;
+    padding-left: calc(max(2rem, (100% - 1280px) / 2 + 2rem));
+    padding-right: calc(max(2rem, (100% - 1280px) / 2 + 2rem));
     font-size: 0.875rem;
+    box-sizing: border-box;
 }
  
 .footer-top {

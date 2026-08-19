@@ -28,6 +28,7 @@
             grid-template-columns: 1.15fr 0.85fr;
             gap: 3.5rem;
             align-items: center;
+            min-height: 480px;
             position: relative;
             z-index: 2;
         }
@@ -36,6 +37,7 @@
             .l2-hero-container {
                 grid-template-columns: 1fr;
                 gap: 2.5rem;
+                min-height: auto;
             }
         }
 
@@ -107,7 +109,9 @@
             position: relative;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-end;
+            height: 480px;
+            width: 100%;
         }
 
         /* Soft ambient radial glow behind the doctor cutout */
@@ -123,20 +127,19 @@
         }
 
         .l2-hero-img {
-            width: 100%;
-            height: auto;
-            max-height: 500px;
+            height: 100%;
+            max-height: 480px;
+            width: auto;
             object-fit: contain;
             display: block;
             position: relative;
             z-index: 2;
             filter: drop-shadow(0 20px 35px rgba(155, 81, 224, 0.15)) drop-shadow(0 10px 20px rgba(0, 0, 0, 0.07));
+            transform: scaleX(-1);
             transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .l2-hero-img-wrapper:hover .l2-hero-img {
-            transform: translateY(-6px) scale(1.02);
-        }
+        
 
         /* Healthcare Specific Styles & Enhancements */
         .benefit-card-grid {
@@ -831,16 +834,14 @@
             <div class="l2-hero-content">
                 <!-- L2 Breadcrumbs -->
                 <div class="l2-breadcrumb">
-                    <a href="#">Who We Serve</a>
+                    <a href="#">Who We Are</a>
                     <span>/</span>
-                    <a href="#">Healthcare</a>
-                    <span>/</span>
-                    <span class="active">Healthcare Provider</span>
+                    <span class="active">Diversity, Equity and Belonging</span>
                 </div>
 
                 
 
-                <h1>Provider</h1>
+                <h1>Diversity, Equity and Belonging</h1>
 
                 <p>At R Systems, we empower healthcare providers with cutting-edge digital health engineering, AI diagnostics, remote patient monitoring, and EHR integration—driving exceptional care outcomes while optimizing operational costs.</p>
 
@@ -849,13 +850,13 @@
 
             <!-- Right L2 Clean Featured Image -->
             <div class="l2-hero-img-wrapper">
-                <img src="image/provider.png" alt="Healthcare Provider Solutions" class="l2-hero-img">
+                <img src="image/divery-hero.png" alt="Healthcare Provider Solutions" class="l2-hero-img">
             </div>
         </div>
     </section>
 
     <!-- Value and Benefits Section -->
-    <section class="value-benefits-section" style="background: #f8f9fd; padding: 4.5rem 5%;">
+    <section class="value-benefits-section" style="background: #f8f9fd; padding: 4.5rem calc(max(2rem, (100% - 1280px) / 2 + 2rem));">
         <div style="max-width: 1280px; margin: 0 auto;">
             <div class="section-header text-left" style="margin-bottom: 2.5rem; text-align: left;">
                 <span class="eyebrow" style="color: #9b51e0; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.88rem;">• VALUE & BENEFITS</span>
@@ -1031,7 +1032,7 @@
                 <!-- Card 5 -->
                 <div class="empower-photo-card">
                     <div class="empower-photo-inner">
-                        <img src="image/empower-5.avif" alt="Equipment & Bed Rentals" class="empower-bg-img">
+                        <img src="image/empower5.png" alt="Equipment & Bed Rentals" class="empower-bg-img">
                         <span class="empower-top-badge">Asset Ops</span>
                         <div class="empower-card-overlay">
                             <div class="empower-card-title-row">
@@ -1046,7 +1047,7 @@
                 <!-- Card 6 -->
                 <div class="empower-photo-card">
                     <div class="empower-photo-inner">
-                        <img src="image/empower-6.avif" alt="AI/ML for Peripheral Artery Disease" class="empower-bg-img">
+                        <img src="image/empower6.png" alt="AI/ML for Peripheral Artery Disease" class="empower-bg-img">
                         <span class="empower-top-badge">AI Diagnostics</span>
                         <div class="empower-card-overlay">
                             <div class="empower-card-title-row">
@@ -1061,7 +1062,7 @@
                 <!-- Card 7 -->
                 <div class="empower-photo-card">
                     <div class="empower-photo-inner">
-                        <img src="image/empower-7.avif" alt="Business Solutions for Cancer Care" class="empower-bg-img">
+                        <img src="image/empower7.png" alt="Business Solutions for Cancer Care" class="empower-bg-img">
                         <span class="empower-top-badge">Oncology Ops</span>
                         <div class="empower-card-overlay">
                             <div class="empower-card-title-row">
@@ -1076,7 +1077,7 @@
                 <!-- Card 8 -->
                 <div class="empower-photo-card">
                     <div class="empower-photo-inner">
-                        <img src="image/empower-8.avif" alt="EHR & Practice Management" class="empower-bg-img">
+                        <img src="image/empower8.png" alt="EHR & Practice Management" class="empower-bg-img">
                         <span class="empower-top-badge">EHR & Admin</span>
                         <div class="empower-card-overlay">
                             <div class="empower-card-title-row">
@@ -1124,7 +1125,7 @@
     </section>
 
     <!-- Collaborations Across the Technology Ecosystem Section (Matching R Systems Design System) -->
-    <section class="collaborations-section" style="padding: 5rem 5%; background: #f8f9fd; border-top: 1px solid #f1f5f9;">
+    <section class="collaborations-section" style="padding: 5rem calc(max(2rem, (100% - 1280px) / 2 + 2rem)); background: #f8f9fd; border-top: 1px solid #f1f5f9;">
         <div style="max-width: 1280px; margin: 0 auto;">
             <!-- Standard Left-Aligned Section Header Pattern -->
             <div class="section-header text-left" style="margin-bottom: 2.5rem; text-align: left;">
@@ -1277,7 +1278,7 @@
     </section>
 
     <!-- Great Place To Work Certification Section -->
-    <section class="gptw-section" style="padding: 5.5rem 5%; background: #ffffff; border-top: 1px solid #f1f5f9;">
+    <section class="gptw-section" style="padding: 5.5rem calc(max(2rem, (100% - 1280px) / 2 + 2rem)); background: #ffffff; border-top: 1px solid #f1f5f9;">
         <div style="max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 4rem; align-items: center;">
             <!-- Left Text Content -->
             <div class="gptw-content">

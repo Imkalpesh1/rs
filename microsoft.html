@@ -20,7 +20,45 @@
             overflow-x: hidden;
         }
 
-        /* Header Overrides for Hero (White text on Hero, Dark when scrolled) */
+        /* Unified 1280px Header Container Alignment */
+        .header.ms-header-hero {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.35rem 0;
+            z-index: 1000;
+            background: transparent;
+            border-bottom: none;
+            box-shadow: none;
+            transition: background 0.35s ease, box-shadow 0.35s ease, padding 0.35s ease;
+        }
+
+        .header.ms-header-hero.scrolled {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            padding: 0.85rem 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+        }
+
+        .header-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* Header Text Overrides for Hero (White text on Hero, Dark when scrolled) */
         .header.ms-header-hero .nav-link,
         .header.ms-header-hero .nav-link-secondary,
         .header.ms-header-hero .icon-btn {
@@ -28,14 +66,22 @@
             transition: color 0.25s ease;
         }
 
-        .header.ms-header-hero .logo-img {
-            filter: brightness(0) invert(1) !important;
-            transition: filter 0.25s ease;
-        }
-
         .header.ms-header-hero .hamburger-line {
             background-color: #ffffff !important;
             transition: background-color 0.25s ease;
+        }
+
+        /* Header Logo Switching for Dark vs Scrolled Header (Using r-logo-light.svg) */
+        .header.ms-header-hero .logo-img-light {
+            display: block !important;
+            height: 32px;
+            width: auto;
+        }
+
+        .header.ms-header-hero .logo-img-dark {
+            display: none !important;
+            height: 32px;
+            width: auto;
         }
 
         /* Scrolled Header State */
@@ -50,8 +96,12 @@
             color: #9b51e0 !important;
         }
 
-        .header.scrolled .logo-img {
-            filter: none !important;
+        .header.scrolled .logo-img-light {
+            display: none !important;
+        }
+
+        .header.scrolled .logo-img-dark {
+            display: block !important;
         }
 
         .header.scrolled .hamburger-line {
@@ -83,12 +133,12 @@
             font-weight: 600;
         }
 
-        /* HERO SECTION - Exact Height and Padding Matched to v2.html */
+        /* HERO SECTION - Unified 1280px Container & 2rem Padding */
         .ms-hero-section {
             position: relative;
-            background: #0072ce url('images/hero-microsoft.png') center center / cover no-repeat;
+            background: #0072ce url('images/r-hero.png') right center / cover no-repeat;
             color: #ffffff;
-            padding: 7.5rem 2rem 4.5rem 2rem;
+            padding: 7.5rem 0 4.5rem 0;
             overflow: hidden;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
@@ -96,6 +146,7 @@
         .ms-hero-container {
             max-width: 1280px;
             margin: 0 auto;
+            padding: 0 2rem;
             display: grid;
             grid-template-columns: 1.15fr 0.85fr;
             gap: 3.5rem;
@@ -103,6 +154,7 @@
             position: relative;
             z-index: 2;
             min-height: 380px;
+            box-sizing: border-box;
         }
 
         @media (max-width: 992px) {
@@ -112,7 +164,7 @@
                 min-height: auto;
             }
             .ms-hero-section {
-                padding: 6.5rem 1.5rem 3.5rem 1.5rem;
+                padding: 6.5rem 0 3.5rem 0;
             }
         }
 
@@ -133,7 +185,108 @@
             margin: 0;
         }
 
-        /* DESIGNATION CARDS STRIP SECTION */
+        /* HERO VISUAL RIGHT SIDE (Concentric Perfect Circular Orbits) */
+        .ms-hero-visual {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            position: relative;
+            height: 100%;
+            min-height: 420px;
+        }
+
+        .ms-hero-orbit-stage {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: heroFloat 6s ease-in-out infinite alternate;
+        }
+
+        .ms-orbit-svg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: visible;
+        }
+
+        /* Concentric Circular Orbit Animations */
+        .orbit-anim-slow {
+            transform-origin: 200px 200px;
+            animation: orbitClockwise 60s linear infinite;
+        }
+
+        .orbit-anim-normal {
+            transform-origin: 200px 200px;
+            animation: orbitClockwise 35s linear infinite;
+        }
+
+        .orbit-anim-dash {
+            transform-origin: 200px 200px;
+            animation: orbitCounterClockwise 45s linear infinite;
+        }
+
+        .orbit-anim-rev {
+            transform-origin: 200px 200px;
+            animation: orbitCounterClockwise 55s linear infinite;
+        }
+
+        .orbit-anim-dot {
+            transform-origin: 200px 200px;
+            animation: orbitClockwise 25s linear infinite;
+        }
+
+        @keyframes orbitClockwise {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes orbitCounterClockwise {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(-360deg); }
+        }
+
+        @keyframes heroFloat {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-10px); }
+        }
+
+        /* Central White Circle Badge */
+        .ms-hero-circle-badge {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            background: #ffffff;
+            box-shadow: 0 20px 50px rgba(0, 60, 130, 0.3), 0 4px 16px rgba(0, 0, 0, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 5;
+            padding: 1.8rem;
+            box-sizing: border-box;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+            cursor: pointer;
+        }
+
+        .ms-hero-circle-badge:hover {
+            transform: scale(1.04);
+            box-shadow: 0 28px 65px rgba(0, 60, 130, 0.4), 0 6px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .ms-hero-circle-badge img {
+            width: 100%;
+            height: auto;
+            max-height: 82%;
+            object-fit: contain;
+            display: block;
+        }
+
+        /* DESIGNATION CARDS STRIP SECTION - Unified 1280px Container */
         .ms-strip-section {
             background: #ffffff;
             padding: 3.5rem 0 4rem 0;
@@ -141,13 +294,13 @@
             overflow: hidden;
         }
 
-        /* Left Side Frosted Glass Panel (Ends EXACTLY at single purple vertical line) */
+        /* Left Side Frosted Glass Panel (Ends EXACTLY at center of single purple vertical line inside 1280px grid) */
         .ms-strip-glass-panel {
             position: absolute;
             top: -30px;
             bottom: -30px;
             left: 0;
-            width: calc( max(0px, (100% - 1400px) / 2) + 2rem + 57.5px );
+            width: calc( max(0px, (100% - 1280px) / 2) + 2rem + 57.5px );
             z-index: 8;
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(248, 242, 255, 0.72) 100%);
             backdrop-filter: blur(16px) saturate(180%);
@@ -157,23 +310,24 @@
             pointer-events: none;
         }
 
-        /* Right Side Pure Soft Gradient Fade (No Blur / Glass) */
+        /* Right Side Pure Soft Gradient Fade Overlay for Top Strip */
         .ms-strip-right-fade {
             position: absolute;
             top: 0;
             bottom: 0;
             right: 0;
-            width: 120px;
-            z-index: 8;
-            background: linear-gradient(270deg, #ffffff 0%, rgba(255, 255, 255, 0.85) 60%, rgba(255, 255, 255, 0) 100%);
+            width: 220px;
+            z-index: 15;
+            background: linear-gradient(270deg, #ffffff 15%, rgba(255, 255, 255, 0.95) 45%, rgba(255, 255, 255, 0.7) 70%, rgba(255, 255, 255, 0) 100%);
             pointer-events: none;
         }
 
         .ms-strip-wrapper {
-            max-width: 1400px;
+            max-width: 1280px;
             margin: 0 auto;
             position: relative;
             padding: 0 2rem;
+            box-sizing: border-box;
         }
 
         /* Absolute Pinned Left Badge Overlap Layer (z-index: 10) */
@@ -233,14 +387,14 @@
             right: 2rem;
             top: 50%;
             transform: translateY(-50%);
-            z-index: 12;
+            z-index: 25;
             width: 44px;
             height: 44px;
             border-radius: 50%;
             background: #ffffff;
             border: 1px solid #e2e8f0;
-            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
-            color: #1e293b;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+            color: #333333;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -249,10 +403,10 @@
         }
 
         .ms-strip-scroll-btn:hover {
-            background: #9b51e0;
+            background: #333333;
             color: #ffffff;
-            border-color: #9b51e0;
-            box-shadow: 0 6px 20px rgba(155, 81, 224, 0.3);
+            border-color: #333333;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
             transform: translateY(-50%) scale(1.08);
         }
 
@@ -298,37 +452,43 @@
         }
 
         .ms-card-top-icon {
-            width: 38px;
-            height: 38px;
-            color: #9b51e0;
-            margin-bottom: 0.85rem;
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            
+            color: #333333;
+            margin-bottom: 1.1rem;
             display: flex;
             align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
         }
 
-        /* Refined, Lighter Typography for Cards */
+        
+
+        /* Refined, Crisp #333333 Typography for Cards */
         .ms-card-info h4 {
             font-size: 1.1rem;
-            font-weight: 450;
-            color: #1d1d1f;
+            font-weight: 500;
+            color: #333333;
             margin: 0 0 0.25rem 0;
             line-height: 1.35;
             letter-spacing: -0.01em;
         }
 
         .ms-card-info .azure-tag {
-            color: #9b51e0;
+            color: #333333;
             font-size: 0.9rem;
-            font-weight: 450;
+            font-weight: 500;
             margin-bottom: 1.25rem;
             display: block;
         }
 
         .ms-card-bottom-box {
-            background: #f8f3fc;
+            background: #f5f5f5;
             border-radius: 12px;
             padding: 1rem 1.1rem;
-            color: #1e293b;
+            color: #333333;
             font-size: 0.86rem;
             line-height: 1.45;
             margin-top: auto;
@@ -336,8 +496,8 @@
 
         .specialist-label {
             display: block;
-            font-weight: 550;
-            color: #9b51e0;
+            font-weight: 600;
+            color: #333333;
             font-size: 0.78rem;
             text-transform: uppercase;
             letter-spacing: 0.04em;
@@ -351,61 +511,170 @@
             line-height: 1.4;
         }
 
-        /* OUR EXPERTISE SECTION */
+        /* OUR EXPERTISE CAROUSEL SECTION - Unified 1280px Container */
         .ms-expertise-section {
-            padding: 4.5rem 2rem 5rem 2rem;
+            padding: 4.5rem 0 5rem 0;
             background: #ffffff;
+            position: relative;
         }
 
         .ms-expertise-container {
             max-width: 1280px;
             margin: 0 auto;
+            padding: 0 2rem;
+            box-sizing: border-box;
         }
 
-        .ms-section-header {
-            margin-bottom: 3.5rem;
+        .ms-section-header.flex-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 2.5rem;
+            gap: 2rem;
         }
 
         .ms-section-header h2 {
             font-size: clamp(2rem, 3.5vw, 2.75rem);
-            font-weight: 400;
+            font-weight: 300;
             color: #0f172a;
-            margin: 0 0 0.75rem 0;
+            margin: 0.3rem 0 0.5rem 0;
             letter-spacing: -0.01em;
         }
 
         .ms-section-header p {
             font-size: 1.05rem;
             color: #64748b;
-            max-width: 760px;
+            max-width: 680px;
             margin: 0;
             line-height: 1.6;
         }
 
-        .ms-expertise-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2.5rem 2rem;
+        /* Expertise Carousel Track & Cards (Exactly 4 Cards Visible per View with Scroll Snap) */
+        .ms-expertise-carousel-track {
+            display: flex;
+            gap: 1.5rem;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            scroll-snap-type: x mandatory;
+            padding: 0.75rem 0 1.75rem 0;
+            scrollbar-width: none;
         }
 
-        @media (max-width: 1024px) {
-            .ms-expertise-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+        .ms-expertise-carousel-track::-webkit-scrollbar {
+            display: none;
         }
 
-        @media (max-width: 600px) {
-            .ms-expertise-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .ms-exp-card {
+        .ms-exp-carousel-card {
+            background: #ffffff;
+            padding: 2.2rem 1.6rem;
+            border-radius: 20px;
+            border: 1px solid rgba(226, 232, 240, 0.9);
+            box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
+            overflow: hidden;
             display: flex;
             flex-direction: column;
-            gap: 0.7rem;
+            position: relative;
+            width: calc((100% - 4.5rem) / 4);
+            min-width: calc((100% - 4.5rem) / 4);
+            max-width: calc((100% - 4.5rem) / 4);
+            flex: 0 0 auto;
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+            box-sizing: border-box;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                        box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                        border-color 0.35s ease;
         }
 
+        @media (max-width: 1100px) {
+            .ms-exp-carousel-card {
+                width: calc((100% - 3rem) / 3);
+                min-width: calc((100% - 3rem) / 3);
+                max-width: calc((100% - 3rem) / 3);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .ms-exp-carousel-card {
+                width: calc((100% - 1.5rem) / 2);
+                min-width: calc((100% - 1.5rem) / 2);
+                max-width: calc((100% - 1.5rem) / 2);
+            }
+        }
+
+        @media (max-width: 500px) {
+            .ms-exp-carousel-card {
+                width: 100%;
+                min-width: 100%;
+                max-width: 100%;
+            }
+        }
+
+        .ms-exp-carousel-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #8656FE, #9b51e0, #ec4899);
+            opacity: 0;
+            transition: opacity 0.35s ease;
+            z-index: 2;
+        }
+
+        .ms-exp-carousel-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 42px -10px rgba(134, 86, 254, 0.18), 0 0 0 1px rgba(134, 86, 254, 0.35);
+            border-color: rgba(134, 86, 254, 0.4);
+        }
+
+        .ms-exp-carousel-card:hover::before {
+            opacity: 1;
+        }
+
+        .ms-exp-carousel-card .icon-box {
+            width: 54px;
+            height: 54px;
+            border-radius: 16px;
+            background: rgba(134, 86, 254, 0.08);
+            border: 1px solid rgba(134, 86, 254, 0.15);
+            color: #8656FE;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .ms-exp-carousel-card:hover .icon-box {
+            background: linear-gradient(135deg, #8656FE 0%, #9b51e0 100%);
+            border-color: transparent;
+            color: #ffffff;
+            transform: scale(1.08) rotate(-3deg);
+            box-shadow: 0 8px 22px rgba(134, 86, 254, 0.3);
+        }
+
+        .ms-exp-carousel-card h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #0f172a;
+            line-height: 1.35;
+            margin: 0 0 0.75rem 0;
+            transition: color 0.35s ease;
+        }
+
+        .ms-exp-carousel-card:hover h3 {
+            color: #6d28d9;
+        }
+
+        .ms-exp-carousel-card p {
+            font-size: 0.9rem;
+            color: #64748b;
+            line-height: 1.6;
+            margin: 0;
+        }
+           
         .ms-exp-icon-box {
             width: 32px;
             height: 32px;
@@ -430,16 +699,18 @@
             margin: 0;
         }
 
-        /* SERVICE OFFERINGS (Exact Apple Interactive Showcase copied from v2.html) */
+        /* SERVICE OFFERINGS (Apple Interactive Showcase - Microsoft Solutions - Unified 1280px Container) */
         .service-offerings {
-            padding: 5rem 2rem;
+            padding: 5rem 0;
             background: #ffffff;
             border-top: 1px solid #f1f5f9;
         }
 
         .service-offerings-header {
-            max-width: 1240px;
+            max-width: 1280px;
             margin: 0 auto 3rem auto;
+            padding: 0 2rem;
+            box-sizing: border-box;
         }
 
         .service-offerings-header .eyebrow {
@@ -471,8 +742,10 @@
             grid-template-columns: 430px 1fr;
             gap: 3rem;
             align-items: flex-start;
-            max-width: 1240px;
+            max-width: 1280px;
             margin: 0 auto;
+            padding: 0 2rem;
+            box-sizing: border-box;
         }
 
         @media (max-width: 992px) {
@@ -582,13 +855,24 @@
             color: #9b51e0;
             font-weight: 600;
             text-decoration: none;
-            margin-left: 0.3rem;
-            display: inline-block;
+            margin-top: 0.75rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.88rem;
+            padding: 0.35rem 0.85rem;
+            background: rgba(155, 81, 224, 0.08);
+            border-radius: 9999px;
+            border: 1px solid rgba(155, 81, 224, 0.2);
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .ms-read-more-link:hover {
-            text-decoration: underline;
-            color: #7b2ff7;
+            background: #9b51e0;
+            color: #ffffff;
+            border-color: #9b51e0;
+            transform: translateX(4px);
+            box-shadow: 0 4px 12px rgba(155, 81, 224, 0.25);
         }
 
         .apple-stage-card {
@@ -688,56 +972,59 @@
 
 <body>
 
-    <!-- Transparent Overlay Header (Copied exact structure from v2.html) -->
+    <!-- Transparent Overlay Header with Unified 1280px Container -->
     <header class="header ms-header-hero">
-        <div class="logo">
-            <a href="#" class="logo-brand" aria-label="RSi Home">
-                <img src="images/rsi_logo.png" alt="RSi Logo" class="logo-img">
-            </a>
-        </div>
-        <nav class="main-nav">
-            <a href="#" class="nav-link">ExiQO</a>
-            
-            <!-- What We Do with Dropdown Menu -->
-            <div class="nav-item-dropdown">
-                <a href="#" class="nav-link dropdown-toggle">What We Do</a>
-                <div class="dropdown-menu">
-                    <a href="#" class="dropdown-item">Digital Product Engineering</a>
-                    <a href="#" class="dropdown-item">Cloud & Modernization</a>
-                    <a href="#" class="dropdown-item">Generative AI & Data</a>
-                </div>
+        <div class="header-container">
+            <div class="logo">
+                <a href="#" class="logo-brand" aria-label="RSi Home">
+                    <img src="images/r-logo-light.svg" alt="RSi Logo" class="logo-img logo-img-light">
+                    <img src="images/rsi_logo.png" alt="RSi Logo" class="logo-img logo-img-dark" style="display: none;">
+                </a>
             </div>
-            
-            <a href="#" class="nav-link">Who We Are</a>
-            <a href="#" class="nav-link">Insights</a>
-            <a href="#" class="nav-link">Careers</a>
-        </nav>
-        <div class="header-right">
-            <a href="#" class="nav-link-secondary">Investors</a>
-            <a href="#contact" class="nav-link-secondary">Contact Us</a>
-            <button class="icon-btn search-btn" aria-label="Search">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="11" cy="11" r="8" />
-                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                </svg>
-            </button>
-            <button class="icon-btn lang-btn" aria-label="Language Selector">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                    <circle cx="12" cy="12" r="10" />
-                    <line x1="2" y1="12" x2="22" y2="12" />
-                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-                </svg>
+            <nav class="main-nav">
+                <a href="#" class="nav-link">ExiQO</a>
+                
+                <!-- What We Do with Dropdown Menu -->
+                <div class="nav-item-dropdown">
+                    <a href="#" class="nav-link dropdown-toggle">What We Do</a>
+                    <div class="dropdown-menu">
+                        <a href="#" class="dropdown-item">Digital Product Engineering</a>
+                        <a href="#" class="dropdown-item">Cloud & Modernization</a>
+                        <a href="#" class="dropdown-item">Generative AI & Data</a>
+                    </div>
+                </div>
+                
+                <a href="#" class="nav-link">Who We Are</a>
+                <a href="#" class="nav-link">Insights</a>
+                <a href="#" class="nav-link">Careers</a>
+            </nav>
+            <div class="header-right">
+                <a href="#" class="nav-link-secondary">Investors</a>
+                <a href="#contact" class="nav-link-secondary">Contact Us</a>
+                <button class="icon-btn search-btn" aria-label="Search">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8" />
+                        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                    </svg>
+                </button>
+                <button class="icon-btn lang-btn" aria-label="Language Selector">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="2" y1="12" x2="22" y2="12" />
+                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                    </svg>
+                </button>
+            </div>
+            <!-- Mobile Menu Toggle Button -->
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle Mobile Menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
             </button>
         </div>
-        <!-- Mobile Menu Toggle Button -->
-        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle Mobile Menu">
-            <span class="hamburger-line"></span>
-            <span class="hamburger-line"></span>
-            <span class="hamburger-line"></span>
-        </button>
     </header>
 
-    <!-- Mobile Navigation Drawer Overlay & Drawer (Copied from v2.html) -->
+    <!-- Mobile Navigation Drawer Overlay & Drawer -->
     <div class="mobile-drawer-overlay" id="mobileDrawerOverlay"></div>
     <div class="mobile-nav-drawer" id="mobileNavDrawer">
         <div class="mobile-drawer-header">
@@ -762,11 +1049,11 @@
         </div>
     </div>
 
-    <!-- HERO SECTION - Exact Height and Padding matched to v2.html -->
+    <!-- HERO SECTION - Unified 1280px Container with Interactive Orbital Graphic (Screenshot 1 Style) -->
     <section class="ms-hero-section">
         <div class="ms-hero-container">
             <div class="ms-hero-content">
-                <!-- Breadcrumbs matching v2.html style -->
+                <!-- Breadcrumbs -->
                 <div class="l2-breadcrumb">
                     <a href="#">Our Partners</a>
                     <span>/</span>
@@ -776,12 +1063,58 @@
                 <h1>Microsoft</h1>
                 <p>At R Systems, we empower businesses to maximize Microsoft technologies for scalability, security, and modernization. Backed by proven frameworks and industry best practices, we help enterprises leverage the full power of the Microsoft ecosystem for sustained growth.</p>
             </div>
-            <!-- Right side spacer so the badge graphics baked into hero-microsoft.png shine through -->
-            <div></div>
+
+            <!-- Right Side Interactive Orbital Graphic (Concentric Circular Orbits matching Reference) -->
+            <div class="ms-hero-visual">
+                <div class="ms-hero-orbit-stage">
+                    <svg class="ms-orbit-svg" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <filter id="dotGlow" x="-50%" y="-50%" width="200%" height="200%">
+                                <feGaussianBlur stdDeviation="3" result="blur" />
+                                <feMerge>
+                                    <feMergeNode in="blur" />
+                                    <feMergeNode in="SourceGraphic" />
+                                </feMerge>
+                            </filter>
+                            <linearGradient id="orbitArcGrad" x1="100" y1="50" x2="300" y2="350" gradientUnits="userSpaceOnUse">
+                                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+                                <stop offset="70%" stop-color="#38bdf8" stop-opacity="0.8"/>
+                                <stop offset="100%" stop-color="#ffffff" stop-opacity="0.2"/>
+                            </linearGradient>
+                        </defs>
+
+                        <!-- 1. INNER CONCENTRIC RING (r = 126px) -->
+                        <circle cx="200" cy="200" r="126" stroke="rgba(255, 255, 255, 0.45)" stroke-width="1.5" class="orbit-anim-slow"/>
+                        <circle cx="200" cy="200" r="126" stroke="url(#orbitArcGrad)" stroke-width="4.5" stroke-linecap="round" stroke-dasharray="160 600" class="orbit-anim-normal"/>
+
+                        <!-- 2. MIDDLE DASHED ORBIT CIRCLE (r = 146px) -->
+                        <circle cx="200" cy="200" r="146" stroke="rgba(255, 255, 255, 0.75)" stroke-width="1.5" stroke-dasharray="4 6" class="orbit-anim-dash"/>
+
+                        <!-- 3. OUTER CONCENTRIC ARC (r = 166px) -->
+                        <circle cx="200" cy="200" r="166" stroke="rgba(255, 255, 255, 0.35)" stroke-width="1.2" stroke-dasharray="320 200" class="orbit-anim-rev"/>
+
+                        
+                        <!-- 5. ORBITING WHITE DOT & RADIAL TICK LINE (on r=146px path) -->
+                        <g class="orbit-anim-dot">
+                            <!-- Radial Tick Line perpendicular to orbit circle -->
+                            <line x1="44" y1="200" x2="64" y2="200" stroke="rgba(255, 255, 255, 0.75)" stroke-width="1.2"/>
+                            <!-- Subtle outer white halo ring -->
+                            <circle cx="54" cy="200" r="8" stroke="rgba(255, 255, 255, 0.4)" stroke-width="1" fill="none"/>
+                            <!-- Crisp solid white dot -->
+                            <circle cx="54" cy="200" r="4.5" fill="#ffffff"/>
+                        </g>
+                    </svg>
+
+                    <!-- Central White Badge -->
+                    <div class="ms-hero-circle-badge">
+                        <img src="images/microsoft.png" alt="Microsoft Solutions Partner">
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- DESIGNATION CARDS STRIP SECTION -->
+    <!-- DESIGNATION CARDS STRIP SECTION - Unified 1280px Container -->
     <section class="ms-strip-section">
         <!-- Frosted Glass Overlay Panel aligned perfectly to the purple line -->
         <div class="ms-strip-glass-panel"></div>
@@ -903,140 +1236,162 @@
         </div>
     </section>
 
-    <!-- OUR EXPERTISE SECTION -->
+    <!-- OUR EXPERTISE SECTION (Carousel with Navigation Arrows matching Screenshot 2) -->
     <section class="ms-expertise-section">
         <div class="ms-expertise-container">
-            <div class="ms-section-header">
-                <h2>Our Expertise</h2>
-                <p>Empowering enterprises to transform, fortify, and streamline their technology ecosystem with Microsoft-powered solutions.</p>
+            <div class="ms-section-header flex-header">
+                <div>
+                    <span class="eyebrow" style="color: #9b51e0; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.88rem;">• OUR CAPABILITIES</span>
+                    <h2>Our Expertise</h2>
+                    <p>Empowering enterprises to transform, fortify, and streamline their technology ecosystem with Microsoft-powered solutions.</p>
+                </div>
+                <div class="carousel-nav" style="display: flex; align-items: center; gap: 0.75rem; flex-shrink: 0;">
+                    <button class="nav-btn" id="expPrevBtn" aria-label="Previous Slide">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                    </button>
+                    <button class="nav-btn" id="expNextBtn" aria-label="Next Slide">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </button>
+                </div>
             </div>
 
-            <div class="ms-expertise-grid">
-                <!-- 1 -->
-                <div class="ms-exp-card">
-                    <div class="ms-exp-icon-box">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="10"/>
-                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-                        </svg>
+            <div class="ms-exp-carousel-wrapper" style="position: relative;">
+                <div class="ms-expertise-carousel-track" id="expCarouselTrack">
+                    <!-- 1: Improved Patient Outcomes -->
+                    <div class="ms-exp-carousel-card">
+                        <div class="icon-box">
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                            </svg>
+                        </div>
+                        <h3>Improved Patient Outcomes</h3>
+                        <p>Empowering health systems with intelligent digital workflows and real-time clinical telemetry to optimize patient care.</p>
                     </div>
-                    <h3>Improved Patient Outcomes</h3>
-                    <p>Lorem ipsum is simply dummy text of the printing and typesetting industry.</p>
-                </div>
 
-                <!-- 2 -->
-                <div class="ms-exp-card">
-                    <div class="ms-exp-icon-box">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-                        </svg>
+                    <!-- 2: Reduced Cost of Care & Readmissions -->
+                    <div class="ms-exp-carousel-card">
+                        <div class="icon-box">
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/>
+                                <polyline points="17 18 23 18 23 12"/>
+                            </svg>
+                        </div>
+                        <h3>Reduced Cost of Care & Readmissions</h3>
+                        <p>Automating administrative routines and care transitions to significantly lower operational costs and hospital readmission rates.</p>
                     </div>
-                    <h3>Reduced Cost of Care, Length of Stay, and Readmissions.</h3>
-                    <p>Lorem ipsum is simply dummy text of the printing and typesetting industry.</p>
-                </div>
 
-                <!-- 3 -->
-                <div class="ms-exp-card">
-                    <div class="ms-exp-icon-box">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z" />
-                        </svg>
+                    <!-- 3: Improved Quality of Care -->
+                    <div class="ms-exp-carousel-card">
+                        <div class="icon-box">
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                <polyline points="9 12 11 14 15 10"/>
+                            </svg>
+                        </div>
+                        <h3>Improved Quality of Care</h3>
+                        <p>Delivering unified clinical data interoperability and cloud infrastructure to ensure continuous, high-quality care delivery.</p>
                     </div>
-                    <h3>Improved Quality of Care</h3>
-                    <p>Lorem ipsum is simply dummy text of the printing and typesetting industry.</p>
-                </div>
 
-                <!-- 4 -->
-                <div class="ms-exp-card">
-                    <div class="ms-exp-icon-box">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="2" y="5" width="20" height="14" rx="2"/>
-                            <line x1="2" y1="10" x2="22" y2="10"/>
-                        </svg>
+                    <!-- 4: Convenient Patient Diagnostics -->
+                    <div class="ms-exp-carousel-card">
+                        <div class="icon-box">
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                                <line x1="8" y1="21" x2="16" y2="21"/>
+                                <line x1="12" y1="17" x2="12" y2="21"/>
+                                <path d="M6 10h2l1-3 2 6 2-4 1 1h4"/>
+                            </svg>
+                        </div>
+                        <h3>Convenient Patient Diagnostics</h3>
+                        <p>Enabling remote patient diagnostics and AI-driven triage for rapid, accurate clinical decision-making.</p>
                     </div>
-                    <h3>Convenient Patient Diagnostics</h3>
-                    <p>Lorem ipsum is simply dummy text of the printing and typesetting industry.</p>
-                </div>
 
-                <!-- 5 -->
-                <div class="ms-exp-card">
-                    <div class="ms-exp-icon-box">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M12 20h9"/>
-                            <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
-                        </svg>
+                    <!-- 5: Better Receivables Management -->
+                    <div class="ms-exp-carousel-card">
+                        <div class="icon-box">
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+                                <line x1="1" y1="10" x2="23" y2="10"/>
+                                <path d="M12 14v4M9.5 15.5h5"/>
+                            </svg>
+                        </div>
+                        <h3>Better Receivables Management</h3>
+                        <p>Streamlining medical billing, revenue cycle workflows, and automated claim tracking to reduce outstanding receivables.</p>
                     </div>
-                    <h3>Better Account Receivables Management</h3>
-                    <p>Lorem ipsum is simply dummy text of the printing and typesetting industry.</p>
-                </div>
 
-                <!-- 6 -->
-                <div class="ms-exp-card">
-                    <div class="ms-exp-icon-box">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <line x1="18" y1="20" x2="18" y2="10"/>
-                            <line x1="12" y1="20" x2="12" y2="4"/>
-                            <line x1="6" y1="20" x2="6" y2="14"/>
-                        </svg>
+                    <!-- 6: Streamlined Operations Workload -->
+                    <div class="ms-exp-carousel-card">
+                        <div class="icon-box">
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                                <polyline points="2 17 12 22 22 17"/>
+                                <polyline points="2 12 12 17 22 12"/>
+                            </svg>
+                        </div>
+                        <h3>Streamlined Operations Workload</h3>
+                        <p>Optimizing staff scheduling, resource allocation, and automated inventory pipelines to relieve clinical workload.</p>
                     </div>
-                    <h3>Streamlined Operations Workload</h3>
-                    <p>Lorem ipsum is simply dummy text of the printing and typesetting industry.</p>
-                </div>
 
-                <!-- 7 -->
-                <div class="ms-exp-card">
-                    <div class="ms-exp-icon-box">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                            <polyline points="14 2 14 8 20 8"/>
-                            <line x1="16" y1="13" x2="8" y2="13"/>
-                            <line x1="16" y1="17" x2="8" y2="17"/>
-                        </svg>
+                    <!-- 7: Improved Patient Workflows -->
+                    <div class="ms-exp-carousel-card">
+                        <div class="icon-box">
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="18" cy="18" r="3"/>
+                                <circle cx="6" cy="6" r="3"/>
+                                <path d="M13 6h3a2 2 0 0 1 2 2v7"/>
+                                <line x1="6" y1="9" x2="6" y2="21"/>
+                            </svg>
+                        </div>
+                        <h3>Improved Patient Workflows</h3>
+                        <p>Orchestrating end-to-end EHR and EMR data flows for frictionless patient intake, registration, and discharge.</p>
                     </div>
-                    <h3>Improved Patient Workflows</h3>
-                    <p>Lorem ipsum is simply dummy text of the printing and typesetting industry.</p>
-                </div>
 
-                <!-- 8 -->
-                <div class="ms-exp-card">
-                    <div class="ms-exp-icon-box">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M9 11l3 3L22 4"/>
-                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
-                        </svg>
+                    <!-- 8: Reduction in Claim Denials -->
+                    <div class="ms-exp-carousel-card">
+                        <div class="icon-box">
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <path d="m9 15 2 2 4-4"/>
+                            </svg>
+                        </div>
+                        <h3>Reduction in Claim Denials</h3>
+                        <p>Leveraging predictive AI rules engine to verify insurance coverage upfront and eliminate pre-bill claim errors.</p>
                     </div>
-                    <h3>Reduction in Claim Denials & Rejections</h3>
-                    <p>Lorem ipsum is simply dummy text of the printing and typesetting industry.</p>
-                </div>
 
-                <!-- 9 -->
-                <div class="ms-exp-card">
-                    <div class="ms-exp-icon-box">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="10"/>
-                            <polyline points="12 6 12 12 16 14"/>
-                        </svg>
+                    <!-- 9: Effective Physician Time Management -->
+                    <div class="ms-exp-carousel-card">
+                        <div class="icon-box">
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="13" r="8"/>
+                                <path d="M12 9v4l3 3"/>
+                                <path d="M5 3 2 6"/>
+                                <path d="m22 6-3-3"/>
+                                <path d="M12 2v1"/>
+                            </svg>
+                        </div>
+                        <h3>Effective Physician Time Management</h3>
+                        <p>Reducing EHR documentation burden with voice-enabled AI scribes and automated clinical charting tools.</p>
                     </div>
-                    <h3>Effective Physician Time Management</h3>
-                    <p>Lorem ipsum is simply dummy text of the printing and typesetting industry.</p>
-                </div>
 
-                <!-- 10 -->
-                <div class="ms-exp-card">
-                    <div class="ms-exp-icon-box">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="23 4 23 10 17 10"/>
-                            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
-                        </svg>
+                    <!-- 10: Improved Utilization Management -->
+                    <div class="ms-exp-carousel-card">
+                        <div class="icon-box">
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="18" y1="20" x2="18" y2="10"/>
+                                <line x1="12" y1="20" x2="12" y2="4"/>
+                                <line x1="6" y1="20" x2="6" y2="14"/>
+                            </svg>
+                        </div>
+                        <h3>Improved Utilization Management</h3>
+                        <p>Maximizing facility utilization, operating room throughput, and medical equipment allocation across health networks.</p>
                     </div>
-                    <h3>Improved Utilization Management</h3>
-                    <p>Lorem ipsum is simply dummy text of the printing and typesetting industry.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Service Offerings (Apple Interactive Showcase - Microsoft Solutions - Copied Exact Structure from v2.html) -->
+    <!-- Service Offerings (Apple Interactive Showcase - Microsoft Solutions - Unified 1280px Container) -->
     <section class="service-offerings">
         <div class="service-offerings-header">
             <span class="eyebrow">• MICROSOFT SOLUTIONS</span>
@@ -1046,26 +1401,26 @@
 
         <div class="apple-showcase-container">
             <!-- Left Side Interactive Accordion List -->
-            <div class="apple-accordion-list" id="appleAccordionList">
+            <div class="apple-accordion-list" id="msAppleAccordionList">
                 <!-- Populated dynamically with Microsoft items -->
             </div>
 
             <!-- Right Side Visual Stage Canvas -->
             <div class="apple-stage-card">
                 <div class="apple-stage-img-wrapper">
-                    <span class="apple-stage-badge" id="appleStageBadge">Microsoft Solution</span>
-                    <img src="images/Desktop - 4.jpg" alt="Service Showcase" id="appleStageImg" class="apple-stage-img">
+                    <span class="apple-stage-badge" id="msAppleStageBadge">Microsoft Solution</span>
+                    <img src="images/Desktop - 4.jpg" alt="Service Showcase" id="msAppleStageImg" class="apple-stage-img">
                     <div class="apple-stage-gradient-overlay"></div>
                     <div class="apple-stage-bottom-overlay">
-                        <h3 class="apple-stage-bottom-title" id="appleStageTitle">RSI’ Kubernity: Purpose-Built for Kubernetes Excellence</h3>
-                        <div class="apple-stage-bottom-tags" id="appleStageTags"></div>
+                        <h3 class="apple-stage-bottom-title" id="msAppleStageTitle">RSI’ Kubernity: Purpose-Built for Kubernetes Excellence</h3>
+                        <div class="apple-stage-bottom-tags" id="msAppleStageTags"></div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Pre-Footer Banner (EXACT PRE-FOOTER COPIED FROM v2.html) -->
+    <!-- Pre-Footer Banner -->
     <section class="pre-footer" id="preFooterSection">
         <!-- MoltenMetal WebGL2 background -->
         <div id="moltenMetalContainer" style="position:absolute;inset:0;width:100%;height:100%;overflow:hidden;z-index:0;"></div>
@@ -1075,7 +1430,7 @@
         </div>
     </section>
 
-    <!-- Footer (EXACT FOOTER COPIED FROM v2.html) -->
+    <!-- Footer -->
     <footer class="footer">
         <div class="footer-top">
             <div class="footer-brand">
@@ -1178,84 +1533,95 @@
     <script src="js/main.js" defer></script>
     <script src="js/molten-metal.js"></script>
 
-    <!-- INTERACTIVE ACCORDION & SHOWCASE SCRIPT (Copied Exact Logic from v2.html) -->
+    <!-- INTERACTIVE ACCORDION & SHOWCASE SCRIPT -->
     <script>
       (function() {
         const microsoftOfferings = [
           {
             title: "RSI’ Kubernity: Purpose-Built for Kubernetes Excellence",
-            desc: 'Accelerate cloud-native transformation with secure, scalable, and expertly managed Azure Kubernetes Services (AKS). <a href="https://www.rsystems.com/azure-kubernetes/" target="_blank" class="ms-read-more-link">Read More</a>',
+            desc: "Accelerate cloud-native transformation with secure, scalable, and expertly managed Azure Kubernetes Services (AKS).",
+            link: "https://www.rsystems.com/azure-kubernetes/",
             tags: ["Azure Kubernetes", "AKS", "Cloud-Native", "Container Security"],
             image: "images/Desktop - 4.jpg"
           },
           {
             title: "RSI Microsoft Dynamics 365 Customer Service",
-            desc: 'Empowers organizations to build stronger customer connections, equip teams, and discover new ways to add value through personalized service and enhanced productivity. <a href="https://www.rsystems.com/microsoft-dynamics-365-customer-service/" target="_blank" class="ms-read-more-link">Read More</a>',
+            desc: "Empowers organizations to build stronger customer connections, equip teams, and discover new ways to add value through personalized service and enhanced productivity.",
+            link: "https://www.rsystems.com/microsoft-dynamics-365-customer-service/",
             tags: ["Dynamics 365", "Customer Service", "Productivity", "Personalized Service"],
             image: "images/hero_futuristic.jpg"
           },
           {
             title: "RSI Microsoft Dynamics 365 Supply Chain Management",
-            desc: 'Delivers end-to-end visibility and optimization of supply chain processes, enhancing efficiency and reducing costs with AI-powered insights. <a href="https://www.rsystems.com/microsoft-dynamics-365-supply-chain-management/" target="_blank" class="ms-read-more-link">Read More</a>',
+            desc: "Delivers end-to-end visibility and optimization of supply chain processes, enhancing efficiency and reducing costs with AI-powered insights.",
+            link: "https://www.rsystems.com/microsoft-dynamics-365-supply-chain-management/",
             tags: ["Supply Chain", "Optimization", "AI Insights", "Dynamics 365"],
             image: "images/service.png"
           },
           {
             title: "RSI Microsoft Dynamics 365 Sales",
-            desc: 'Enables sales teams to cultivate deeper customer relationships through AI-driven insights and automation tools, optimizing the sales process from lead to close. <a href="https://www.rsystems.com/microsoft-dynamics-365-sales/" target="_blank" class="ms-read-more-link">Read More</a>',
+            desc: "Enables sales teams to cultivate deeper customer relationships through AI-driven insights and automation tools, optimizing the sales process from lead to close.",
+            link: "https://www.rsystems.com/microsoft-dynamics-365-sales/",
             tags: ["Dynamics 365 Sales", "AI Sales Insights", "Lead to Close", "Automation"],
             image: "images/whitepaper.png"
           },
           {
             title: "RSI Microsoft Dynamics 365 Marketing",
-            desc: 'Amplifies marketing campaign effectiveness by creating personalized customer journeys across all touchpoints, capturing leads and strengthening customer loyalty. <a href="https://www.rsystems.com/microsoft-dynamics-365-marketing/" target="_blank" class="ms-read-more-link">Read More</a>',
+            desc: "Amplifies marketing campaign effectiveness by creating personalized customer journeys across all touchpoints, capturing leads and strengthening customer loyalty.",
+            link: "https://www.rsystems.com/microsoft-dynamics-365-marketing/",
             tags: ["Marketing Automation", "Customer Journeys", "Lead Capture", "Loyalty"],
             image: "images/exiqo.png"
           },
           {
             title: "RSI Microsoft Dynamics 365 Finance",
-            desc: 'Empowers organizations with real-time oversight of global financial operations, facilitating data-driven decisions and optimizing financial workflows. <a href="https://www.rsystems.com/microsoft-dynamics-365-finance/" target="_blank" class="ms-read-more-link">Read More</a>',
+            desc: "Empowers organizations with real-time oversight of global financial operations, facilitating data-driven decisions and optimizing financial workflows.",
+            link: "https://www.rsystems.com/microsoft-dynamics-365-finance/",
             tags: ["Financial Operations", "Global Oversight", "Data-Driven", "Workflows"],
             image: "images/provider.png"
           },
           {
             title: "RSI Microsoft Dynamics 365 Field Service",
-            desc: 'Helps organizations deliver efficient onsite services by optimizing resource allocation and reducing operational costs, enhancing customer satisfaction. <a href="https://www.rsystems.com/microsoft-dynamics-365-field-service/" target="_blank" class="ms-read-more-link">Read More</a>',
+            desc: "Helps organizations deliver efficient onsite services by optimizing resource allocation and reducing operational costs, enhancing customer satisfaction.",
+            link: "https://www.rsystems.com/microsoft-dynamics-365-field-service/",
             tags: ["Field Service", "Onsite Operations", "Resource Allocation", "Cost Reduction"],
             image: "images/hero.jpg"
           },
           {
             title: "RSI Microsoft Dynamics 365 Commerce",
-            desc: 'Delivers a unified omnichannel experience, integrating in-store, back-office, and digital interactions to foster personalized customer engagements. <a href="https://www.rsystems.com/microsoft-dynamics-365-commerce/" target="_blank" class="ms-read-more-link">Read More</a>',
+            desc: "Delivers a unified omnichannel experience, integrating in-store, back-office, and digital interactions to foster personalized customer engagements.",
+            link: "https://www.rsystems.com/microsoft-dynamics-365-commerce/",
             tags: ["Omnichannel", "Digital Commerce", "Customer Engagement", "Back-Office"],
             image: "images/Desktop - 4.jpg"
           },
           {
             title: "RSI Microsoft Dynamics 365 Business Central",
-            desc: 'Equips companies to effectively manage core business functions, including financials, sales, service, and supply chains, with a secure and scalable cloud ERP platform. <a href="https://www.rsystems.com/microsoft-dynamics-365-business-central/" target="_blank" class="ms-read-more-link">Read More</a>',
+            desc: "Equips companies to effectively manage core business functions, including financials, sales, service, and supply chains, with a secure and scalable cloud ERP platform.",
+            link: "https://www.rsystems.com/microsoft-dynamics-365-business-central/",
             tags: ["Business Central", "Cloud ERP", "Core Functions", "Scalable Platform"],
             image: "images/hero_futuristic.jpg"
           },
           {
             title: "RSI Microsoft Copilot",
-            desc: 'Integrates AI-powered productivity enhancement across Microsoft 365 applications to automate tasks, synthesize information, and provide actionable intelligence. <a href="https://www.rsystems.com/microsoft-copilot/" target="_blank" class="ms-read-more-link">Read More</a>',
+            desc: "Integrates AI-powered productivity enhancement across Microsoft 365 applications to automate tasks, synthesize information, and provide actionable intelligence.",
+            link: "https://www.rsystems.com/microsoft-copilot/",
             tags: ["Microsoft Copilot", "Generative AI", "M365 Automation", "Productivity"],
             image: "images/service.png"
           },
           {
             title: "RSI Microsoft Azure",
-            desc: 'Provides access to a comprehensive suite of cloud computing services for building and managing scalable, secure applications. <a href="https://www.rsystems.com/microsoft-azure/" target="_blank" class="ms-read-more-link">Read More</a>',
+            desc: "Provides access to a comprehensive suite of cloud computing services for building and managing scalable, secure applications.",
+            link: "https://www.rsystems.com/microsoft-azure/",
             tags: ["Microsoft Azure", "Cloud Services", "Scalable Apps", "Cloud Security"],
             image: "images/whitepaper.png"
           }
         ];
 
         function initMicrosoftOfferings() {
-          const accordionList = document.getElementById("appleAccordionList");
-          const stageBadge = document.getElementById("appleStageBadge");
-          const stageImg = document.getElementById("appleStageImg");
-          const stageTitle = document.getElementById("appleStageTitle");
-          const stageTags = document.getElementById("appleStageTags");
+          const accordionList = document.getElementById("msAppleAccordionList");
+          const stageBadge = document.getElementById("msAppleStageBadge");
+          const stageImg = document.getElementById("msAppleStageImg");
+          const stageTitle = document.getElementById("msAppleStageTitle");
+          const stageTags = document.getElementById("msAppleStageTags");
 
           if (!accordionList) return;
 
@@ -1290,6 +1656,12 @@
                     </div>
                     <div class="apple-accordion-body">
                       <p class="apple-accordion-desc">${item.desc}</p>
+                      <div style="margin-top: 0.5rem;">
+                        <a href="${item.link}" target="_blank" class="ms-read-more-link">
+                          <span>Read More</span>
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </a>
+                      </div>
                       <div class="mobile-accordion-media">
                         <div class="mobile-img-wrapper">
                           <img src="${item.image}" alt="${item.title}" class="mobile-accordion-img">
@@ -1380,11 +1752,17 @@
           if (mobileDrawerOverlay) mobileDrawerOverlay.addEventListener("click", closeDrawer);
 
           const headerElem = document.querySelector(".header");
+          const logoLight = document.querySelector(".logo-img-light");
+          const logoDark = document.querySelector(".logo-img-dark");
           window.addEventListener("scroll", function() {
             if (window.scrollY > 80) {
               if (headerElem) headerElem.classList.add("scrolled");
+              if (logoLight) logoLight.style.display = "none";
+              if (logoDark) logoDark.style.display = "block";
             } else {
               if (headerElem) headerElem.classList.remove("scrolled");
+              if (logoLight) logoLight.style.display = "block";
+              if (logoDark) logoDark.style.display = "none";
             }
           });
 
@@ -1394,6 +1772,22 @@
           if (scrollRightBtn && stripFlexTrack) {
             scrollRightBtn.addEventListener("click", function() {
               stripFlexTrack.scrollBy({ left: 300, behavior: "smooth" });
+            });
+          }
+          // Our Expertise Carousel Arrow Buttons Click Handler (Scroll 3 Full Cards at a Time)
+          const expPrevBtn = document.getElementById("expPrevBtn");
+          const expNextBtn = document.getElementById("expNextBtn");
+          const expCarouselTrack = document.getElementById("expCarouselTrack");
+
+          if (expPrevBtn && expCarouselTrack) {
+            expPrevBtn.addEventListener("click", function() {
+              expCarouselTrack.scrollBy({ left: -expCarouselTrack.clientWidth, behavior: "smooth" });
+            });
+          }
+
+          if (expNextBtn && expCarouselTrack) {
+            expNextBtn.addEventListener("click", function() {
+              expCarouselTrack.scrollBy({ left: expCarouselTrack.clientWidth, behavior: "smooth" });
             });
           }
         });
