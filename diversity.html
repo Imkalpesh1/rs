@@ -110,7 +110,7 @@
             display: flex;
             justify-content: center;
             align-items: flex-end;
-            height: 480px;
+            height: 420px;
             width: 100%;
         }
 
@@ -126,20 +126,372 @@
             pointer-events: none;
         }
 
-        .l2-hero-img {
+        .l2-hero-img-slide {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-42%) scale(0.97);
             height: 100%;
-            max-height: 480px;
+            max-height: 420px;
             width: auto;
             object-fit: contain;
             display: block;
-            position: relative;
-            z-index: 2;
-            filter: drop-shadow(0 20px 35px rgba(155, 81, 224, 0.15)) drop-shadow(0 10px 20px rgba(0, 0, 0, 0.07));
-            transform: scaleX(-1);
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            filter: drop-shadow(0 20px 35px rgba(155, 81, 224, 0.15)) blur(12px);
+            opacity: 0;
+            z-index: 1;
+            pointer-events: none;
+            transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1),
+                        opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1),
+                        filter 1.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        
+        .l2-hero-img-slide.active {
+            opacity: 1;
+            z-index: 2;
+            transform: translateX(-50%) scale(1);
+            filter: drop-shadow(0 20px 35px rgba(155, 81, 224, 0.15)) blur(0px);
+            pointer-events: auto;
+        }
+
+        .l2-hero-img-slide.exit-left {
+            opacity: 0;
+            z-index: 1;
+            transform: translateX(-58%) scale(0.97);
+            filter: drop-shadow(0 20px 35px rgba(155, 81, 224, 0.15)) blur(12px);
+        }
+
+        /* Reused Microsoft Expertise Section & Card CSS for Diversity Page */
+        .ms-expertise-section {
+            padding: 5rem 2rem;
+            background: #ffffff;
+            position: relative;
+        }
+
+        .ms-expertise-container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .ms-section-header h2 {
+            font-size: clamp(2.2rem, 3.8vw, 3rem);
+            font-weight: 300;
+            color: #0f172a;
+            line-height: 1.15;
+            margin: 0.3rem 0 0.5rem 0;
+            letter-spacing: -0.01em;
+        }
+
+        .ms-expertise-carousel-track {
+            display: flex;
+            gap: 1.5rem;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            scroll-snap-type: x mandatory;
+            padding: 0.75rem 0 1.75rem 0;
+            scrollbar-width: none;
+        }
+
+        .ms-expertise-carousel-track::-webkit-scrollbar {
+            display: none;
+        }
+
+        .ms-exp-carousel-card {
+            background: #ffffff;
+            padding: 2.2rem 1.6rem;
+            border-radius: 20px;
+            border: 1px solid rgba(226, 232, 240, 0.9);
+            box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            width: calc((100% - 4.5rem) / 4);
+            min-width: calc((100% - 4.5rem) / 4);
+            max-width: calc((100% - 4.5rem) / 4);
+            flex: 0 0 auto;
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+            box-sizing: border-box;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                        box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                        border-color 0.35s ease;
+        }
+
+        @media (max-width: 1100px) {
+            .ms-exp-carousel-card {
+                width: calc((100% - 3rem) / 3);
+                min-width: calc((100% - 3rem) / 3);
+                max-width: calc((100% - 3rem) / 3);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .ms-exp-carousel-card {
+                width: calc((100% - 1.5rem) / 2);
+                min-width: calc((100% - 1.5rem) / 2);
+                max-width: calc((100% - 1.5rem) / 2);
+            }
+        }
+
+        @media (max-width: 500px) {
+            .ms-exp-carousel-card {
+                width: 100%;
+                min-width: 100%;
+                max-width: 100%;
+            }
+        }
+
+        .ms-exp-carousel-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #8656FE, #9b51e0, #ec4899);
+            opacity: 0;
+            transition: opacity 0.35s ease;
+            z-index: 2;
+        }
+
+        .ms-exp-carousel-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 42px -10px rgba(134, 86, 254, 0.18), 0 0 0 1px rgba(134, 86, 254, 0.35);
+            border-color: rgba(134, 86, 254, 0.4);
+        }
+
+        .ms-exp-carousel-card:hover::before {
+            opacity: 1;
+        }
+
+        .ms-exp-carousel-card .icon-box {
+            width: 54px;
+            height: 54px;
+            border-radius: 16px;
+            background: rgba(134, 86, 254, 0.08);
+            border: 1px solid rgba(134, 86, 254, 0.15);
+            color: #8656FE;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .ms-exp-carousel-card:hover .icon-box {
+            background: linear-gradient(135deg, #8656FE 0%, #9b51e0 100%);
+            border-color: transparent;
+            color: #ffffff;
+            transform: scale(1.08) rotate(-3deg);
+            box-shadow: 0 8px 22px rgba(134, 86, 254, 0.3);
+        }
+
+        .ms-exp-carousel-card h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #0f172a;
+            line-height: 1.35;
+            margin: 0 0 0.75rem 0;
+            transition: color 0.35s ease;
+        }
+
+        .ms-exp-carousel-card:hover h3 {
+            color: #6d28d9;
+        }
+
+        .ms-exp-carousel-card p {
+            font-size: 0.9rem;
+            color: #64748b;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Employee Resource Groups (ERGs) Section Styles with Subtle r-system.svg Background Watermark */
+        .erg-section {
+            position: relative;
+            background: #f8f9fd;
+            padding: 5.5rem 2rem;
+            overflow: hidden;
+            border-top: 1px solid #f1f5f9;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .erg-bg-watermark {
+            position: absolute;
+            top: 50%;
+            right: -100px;
+            transform: translateY(-50%) scale(1.45);
+            width: 880px;
+            height: auto;
+            opacity: 0.085;
+            pointer-events: none;
+            z-index: 1;
+            filter: invert(36%) sepia(87%) saturate(1633%) hue-rotate(238deg);
+        }
+
+        .erg-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .erg-header {
+            text-align: center;
+            max-width: 780px;
+            margin: 0 auto 3.5rem auto;
+        }
+
+        .erg-header h2 {
+            font-size: clamp(2.2rem, 3.8vw, 3rem);
+            font-weight: 300;
+            color: #0f172a;
+            line-height: 1.15;
+            margin-top: 0.4rem;
+            letter-spacing: -0.02em;
+        }
+
+        .erg-header p {
+            color: #64748b;
+            font-size: 1.08rem;
+            line-height: 1.65;
+            margin-top: 0.85rem;
+        }
+
+        .erg-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+            gap: 2rem;
+        }
+
+        /* =============================================================
+           Minimalist Enterprise ERG Card (Concept 3 - Selected)
+           ============================================================= */
+        .erg-card {
+            background: #ffffff;
+            border-radius: 28px;
+            border: 1px solid rgba(226, 232, 240, 0.9);
+            box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+        }
+
+        .erg-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 42px rgba(15, 23, 42, 0.1);
+            border-color: rgba(134, 86, 254, 0.35);
+        }
+
+        .erg-card .c3-top-row {
+            padding: 2.2rem 2.2rem 1.2rem 2.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .erg-card .c3-logo-img {
+            height: 85px;
+            max-height: 90px;
+            max-width: 220px;
+            object-fit: contain;
+            object-position: left center;
+            filter: drop-shadow(0 4px 12px rgba(15, 23, 42, 0.06));
+            transition: transform 0.35s ease;
+        }
+
+        .erg-card:hover .c3-logo-img {
+            transform: scale(1.05);
+        }
+
+        .c3-watermark-logo {
+            position: absolute;
+            top: -45px;
+            right: -35px;
+            height: 310px;
+            width: auto;
+            max-width: 570px;
+            object-fit: cover;
+            opacity: 0.05;
+            pointer-events: none;
+            z-index: 1;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .erg-card:hover .c3-watermark-logo {
+            opacity: 0.16;
+            transform: rotate(0deg) scale(1.25);
+        }
+
+        /* React Bits CircularGallery WebGL Container Styles */
+        .circular-gallery {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            cursor: grab;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .circular-gallery:active {
+            cursor: grabbing;
+        }
+
+        .erg-card .c3-body {
+            padding: 0 2.2rem 2.2rem 2.2rem;
+            flex-grow: 1;
+        }
+
+        .erg-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin: 1.2rem 0 0.6rem 0;
+        }
+
+        .erg-card p {
+            font-size: 0.92rem;
+            color: #64748b;
+            line-height: 1.65;
+            margin: 0;
+        }
+
+        .erg-card .c3-footer-link {
+            border-top: 1px solid #f1f5f9;
+            padding: 1.1rem 2.2rem;
+            background: #fafafa;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-decoration: none;
+            color: #8656FE;
+            font-weight: 600;
+            font-size: 0.88rem;
+            transition: all 0.3s ease;
+        }
+
+        .erg-card:hover .c3-footer-link {
+            background: #8656FE;
+            color: #ffffff;
+        }
+
+        .erg-card .c3-footer-link svg {
+            transition: transform 0.3s ease;
+        }
+
+        .erg-card:hover .c3-footer-link svg {
+            transform: translateX(4px);
+        }
+
+        .erg-btn-pill svg {
+            transition: transform 0.3s ease;
+        }
+
+        .erg-btn-pill:hover svg {
+            transform: translateX(4px);
+        }
 
         /* Healthcare Specific Styles & Enhancements */
         .benefit-card-grid {
@@ -732,6 +1084,313 @@
         .leader-contact-link:hover {
             color: #9b51e0;
         }
+         
+        /* LEADERSHIP COMMITMENT SECTION */
+        .ms-commitment-section {
+            padding: 6rem 2rem 5rem 2rem;
+            background: #ffffff;
+        }
+ 
+        .ms-commitment-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            position: relative;
+        }
+ 
+        .ms-commitment-card {
+            background: #131217; /* Dark charcoal base matching reference */
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            display: grid;
+            grid-template-columns: 1fr 340px; /* Swapped: Text left, Image right */
+            gap: 4rem;
+            padding: 4.5rem 0 4.5rem 4.5rem; /* No padding on the right to bleed elements */
+            align-items: center; /* Center content vertically */
+            position: relative;
+            margin-top: 5rem;
+            box-shadow: 0 30px 60px -15px rgba(15, 23, 42, 0.5);
+            overflow: hidden; /* Contain circles and cutout image strictly */
+            min-height: 480px;
+            transition: border-color 0.4s ease, box-shadow 0.4s ease;
+        }
+ 
+        .ms-commitment-card:hover {
+            border-color: rgba(155, 81, 224, 0.3);
+            box-shadow: 0 35px 70px -10px rgba(15, 23, 42, 0.6);
+        }
+ 
+        /* SVG Quote Decorator positioned in card background on the left */
+        .ms-quote-decor {
+            position: absolute;
+            left: 2.5rem;
+            top: 2.5rem;
+            color: #ffffff;
+            opacity: 0.03;
+            pointer-events: none;
+            transition: transform 0.5s ease, opacity 0.3s ease;
+            z-index: 1;
+        }
+ 
+        .ms-commitment-card:hover .ms-quote-decor {
+            transform: scale(1.1) rotate(-5deg);
+            opacity: 0.05;
+        }
+ 
+        /* 3D Floating Cutout Image Container */
+        .ms-commitment-img-container {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            width: 45%;
+            height: 100%;
+            z-index: 2;
+            overflow: hidden;
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-end;
+        }
+ 
+        /* Circular background shapes matching the reference banner */
+        .ms-commitment-circle-1 {
+            position: absolute;
+            top: 50%;
+            right: -80px; /* Locked to the right edge */
+            transform: translateY(-50%);
+            width: 480px;
+            height: 480px;
+            border-radius: 50%;
+            background: #8b3ffc; /* Bright violet */
+            z-index: 1;
+            pointer-events: none;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+ 
+        .ms-commitment-circle-2 {
+            position: absolute;
+            top: 55%;
+            right: 140px; /* Offset behind the primary circle */
+            transform: translateY(-50%);
+            width: 340px;
+            height: 340px;
+            border-radius: 50%;
+            background: #b175ff; /* Lighter purple */
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0.55;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+ 
+        .ms-commitment-card:hover .ms-commitment-circle-1 {
+            transform: translateY(-50%) scale(1.03) translate(-10px, -5px);
+        }
+ 
+        .ms-commitment-card:hover .ms-commitment-circle-2 {
+            transform: translateY(-50%) scale(1.05) translate(-15px, 5px);
+        }
+ 
+        .ms-commitment-img {
+            position: absolute;
+            bottom: 0;
+            right: -100px;
+            height: 100%; /* Contained cleanly inside card vertical area */
+            width: auto;
+            max-width: 100%;
+            object-fit: contain;
+            object-position: right bottom; /* Force align to the far right edge of card */
+            z-index: 2;
+            filter: drop-shadow(-10px 10px 20px rgba(0, 0, 0, 0.45));
+            opacity: 0;
+            transform: translateX(30px);
+            transition: opacity 0.5s ease, transform 0.5s ease, filter 0.3s ease;
+            pointer-events: none;
+        }
+ 
+        .ms-commitment-img.active {
+            opacity: 1;
+            transform: translateX(0);
+            pointer-events: auto;
+        }
+ 
+        .ms-commitment-card:hover .ms-commitment-img.active {
+            transform: translateY(-5px) scale(1.01);
+        }
+ 
+        /* Large banner heading on left */
+        .ms-commitment-card-title {
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            font-weight: 750;
+            color: #ffffff;
+            line-height: 1.15;
+            margin: 0 0 1.25rem 0;
+            letter-spacing: -0.02em;
+        }
+ 
+        .ms-commitment-card-title span {
+            color: #9b51e0; /* Highlight color */
+        }
+ 
+        /* Carousel containers and slide transitions using Grid cell overlapping */
+        .ms-commitment-content-container {
+            color: #ffffff;
+            display: grid;
+            grid-template-columns: 1fr;
+            z-index: 2; /* Sit on top of mesh background */
+            width: 100%;
+            position: relative;
+        }
+ 
+        .ms-commitment-slide {
+            grid-area: 1 / 1 / 2 / 2;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(15px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+ 
+        .ms-commitment-slide.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+            z-index: 3;
+        }
+ 
+        .ms-commitment-text {
+            color: #d1d5db;
+            font-size: 1.02rem;
+            line-height: 1.7;
+            margin: 0;
+            font-weight: 300;
+        }
+ 
+        /* Creative pillar highlights inside quote text */
+        .ms-commitment-text strong {
+            color: #f3e8ff;
+            font-weight: 550;
+            background: rgba(155, 81, 224, 0.18);
+            padding: 0.1rem 0.35rem;
+            border-radius: 6px;
+            white-space: nowrap;
+        }
+ 
+        .ms-commitment-author {
+            margin-top: 0.5rem;
+        }
+ 
+        .ms-commitment-name {
+            font-size: 1.08rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin: 0;
+            letter-spacing: -0.01em;
+        }
+ 
+        .ms-commitment-title {
+            font-size: 0.88rem;
+            color: #94a3b8;
+            margin: 0.25rem 0 0.75rem 0;
+        }
+ 
+        .ms-commitment-indicator {
+            display: flex;
+            gap: 8px;
+        }
+ 
+        .ms-indicator-bar {
+            height: 6px;
+            border-radius: 3px;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.4s ease;
+        }
+ 
+        .ms-indicator-bar.white {
+            width: 24px;
+            background: rgba(255, 255, 255, 0.3);
+        }
+ 
+        .ms-indicator-bar.purple {
+            width: 24px;
+            background: rgba(155, 81, 224, 0.35);
+        }
+ 
+        .ms-indicator-bar.white.active {
+            width: 48px;
+            background: #ffffff;
+        }
+ 
+        .ms-indicator-bar.purple.active {
+            width: 48px;
+            background: #9b51e0;
+        }
+ 
+        @media (max-width: 992px) {
+            .ms-commitment-card {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+                padding: 2.5rem 2rem 2.5rem 2rem;
+                margin-top: 5rem;
+            }
+            .ms-commitment-img-container {
+                order: 1; /* Image on top */
+                position: relative;
+                width: 100%;
+                height: 320px;
+                min-height: auto;
+                margin-top: 0;
+                overflow: hidden;
+                border-radius: 16px;
+                background: #110f1c;
+            }
+            .ms-commitment-circle-1 {
+                width: 280px;
+                height: 280px;
+                top: 50%;
+                left: 50%;
+                transform: translate(-30%, -40%);
+            }
+            .ms-commitment-circle-2 {
+                width: 200px;
+                height: 200px;
+                top: 55%;
+                left: 50%;
+                transform: translate(-70%, -30%);
+            }
+            .ms-commitment-card:hover .ms-commitment-circle-1 {
+                transform: translate(-30%, -40%) scale(1.03);
+            }
+            .ms-commitment-card:hover .ms-commitment-circle-2 {
+                transform: translate(-70%, -30%) scale(1.05);
+            }
+            .ms-commitment-img {
+                position: absolute;
+                height: 100%;
+                bottom: 0;
+                right: 0;
+                left: 0;
+                margin: 0 auto;
+                display: block;
+                opacity: 0;
+                transform: scale(0.95);
+                transition: opacity 0.5s ease, transform 0.5s ease;
+            }
+            .ms-commitment-img.active {
+                opacity: 1;
+                transform: scale(1);
+            }
+            .ms-commitment-content-container {
+                order: 2; /* Text below */
+            }
+            /* Avoid nowrap wrapper breaks on mobile */
+            .ms-commitment-text strong {
+                white-space: normal;
+            }
+        }
+ 
     </style>
 </head>
 
@@ -848,250 +1507,257 @@
                 
             </div>
 
-            <!-- Right L2 Clean Featured Image -->
-            <div class="l2-hero-img-wrapper">
-                <img src="image/divery-hero.png" alt="Healthcare Provider Solutions" class="l2-hero-img">
+            <!-- Right L2 Single Featured Hero Image -->
+            <div class="l2-hero-img-wrapper" id="diversityHeroImgWrapper">
+                <img src="image/diversity-hero.png" alt="Diversity, Equity and Belonging" class="l2-hero-img-slide active" id="divHeroImg1">
             </div>
         </div>
     </section>
 
-    <!-- Value and Benefits Section -->
-    <section class="value-benefits-section" style="background: #f8f9fd; padding: 4.5rem calc(max(2rem, (100% - 1280px) / 2 + 2rem));">
+    <!-- Cultural Change Commitment & 4 Key Pillars Section (Reusing Microsoft Expertise Section Code) -->
+    <section class="ms-expertise-section" style="background: #ffffff; border-bottom: 1px solid #f1f5f9;">
+        <div class="ms-expertise-container">
+            <!-- Header Grid: Title Left, Paragraph Right -->
+            <div class="ms-section-header" style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 3.5rem; align-items: flex-start; margin-bottom: 3rem;">
+                <div>
+                    <span class="eyebrow" style="color: #9b51e0; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.88rem;">• CULTURAL CHANGE</span>
+                    <h2>Our commitment to cultural change</h2>
+                </div>
+                <div>
+                    <p style="color: #475569; font-size: 1.08rem; line-height: 1.7; margin: 0; max-width: 100%;">At RSi we are committed to fostering a diverse and inclusive workplace where every individual is respected, valued, and empowered. We recognize that diversity enhances creativity, innovation, and collaboration, which are essential for our success. Our strategy is rooted in our core values and built on four key pillars, aiming to create an environment with diverse perspectives, inclusive practices, and equitable opportunities that can also contribute to a better society.</p>
+                </div>
+            </div>
+
+            <div class="ms-exp-carousel-wrapper" style="position: relative;">
+                <div class="ms-expertise-carousel-track">
+                    <!-- Pillar 1: Inclusive Leadership -->
+                    <div class="ms-exp-carousel-card">
+                        <div class="icon-box">
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="m19 8 2 2 4-4"/>
+                            </svg>
+                        </div>
+                        <h3>Inclusive Leadership</h3>
+                        <p>Our leaders are committed to modeling inclusive behaviors and creating an environment where all voices are heard. We aim to inspire our teams to embrace diversity and leverage different viewpoints for innovative problem-solving.</p>
+                    </div>
+
+                    <!-- Pillar 2: Inclusive Teams -->
+                    <div class="ms-exp-carousel-card">
+                        <div class="icon-box">
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="6" cy="6" r="3"/>
+                                <circle cx="18" cy="6" r="3"/>
+                                <circle cx="12" cy="18" r="3"/>
+                                <line x1="8.5" y1="7.5" x2="15.5" y2="7.5"/>
+                                <line x1="7.5" y1="8.5" x2="10.5" y2="15.5"/>
+                                <line x1="16.5" y1="8.5" x2="13.5" y2="15.5"/>
+                            </svg>
+                        </div>
+                        <h3>Inclusive Teams</h3>
+                        <p>We build inclusive teams that reflect a wide range of perspectives, experiences, and talents. We promote a culture of belonging where team members feel safe to express their ideas and challenge the status quo.</p>
+                    </div>
+
+                    <!-- Pillar 3: Equitable Processes -->
+                    <div class="ms-exp-carousel-card">
+                        <div class="icon-box">
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 3v18"/>
+                                <path d="M3 7h18"/>
+                                <path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/>
+                                <path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/>
+                            </svg>
+                        </div>
+                        <h3>Equitable Processes</h3>
+                        <p>We ensure that all employees have equal access to opportunities, resources, and support. This includes transparent hiring practices, equitable performance evaluations, and accessible career development programs.</p>
+                    </div>
+
+                    <!-- Pillar 4: DEI Enablement -->
+                    <div class="ms-exp-carousel-card">
+                        <div class="icon-box">
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M17 21v-2a4 4 0 0 0-3-3.87"/>
+                                <path d="M9 21v-2a4 4 0 0 1 3-3.87"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <circle cx="15" cy="7" r="3"/>
+                            </svg>
+                        </div>
+                        <h3>DEI Enablement</h3>
+                        <p>We provide comprehensive training programs, workshops, and resources that empower employees to be advocates for DEI. Our internal communications celebrate diversity and share best practices, encouraging employees to take an active role in fostering an inclusive culture.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Leadership D&I Commitment Section -->
+    <section class="ms-commitment-section">
+        <div class="ms-commitment-container">
+            <div class="section-header text-left" style="margin-bottom: 4.5rem; text-align: left;">
+                <span class="eyebrow" style="color: #9b51e0; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.88rem;">• OUR VISION & COMMITMENT</span>
+                <h2 style="font-size: clamp(2.2rem, 3.8vw, 3rem); font-weight: 300; color: #0f172a; margin-top: 0.4rem; line-height: 1.15; letter-spacing: -0.02em;">Fostering a Culture of Inclusion and Belonging</h2>
+                <p style="color: #64748b; font-size: 1.05rem; line-height: 1.6; margin-top: 0.75rem; max-width: 780px;">Our commitment to diversity, equity, and inclusion is driven by our leadership and woven into every aspect of our global operations.</p>
+            </div>
+ 
+            <div class="ms-commitment-card">
+                <!-- SVG Quote Decorator -->
+                <svg class="ms-quote-decor" width="120" height="120" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                </svg>
+ 
+                <!-- Left Column: Carousel Content Container -->
+                <div class="ms-commitment-content-container">
+                    
+                    <!-- Slide 1 (Raluca Rusu) -->
+                    <div class="ms-commitment-slide active" data-slide="0">
+                        <h2 class="ms-commitment-card-title">Diversity & Inclusion in <span>Action</span></h2>
+                        <p class="ms-commitment-text">Diversity and Inclusion at RSI is woven into the fabric of who we are and how we operate every single day. We've learned that when people feel genuinely valued and included, they don't just perform better; they unlock their full potential, advance their careers with purpose, and ultimately drive both organizational and community success.</p>
+                        <p class="ms-commitment-text">Our approach is built on four foundational pillars: <strong>fostering inclusive leadership</strong>, <strong>building inclusive teams</strong>, <strong>establishing equitable processes</strong>, and providing the right D&I enablement. These pillars directly inform <strong>our leadership practices, collaboration styles, and decision-making</strong> at every level. The result is a workplace where diverse viewpoints are genuinely welcomed, where inclusion moves from policy to lived reality, and where every person has transparent access to equal <strong>opportunities</strong>.</p>
+                        <p class="ms-commitment-text">But we recognize our responsibility goes <strong>further</strong>. We see our <strong>internal commitment</strong> to inclusion as a catalyst for creating a more equitable society beyond our organization's walls.</p>
+                        
+                        <div class="ms-commitment-author" style="margin-top: 1.5rem;">
+                            <h4 class="ms-commitment-name" style="font-size: 1.15rem; font-weight: 700; color: #ffffff; margin: 0;">Raluca Rusu</h4>
+                            <div class="ms-commitment-title" style="font-size: 0.9rem; color: #94a3b8; margin: 0.15rem 0 0.5rem 0;">CEO, R Systems Europe</div>
+                        </div>
+                    </div>
+ 
+                    <!-- Slide 2 (Danusia Jugastreanu) -->
+                    <div class="ms-commitment-slide" data-slide="1">
+                        <h2 class="ms-commitment-card-title">Fostering a Culture of <span>Inclusion</span></h2>
+                        <p class="ms-commitment-text">Diversity and Inclusion at RSI is woven into the fabric of who we are and how we operate every single day. We've learned that when people feel genuinely valued and included, they don't just perform better; they unlock their full potential, advance their careers with purpose, and ultimately drive both organizational and community success.</p>
+                        <p class="ms-commitment-text">Our approach is built on four foundational pillars: <strong>fostering inclusive leadership</strong>, <strong>building inclusive teams</strong>, <strong>establishing equitable processes</strong>, and providing the right D&I enablement. These pillars directly inform <strong>our leadership practices, collaboration styles, and decision-making</strong> at every level. The result is a workplace where diverse viewpoints are genuinely welcomed, where inclusion moves from policy to lived reality, and where every person has transparent access to equal <strong>opportunities</strong>.</p>
+                        <p class="ms-commitment-text">But we recognize our responsibility goes <strong>further</strong>. We see our <strong>internal commitment</strong> to inclusion as a catalyst for creating a more equitable society beyond our organization's walls.</p>
+                        
+                        <div class="ms-commitment-author" style="margin-top: 1.5rem;">
+                            <h4 class="ms-commitment-name" style="font-size: 1.15rem; font-weight: 700; color: #ffffff; margin: 0;">Danusia Jugastreanu</h4>
+                            <div class="ms-commitment-title" style="font-size: 0.9rem; color: #94a3b8; margin: 0.15rem 0 0.5rem 0;">Global Head of HR BP / D&I Leader</div>
+                        </div>
+                    </div>
+ 
+                    <!-- Signature Link & Pagination Bars -->
+                    <div class="ms-commitment-footer" style="display: flex; justify-content: space-between; align-items: flex-end; margin-top: 2rem; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 1.5rem; z-index: 5; position: relative;">
+                        <div style="font-size: 0.85rem; color: #7b2ff7; font-weight: 600; letter-spacing: 0.05em;">rsystems.com</div>
+                        <div class="ms-commitment-indicator" style="display: flex; gap: 8px;">
+                            <button class="ms-indicator-bar white active" data-go="0" aria-label="Slide 1"></button>
+                            <button class="ms-indicator-bar purple" data-go="1" aria-label="Slide 2"></button>
+                        </div>
+                    </div>
+ 
+                </div>
+ 
+                <!-- Right Column Grid Spacer -->
+                <div style="pointer-events: none;"></div>
+ 
+                <!-- Right: Absolute Image & Circle Background Container -->
+                <div class="ms-commitment-img-container">
+                    <div class="ms-commitment-circle-2"></div>
+                    <div class="ms-commitment-circle-1"></div>
+                    
+                    <!-- Image Slide 1 -->
+                    <img src="image/Raluca_Rusu_official-photo.png" alt="Raluca Rusu" class="ms-commitment-img active" data-img-slide="0">
+                    
+                    <!-- Image Slide 2 -->
+                    <img src="image/Danusia_Jugastreanu-cutout.png" alt="Danusia Jugastreanu" class="ms-commitment-img" data-img-slide="1">
+                </div>
+            </div>
+        </div>
+    </section>
+ 
+ 
+
+
+
+    <!-- Employee Resource Groups (ERGs) Section with 3 Brand New UI Concepts -->
+    <section class="erg-section">
+        <!-- Subtle Background Logo Watermark -->
+        <img src="image/r-system.svg" alt="" class="erg-bg-watermark">
+
+        <div class="erg-container">
+            <div class="erg-header">
+                <span class="eyebrow" style="color: #9b51e0; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.88rem;">• EMPLOYEE COMMUNITIES</span>
+                <h2>Employee Resource Groups (ERGs)</h2>
+                <p>These employee-led communities strengthen culture by creating space for support, inclusion, and cross-organizational connection.</p>
+            </div>
+
+            <div class="erg-cards-grid">
+                <!-- Card 1: Women of RSI -->
+                <div class="erg-card">
+                    <!-- Giant Faded Watermark Logo Top Right -->
+                    <img src="https://media.rsystems.com/wp-content/uploads/2026/07/Viva-Engage-Communities_logosheader-visals-5-1.png" alt="" class="c3-watermark-logo">
+
+                    <div class="c3-top-row">
+                        <img src="https://media.rsystems.com/wp-content/uploads/2026/07/Viva-Engage-Communities_logosheader-visals-5-1.png" alt="Women of RSI" class="c3-logo-img">
+                    </div>
+                    <div class="c3-body">
+                        <h3>Women of RSI</h3>
+                        <p>Empowers women through mentorship, connection, professional development, and gender equity in the workplace.</p>
+                    </div>
+                    <a href="/wp-content/uploads/2026/06/ERG_Women-of-RSI.pdf" target="_blank" class="c3-footer-link">
+                        <span>Learn More About Women of RSI</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </a>
+                </div>
+
+                <!-- Card 2: The Village -->
+                <div class="erg-card">
+                    <!-- Giant Faded Watermark Logo Top Right -->
+                    <img src="https://media.rsystems.com/wp-content/uploads/2026/07/Viva-Engage-Communities_logosheader-visals-6-1.png" alt="" class="c3-watermark-logo">
+
+                    <div class="c3-top-row">
+                        <img src="https://media.rsystems.com/wp-content/uploads/2026/07/Viva-Engage-Communities_logosheader-visals-6-1.png" alt="The Village" class="c3-logo-img">
+                    </div>
+                    <div class="c3-body">
+                        <h3>The Village</h3>
+                        <p>Supports parents and caregivers by fostering empathy, flexibility, practical support, and work life balance.</p>
+                    </div>
+                    <a href="/wp-content/uploads/2026/06/ERG_The-village.pdf" target="_blank" class="c3-footer-link">
+                        <span>Learn More About The Village</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </a>
+                </div>
+
+                <!-- Card 3: Generational Bridge -->
+                <div class="erg-card">
+                    <!-- Giant Faded Watermark Logo Top Right -->
+                    <img src="https://media.rsystems.com/wp-content/uploads/2026/07/Viva-Engage-Communities_logosheader-visals-3-1.png" alt="" class="c3-watermark-logo">
+
+                    <div class="c3-top-row">
+                        <img src="https://media.rsystems.com/wp-content/uploads/2026/07/Viva-Engage-Communities_logosheader-visals-3-1.png" alt="Generational Bridge" class="c3-logo-img">
+                    </div>
+                    <div class="c3-body">
+                        <h3>Generational Bridge</h3>
+                        <p>Connects employees across generations to strengthen collaboration, knowledge sharing, and mutual understanding.</p>
+                    </div>
+                    <a href="/wp-content/uploads/2026/06/ERG_Generational-bridge.pdf" target="_blank" class="c3-footer-link">
+                        <span>Learn More About Generational Bridge</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </a>
+                </div>
+            </div>
+    </section>
+
+    <!-- Inspiring Women of RSI Section (React Bits CircularGallery 3D WebGL Component) -->
+    <section class="inspiring-women-section" style="background: #ffffff; padding: 5.5rem 2rem; border-bottom: 1px solid #f1f5f9; position: relative; overflow: hidden;">
         <div style="max-width: 1280px; margin: 0 auto;">
+            <!-- Left-Aligned Header Pattern (RSi Design System Style) -->
             <div class="section-header text-left" style="margin-bottom: 2.5rem; text-align: left;">
-                <span class="eyebrow" style="color: #9b51e0; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.88rem;">• VALUE & BENEFITS</span>
-                <h2 style="font-size: clamp(2.2rem, 3.8vw, 3rem); font-weight: 300; color: #0f172a; margin-top: 0.4rem; line-height: 1.15; letter-spacing: -0.02em;">Driving Measurable Healthcare Outcomes & Value</h2>
-                <p style="color: #64748b; font-size: 1.05rem; line-height: 1.6; margin-top: 0.75rem; max-width: 780px;">Our specialized healthcare engineering capabilities empower organizations to deliver superior clinical outcomes while streamlining administrative overhead.</p>
+                <span class="eyebrow" style="color: #9b51e0; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.88rem;">• INSPIRING WOMEN OF RSI</span>
+                <h2 style="font-size: clamp(2.2rem, 3.8vw, 3rem); font-weight: 300; color: #0f172a; margin-top: 0.4rem; line-height: 1.15; letter-spacing: -0.02em;">Inspiring Women of RSI</h2>
+                <p style="color: #64748b; font-size: 1.05rem; line-height: 1.65; margin-top: 0.75rem; max-width: 780px;">Each woman at RSI brings her own perspective, strength, and story. Get to know the faces behind the transformation and what keeps them moving forward.</p>
             </div>
 
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1.5rem 4rem;">
-                <!-- Column 1 -->
-                <div style="display: flex; flex-direction: column; gap: 1.4rem;">
-                    <div style="display: flex; align-items: flex-start; gap: 0.9rem;">
-                        <span style="width: 26px; height: 26px; border-radius: 50%; background: #e9d5ff; color: #7e22ce; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                        </span>
-                        <span style="font-size: 1.05rem; font-weight: 450; color: #334155; line-height: 1.45;">Improved Patient Outcomes</span>
-                    </div>
-
-                    <div style="display: flex; align-items: flex-start; gap: 0.9rem;">
-                        <span style="width: 26px; height: 26px; border-radius: 50%; background: #e9d5ff; color: #7e22ce; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                        </span>
-                        <span style="font-size: 1.05rem; font-weight: 450; color: #334155; line-height: 1.45;">Improved Quality of Care</span>
-                    </div>
-
-                    <div style="display: flex; align-items: flex-start; gap: 0.9rem;">
-                        <span style="width: 26px; height: 26px; border-radius: 50%; background: #e9d5ff; color: #7e22ce; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                        </span>
-                        <span style="font-size: 1.05rem; font-weight: 450; color: #334155; line-height: 1.45;">Better Account Receivables Management</span>
-                    </div>
-
-                    <div style="display: flex; align-items: flex-start; gap: 0.9rem;">
-                        <span style="width: 26px; height: 26px; border-radius: 50%; background: #e9d5ff; color: #7e22ce; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                        </span>
-                        <span style="font-size: 1.05rem; font-weight: 450; color: #334155; line-height: 1.45;">Improved Patient Workflows</span>
-                    </div>
-
-                    <div style="display: flex; align-items: flex-start; gap: 0.9rem;">
-                        <span style="width: 26px; height: 26px; border-radius: 50%; background: #e9d5ff; color: #7e22ce; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                        </span>
-                        <span style="font-size: 1.05rem; font-weight: 450; color: #334155; line-height: 1.45;">Effective Physician Time Management</span>
-                    </div>
-
-                    <div style="display: flex; align-items: flex-start; gap: 0.9rem;">
-                        <span style="width: 26px; height: 26px; border-radius: 50%; background: #e9d5ff; color: #7e22ce; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                        </span>
-                        <span style="font-size: 1.05rem; font-weight: 450; color: #334155; line-height: 1.45;">Reduced Administrative Time for Physicians</span>
-                    </div>
-                </div>
-
-                <!-- Column 2 -->
-                <div style="display: flex; flex-direction: column; gap: 1.4rem;">
-                    <div style="display: flex; align-items: flex-start; gap: 0.9rem;">
-                        <span style="width: 26px; height: 26px; border-radius: 50%; background: #e9d5ff; color: #7e22ce; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                        </span>
-                        <span style="font-size: 1.05rem; font-weight: 450; color: #334155; line-height: 1.45;">Reduced Cost of Care, Length of Stay, and Readmissions.</span>
-                    </div>
-
-                    <div style="display: flex; align-items: flex-start; gap: 0.9rem;">
-                        <span style="width: 26px; height: 26px; border-radius: 50%; background: #e9d5ff; color: #7e22ce; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                        </span>
-                        <span style="font-size: 1.05rem; font-weight: 450; color: #334155; line-height: 1.45;">Convenient Patient Diagnostics</span>
-                    </div>
-
-                    <div style="display: flex; align-items: flex-start; gap: 0.9rem;">
-                        <span style="width: 26px; height: 26px; border-radius: 50%; background: #e9d5ff; color: #7e22ce; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                        </span>
-                        <span style="font-size: 1.05rem; font-weight: 450; color: #334155; line-height: 1.45;">Streamlined Operations Workload</span>
-                    </div>
-
-                    <div style="display: flex; align-items: flex-start; gap: 0.9rem;">
-                        <span style="width: 26px; height: 26px; border-radius: 50%; background: #e9d5ff; color: #7e22ce; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                        </span>
-                        <span style="font-size: 1.05rem; font-weight: 450; color: #334155; line-height: 1.45;">Reduction in Claim Denials & Rejections</span>
-                    </div>
-
-                    <div style="display: flex; align-items: flex-start; gap: 0.9rem;">
-                        <span style="width: 26px; height: 26px; border-radius: 50%; background: #e9d5ff; color: #7e22ce; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                        </span>
-                        <span style="font-size: 1.05rem; font-weight: 450; color: #334155; line-height: 1.45;">Improved Utilization Management</span>
-                    </div>
-
-                    <div style="display: flex; align-items: flex-start; gap: 0.9rem;">
-                        <span style="width: 26px; height: 26px; border-radius: 50%; background: #e9d5ff; color: #7e22ce; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                        </span>
-                        <span style="font-size: 1.05rem; font-weight: 450; color: #334155; line-height: 1.45;">Predictive Modelling for Early Detection of Diseases</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Industry Use Cases Section (Horizontal Scrollable Card Track with Empower AVIF Images) -->
-    <section class="thinking-industry" style="padding: 5rem 2rem; background: #ffffff;">
-        <div class="use-case-scroll-wrapper">
-            <div class="section-header text-left" style="margin-bottom: 2.5rem; text-align: left;">
-                <span class="eyebrow" style="color: #9b51e0; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.88rem;">• INDUSTRY USE CASES</span>
-                <h2 style="font-size: clamp(2.2rem, 3.8vw, 3rem); font-weight: 300; color: #0f172a; margin-top: 0.4rem; line-height: 1.15; letter-spacing: -0.02em;">Empowering Healthcare Providers with Advanced Solutions</h2>
-                <p style="color: #64748b; font-size: 1.05rem; line-height: 1.6; margin-top: 0.75rem; max-width: 780px;">Targeted, AI-driven solutions built to solve complex clinical, operational, and interoperability challenges across modern health systems.</p>
+            <!-- React Bits CircularGallery WebGL Stage Canvas Container -->
+            <div style="height: 510px; position: relative; width: 100%; border-radius: 24px; overflow: hidden; background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%); border: 1px solid rgba(226, 232, 240, 0.9); box-shadow: inset 0 0 35px rgba(134, 86, 254, 0.04);">
+                <div id="circularGalleryContainer" class="circular-gallery" style="width: 100%; height: 100%; position: absolute; top: 0; left: 0;"></div>
             </div>
 
-            <!-- Horizontal Scrollable Track with Apple Profile Cover Photo Cards -->
-            <div class="use-case-horizontal-track" id="useCaseTrack">
-                <!-- Card 1 -->
-                <div class="empower-photo-card">
-                    <div class="empower-photo-inner">
-                        <img src="image/empower1.png" alt="Behavioral Health & Well-being Solutions" class="empower-bg-img">
-                        <span class="empower-top-badge">Behavioral Health</span>
-                        <div class="empower-card-overlay">
-                            <div class="empower-card-title-row">
-                                <h3>Behavioral Health & Well-being</h3>
-                                <span class="empower-check-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-                            </div>
-                            <p class="empower-card-desc">Transforming behavioral health delivery through connected platforms, intelligent workflows, and data-driven care coordination.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 2 -->
-                <div class="empower-photo-card">
-                    <div class="empower-photo-inner">
-                        <img src="image/empower2.png" alt="Interoperability" class="empower-bg-img">
-                        <span class="empower-top-badge">Interoperability</span>
-                        <div class="empower-card-overlay">
-                            <div class="empower-card-title-row">
-                                <h3>Interoperability (HL7 & FHIR)</h3>
-                                <span class="empower-check-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-                            </div>
-                            <p class="empower-card-desc">Enable secure, real-time connectivity between EHRs, healthcare platforms, and third-party systems using HL7 and FHIR.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 3 -->
-                <div class="empower-photo-card">
-                    <div class="empower-photo-inner">
-                        <img src="image/empower3.png" alt="Remote Patient Monitoring" class="empower-bg-img">
-                        <span class="empower-top-badge">Remote Care</span>
-                        <div class="empower-card-overlay">
-                            <div class="empower-card-title-row">
-                                <h3>Remote Patient Monitoring</h3>
-                                <span class="empower-check-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-                            </div>
-                            <p class="empower-card-desc">Implement advanced RPM solutions to track health metrics in real-time and enable proactive interventions.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 4 -->
-                <div class="empower-photo-card">
-                    <div class="empower-photo-inner">
-                        <img src="image/empower4.png" alt="Agentic AI Solutions" class="empower-bg-img">
-                        <span class="empower-top-badge">Autonomous AI</span>
-                        <div class="empower-card-overlay">
-                            <div class="empower-card-title-row">
-                                <h3>Agentic Autonomous AI</h3>
-                                <span class="empower-check-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-                            </div>
-                            <p class="empower-card-desc">Redefine patient care and streamline complex healthcare workflows with autonomous Agentic AI technology.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 5 -->
-                <div class="empower-photo-card">
-                    <div class="empower-photo-inner">
-                        <img src="image/empower5.png" alt="Equipment & Bed Rentals" class="empower-bg-img">
-                        <span class="empower-top-badge">Asset Ops</span>
-                        <div class="empower-card-overlay">
-                            <div class="empower-card-title-row">
-                                <h3>Equipment & Bed Rentals</h3>
-                                <span class="empower-check-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-                            </div>
-                            <p class="empower-card-desc">Optimize tracking, scheduling, and asset management for medical equipment and hospital bed rentals.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 6 -->
-                <div class="empower-photo-card">
-                    <div class="empower-photo-inner">
-                        <img src="image/empower6.png" alt="AI/ML for Peripheral Artery Disease" class="empower-bg-img">
-                        <span class="empower-top-badge">AI Diagnostics</span>
-                        <div class="empower-card-overlay">
-                            <div class="empower-card-title-row">
-                                <h3>AI/ML for Artery Disease</h3>
-                                <span class="empower-check-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-                            </div>
-                            <p class="empower-card-desc">Leverage machine learning algorithms for accurate diagnostic modeling and treatment planning of PAD.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 7 -->
-                <div class="empower-photo-card">
-                    <div class="empower-photo-inner">
-                        <img src="image/empower7.png" alt="Business Solutions for Cancer Care" class="empower-bg-img">
-                        <span class="empower-top-badge">Oncology Ops</span>
-                        <div class="empower-card-overlay">
-                            <div class="empower-card-title-row">
-                                <h3>Cancer Care Solutions</h3>
-                                <span class="empower-check-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-                            </div>
-                            <p class="empower-card-desc">Streamline oncology delivery through business solutions optimizing multidisciplinary care workflows.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 8 -->
-                <div class="empower-photo-card">
-                    <div class="empower-photo-inner">
-                        <img src="image/empower8.png" alt="EHR & Practice Management" class="empower-bg-img">
-                        <span class="empower-top-badge">EHR & Admin</span>
-                        <div class="empower-card-overlay">
-                            <div class="empower-card-title-row">
-                                <h3>EHR & Practice Ops</h3>
-                                <span class="empower-check-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-                            </div>
-                            <p class="empower-card-desc">Enhance efficiency in medical practice management through administrative automation and EHR tools.</p>
-                        </div>
-                    </div>
-                </div>
+            <!-- Bottom Action Link -->
+            <div style="margin-top: 2.5rem; text-align: center;">
+                <a href="https://www.rsystems.com/inspiring-women-of-r-systems/" target="_blank" class="btn btn-purple">
+                    <span>Learn More About Inspiring Women of RSI</span>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
             </div>
-
-            <!-- Carousel Pagination Dots -->
-            <div class="use-case-carousel-dots" id="useCaseDots"></div>
         </div>
     </section>
 
@@ -1413,6 +2079,7 @@
     <script src="js/LogoLoopApp.js" defer></script>
     <script src="js/main.js" defer></script>
     <script src="js/molten-metal.js"></script>
+    <script src="js/ogl.umd.js"></script>
 
     <!-- Custom Script Override for Healthcare Service Offerings & Orbital Arc Tech System -->
     <script>
@@ -1646,17 +2313,366 @@
           });
         }
 
+        // React Bits CircularGallery WebGL Component Implementation
+        function initCircularGallery() {
+          const container = document.getElementById("circularGalleryContainer");
+          const OGL = window.ogl || window.OGL;
+          if (!container || !OGL) return;
+
+          const items = [
+            { image: "image/Slide1.png", text: "" },
+            { image: "image/Slide2.png", text: "" },
+            { image: "image/Slide3.png", text: "" },
+            { image: "image/Slide4.png", text: "" },
+            { image: "image/Slide5.png", text: "" },
+            { image: "image/Slide6.png", text: "" }
+          ];
+
+          function debounce(func, wait) {
+            let timeout;
+            return function (...args) {
+              clearTimeout(timeout);
+              timeout = setTimeout(() => func.apply(this, args), wait);
+            };
+          }
+
+          function lerp(p1, p2, t) {
+            return p1 + (p2 - p1) * t;
+          }
+
+          class Media {
+            constructor({ geometry, gl, image, index, length, renderer, scene, screen, text, viewport, bend, textColor = '#ffffff', borderRadius = 0.05, font }) {
+              this.extra = 0;
+              this.geometry = geometry;
+              this.gl = gl;
+              this.image = image;
+              this.index = index;
+              this.length = length;
+              this.renderer = renderer;
+              this.scene = scene;
+              this.screen = screen;
+              this.text = text;
+              this.viewport = viewport;
+              this.bend = bend;
+              this.textColor = textColor;
+              this.borderRadius = borderRadius;
+              this.font = font;
+              this.createShader();
+              this.createMesh();
+              this.onResize();
+            }
+
+            createShader() {
+              const canvas = document.createElement("canvas");
+              canvas.width = 800;
+              canvas.height = 600;
+              const ctx = canvas.getContext("2d");
+              ctx.fillStyle = "#8656FE";
+              ctx.fillRect(0, 0, 800, 600);
+
+              const texture = new OGL.Texture(this.gl, { generateMipmaps: false, image: canvas });
+
+              this.program = new OGL.Program(this.gl, {
+                depthTest: false,
+                depthWrite: false,
+                vertex: `
+                  precision highp float;
+                  attribute vec3 position;
+                  attribute vec2 uv;
+                  uniform mat4 modelViewMatrix;
+                  uniform mat4 projectionMatrix;
+                  uniform float uTime;
+                  uniform float uSpeed;
+                  varying vec2 vUv;
+                  void main() {
+                    vUv = uv;
+                    vec3 p = position;
+                    p.z = (sin(p.x * 4.0 + uTime) * 1.5 + cos(p.y * 2.0 + uTime) * 1.5) * (0.1 + uSpeed * 0.5);
+                    gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
+                  }
+                `,
+                fragment: `
+                  precision highp float;
+                  uniform vec2 uImageSizes;
+                  uniform vec2 uPlaneSizes;
+                  uniform sampler2D tMap;
+                  uniform float uBorderRadius;
+                  varying vec2 vUv;
+
+                  float roundedBoxSDF(vec2 p, vec2 b, float r) {
+                    vec2 d = abs(p) - b;
+                    return length(max(d, vec2(0.0))) + min(max(d.x, d.y), 0.0) - r;
+                  }
+
+                  void main() {
+                    float imgAspect = (uImageSizes.x > 0.0 && uImageSizes.y > 0.0) ? (uImageSizes.x / uImageSizes.y) : 1.0;
+                    float planeAspect = (uPlaneSizes.x > 0.0 && uPlaneSizes.y > 0.0) ? (uPlaneSizes.x / uPlaneSizes.y) : 1.0;
+                    
+                    vec2 ratio = vec2(
+                      max(planeAspect / imgAspect, 1.0),
+                      max(imgAspect / planeAspect, 1.0)
+                    );
+                    vec2 uv = vec2(
+                      vUv.x * ratio.x + (1.0 - ratio.x) * 0.5,
+                      vUv.y * ratio.y + (1.0 - ratio.y) * 0.5
+                    );
+                    vec4 color = texture2D(tMap, uv);
+
+                    float d = roundedBoxSDF(vUv - 0.5, vec2(0.5 - uBorderRadius), uBorderRadius);
+                    float edgeSmooth = 0.002;
+                    float alpha = 1.0 - smoothstep(-edgeSmooth, edgeSmooth, d);
+
+                    gl_FragColor = vec4(color.rgb, alpha * color.a);
+                  }
+                `,
+                uniforms: {
+                  tMap: { value: texture },
+                  uPlaneSizes: { value: [10, 10] },
+                  uImageSizes: { value: [800, 600] },
+                  uSpeed: { value: 0 },
+                  uTime: { value: 100 * Math.random() },
+                  uBorderRadius: { value: this.borderRadius }
+                },
+                transparent: true
+              });
+
+              const img = new Image();
+              img.src = this.image;
+              const updateTex = () => {
+                texture.image = img;
+                texture.needsUpdate = true;
+                if (img.naturalWidth && img.naturalHeight) {
+                  this.program.uniforms.uImageSizes.value = [img.naturalWidth, img.naturalHeight];
+                }
+              };
+              if (img.complete) {
+                updateTex();
+              } else {
+                img.onload = updateTex;
+              }
+            }
+
+            createMesh() {
+              this.plane = new OGL.Mesh(this.gl, { geometry: this.geometry, program: this.program });
+              this.plane.setParent(this.scene);
+            }
+
+            update(scroll, direction) {
+              this.plane.position.x = this.x - scroll.current - this.extra;
+              const x = this.plane.position.x;
+              const H = this.viewport.width / 2;
+
+              if (this.bend === 0) {
+                this.plane.position.y = 0;
+                this.plane.rotation.z = 0;
+              } else {
+                const B_abs = Math.abs(this.bend);
+                const R = (H * H + B_abs * B_abs) / (2 * B_abs);
+                const effectiveX = Math.min(Math.abs(x), H);
+                const arc = R - Math.sqrt(R * R - effectiveX * effectiveX);
+                if (this.bend > 0) {
+                  this.plane.position.y = -arc;
+                  this.plane.rotation.z = -Math.sign(x) * Math.asin(effectiveX / R);
+                } else {
+                  this.plane.position.y = arc;
+                  this.plane.rotation.z = Math.sign(x) * Math.asin(effectiveX / R);
+                }
+              }
+
+              this.speed = scroll.current - scroll.last;
+              this.program.uniforms.uTime.value += 0.04;
+              this.program.uniforms.uSpeed.value = this.speed;
+
+              const planeOffset = this.plane.scale.x / 2;
+              const viewportOffset = this.viewport.width / 2;
+              this.isBefore = this.plane.position.x + planeOffset < -viewportOffset;
+              this.isAfter = this.plane.position.x - planeOffset > viewportOffset;
+              if (direction === "right" && this.isBefore) {
+                this.extra -= this.widthTotal;
+                this.isBefore = this.isAfter = false;
+              }
+              if (direction === "left" && this.isAfter) {
+                this.extra += this.widthTotal;
+                this.isBefore = this.isAfter = false;
+              }
+            }
+
+            onResize({ screen, viewport } = {}) {
+              if (screen) this.screen = screen;
+              if (viewport) this.viewport = viewport;
+              this.scale = this.screen.height / 1300;
+              this.plane.scale.y = (this.viewport.height * (850 * this.scale)) / this.screen.height;
+              this.plane.scale.x = this.plane.scale.y * 1.0;
+              this.plane.program.uniforms.uPlaneSizes.value = [this.plane.scale.x, this.plane.scale.y];
+              this.padding = 1.35;
+              this.width = this.plane.scale.x + this.padding;
+              this.widthTotal = this.width * this.length;
+              this.x = this.width * this.index;
+            }
+          }
+
+          class CircularGalleryApp {
+            constructor(container, { items, bend = 3, textColor = '#ffffff', borderRadius = 0.05, scrollSpeed = 2, scrollEase = 0.05 }) {
+              this.container = container;
+              this.scrollSpeed = scrollSpeed;
+              this.scroll = { ease: scrollEase, current: 0, target: 0, last: 0 };
+              this.onCheckDebounce = debounce(this.onCheck.bind(this), 200);
+              this.createRenderer();
+              this.createCamera();
+              this.createScene();
+              this.onResize();
+              this.createGeometry();
+              this.createMedias(items, bend, textColor, borderRadius);
+              this.update();
+              this.addEventListeners();
+            }
+
+            createRenderer() {
+              this.renderer = new OGL.Renderer({ alpha: true, antialias: true, dpr: Math.min(window.devicePixelRatio || 1, 2) });
+              this.gl = this.renderer.gl;
+              this.gl.clearColor(0, 0, 0, 0);
+              this.container.appendChild(this.gl.canvas);
+            }
+
+            createCamera() {
+              this.camera = new OGL.Camera(this.gl);
+              this.camera.fov = 45;
+              this.camera.position.z = 20;
+            }
+
+            createScene() {
+              this.scene = new OGL.Transform();
+            }
+
+            createGeometry() {
+              this.planeGeometry = new OGL.Plane(this.gl, { heightSegments: 50, widthSegments: 100 });
+            }
+
+            createMedias(items, bend, textColor, borderRadius) {
+              const galleryItems = items && items.length ? items : [];
+              this.mediasImages = galleryItems.concat(galleryItems).concat(galleryItems);
+              this.medias = this.mediasImages.map((data, index) => {
+                return new Media({
+                  geometry: this.planeGeometry,
+                  gl: this.gl,
+                  image: data.image,
+                  index,
+                  length: this.mediasImages.length,
+                  renderer: this.renderer,
+                  scene: this.scene,
+                  screen: this.screen,
+                  text: data.text,
+                  viewport: this.viewport,
+                  bend,
+                  textColor,
+                  borderRadius
+                });
+              });
+            }
+
+            onTouchDown(e) {
+              this.isDown = true;
+              this.scroll.position = this.scroll.current;
+              this.start = e.touches ? e.touches[0].clientX : e.clientX;
+            }
+
+            onTouchMove(e) {
+              if (!this.isDown) return;
+              const x = e.touches ? e.touches[0].clientX : e.clientX;
+              const distance = (this.start - x) * (this.scrollSpeed * 0.025);
+              this.scroll.target = this.scroll.position + distance;
+            }
+
+            onTouchUp() {
+              this.isDown = false;
+              this.onCheck();
+            }
+
+            onWheel(e) {
+              const delta = e.deltaY || e.wheelDelta || e.detail;
+              this.scroll.target += (delta > 0 ? this.scrollSpeed : -this.scrollSpeed) * 0.2;
+              this.onCheckDebounce();
+            }
+
+            onCheck() {
+              if (!this.medias || !this.medias[0]) return;
+              const width = this.medias[0].width;
+              const itemIndex = Math.round(Math.abs(this.scroll.target) / width);
+              const item = width * itemIndex;
+              this.scroll.target = this.scroll.target < 0 ? -item : item;
+            }
+
+            onResize() {
+              if (!this.container) return;
+              this.screen = { width: this.container.clientWidth, height: this.container.clientHeight };
+              this.renderer.setSize(this.screen.width, this.screen.height);
+              this.camera.perspective({ aspect: this.screen.width / this.screen.height });
+              const fov = (this.camera.fov * Math.PI) / 180;
+              const height = 2 * Math.tan(fov / 2) * this.camera.position.z;
+              const width = height * this.camera.aspect;
+              this.viewport = { width, height };
+              if (this.medias) {
+                this.medias.forEach(media => media.onResize({ screen: this.screen, viewport: this.viewport }));
+              }
+            }
+
+            update() {
+              if (!this.isDown) {
+                if (this.isHovered) {
+                  this.scroll.target += 0.002; // Very slow crawl when mouse hovered!
+                } else {
+                  this.scroll.target += 0.016; // Noticeably faster auto-drift when not hovered!
+                }
+              }
+              this.scroll.current = lerp(this.scroll.current, this.scroll.target, this.scroll.ease);
+              const direction = this.scroll.current > this.scroll.last ? "right" : "left";
+              if (this.medias) {
+                this.medias.forEach(media => media.update(this.scroll, direction));
+              }
+              this.renderer.render({ scene: this.scene, camera: this.camera });
+              this.scroll.last = this.scroll.current;
+              this.raf = window.requestAnimationFrame(this.update.bind(this));
+            }
+
+            addEventListeners() {
+              window.addEventListener("resize", this.onResize.bind(this));
+              this.container.addEventListener("mouseenter", () => { this.isHovered = true; });
+              this.container.addEventListener("mouseleave", () => { this.isHovered = false; });
+              this.container.addEventListener("wheel", this.onWheel.bind(this), { passive: true });
+              this.container.addEventListener("mousedown", this.onTouchDown.bind(this));
+              window.addEventListener("mousemove", this.onTouchMove.bind(this));
+              window.addEventListener("mouseup", this.onTouchUp.bind(this));
+              this.container.addEventListener("touchstart", this.onTouchDown.bind(this), { passive: true });
+              window.addEventListener("touchmove", this.onTouchMove.bind(this), { passive: true });
+              window.addEventListener("touchend", this.onTouchUp.bind(this));
+            }
+          }
+
+          new CircularGalleryApp(container, {
+            items,
+            bend: 3,
+            textColor: '#ffffff',
+            borderRadius: 0.05,
+            scrollSpeed: 2,
+            scrollEase: 0.05
+          });
+        }
+
         // Run after main.js initializes
         window.addEventListener("DOMContentLoaded", function () {
           setTimeout(initHealthcareOfferings, 100);
           initUseCaseCarousel();
+          initCircularGallery();
         });
 
         // Backup init on load
-        window.addEventListener("load", initHealthcareOfferings);
+        window.addEventListener("load", function() {
+          initHealthcareOfferings();
+          initCircularGallery();
+        });
 
         // Initialize Molten Metal Pre-Footer
-        window.addEventListener("DOMContentLoaded", function() {
+        window.addEventListener("load", function() {
           var container = document.getElementById('moltenMetalContainer');
           if (container && window.initMoltenMetal) {
             window.initMoltenMetal(container, {

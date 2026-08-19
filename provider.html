@@ -139,6 +139,104 @@
             transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
+        /* 4-Row Moving Marquee Chips for Provider Page */
+        .marquee-chips-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            padding: 0.5rem 0;
+            mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+        }
+
+        .marquee-chips-row {
+            display: flex;
+            width: max-content;
+            gap: 1.2rem;
+            will-change: transform;
+        }
+
+        /* Pause row animation on hover */
+        .marquee-chips-row:hover {
+            animation-play-state: paused !important;
+        }
+
+        .marquee-row-left {
+            animation: marqueeScrollLeft linear infinite;
+        }
+
+        .marquee-row-right {
+            animation: marqueeScrollRight linear infinite;
+        }
+
+        @keyframes marqueeScrollLeft {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        @keyframes marqueeScrollRight {
+            0% {
+                transform: translateX(-50%);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        .chip-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: #ffffff;
+            border: 1px solid rgba(155, 81, 224, 0.18);
+            border-radius: 30px;
+            padding: 0.75rem 1.4rem;
+            box-shadow: 0 4px 18px rgba(15, 23, 42, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+            white-space: nowrap;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .chip-pill:hover {
+            transform: translateY(-3px) scale(1.02);
+            background: #ffffff;
+            border-color: rgba(155, 81, 224, 0.45);
+            box-shadow: 0 10px 28px rgba(155, 81, 224, 0.18);
+        }
+
+        .chip-icon-box {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(155, 81, 224, 0.15) 0%, rgba(123, 47, 247, 0.08) 100%);
+            color: #8656FE;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .chip-pill:hover .chip-icon-box {
+            background: #8656FE;
+            color: #ffffff;
+        }
+
+        .chip-text {
+            font-size: 0.98rem;
+            font-weight: 500;
+            color: #1e293b;
+            letter-spacing: -0.01em;
+        }
+
         
 
         /* Healthcare Specific Styles & Enhancements */
@@ -857,104 +955,81 @@
         </div>
     </section>
 
-    <!-- Value and Benefits Section -->
-    <section class="value-benefits-section" style="background: #f8f9fd; padding: 4.5rem calc(max(2rem, (100% - 1280px) / 2 + 2rem));">
-        <div style="max-width: 1280px; margin: 0 auto;">
+    <!-- Value and Benefits Section (4-Row Infinite Moving Marquee Chips) -->
+    <section class="value-benefits-section" style="background: #f8f9fd; padding: 4.5rem 0; overflow: hidden;">
+        <div style="max-width: 1280px; margin: 0 auto; padding: 0 2rem;">
             <div class="section-header text-left" style="margin-bottom: 2.5rem; text-align: left;">
                 <span class="eyebrow" style="color: #9b51e0; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.88rem;">• VALUE & BENEFITS</span>
                 <h2 style="font-size: clamp(2.2rem, 3.8vw, 3rem); font-weight: 300; color: #0f172a; margin-top: 0.4rem; line-height: 1.15; letter-spacing: -0.02em;">Driving Measurable Healthcare Outcomes & Value</h2>
                 <p style="color: #64748b; font-size: 1.05rem; line-height: 1.6; margin-top: 0.75rem; max-width: 780px;">Our specialized healthcare engineering capabilities empower organizations to deliver superior clinical outcomes while streamlining administrative overhead.</p>
             </div>
+        </div>
 
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1.5rem 4rem;">
-                <!-- Column 1 -->
-                <div style="display: flex; flex-direction: column; gap: 1.4rem;">
-                    <div style="display: flex; align-items: flex-start; gap: 0.9rem;">
-                        <span style="width: 26px; height: 26px; border-radius: 50%; background: #e9d5ff; color: #7e22ce; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                        </span>
-                        <span style="font-size: 1.05rem; font-weight: 450; color: #334155; line-height: 1.45;">Improved Patient Outcomes</span>
-                    </div>
-
-                    <div style="display: flex; align-items: flex-start; gap: 0.9rem;">
-                        <span style="width: 26px; height: 26px; border-radius: 50%; background: #e9d5ff; color: #7e22ce; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                        </span>
-                        <span style="font-size: 1.05rem; font-weight: 450; color: #334155; line-height: 1.45;">Improved Quality of Care</span>
-                    </div>
-
-                    <div style="display: flex; align-items: flex-start; gap: 0.9rem;">
-                        <span style="width: 26px; height: 26px; border-radius: 50%; background: #e9d5ff; color: #7e22ce; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                        </span>
-                        <span style="font-size: 1.05rem; font-weight: 450; color: #334155; line-height: 1.45;">Better Account Receivables Management</span>
-                    </div>
-
-                    <div style="display: flex; align-items: flex-start; gap: 0.9rem;">
-                        <span style="width: 26px; height: 26px; border-radius: 50%; background: #e9d5ff; color: #7e22ce; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                        </span>
-                        <span style="font-size: 1.05rem; font-weight: 450; color: #334155; line-height: 1.45;">Improved Patient Workflows</span>
-                    </div>
-
-                    <div style="display: flex; align-items: flex-start; gap: 0.9rem;">
-                        <span style="width: 26px; height: 26px; border-radius: 50%; background: #e9d5ff; color: #7e22ce; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                        </span>
-                        <span style="font-size: 1.05rem; font-weight: 450; color: #334155; line-height: 1.45;">Effective Physician Time Management</span>
-                    </div>
-
-                    <div style="display: flex; align-items: flex-start; gap: 0.9rem;">
-                        <span style="width: 26px; height: 26px; border-radius: 50%; background: #e9d5ff; color: #7e22ce; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                        </span>
-                        <span style="font-size: 1.05rem; font-weight: 450; color: #334155; line-height: 1.45;">Reduced Administrative Time for Physicians</span>
-                    </div>
+        <!-- 4-Row Infinite Marquee Chips Container -->
+        <div class="marquee-chips-container">
+            <!-- Row 1: Left Scroll -->
+            <div class="marquee-chips-row marquee-row-left" style="animation-duration: 34s;">
+                <div style="display: flex; gap: 1.2rem;">
+                    <div class="chip-pill"><span class="chip-icon-box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="chip-text">Improved Patient Outcomes</span></div>
+                    <div class="chip-pill"><span class="chip-icon-box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="chip-text">Reduced Cost of Care & Readmissions</span></div>
+                    <div class="chip-pill"><span class="chip-icon-box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="chip-text">Improved Quality of Care</span></div>
+                    <div class="chip-pill"><span class="chip-icon-box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="chip-text">Convenient Patient Diagnostics</span></div>
+                    <div class="chip-pill"><span class="chip-icon-box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="chip-text">Real-Time Clinical Telemetry</span></div>
                 </div>
+                <div style="display: flex; gap: 1.2rem;">
+                    <div class="chip-pill"><span class="chip-icon-box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="chip-text">Improved Patient Outcomes</span></div>
+                    <div class="chip-pill"><span class="chip-icon-box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="chip-text">Reduced Cost of Care & Readmissions</span></div>
+                    <div class="chip-pill"><span class="chip-icon-box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="chip-text">Improved Quality of Care</span></div>
+                    <div class="chip-pill"><span class="chip-icon-box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="chip-text">Convenient Patient Diagnostics</span></div>
+                    <div class="chip-pill"><span class="chip-icon-box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="chip-text">Real-Time Clinical Telemetry</span></div>
+                </div>
+            </div>
 
-                <!-- Column 2 -->
-                <div style="display: flex; flex-direction: column; gap: 1.4rem;">
-                    <div style="display: flex; align-items: flex-start; gap: 0.9rem;">
-                        <span style="width: 26px; height: 26px; border-radius: 50%; background: #e9d5ff; color: #7e22ce; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                        </span>
-                        <span style="font-size: 1.05rem; font-weight: 450; color: #334155; line-height: 1.45;">Reduced Cost of Care, Length of Stay, and Readmissions.</span>
-                    </div>
+            <!-- Row 2: Right Scroll -->
+            <div class="marquee-chips-row marquee-row-right" style="animation-duration: 38s;">
+                <div style="display: flex; gap: 1.2rem;">
+                    <div class="chip-pill"><span class="chip-icon-box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="chip-text">Better Account Receivables Management</span></div>
+                    <div class="chip-pill"><span class="chip-icon-box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="chip-text">Streamlined Operations Workload</span></div>
+                    <div class="chip-pill"><span class="chip-icon-box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="chip-text">Improved Patient Workflows</span></div>
+                    <div class="chip-pill"><span class="chip-icon-box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="chip-text">Reduction in Claim Denials & Rejections</span></div>
+                </div>
+                <div style="display: flex; gap: 1.2rem;">
+                    <div class="chip-pill"><span class="chip-icon-box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="chip-text">Better Account Receivables Management</span></div>
+                    <div class="chip-pill"><span class="chip-icon-box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="chip-text">Streamlined Operations Workload</span></div>
+                    <div class="chip-pill"><span class="chip-icon-box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="chip-text">Improved Patient Workflows</span></div>
+                    <div class="chip-pill"><span class="chip-icon-box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="chip-text">Reduction in Claim Denials & Rejections</span></div>
+                </div>
+            </div>
 
-                    <div style="display: flex; align-items: flex-start; gap: 0.9rem;">
-                        <span style="width: 26px; height: 26px; border-radius: 50%; background: #e9d5ff; color: #7e22ce; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                        </span>
-                        <span style="font-size: 1.05rem; font-weight: 450; color: #334155; line-height: 1.45;">Convenient Patient Diagnostics</span>
-                    </div>
+            <!-- Row 3: Left Scroll -->
+            <div class="marquee-chips-row marquee-row-left" style="animation-duration: 32s;">
+                <div style="display: flex; gap: 1.2rem;">
+                    <div class="chip-pill"><span class="chip-icon-box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="chip-text">Effective Physician Time Management</span></div>
+                    <div class="chip-pill"><span class="chip-icon-box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="chip-text">Improved Utilization Management</span></div>
+                    <div class="chip-pill"><span class="chip-icon-box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="chip-text">Reduced Administrative Time for Physicians</span></div>
+                    <div class="chip-pill"><span class="chip-icon-box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="chip-text">Predictive Early Disease Detection</span></div>
+                </div>
+                <div style="display: flex; gap: 1.2rem;">
+                    <div class="chip-pill"><span class="chip-icon-box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="chip-text">Effective Physician Time Management</span></div>
+                    <div class="chip-pill"><span class="chip-icon-box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="chip-text">Improved Utilization Management</span></div>
+                    <div class="chip-pill"><span class="chip-icon-box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="chip-text">Reduced Administrative Time for Physicians</span></div>
+                    <div class="chip-pill"><span class="chip-icon-box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="chip-text">Predictive Early Disease Detection</span></div>
+                </div>
+            </div>
 
-                    <div style="display: flex; align-items: flex-start; gap: 0.9rem;">
-                        <span style="width: 26px; height: 26px; border-radius: 50%; background: #e9d5ff; color: #7e22ce; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                        </span>
-                        <span style="font-size: 1.05rem; font-weight: 450; color: #334155; line-height: 1.45;">Streamlined Operations Workload</span>
-                    </div>
-
-                    <div style="display: flex; align-items: flex-start; gap: 0.9rem;">
-                        <span style="width: 26px; height: 26px; border-radius: 50%; background: #e9d5ff; color: #7e22ce; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                        </span>
-                        <span style="font-size: 1.05rem; font-weight: 450; color: #334155; line-height: 1.45;">Reduction in Claim Denials & Rejections</span>
-                    </div>
-
-                    <div style="display: flex; align-items: flex-start; gap: 0.9rem;">
-                        <span style="width: 26px; height: 26px; border-radius: 50%; background: #e9d5ff; color: #7e22ce; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                        </span>
-                        <span style="font-size: 1.05rem; font-weight: 450; color: #334155; line-height: 1.45;">Improved Utilization Management</span>
-                    </div>
-
-                    <div style="display: flex; align-items: flex-start; gap: 0.9rem;">
-                        <span style="width: 26px; height: 26px; border-radius: 50%; background: #e9d5ff; color: #7e22ce; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                        </span>
-                        <span style="font-size: 1.05rem; font-weight: 450; color: #334155; line-height: 1.45;">Predictive Modelling for Early Detection of Diseases</span>
-                    </div>
+            <!-- Row 4: Right Scroll -->
+            <div class="marquee-chips-row marquee-row-right" style="animation-duration: 36s;">
+                <div style="display: flex; gap: 1.2rem;">
+                    <div class="chip-pill"><span class="chip-icon-box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="chip-text">AI-Powered Clinical Diagnostics</span></div>
+                    <div class="chip-pill"><span class="chip-icon-box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="chip-text">EHR & EMR System Interoperability</span></div>
+                    <div class="chip-pill"><span class="chip-icon-box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="chip-text">Remote Patient Monitoring (RPM)</span></div>
+                    <div class="chip-pill"><span class="chip-icon-box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="chip-text">Autonomous Agentic Clinical Workflows</span></div>
+                </div>
+                <div style="display: flex; gap: 1.2rem;">
+                    <div class="chip-pill"><span class="chip-icon-box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="chip-text">AI-Powered Clinical Diagnostics</span></div>
+                    <div class="chip-pill"><span class="chip-icon-box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="chip-text">EHR & EMR System Interoperability</span></div>
+                    <div class="chip-pill"><span class="chip-icon-box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="chip-text">Remote Patient Monitoring (RPM)</span></div>
+                    <div class="chip-pill"><span class="chip-icon-box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="chip-text">Autonomous Agentic Clinical Workflows</span></div>
                 </div>
             </div>
         </div>
