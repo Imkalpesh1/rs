@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microsoft Solutions Partner - R Systems</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/LogoLoop.css">
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/ogl@0.0.116/dist/ogl.umd.js"></script>
+    <style>
+        body {
+            font-family: 'Geomanist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #0f172a;
+            background-color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Header Overrides for Hero (White text on Hero, Dark when scrolled) */
+        .header.ms-header-hero .nav-link,
+        .header.ms-header-hero .nav-link-secondary,
+        .header.ms-header-hero .icon-btn {
+            color: #ffffff !important;
+            transition: color 0.25s ease;
+        }
+
+        .header.ms-header-hero .logo-img {
+            filter: brightness(0) invert(1) !important;
+            transition: filter 0.25s ease;
+        }
+
+        .header.ms-header-hero .hamburger-line {
+            background-color: #ffffff !important;
+            transition: background-color 0.25s ease;
+        }
+
+        /* Scrolled Header State */
+        .header.scrolled .nav-link,
+        .header.scrolled .nav-link-secondary,
+        .header.scrolled .icon-btn {
+            color: #1e293b !important;
+        }
+
+        .header.scrolled .nav-link:hover,
+        .header.scrolled .nav-link-secondary:hover {
+            color: #9b51e0 !important;
+        }
+
+        .header.scrolled .logo-img {
+            filter: none !important;
+        }
+
+        .header.scrolled .hamburger-line {
+            background-color: #1e293b !important;
+        }
+
+        /* Breadcrumb in Hero Section */
+        .l2-breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 0.88rem;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 1.5rem;
+        }
+
+        .l2-breadcrumb a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .l2-breadcrumb a:hover {
+            color: #ffffff;
+        }
+
+        .l2-breadcrumb .active {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        /* HERO SECTION - Exact Height and Padding Matched to v2.html */
+        .ms-hero-section {
+            position: relative;
+            background: #0072ce url('images/hero-microsoft.png') center center / cover no-repeat;
+            color: #ffffff;
+            padding: 7.5rem 2rem 4.5rem 2rem;
+            overflow: hidden;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .ms-hero-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 3.5rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+            min-height: 380px;
+        }
+
+        @media (max-width: 992px) {
+            .ms-hero-container {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+                min-height: auto;
+            }
+            .ms-hero-section {
+                padding: 6.5rem 1.5rem 3.5rem 1.5rem;
+            }
+        }
+
+        .ms-hero-content h1 {
+            font-size: clamp(2.4rem, 4vw, 3.4rem);
+            font-weight: 300;
+            line-height: 1.15;
+            margin: 0 0 1.25rem 0;
+            color: #ffffff;
+            letter-spacing: -0.02em;
+        }
+
+        .ms-hero-content p {
+            font-size: 1.05rem;
+            line-height: 1.65;
+            color: rgba(255, 255, 255, 0.95);
+            max-width: 620px;
+            margin: 0;
+        }
+
+        /* DESIGNATION CARDS STRIP SECTION */
+        .ms-strip-section {
+            background: #ffffff;
+            padding: 3.5rem 0 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Left Side Frosted Glass Panel (Ends EXACTLY at single purple vertical line) */
+        .ms-strip-glass-panel {
+            position: absolute;
+            top: -30px;
+            bottom: -30px;
+            left: 0;
+            width: calc( max(0px, (100% - 1400px) / 2) + 2rem + 57.5px );
+            z-index: 8;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(248, 242, 255, 0.72) 100%);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            border: none;
+            box-shadow: none;
+            pointer-events: none;
+        }
+
+        /* Right Side Pure Soft Gradient Fade (No Blur / Glass) */
+        .ms-strip-right-fade {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            width: 120px;
+            z-index: 8;
+            background: linear-gradient(270deg, #ffffff 0%, rgba(255, 255, 255, 0.85) 60%, rgba(255, 255, 255, 0) 100%);
+            pointer-events: none;
+        }
+
+        .ms-strip-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            padding: 0 2rem;
+        }
+
+        /* Absolute Pinned Left Badge Overlap Layer (z-index: 10) */
+        .ms-strip-left-badge-wrapper {
+            position: absolute;
+            left: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+        }
+
+        /* THE SINGLE UNIFIED VERTICAL PURPLE LINE */
+        .ms-strip-purple-line {
+            position: absolute;
+            top: -120px;
+            bottom: -120px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            background: linear-gradient(180deg, rgba(155, 81, 224, 0) 0%, rgba(155, 81, 224, 0.45) 25%, rgba(155, 81, 224, 0.45) 75%, rgba(155, 81, 224, 0) 100%);
+            z-index: 9;
+        }
+
+        .ms-strip-logo-badge {
+            width: 115px;
+            height: 115px;
+            border-radius: 50%;
+            background: #ffffff;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(155, 81, 224, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            border: 1px solid #f1f5f9;
+            position: relative;
+            z-index: 10;
+            padding: 0.8rem;
+            box-sizing: border-box;
+            pointer-events: auto;
+        }
+
+        .ms-strip-logo-badge img {
+            width: 105%;
+            height: auto;
+            max-height: 85%;
+            object-fit: contain;
+            display: block;
+        }
+
+        /* Right Floating Scroll Arrow Button */
+        .ms-strip-scroll-btn {
+            position: absolute;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 12;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+            color: #1e293b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .ms-strip-scroll-btn:hover {
+            background: #9b51e0;
+            color: #ffffff;
+            border-color: #9b51e0;
+            box-shadow: 0 6px 20px rgba(155, 81, 224, 0.3);
+            transform: translateY(-50%) scale(1.08);
+        }
+
+        /* Horizontal Scrollable Track */
+        .ms-strip-flex {
+            display: flex;
+            align-items: stretch;
+            gap: 1.6rem;
+            overflow-x: auto;
+            padding-top: 1.25rem;
+            padding-bottom: 2rem;
+            padding-left: 155px; /* Space for left pinned badge */
+            padding-right: 4rem;
+            scrollbar-width: none;
+            position: relative;
+            z-index: 2;
+            scroll-behavior: smooth;
+        }
+
+        .ms-strip-flex::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Clean White Cards without Heavy Purple Shadow */
+        .ms-card-item {
+            background: #ffffff;
+            border: 1px solid #e8e2f2;
+            border-radius: 20px;
+            padding: 1.75rem 1.6rem 1.6rem 1.6rem;
+            min-width: 270px;
+            max-width: 290px;
+            flex: 0 0 auto;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+
+        .ms-card-item:hover {
+            transform: translateY(-4px);
+            border-color: #d8ceeb;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+        }
+
+        .ms-card-top-icon {
+            width: 38px;
+            height: 38px;
+            color: #9b51e0;
+            margin-bottom: 0.85rem;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Refined, Lighter Typography for Cards */
+        .ms-card-info h4 {
+            font-size: 1.1rem;
+            font-weight: 450;
+            color: #1d1d1f;
+            margin: 0 0 0.25rem 0;
+            line-height: 1.35;
+            letter-spacing: -0.01em;
+        }
+
+        .ms-card-info .azure-tag {
+            color: #9b51e0;
+            font-size: 0.9rem;
+            font-weight: 450;
+            margin-bottom: 1.25rem;
+            display: block;
+        }
+
+        .ms-card-bottom-box {
+            background: #f8f3fc;
+            border-radius: 12px;
+            padding: 1rem 1.1rem;
+            color: #1e293b;
+            font-size: 0.86rem;
+            line-height: 1.45;
+            margin-top: auto;
+        }
+
+        .specialist-label {
+            display: block;
+            font-weight: 550;
+            color: #9b51e0;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-bottom: 0.25rem;
+        }
+
+        .specialist-desc {
+            color: #475569;
+            font-weight: 400;
+            font-size: 0.86rem;
+            line-height: 1.4;
+        }
+
+        /* OUR EXPERTISE SECTION */
+        .ms-expertise-section {
+            padding: 4.5rem 2rem 5rem 2rem;
+            background: #ffffff;
+        }
+
+        .ms-expertise-container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .ms-section-header {
+            margin-bottom: 3.5rem;
+        }
+
+        .ms-section-header h2 {
+            font-size: clamp(2rem, 3.5vw, 2.75rem);
+            font-weight: 400;
+            color: #0f172a;
+            margin: 0 0 0.75rem 0;
+            letter-spacing: -0.01em;
+        }
+
+        .ms-section-header p {
+            font-size: 1.05rem;
+            color: #64748b;
+            max-width: 760px;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .ms-expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2.5rem 2rem;
+        }
+
+        @media (max-width: 1024px) {
+            .ms-expertise-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .ms-expertise-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .ms-exp-card {
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+        }
+
+        .ms-exp-icon-box {
+            width: 32px;
+            height: 32px;
+            color: #9b51e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ms-exp-card h3 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #0f172a;
+            margin: 0;
+            line-height: 1.35;
+        }
+
+        .ms-exp-card p {
+            font-size: 0.88rem;
+            color: #64748b;
+            line-height: 1.55;
+            margin: 0;
+        }
+
+        /* SERVICE OFFERINGS (Exact Apple Interactive Showcase copied from v2.html) */
+        .service-offerings {
+            padding: 5rem 2rem;
+            background: #ffffff;
+            border-top: 1px solid #f1f5f9;
+        }
+
+        .service-offerings-header {
+            max-width: 1240px;
+            margin: 0 auto 3rem auto;
+        }
+
+        .service-offerings-header .eyebrow {
+            color: #9b51e0;
+            font-size: 0.88rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .service-offerings-header h2 {
+            font-size: clamp(2.2rem, 3.8vw, 3rem);
+            font-weight: 300;
+            color: #0f172a;
+            margin: 0.4rem 0 0.75rem 0;
+            letter-spacing: -0.02em;
+        }
+
+        .service-offerings-header p {
+            color: #64748b;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            margin: 0;
+            max-width: 780px;
+        }
+
+        .apple-showcase-container {
+            display: grid;
+            grid-template-columns: 430px 1fr;
+            gap: 3rem;
+            align-items: flex-start;
+            max-width: 1240px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 992px) {
+            .apple-showcase-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .apple-accordion-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .apple-accordion-item {
+            background: #f5f5f7;
+            border-radius: 9999px;
+            padding: 0.85rem 1.4rem;
+            border: 1.5px solid transparent;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            user-select: none;
+        }
+
+        .apple-accordion-item:hover {
+            background: #e8e8ed;
+            transform: translateX(4px);
+        }
+
+        .apple-accordion-header {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            width: 100%;
+        }
+
+        .apple-accordion-icon {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1d1d1f;
+            font-size: 0.95rem;
+            font-weight: 600;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+            transition: transform 0.35s ease, background 0.35s ease, color 0.35s ease;
+            flex-shrink: 0;
+        }
+
+        .apple-accordion-item:hover .apple-accordion-icon {
+            transform: scale(1.1);
+        }
+
+        .apple-accordion-title-text {
+            font-size: 0.95rem;
+            font-weight: 400;
+            color: #1d1d1f;
+            line-height: 1.3;
+        }
+
+        .apple-accordion-item.active {
+            background: #f5f5f7;
+            border-radius: 24px;
+            padding: 1.5rem 1.6rem;
+            border: 1.5px solid rgba(134, 86, 254, 0.35);
+            box-shadow: 0 12px 32px rgba(134, 86, 254, 0.12), 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .apple-accordion-item.active:hover {
+            transform: none;
+        }
+
+        .apple-accordion-item.active .apple-accordion-header {
+            margin-bottom: 0.85rem;
+        }
+
+        .apple-accordion-item.active .apple-accordion-icon {
+            background: linear-gradient(135deg, #8656FE, #9b51e0);
+            color: #ffffff;
+        }
+
+        .apple-accordion-item.active .apple-accordion-title-text {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #0f172a;
+        }
+
+        .apple-accordion-body {
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+        }
+
+        .apple-accordion-desc {
+            font-size: 0.9rem;
+            color: #475569;
+            line-height: 1.65;
+            margin: 0;
+        }
+
+        .ms-read-more-link {
+            color: #9b51e0;
+            font-weight: 600;
+            text-decoration: none;
+            margin-left: 0.3rem;
+            display: inline-block;
+        }
+
+        .ms-read-more-link:hover {
+            text-decoration: underline;
+            color: #7b2ff7;
+        }
+
+        .apple-stage-card {
+            background: #ffffff;
+            border-radius: 28px;
+            border: 1px solid rgba(226, 232, 240, 0.9);
+            box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+            overflow: hidden;
+            position: sticky;
+            top: 100px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .apple-stage-img-wrapper {
+            position: relative;
+            height: 560px;
+            overflow: hidden;
+            background: #0f172a;
+            border-radius: 28px;
+        }
+
+        .apple-stage-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.35s ease, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .apple-stage-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(15, 23, 42, 0.75);
+            color: #ffffff;
+            padding: 0.45rem 1.1rem;
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+            z-index: 5;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        .apple-stage-gradient-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 70%;
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0) 0%, rgba(15, 23, 42, 0.88) 100%);
+            z-index: 3;
+            pointer-events: none;
+            border-radius: 0 0 28px 28px;
+        }
+
+        .apple-stage-bottom-overlay {
+            position: absolute;
+            bottom: 24px;
+            left: 24px;
+            right: 24px;
+            z-index: 5;
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+        }
+
+        .apple-stage-bottom-title {
+            font-size: 1.45rem;
+            font-weight: 600;
+            color: #ffffff;
+            letter-spacing: -0.02em;
+            line-height: 1.25;
+            margin: 0;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        .apple-stage-bottom-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .glass-pill {
+            background: rgba(255, 255, 255, 0.16);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: #ffffff;
+            padding: 0.4rem 0.95rem;
+            border-radius: 9999px;
+            font-size: 0.78rem;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Transparent Overlay Header (Copied exact structure from v2.html) -->
+    <header class="header ms-header-hero">
+        <div class="logo">
+            <a href="#" class="logo-brand" aria-label="RSi Home">
+                <img src="images/rsi_logo.png" alt="RSi Logo" class="logo-img">
+            </a>
+        </div>
+        <nav class="main-nav">
+            <a href="#" class="nav-link">ExiQO</a>
+            
+            <!-- What We Do with Dropdown Menu -->
+            <div class="nav-item-dropdown">
+                <a href="#" class="nav-link dropdown-toggle">What We Do</a>
+                <div class="dropdown-menu">
+                    <a href="#" class="dropdown-item">Digital Product Engineering</a>
+                    <a href="#" class="dropdown-item">Cloud & Modernization</a>
+                    <a href="#" class="dropdown-item">Generative AI & Data</a>
+                </div>
+            </div>
+            
+            <a href="#" class="nav-link">Who We Are</a>
+            <a href="#" class="nav-link">Insights</a>
+            <a href="#" class="nav-link">Careers</a>
+        </nav>
+        <div class="header-right">
+            <a href="#" class="nav-link-secondary">Investors</a>
+            <a href="#contact" class="nav-link-secondary">Contact Us</a>
+            <button class="icon-btn search-btn" aria-label="Search">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8" />
+                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                </svg>
+            </button>
+            <button class="icon-btn lang-btn" aria-label="Language Selector">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="2" y1="12" x2="22" y2="12" />
+                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                </svg>
+            </button>
+        </div>
+        <!-- Mobile Menu Toggle Button -->
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle Mobile Menu">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        </button>
+    </header>
+
+    <!-- Mobile Navigation Drawer Overlay & Drawer (Copied from v2.html) -->
+    <div class="mobile-drawer-overlay" id="mobileDrawerOverlay"></div>
+    <div class="mobile-nav-drawer" id="mobileNavDrawer">
+        <div class="mobile-drawer-header">
+            <img src="images/rsi_logo.png" alt="RSi Logo" class="mobile-drawer-logo">
+            <button class="mobile-drawer-close" id="mobileDrawerClose" aria-label="Close Menu">✕</button>
+        </div>
+        <div class="mobile-drawer-links">
+            <a href="#" class="mobile-nav-link">ExiQO</a>
+            <div class="mobile-dropdown-accordion">
+                <span class="mobile-nav-link">What We Do</span>
+                <div class="mobile-sub-links">
+                    <a href="#">Digital Product Engineering</a>
+                    <a href="#">Cloud & Modernization</a>
+                    <a href="#">Generative AI & Data</a>
+                </div>
+            </div>
+            <a href="#" class="mobile-nav-link">Who We Are</a>
+            <a href="#" class="mobile-nav-link">Insights</a>
+            <a href="#" class="mobile-nav-link">Careers</a>
+            <a href="#" class="mobile-nav-link">Investors</a>
+            <a href="#contact" class="btn-mobile-contact">Contact Us</a>
+        </div>
+    </div>
+
+    <!-- HERO SECTION - Exact Height and Padding matched to v2.html -->
+    <section class="ms-hero-section">
+        <div class="ms-hero-container">
+            <div class="ms-hero-content">
+                <!-- Breadcrumbs matching v2.html style -->
+                <div class="l2-breadcrumb">
+                    <a href="#">Our Partners</a>
+                    <span>/</span>
+                    <span class="active">Microsoft</span>
+                </div>
+
+                <h1>Microsoft</h1>
+                <p>At R Systems, we empower businesses to maximize Microsoft technologies for scalability, security, and modernization. Backed by proven frameworks and industry best practices, we help enterprises leverage the full power of the Microsoft ecosystem for sustained growth.</p>
+            </div>
+            <!-- Right side spacer so the badge graphics baked into hero-microsoft.png shine through -->
+            <div></div>
+        </div>
+    </section>
+
+    <!-- DESIGNATION CARDS STRIP SECTION -->
+    <section class="ms-strip-section">
+        <!-- Frosted Glass Overlay Panel aligned perfectly to the purple line -->
+        <div class="ms-strip-glass-panel"></div>
+
+        <!-- Right Side Pure White Gradient Fade (No Glass Blur) -->
+        <div class="ms-strip-right-fade"></div>
+
+        <!-- Floating Scroll Arrow Button -->
+        <button class="ms-strip-scroll-btn" id="msScrollRightBtn" aria-label="Scroll Right">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+        </button>
+
+        <div class="ms-strip-wrapper">
+            <!-- Pinned Left Badge Layer (z-index: 10) -->
+            <div class="ms-strip-left-badge-wrapper">
+                <div class="ms-strip-purple-line"></div>
+                <div class="ms-strip-logo-badge">
+                    <img src="images/microsoft.png" alt="Microsoft Solutions Partner">
+                </div>
+            </div>
+
+            <!-- Horizontal Scrollable Track -->
+            <div class="ms-strip-flex" id="msStripFlex">
+                <!-- Card 1: Business Applications -->
+                <div class="ms-card-item">
+                    <div class="ms-card-top-icon">
+                        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/>
+                            <line x1="8" y1="13" x2="8" y2="17"/>
+                            <line x1="11" y1="11" x2="11" y2="17"/>
+                            <line x1="14" y1="14" x2="14" y2="17"/>
+                        </svg>
+                    </div>
+                    <div class="ms-card-info">
+                        <h4>Business Applications</h4>
+                    </div>
+                    <div class="ms-card-bottom-box">
+                        <span class="specialist-label">Specialist</span>
+                        <div class="specialist-desc">Small and Midsize Business Management</div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Security -->
+                <div class="ms-card-item">
+                    <div class="ms-card-top-icon">
+                        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                    </div>
+                    <div class="ms-card-info">
+                        <h4>Security</h4>
+                    </div>
+                    <div class="ms-card-bottom-box">
+                        <span class="specialist-label">Solutions Partner</span>
+                        <div class="specialist-desc">Enterprise Security &amp; Compliance</div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Digital & App Innovation -->
+                <div class="ms-card-item">
+                    <div class="ms-card-top-icon">
+                        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                            <line x1="8" y1="21" x2="16" y2="21"/>
+                            <line x1="12" y1="17" x2="12" y2="21"/>
+                        </svg>
+                    </div>
+                    <div class="ms-card-info">
+                        <h4>Digital &amp; App Innovation</h4>
+                        <span class="azure-tag">Azure</span>
+                    </div>
+                    <div class="ms-card-bottom-box">
+                        <span class="specialist-label">Specialist</span>
+                        <div class="specialist-desc">Kubernetes on Azure</div>
+                    </div>
+                </div>
+
+                <!-- Card 4: Data & AI -->
+                <div class="ms-card-item">
+                    <div class="ms-card-top-icon">
+                        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <ellipse cx="12" cy="5" rx="9" ry="3"/>
+                            <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
+                            <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+                        </svg>
+                    </div>
+                    <div class="ms-card-info">
+                        <h4>Data &amp; AI</h4>
+                        <span class="azure-tag">Azure</span>
+                    </div>
+                    <div class="ms-card-bottom-box">
+                        <span class="specialist-label">Specialist</span>
+                        <div class="specialist-desc">Kubernetes on Azure</div>
+                    </div>
+                </div>
+
+                <!-- Card 5: Infrastructure -->
+                <div class="ms-card-item">
+                    <div class="ms-card-top-icon">
+                        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="8" rx="2" ry="2"/>
+                            <rect x="2" y="14" width="20" height="8" rx="2" ry="2"/>
+                            <line x1="6" y1="6" x2="6.01" y2="6"/>
+                            <line x1="6" y1="18" x2="6.01" y2="18"/>
+                        </svg>
+                    </div>
+                    <div class="ms-card-info">
+                        <h4>Infrastructure</h4>
+                        <span class="azure-tag">Azure</span>
+                    </div>
+                    <div class="ms-card-bottom-box">
+                        <span class="specialist-label">Specialist</span>
+                        <div class="specialist-desc">Infra and Database Migration</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- OUR EXPERTISE SECTION -->
+    <section class="ms-expertise-section">
+        <div class="ms-expertise-container">
+            <div class="ms-section-header">
+                <h2>Our Expertise</h2>
+                <p>Empowering enterprises to transform, fortify, and streamline their technology ecosystem with Microsoft-powered solutions.</p>
+            </div>
+
+            <div class="ms-expertise-grid">
+                <!-- 1 -->
+                <div class="ms-exp-card">
+                    <div class="ms-exp-icon-box">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                        </svg>
+                    </div>
+                    <h3>Improved Patient Outcomes</h3>
+                    <p>Lorem ipsum is simply dummy text of the printing and typesetting industry.</p>
+                </div>
+
+                <!-- 2 -->
+                <div class="ms-exp-card">
+                    <div class="ms-exp-icon-box">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                        </svg>
+                    </div>
+                    <h3>Reduced Cost of Care, Length of Stay, and Readmissions.</h3>
+                    <p>Lorem ipsum is simply dummy text of the printing and typesetting industry.</p>
+                </div>
+
+                <!-- 3 -->
+                <div class="ms-exp-card">
+                    <div class="ms-exp-icon-box">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z" />
+                        </svg>
+                    </div>
+                    <h3>Improved Quality of Care</h3>
+                    <p>Lorem ipsum is simply dummy text of the printing and typesetting industry.</p>
+                </div>
+
+                <!-- 4 -->
+                <div class="ms-exp-card">
+                    <div class="ms-exp-icon-box">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="5" width="20" height="14" rx="2"/>
+                            <line x1="2" y1="10" x2="22" y2="10"/>
+                        </svg>
+                    </div>
+                    <h3>Convenient Patient Diagnostics</h3>
+                    <p>Lorem ipsum is simply dummy text of the printing and typesetting industry.</p>
+                </div>
+
+                <!-- 5 -->
+                <div class="ms-exp-card">
+                    <div class="ms-exp-icon-box">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 20h9"/>
+                            <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+                        </svg>
+                    </div>
+                    <h3>Better Account Receivables Management</h3>
+                    <p>Lorem ipsum is simply dummy text of the printing and typesetting industry.</p>
+                </div>
+
+                <!-- 6 -->
+                <div class="ms-exp-card">
+                    <div class="ms-exp-icon-box">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="20" x2="18" y2="10"/>
+                            <line x1="12" y1="20" x2="12" y2="4"/>
+                            <line x1="6" y1="20" x2="6" y2="14"/>
+                        </svg>
+                    </div>
+                    <h3>Streamlined Operations Workload</h3>
+                    <p>Lorem ipsum is simply dummy text of the printing and typesetting industry.</p>
+                </div>
+
+                <!-- 7 -->
+                <div class="ms-exp-card">
+                    <div class="ms-exp-icon-box">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                        </svg>
+                    </div>
+                    <h3>Improved Patient Workflows</h3>
+                    <p>Lorem ipsum is simply dummy text of the printing and typesetting industry.</p>
+                </div>
+
+                <!-- 8 -->
+                <div class="ms-exp-card">
+                    <div class="ms-exp-icon-box">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 11l3 3L22 4"/>
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                        </svg>
+                    </div>
+                    <h3>Reduction in Claim Denials & Rejections</h3>
+                    <p>Lorem ipsum is simply dummy text of the printing and typesetting industry.</p>
+                </div>
+
+                <!-- 9 -->
+                <div class="ms-exp-card">
+                    <div class="ms-exp-icon-box">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                    </div>
+                    <h3>Effective Physician Time Management</h3>
+                    <p>Lorem ipsum is simply dummy text of the printing and typesetting industry.</p>
+                </div>
+
+                <!-- 10 -->
+                <div class="ms-exp-card">
+                    <div class="ms-exp-icon-box">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="23 4 23 10 17 10"/>
+                            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+                        </svg>
+                    </div>
+                    <h3>Improved Utilization Management</h3>
+                    <p>Lorem ipsum is simply dummy text of the printing and typesetting industry.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Offerings (Apple Interactive Showcase - Microsoft Solutions - Copied Exact Structure from v2.html) -->
+    <section class="service-offerings">
+        <div class="service-offerings-header">
+            <span class="eyebrow">• MICROSOFT SOLUTIONS</span>
+            <h2>Microsoft solutions</h2>
+            <p>Accelerate digital transformation, empower teams, and optimize enterprise operations with Microsoft cloud, AI, and Dynamics 365 solutions.</p>
+        </div>
+
+        <div class="apple-showcase-container">
+            <!-- Left Side Interactive Accordion List -->
+            <div class="apple-accordion-list" id="appleAccordionList">
+                <!-- Populated dynamically with Microsoft items -->
+            </div>
+
+            <!-- Right Side Visual Stage Canvas -->
+            <div class="apple-stage-card">
+                <div class="apple-stage-img-wrapper">
+                    <span class="apple-stage-badge" id="appleStageBadge">Microsoft Solution</span>
+                    <img src="images/Desktop - 4.jpg" alt="Service Showcase" id="appleStageImg" class="apple-stage-img">
+                    <div class="apple-stage-gradient-overlay"></div>
+                    <div class="apple-stage-bottom-overlay">
+                        <h3 class="apple-stage-bottom-title" id="appleStageTitle">RSI’ Kubernity: Purpose-Built for Kubernetes Excellence</h3>
+                        <div class="apple-stage-bottom-tags" id="appleStageTags"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pre-Footer Banner (EXACT PRE-FOOTER COPIED FROM v2.html) -->
+    <section class="pre-footer" id="preFooterSection">
+        <!-- MoltenMetal WebGL2 background -->
+        <div id="moltenMetalContainer" style="position:absolute;inset:0;width:100%;height:100%;overflow:hidden;z-index:0;"></div>
+        <div class="pre-footer-content" style="position:relative;z-index:1;">
+            <h2>Let's discuss how our RPA experts can help you<br>speed up your automation journey, accelerate<br>business growth, and achieve greater ROI.</h2>
+            <a href="#contact" class="btn btn-white">Partner With Us</a>
+        </div>
+    </section>
+
+    <!-- Footer (EXACT FOOTER COPIED FROM v2.html) -->
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <div class="footer-logo"><img src="images/rsi_logo.png" alt="RSi Logo" class="footer-logo-img"></div>
+                <p>RSI is a trusted software engineering and digital transformation services partner to global
+                    enterprises navigating technological change. RSI enables technology companies, SaaS platforms, and
+                    enterprises to solve real-world challenges, accelerate time to market, and scale AI-driven
+                    innovation across the full software development lifecycle and business automation.</p>
+            </div>
+        </div>
+        <div class="footer-links-grid">
+            <div class="link-column">
+                <h4>What We Do</h4>
+                <ul>
+                    <li><a href="#">Digital Product Engineering</a></li>
+                    <li><a href="#">Modernization Solutions</a></li>
+                    <li><a href="#">Cloud and DevOps</a></li>
+                    <li><a href="#">Data and AI</a></li>
+                    <li><a href="#">Automation and Digital Ops</a></li>
+                    <li><a href="#">Embedded Firmware</a></li>
+                    <li><a href="#">Quality Engineering</a></li>
+                    <li><a href="#">Mobile Experience Design</a></li>
+                    <li><a href="#">Packaged Services - Integration</a></li>
+                    <li><a href="#">Global Capability Center</a></li>
+                </ul>
+            </div>
+            <div class="link-column">
+                <h4>Who We Serve</h4>
+                <ul>
+                    <li><a href="#">Tech, Internet, and Platform</a></li>
+                    <li><a href="#">Healthcare</a></li>
+                    <li><a href="#">Manufacturing, Logistics and Automotive</a></li>
+                    <li><a href="#">Telecom, Media and Entertainment</a></li>
+                    <li><a href="#">Banking, Financial Services</a></li>
+                    <li><a href="#">Insurance Tech & Digital Engineering</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Public Services</a></li>
+                </ul>
+            </div>
+            <div class="link-column">
+                <h4>Who We Are</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Corporate Social Responsibility</a></li>
+                    <li><a href="#">Awards and Achievements</a></li>
+                    <li><a href="#">Factsheet</a></li>
+                    <li><a href="#">Our Subsidiaries</a></li>
+                    <li><a href="#">Newsroom</a></li>
+                </ul>
+            </div>
+            <div class="link-column">
+                <ul>
+                    <li><a href="#" class="highlight-link">Our Insights</a></li>
+                    <li><a href="#" class="highlight-link">Our Partners</a></li>
+                    <li><a href="#" class="highlight-link">Investors</a></li>
+                    <li><a href="#" class="highlight-link">Policy</a></li>
+                    <li><a href="#" class="highlight-link">Join Us</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="legal-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Use</a>
+                <a href="#">Safe Harbor Provision</a>
+            </div>
+            <div class="social-links">
+                <a href="#" aria-label="LinkedIn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                    </svg>
+                </a>
+                <a href="#" aria-label="X">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                </a>
+                <a href="#" aria-label="Facebook">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                </a>
+                <a href="#" aria-label="Instagram">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                </a>
+                <a href="#" aria-label="YouTube">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M23.498 6.163c-.272-.646-.78-1.154-1.428-1.327C20.128 4.3 12 4.3 12 4.3s-8.128 0-10.07.536C1.282 5.009.774 5.517.502 6.163.082 8.136 0 12 0 12s.082 3.864.502 5.837c.272.646.78 1.154 1.428 1.327C3.872 19.7 12 19.7 12 19.7s8.128 0 10.07-.536c.648-.173 1.156-.681 1.428-1.327.42-1.973.502-5.837.502-5.837s-.076-3.864-.5-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/LogoLoopApp.js" defer></script>
+    <script src="js/main.js" defer></script>
+    <script src="js/molten-metal.js"></script>
+
+    <!-- INTERACTIVE ACCORDION & SHOWCASE SCRIPT (Copied Exact Logic from v2.html) -->
+    <script>
+      (function() {
+        const microsoftOfferings = [
+          {
+            title: "RSI’ Kubernity: Purpose-Built for Kubernetes Excellence",
+            desc: 'Accelerate cloud-native transformation with secure, scalable, and expertly managed Azure Kubernetes Services (AKS). <a href="https://www.rsystems.com/azure-kubernetes/" target="_blank" class="ms-read-more-link">Read More</a>',
+            tags: ["Azure Kubernetes", "AKS", "Cloud-Native", "Container Security"],
+            image: "images/Desktop - 4.jpg"
+          },
+          {
+            title: "RSI Microsoft Dynamics 365 Customer Service",
+            desc: 'Empowers organizations to build stronger customer connections, equip teams, and discover new ways to add value through personalized service and enhanced productivity. <a href="https://www.rsystems.com/microsoft-dynamics-365-customer-service/" target="_blank" class="ms-read-more-link">Read More</a>',
+            tags: ["Dynamics 365", "Customer Service", "Productivity", "Personalized Service"],
+            image: "images/hero_futuristic.jpg"
+          },
+          {
+            title: "RSI Microsoft Dynamics 365 Supply Chain Management",
+            desc: 'Delivers end-to-end visibility and optimization of supply chain processes, enhancing efficiency and reducing costs with AI-powered insights. <a href="https://www.rsystems.com/microsoft-dynamics-365-supply-chain-management/" target="_blank" class="ms-read-more-link">Read More</a>',
+            tags: ["Supply Chain", "Optimization", "AI Insights", "Dynamics 365"],
+            image: "images/service.png"
+          },
+          {
+            title: "RSI Microsoft Dynamics 365 Sales",
+            desc: 'Enables sales teams to cultivate deeper customer relationships through AI-driven insights and automation tools, optimizing the sales process from lead to close. <a href="https://www.rsystems.com/microsoft-dynamics-365-sales/" target="_blank" class="ms-read-more-link">Read More</a>',
+            tags: ["Dynamics 365 Sales", "AI Sales Insights", "Lead to Close", "Automation"],
+            image: "images/whitepaper.png"
+          },
+          {
+            title: "RSI Microsoft Dynamics 365 Marketing",
+            desc: 'Amplifies marketing campaign effectiveness by creating personalized customer journeys across all touchpoints, capturing leads and strengthening customer loyalty. <a href="https://www.rsystems.com/microsoft-dynamics-365-marketing/" target="_blank" class="ms-read-more-link">Read More</a>',
+            tags: ["Marketing Automation", "Customer Journeys", "Lead Capture", "Loyalty"],
+            image: "images/exiqo.png"
+          },
+          {
+            title: "RSI Microsoft Dynamics 365 Finance",
+            desc: 'Empowers organizations with real-time oversight of global financial operations, facilitating data-driven decisions and optimizing financial workflows. <a href="https://www.rsystems.com/microsoft-dynamics-365-finance/" target="_blank" class="ms-read-more-link">Read More</a>',
+            tags: ["Financial Operations", "Global Oversight", "Data-Driven", "Workflows"],
+            image: "images/provider.png"
+          },
+          {
+            title: "RSI Microsoft Dynamics 365 Field Service",
+            desc: 'Helps organizations deliver efficient onsite services by optimizing resource allocation and reducing operational costs, enhancing customer satisfaction. <a href="https://www.rsystems.com/microsoft-dynamics-365-field-service/" target="_blank" class="ms-read-more-link">Read More</a>',
+            tags: ["Field Service", "Onsite Operations", "Resource Allocation", "Cost Reduction"],
+            image: "images/hero.jpg"
+          },
+          {
+            title: "RSI Microsoft Dynamics 365 Commerce",
+            desc: 'Delivers a unified omnichannel experience, integrating in-store, back-office, and digital interactions to foster personalized customer engagements. <a href="https://www.rsystems.com/microsoft-dynamics-365-commerce/" target="_blank" class="ms-read-more-link">Read More</a>',
+            tags: ["Omnichannel", "Digital Commerce", "Customer Engagement", "Back-Office"],
+            image: "images/Desktop - 4.jpg"
+          },
+          {
+            title: "RSI Microsoft Dynamics 365 Business Central",
+            desc: 'Equips companies to effectively manage core business functions, including financials, sales, service, and supply chains, with a secure and scalable cloud ERP platform. <a href="https://www.rsystems.com/microsoft-dynamics-365-business-central/" target="_blank" class="ms-read-more-link">Read More</a>',
+            tags: ["Business Central", "Cloud ERP", "Core Functions", "Scalable Platform"],
+            image: "images/hero_futuristic.jpg"
+          },
+          {
+            title: "RSI Microsoft Copilot",
+            desc: 'Integrates AI-powered productivity enhancement across Microsoft 365 applications to automate tasks, synthesize information, and provide actionable intelligence. <a href="https://www.rsystems.com/microsoft-copilot/" target="_blank" class="ms-read-more-link">Read More</a>',
+            tags: ["Microsoft Copilot", "Generative AI", "M365 Automation", "Productivity"],
+            image: "images/service.png"
+          },
+          {
+            title: "RSI Microsoft Azure",
+            desc: 'Provides access to a comprehensive suite of cloud computing services for building and managing scalable, secure applications. <a href="https://www.rsystems.com/microsoft-azure/" target="_blank" class="ms-read-more-link">Read More</a>',
+            tags: ["Microsoft Azure", "Cloud Services", "Scalable Apps", "Cloud Security"],
+            image: "images/whitepaper.png"
+          }
+        ];
+
+        function initMicrosoftOfferings() {
+          const accordionList = document.getElementById("appleAccordionList");
+          const stageBadge = document.getElementById("appleStageBadge");
+          const stageImg = document.getElementById("appleStageImg");
+          const stageTitle = document.getElementById("appleStageTitle");
+          const stageTags = document.getElementById("appleStageTags");
+
+          if (!accordionList) return;
+
+          let activeIndex = 0;
+
+          function updateStage(data) {
+            if (stageBadge) stageBadge.innerText = "Microsoft Capability";
+            if (stageTitle) stageTitle.innerText = data.title;
+            if (stageTags) {
+              stageTags.innerHTML = data.tags.map(t => `<span class="glass-pill">${t}</span>`).join("");
+            }
+            if (stageImg) {
+              stageImg.style.opacity = "0.3";
+              stageImg.style.transform = "scale(0.97)";
+              setTimeout(() => {
+                stageImg.src = data.image;
+                stageImg.style.opacity = "1";
+                stageImg.style.transform = "scale(1)";
+              }, 150);
+            }
+          }
+
+          function renderAccordion() {
+            accordionList.innerHTML = microsoftOfferings.map((item, idx) => {
+              const isActive = idx === activeIndex;
+              if (isActive) {
+                return `
+                  <div class="apple-accordion-item active" data-index="${idx}">
+                    <div class="apple-accordion-header">
+                      <span class="apple-accordion-icon">−</span>
+                      <span class="apple-accordion-title-text">${item.title}</span>
+                    </div>
+                    <div class="apple-accordion-body">
+                      <p class="apple-accordion-desc">${item.desc}</p>
+                      <div class="mobile-accordion-media">
+                        <div class="mobile-img-wrapper">
+                          <img src="${item.image}" alt="${item.title}" class="mobile-accordion-img">
+                        </div>
+                        <div class="mobile-accordion-tags">
+                          ${item.tags.map(t => `<span class="glass-pill">${t}</span>`).join("")}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                `;
+              } else {
+                return `
+                  <div class="apple-accordion-item" data-index="${idx}">
+                    <div class="apple-accordion-header">
+                      <span class="apple-accordion-icon">+</span>
+                      <span class="apple-accordion-title-text">${item.title}</span>
+                    </div>
+                  </div>
+                `;
+              }
+            }).join('');
+
+            accordionList.querySelectorAll(".apple-accordion-item").forEach(el => {
+              el.addEventListener("click", function (e) {
+                e.stopPropagation();
+                const idx = parseInt(this.getAttribute("data-index"));
+                if (activeIndex === idx) return;
+                activeIndex = idx;
+                renderAccordion();
+                updateStage(microsoftOfferings[idx]);
+              });
+            });
+          }
+
+          renderAccordion();
+          updateStage(microsoftOfferings[0]);
+        }
+
+        function initMoltenMetalBG() {
+          var container = document.getElementById('moltenMetalContainer');
+          if (container && window.initMoltenMetal) {
+            window.initMoltenMetal(container, {
+              color1:           '#1a003a',
+              color2:           '#7B2FF7',
+              color3:           '#e8b4ff',
+              speed:            0.3,
+              scale:            3.5,
+              detail:           4,
+              glow:             1.8,
+              coreSize:         0.12,
+              swirl:            1.2,
+              fold:             -0.18,
+              blackPoint:       0.04,
+              brightness:       1.4,
+              colorMode:        'molten',
+              grain:            true,
+              grainIntensity:   0.04,
+              mouseInteraction: true,
+              mouseStrength:    0.25,
+              opacity:          1.0
+            });
+          }
+        }
+
+        // Mobile Nav Drawer Toggle & Scroll Event Handlers
+        document.addEventListener("DOMContentLoaded", function() {
+          initMicrosoftOfferings();
+          setTimeout(initMoltenMetalBG, 50);
+
+          const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+          const mobileDrawerClose = document.getElementById("mobileDrawerClose");
+          const mobileDrawerOverlay = document.getElementById("mobileDrawerOverlay");
+          const mobileNavDrawer = document.getElementById("mobileNavDrawer");
+
+          function openDrawer() {
+            if (mobileNavDrawer) mobileNavDrawer.classList.add("active");
+            if (mobileDrawerOverlay) mobileDrawerOverlay.classList.add("active");
+          }
+
+          function closeDrawer() {
+            if (mobileNavDrawer) mobileNavDrawer.classList.remove("active");
+            if (mobileDrawerOverlay) mobileDrawerOverlay.classList.remove("active");
+          }
+
+          if (mobileMenuBtn) mobileMenuBtn.addEventListener("click", openDrawer);
+          if (mobileDrawerClose) mobileDrawerClose.addEventListener("click", closeDrawer);
+          if (mobileDrawerOverlay) mobileDrawerOverlay.addEventListener("click", closeDrawer);
+
+          const headerElem = document.querySelector(".header");
+          window.addEventListener("scroll", function() {
+            if (window.scrollY > 80) {
+              if (headerElem) headerElem.classList.add("scrolled");
+            } else {
+              if (headerElem) headerElem.classList.remove("scrolled");
+            }
+          });
+
+          // Smooth Right Scroll Button Click Handler
+          const scrollRightBtn = document.getElementById("msScrollRightBtn");
+          const stripFlexTrack = document.getElementById("msStripFlex");
+          if (scrollRightBtn && stripFlexTrack) {
+            scrollRightBtn.addEventListener("click", function() {
+              stripFlexTrack.scrollBy({ left: 300, behavior: "smooth" });
+            });
+          }
+        });
+
+        window.addEventListener("load", function() {
+          initMoltenMetalBG();
+        });
+      })();
+    </script>
+</body>
+
+</html>

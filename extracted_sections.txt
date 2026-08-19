@@ -1,0 +1,182 @@
+[li] (breadcrumb-item text-white): Who We Serve
+[a] (): Healthcare
+[li] (breadcrumb-item text-white active): Healthcare Provider
+[h1] (): Provider
+[p] (): At the core of the healthcare ecosystem, providers are central to delivering care. At R Systems, we are dedicated to empowering healthcare providers with the insights needed to drive exceptional patient outcomes and reduce the cost of care. Through cutting-edge solutions like remote patient monitoring, AI/ML for Peripheral Artery Disease, and mental health services, we enhance care quality. Our service offerings, from patient workflows in Electronic Health Records to telehealth solutions, optimize operations and streamline processes. We are transforming healthcare delivery, one patient at a time.
+[h3] (rsystems_blue): Value and Benefits
+[img] (img-fluid normal-logo): Improved Patient Outcomes
+[img] (img-fluid normal-logo): Reduced Cost of Care, Length of Stay, and Readmissions.
+[img] (img-fluid normal-logo): Improved Quality of Care
+[img] (img-fluid normal-logo): Convenient Patient Diagnostics
+[img] (img-fluid normal-logo): Better Account Receivables Management
+[img] (img-fluid normal-logo): Streamlined Operations Workload
+[img] (img-fluid normal-logo): Improved Patient Workflows
+[img] (img-fluid normal-logo): Reduction in Claim Denials & Rejections
+[img] (img-fluid normal-logo): Effective Physician Time Management
+[img] (img-fluid normal-logo): Improved Utilization Management
+[img] (img-fluid normal-logo): Reduced Administrative Time for Physicians
+[img] (img-fluid normal-logo): Predictive Modelling for Early Detection of Diseases
+[h6] (text-capitalize): Industry Use Cases
+[h2] (): Empowering Healthcare Providers with Advanced Solutions
+[h3] (our-offering-heading): Behavioral Health & Well-being Solutions
+[p] (card-text): Transforming behavioral health delivery through connected platforms, intelligent workflows, and data-driven care coordination that improve outcomes, engagement, and operational efficiency.
+[a] (stretched-link mt-auto rsystems-btn rsystems-btn-v2): Read More
+[h3] (our-offering-heading): Interoperability
+[p] (card-text): Enable secure, real-time connectivity between EHRs, healthcare platforms, medical devices, and third-party systems using scalable HL7, FHIR, SMART on FHIR, and API-based integrations, and interoperability engineering best practices.
+[a] (stretched-link mt-auto rsystems-btn rsystems-btn-v2): Read More
+[h3] (our-offering-heading): Remote Patient Monitoring
+[p] (card-text): Implement advanced solutions for remote patient monitoring to streamline care and enable proactive interventions, reducing hospital admissions.
+[a] (stretched-link mt-auto rsystems-btn rsystems-btn-v2): Read More
+[h3] (our-offering-heading): Agentic AI – An Autonomous AI Solution
+[p] (card-text): Redefine patient care and streamline complex healthcare processes with Agentic AI, an advanced autonomous AI solution that outpaces RPA and traditional AI.
+[a] (stretched-link mt-auto rsystems-btn rsystems-btn-v2): Read More
+[h3] (our-offering-heading): Medical Equipment and Bed Rentals Management
+[p] (card-text): Optimize the management of medical equipment and bed rentals to improve resource allocation and operational efficiency.
+[h3] (our-offering-heading): AI/ML for Peripheral Artery Disease
+[p] (card-text): Leverage AI and machine learning solutions for accurate diagnosis and treatment planning of Peripheral Artery Disease, improving patient outcomes.
+[h3] (our-offering-heading): Business Solutions for Cancer Care
+[p] (card-text): Streamline cancer care delivery through tailored business solutions that optimize workflows and resource management.
+[h3] (our-offering-heading): EHR and Practice Management
+[p] (card-text): Enhance efficiency and cost-effectiveness in practice management through streamlined administrative tasks and advanced EHR solutions.
+[h3] (rsystems_blue service-offering-heading): Service Offerings
+[button] (accordion-button ): Patient Workflows in EHR/EMR
+[p] (): Streamline patient workflows within electronic health records (EHR) and electronic medical records (EMR) systems to improve operational efficiency and enhance patient care delivery.
+[button] (accordion-button collapsed): Remote Patient Monitoring
+[p] (): Implement remote monitoring solutions to track patient health metrics in real time, enabling proactive interventions and personalized care.
+[button] (accordion-button collapsed): Patient Engagement Solutions
+[p] (): Enhance patient engagement through interactive solutions that promote communication, education, and self-management.
+[button] (accordion-button collapsed): Real-Time Insurance Eligibility Verification
+[p] (): Verify patient insurance eligibility in real time to reduce claim denials and improve revenue cycle management.
+[button] (accordion-button collapsed): Automated Patient Registration
+[p] (): Simplify patient registration processes with automated solutions, reducing administrative burden and improving data accuracy.
+[button] (accordion-button collapsed): RCM Solution for Revenue Optimization
+[p] (): Optimize revenue cycle management (RCM) processes to maximize revenue and reduce billing errors.
+[button] (accordion-button collapsed): Collaborative Care for Chronic ill Patients
+[p] (): Facilitate collaborative care for chronic illness management, ensuring coordinated and holistic patient care.
+[button] (accordion-button collapsed): Automated Authorization
+[p] (): Automate the authorization process to expedite approvals and improve patient access to care.
+[button] (accordion-button collapsed): Gaps in Care Reporting
+[p] (): Identify and address gaps in patient care through comprehensive reporting and analytics.
+[button] (accordion-button collapsed): Appointment Scheduling & Time Tracking
+[p] (): Streamline appointment scheduling and track provider time to optimize resource utilization.
+[button] (accordion-button collapsed): Automated Claim Generation and Payment Posting
+[p] (): Automate claim generation and payment posting processes for efficient billing and reimbursement.
+[button] (accordion-button collapsed): Clinical Ops Reporting for Quality Management System
+[p] (): Generate comprehensive reports for quality management, compliance, and operational efficiency.
+[button] (accordion-button collapsed): Telehealth Solutions for Virtual Appointments
+[p] (): Enable virtual appointments and telehealth solutions to expand access to care and improve patient convenience.
+[button] (accordion-button collapsed): Affordable Patient Diagnostics
+[p] (): Provide affordable and accessible diagnostic solutions to enhance patient care and outcomes.
+[h2] (): Collaborations Across the Technology Ecosystem
+[h2] (): Our Team
+[a] (rsystems-btn rsystems-btn-trans-dark): Connect with Experts
+[h6] (pt-2): Sanjeev Dhawan
+[p] (fs-14 mb-0): Vice President – Healthcare
+[h6] (pt-2): Savitha Suresh
+[p] (fs-14 mb-0): Senior Practice Manager – Healthcare
+[h2] (): Latest Insights
+[a] (rsystems-btn rsystems-btn-trans-dark): See All
+[h6] (rsystems_rosegold fs-14): Blogs
+[h5] (mb-2 rsystems_blue fw-600): Can AI Help Healthcare Organizations Become FHIR-Ready Without Large Middleware Investments?
+[h6] (rsystems_rosegold fs-14): Case Study
+[h5] (mb-2 rsystems_blue fw-600): Driving TV Monetization through targeted Addressable Advertising for Proximus Group
+[h6] (rsystems_rosegold fs-14): POV
+[h5] (mb-2 rsystems_blue fw-600): Test smarter, deploy faster: How AI is reshaping Telecom validation beyond manual limits
+[h6] (rsystems_rosegold fs-14): Case Study
+[h5] (mb-2 rsystems_blue fw-600): 100% Traceability, 0% Guesswork: How a Smarter MES Unlocked a New Production Reality.
+[h6] (rsystems_rosegold fs-14): POV
+[h5] (mb-2 rsystems_blue fw-600): Why Recall‑Ready Operations Matter in EV Battery Manufacturing
+[a] (rsystems-btn rsystems-btn-trans-dark): See All
+[h4] (fw-600 rsystems_blue): Contact Us
+[p] (fs-14): Fill out the form, and someone from R Systems will reach out.
+[option] (): Enquiry Type*
+[option] (): Sales
+[option] (): Support
+[option] (): Vendor
+[option] (): Investor
+[option] (): Others
+[option] (): Business Sector*
+[option] (): Tech & Independent Software Vendors
+[option] (): Healthcare
+[option] (): Manufacturing & Retail
+[option] (): Telecom, Media & Entertainment
+[option] (): Banking, Financial Services
+[option] (): Insurance Tech & Digital Engineering
+[option] (): Services
+[option] (): Public Services
+[option] (): Others
+[span] (wpcf7-list-item-label): I consent to receive occasional e-mail communication from RSI.
+[span] (wpcf7-list-item-label): * I have read and agree to the RSI
+[a] (): Privacy Policy
+[a] (): applicable to the processing of my personal data submitted through this form.
+[p] (): Why RSI
+[h5] (): Learn What Makes Us Different
+[a] (rsystems-btn stretched-link): Find Out
+[p] (): Join Us
+[h5] (): Join Our Diverse Team Of Tech Pioneers
+[a] (rsystems-btn stretched-link): Join Us
+[h2] (): Our Partners
+[h6] (rsystems_rosegold): #GPTWCertified
+[span] (dis-blk): RSI is ‘Great Place To Work’® Certified™
+[p] (): We are Great Place To Work® Certified™ in 6 countries with a full-time workforce - India, the US, Canada, Mexico, Poland, and Moldova - each country individually acknowledging RSI as a preferred employer.
+[a] (rsystems-btn rsystems-btn-trans-dark): Explore Careers
+[div] (cmplz-title): Manage Consent
+[p] (): We use cookies to provide an exceptional user experience and analyze website traffic. Cookies enable you to enjoy certain features and allow us to understand how our site is being used. By clicking on “Accept all” or using the website, you agree to our use of cookies. You may reject optional cookies in the View Preferences or block cookies in your browser. Please find more information on our use of cookies and how to withdraw your consent on our
+[a] (): Privacy Policy
+[span] (cmplz-category-title): Essential/Necessary
+[span] (screen-reader-text): Essential/Necessary
+[span] (screen-reader-text): Always active
+[span] (cmplz-description-functional): These cookies are necessary for the website to function and cannot be switched off in our systems. Essential cookies are required to enable you to log into secure areas of our site. Disabling these cookies may make certain features and services unavailable. You can set your browser to block or alert you about these cookies. These cookies do not store any personally identifiable information.
+[span] (cmplz-category-title): Functional
+[span] (screen-reader-text): Functional
+[span] (cmplz-description-preferences): Functional cookies record your preferences and settings regarding our services, enabling us to maintain your preferences over time, and recognize you when you visit our site again. These cookies help us to personalize our content for you as per your preference and greet you by name.
+[span] (cmplz-category-title): Performance/Analytical
+[span] (screen-reader-text): Performance/Analytical
+[span] (cmplz-description-statistics): The technical storage or access that is used exclusively for statistical purposes.
+[span] (cmplz-description-statistics-anonymous): Performance/Analytical cookies allow us to understand how visitors use our site and services, what pages they visit, how long they stay on the site, etc. These cookies also help us measure our advertising campaigns’ performance to help us improve our customer engagement.
+[span] (cmplz-category-title): Retargeting/Advertising
+[span] (screen-reader-text): Retargeting/Advertising
+[span] (cmplz-description-marketing): These cookies may be set through our site by our advertising partners. They may be used by those companies to build a profile of your interests and show you relevant adverts on other sites. They do not store directly personal information but are based on uniquely identifying your browser and internet device. If you do not allow these cookies, you will experience less targeted advertising.
+[a] (cmplz-link cmplz-manage-options cookie-statement): Manage options
+[a] (cmplz-link cmplz-manage-third-parties cookie-statement): Manage services
+[a] (cmplz-link cmplz-manage-vendors tcf cookie-statement): Manage {vendor_count} vendors
+[a] (cmplz-link cmplz-external cmplz-read-more-purposes tcf): Read more about these purposes
+[button] (cmplz-btn cmplz-accept): Accept all
+[button] (cmplz-btn cmplz-deny): Deny all
+[button] (cmplz-btn cmplz-view-preferences): View preferences
+[button] (cmplz-btn cmplz-save-preferences): Save preferences
+[a] (cmplz-btn cmplz-manage-options tcf cookie-statement): View preferences
+[a] (cmplz-link cookie-statement): {title}
+[a] (cmplz-link privacy-statement): {title}
+[a] (cmplz-link impressum): {title}
+[div] (cmplz-title): Manage Consent
+[p] (): We use cookies to provide an exceptional user experience and analyze website traffic. Cookies enable you to enjoy certain features and allow us to understand how our site is being used. By clicking on “Accept all” or using the website, you agree to our use of cookies. You may reject optional cookies in the View Preferences or block cookies in your browser. Please find more information on our use of cookies and how to withdraw your consent on our
+[a] (): Privacy Policy
+[span] (cmplz-category-title): Essential/Necessary
+[span] (screen-reader-text): Essential/Necessary
+[span] (screen-reader-text): Always active
+[span] (cmplz-description-functional): These cookies are necessary for the website to function and cannot be switched off in our systems. Essential cookies are required to enable you to log into secure areas of our site. Disabling these cookies may make certain features and services unavailable. You can set your browser to block or alert you about these cookies. These cookies do not store any personally identifiable information.
+[span] (cmplz-category-title): Functional
+[span] (screen-reader-text): Functional
+[span] (cmplz-description-preferences): Functional cookies record your preferences and settings regarding our services, enabling us to maintain your preferences over time, and recognize you when you visit our site again. These cookies help us to personalize our content for you as per your preference and greet you by name.
+[span] (cmplz-category-title): Performance/Analytical
+[span] (screen-reader-text): Performance/Analytical
+[span] (cmplz-description-statistics): The technical storage or access that is used exclusively for statistical purposes.
+[span] (cmplz-description-statistics-anonymous): Performance/Analytical cookies allow us to understand how visitors use our site and services, what pages they visit, how long they stay on the site, etc. These cookies also help us measure our advertising campaigns’ performance to help us improve our customer engagement.
+[span] (cmplz-category-title): Retargeting/Advertising
+[span] (screen-reader-text): Retargeting/Advertising
+[span] (cmplz-description-marketing): These cookies may be set through our site by our advertising partners. They may be used by those companies to build a profile of your interests and show you relevant adverts on other sites. They do not store directly personal information but are based on uniquely identifying your browser and internet device. If you do not allow these cookies, you will experience less targeted advertising.
+[a] (cmplz-link cmplz-manage-options cookie-statement): Manage options
+[a] (cmplz-link cmplz-manage-third-parties cookie-statement): Manage services
+[a] (cmplz-link cmplz-manage-vendors tcf cookie-statement): Manage {vendor_count} vendors
+[a] (cmplz-link cmplz-external cmplz-read-more-purposes tcf): Read more about these purposes
+[button] (cmplz-btn cmplz-accept): Accept all
+[button] (cmplz-btn cmplz-deny): Deny all
+[button] (cmplz-btn cmplz-view-preferences): View preferences
+[button] (cmplz-btn cmplz-save-preferences): Save preferences
+[a] (cmplz-btn cmplz-manage-options tcf cookie-statement): View preferences
+[a] (cmplz-link cookie-statement): {title}
+[a] (cmplz-link privacy-statement): {title}
+[a] (cmplz-link impressum): {title}
+[button] (cmplz-btn cmplz-hidden cmplz-manage-consent manage-consent-5): Manage Consent
+[button] (cmplz-btn cmplz-hidden cmplz-manage-consent manage-consent-5): Manage Consent
