@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSI - Digital Product Engineering</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/LogoLoop.css">
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/ogl@0.0.116/dist/ogl.umd.js"></script>
+</head>
+
+<body>
+
+    <!-- Page Preloader Screen -->
+    <div id="pagePreloader" class="page-preloader">
+        <div class="preloader-content">
+            <div class="preloader-logo-wrapper">
+                <img src="image/rsi_logo.png" alt="RSi Loading" class="preloader-logo">
+                <div class="preloader-glow"></div>
+            </div>
+            <div class="preloader-bar-container">
+                <div id="preloaderBar" class="preloader-bar-fill"></div>
+            </div>
+            <div class="preloader-status">
+                <span class="preloader-tag">Accelerating Digital Innovation</span>
+                <span id="preloaderPercent" class="preloader-percent">0%</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Transparent Overlay / Sticky Header -->
+    <header class="header">
+        <div class="logo">
+            <a href="index.html" class="logo-brand" aria-label="RSi Home">
+                <img src="image/rsi_logo.png" alt="RSi Logo" class="logo-img">
+            </a>
+        </div>
+        <nav class="main-nav">
+            <a href="index.html" class="nav-link">ExiQO</a>
+            
+            <!-- What We Do with Dropdown Menu -->
+            <div class="nav-item-dropdown">
+                <a href="provider.html" class="nav-link dropdown-toggle">What We Do</a>
+                <div class="dropdown-menu">
+                    <a href="provider.html" class="dropdown-item">Healthcare Provider</a>
+                    <a href="microsoft.html" class="dropdown-item">Microsoft Partnership</a>
+                    <a href="provider.html" class="dropdown-item">Digital Product Engineering</a>
+                    <a href="microsoft.html" class="dropdown-item">Cloud & Modernization</a>
+                </div>
+            </div>
+            
+            <!-- Who We Are with Dropdown Menu -->
+            <div class="nav-item-dropdown">
+                <a href="diversity.html" class="nav-link dropdown-toggle">Who We Are</a>
+                <div class="dropdown-menu">
+                    <a href="diversity.html" class="dropdown-item">Diversity, Equity & Belonging</a>
+                </div>
+            </div>
+            
+            <a href="index.html" class="nav-link">Insights</a>
+            <a href="diversity.html" class="nav-link">Careers</a>
+        </nav>
+        <div class="header-right">
+            <a href="index.html" class="nav-link-secondary">Investors</a>
+            <a href="#contact" class="nav-link-secondary">Contact Us</a>
+            <button class="icon-btn search-btn" aria-label="Search">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8" />
+                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                </svg>
+            </button>
+            <button class="icon-btn lang-btn" aria-label="Language Selector">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="2" y1="12" x2="22" y2="12" />
+                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                </svg>
+            </button>
+        </div>
+        <!-- Mobile Menu Toggle Button -->
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle Mobile Menu">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        </button>
+    </header>
+
+    <!-- Mobile Navigation Drawer Overlay & Drawer -->
+    <div class="mobile-drawer-overlay" id="mobileDrawerOverlay"></div>
+    <div class="mobile-nav-drawer" id="mobileNavDrawer">
+        <div class="mobile-drawer-header">
+            <img src="image/rsi_logo.png" alt="RSi Logo" class="mobile-drawer-logo">
+            <button class="mobile-drawer-close" id="mobileDrawerClose" aria-label="Close Menu">✕</button>
+        </div>
+        <div class="mobile-drawer-links">
+            <a href="index.html" class="mobile-nav-link">ExiQO</a>
+            <div class="mobile-dropdown-accordion">
+                <span class="mobile-nav-link">What We Do</span>
+                <div class="mobile-sub-links">
+                    <a href="provider.html">Healthcare Provider</a>
+                    <a href="microsoft.html">Microsoft Partnership</a>
+                    <a href="provider.html">Digital Product Engineering</a>
+                    <a href="microsoft.html">Cloud & Modernization</a>
+                </div>
+            </div>
+            <div class="mobile-dropdown-accordion">
+                <span class="mobile-nav-link">Who We Are</span>
+                <div class="mobile-sub-links">
+                    <a href="diversity.html">Diversity, Equity & Belonging</a>
+                </div>
+            </div>
+            <a href="index.html" class="mobile-nav-link">Insights</a>
+            <a href="diversity.html" class="mobile-nav-link">Careers</a>
+            <a href="index.html" class="mobile-nav-link">Investors</a>
+            <a href="#contact" class="btn-mobile-contact">Contact Us</a>
+        </div>
+    </div>
+
+    <!-- Hero Section 1 (SVG Logo Mask Video) -->
+    <section class="hero-1">
+        <div class="hero-1-left">
+            <h1>Celebrating Our<br>Excellence in Software<br>Product Engineering!</h1>
+            <p>R Systems Named a Major Contender in Everest Group's Software Product Engineering Services PEAK Matrix® Assessment 2024.</p>
+            <a href="#" class="btn btn-purple-pill">Read More</a>
+        </div>
+
+        <div class="hero-1-right">
+            <div class="hero-mask-container">
+                <video autoplay loop muted playsinline class="hero-mask-video">
+                    <source src="image/loop-hero.mp4" type="video/mp4">
+                    <source src="loop-hero.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </section>
+
+    <!-- Warm Glassmorphism Banner Section (Under Hero Section) -->
+    <section class="glass-banner-section">
+        <video autoplay loop muted playsinline class="glass-banner-video">
+            <source src="image/loop-hero.mp4" type="video/mp4">
+            <source src="loop-hero.mp4" type="video/mp4">
+        </video>
+        
+        <!-- Frosted Glassmorphism Overlay Layer -->
+        <div class="glass-banner-overlay"></div>
+
+        <div class="glass-banner-content">
+            <h2>Accelerating Digital Innovation From concept to deployment, we create future-ready products that drive growth, efficiency, and business value.</h2>
+            <a href="#contact" class="btn-talk-expert">Talk to an expert</a>
+        </div>
+    </section>
+
+    <!-- Hero Section 2 White Creative Layout (Reference Image Match) -->
+    
+
+    <!-- Case Study Section -->
+    <section class="case-studies">
+        <div class="case-glow-orb-1"></div>
+        <div class="case-glow-orb-2"></div>
+        <div class="case-tech-grid"></div>
+        <canvas id="caseStudiesCanvas" class="case-bg-canvas"></canvas>
+
+        <div class="section-header">
+            <h2>Our customers achieve more - Case Study</h2>
+            <p>Discover how R Systems has helped global enterprises accelerate digital transformation, unlock AI-driven efficiency, and build scalable, future-ready products through proven engineering excellence.</p>
+        </div>
+        <div class="case-grid">
+            <div class="case-card large">
+                <img src="image/case1.png" alt="Case Study 1" class="case-img">
+                <span class="tag">Case Study</span>
+                <div class="card-content">
+                    <h3>How R Systems Reduced Time-to-Market by 40% for a Leading SaaS Platform Through AI-Powered Engineering.</h3>
+                    <a href="#" class="learn-more">Learn more</a>
+                </div>
+            </div>
+            <div class="case-card small">
+                <img src="image/case2.png" alt="Case Study 2" class="case-img">
+                <span class="tag">Case Study</span>
+                <div class="card-content">
+                    <h3>Modernizing Legacy Infrastructure for a Global Healthcare Provider with Cloud-Native Architecture.</h3>
+                    <a href="#" class="learn-more">Learn more</a>
+                </div>
+            </div>
+            <div class="case-card small">
+                <img src="image/case3.png" alt="Case Study 3" class="case-img">
+                <span class="tag">Case Study</span>
+                <div class="card-content">
+                    <h3>Enabling 520K+ Monthly Process Automations for a Fortune 500 Financial Services Firm.</h3>
+                    <a href="#" class="learn-more">Learn more</a>
+                </div>
+            </div>
+        </div>
+        <div class="center-btn">
+            <a href="#" class="btn btn-purple">View All Case Studies</a>
+        </div>
+    </section>
+
+    <!-- Service Offerings -->
+    <section class="service-offerings">
+        <div class="service-offerings-header">
+            <span class="eyebrow">• EXPERTISE & SOLUTIONS</span>
+            <h2>Service Offerings</h2>
+            <p>End-to-end digital engineering and AI transformation capabilities designed to help modern enterprises
+                innovate faster and scale with confidence.</p>
+        </div>
+
+        <div class="apple-showcase-container">
+            <!-- Left Side Interactive Accordion List -->
+            <div class="apple-accordion-list" id="appleAccordionList">
+                <!-- Dynamically populated via JS for seamless interactive accordion morph -->
+            </div>
+
+            <!-- Right Side Visual Stage Canvas (Apple Visual Showcase with Bottom-Left Title & Pills Overlay) -->
+            <div class="apple-stage-card">
+                <div class="apple-stage-img-wrapper">
+                    <span class="apple-stage-badge" id="appleStageBadge">Featured Capability</span>
+                    <img src="images/image-1.avif" alt="Service Showcase" id="appleStageImg" class="apple-stage-img">
+                    <div class="apple-stage-gradient-overlay"></div>
+                    <div class="apple-stage-bottom-overlay">
+                        <h3 class="apple-stage-bottom-title" id="appleStageTitle">Innovation Consulting & Digital Advisory</h3>
+                        <div class="apple-stage-bottom-tags" id="appleStageTags">
+                            <!-- Dynamically populated pills -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXIQO Section -->
+    <section class="exiqo-section">
+        <video autoplay loop muted playsinline poster="image/exiqo.png" class="exiqo-bg-video">
+            <source src="ful.mp4" type="video/mp4">
+        </video>
+        <div class="exiqo-video-overlay"></div>
+        <div class="exiqo-content">
+            <h2>EXIQO</h2>
+            <h3>The AI Studio from R Systems</h3>
+            <p>Getting AI to actually work in your business is hard. EXIQO makes it straightforward bringing together
+                the right talent, the OptimaAI platform, and a delivery method that gets you from first conversation to
+                real, measurable results in 90 days.</p>
+            <a href="#" class="btn btn-white">Learn more about EXIQO</a>
+        </div>
+    </section>
+
+    <!-- Expertise Section: Concentric Orbital Arc Tech System -->
+    <section class="expertise" id="expertiseSection">
+        <div class="expertise-header">
+            <span class="eyebrow">• TECH STACK & ECOSYSTEM</span>
+            <h2>Our Expertise Across Technology Ecosystem</h2>
+            <p>Accelerating digital transformation with industry-standard frameworks, cloud platforms, and modern AI toolchains.</p>
+        </div>
+
+        <div class="tech-tabs-outer-container">
+            <div class="tech-tabs-wrapper">
+                <button class="tech-tab-btn active" data-tab="0">GenAI & Cloud</button>
+                <button class="tech-tab-btn" data-tab="1">Languages & Frameworks</button>
+                <button class="tech-tab-btn" data-tab="2">SQL Databases</button>
+                <button class="tech-tab-btn" data-tab="3">NoSQL Databases</button>
+                <button class="tech-tab-btn" data-tab="4">Integrations</button>
+                <button class="tech-tab-btn" data-tab="5">Cloud Native & Microservices</button>
+                <button class="tech-tab-btn" data-tab="6">Serverless</button>
+                <button class="tech-tab-btn" data-tab="7">Automation Testing</button>
+            </div>
+        </div>
+
+        <!-- Concentric Semi-Circle Arc Arena -->
+        <div class="orbital-arena" id="orbitalArena">
+            <!-- SVG Semi-Circle Background Paths (Equal 120px Spacing) -->
+            <svg class="orbital-svg" viewBox="0 0 840 440" preserveAspectRatio="xMidYMax meet">
+                <defs>
+                    <radialGradient id="innerArcGrad" cx="50%" cy="100%" r="100%">
+                        <stop offset="0%" stop-color="#f3ebff" stop-opacity="0.85" />
+                        <stop offset="70%" stop-color="#f8fafc" stop-opacity="0.2" />
+                        <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+                    </radialGradient>
+                    <radialGradient id="outerArcGrad" cx="50%" cy="100%" r="100%">
+                        <stop offset="0%" stop-color="#f8f5ff" stop-opacity="0.5" />
+                        <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+                    </radialGradient>
+                    <radialGradient id="outermostArcGrad" cx="50%" cy="100%" r="100%">
+                        <stop offset="0%" stop-color="#fcf9ff" stop-opacity="0.3" />
+                        <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+                    </radialGradient>
+                </defs>
+
+                <!-- Outermost Semi-Circle Arc (R = 420px) -->
+                <path d="M 0 440 A 420 420 0 0 1 840 440 Z" fill="url(#outermostArcGrad)" />
+                <path d="M 0 440 A 420 420 0 0 1 840 440" fill="none" stroke="rgba(155, 81, 224, 0.25)" stroke-width="1.6" />
+
+                <!-- Middle Semi-Circle Arc (R = 300px, Gap = 120px) -->
+                <path d="M 120 440 A 300 300 0 0 1 720 440 Z" fill="url(#outerArcGrad)" />
+                <path d="M 120 440 A 300 300 0 0 1 720 440" fill="none" stroke="rgba(155, 81, 224, 0.45)" stroke-width="1.8" />
+
+                <!-- Inner Semi-Circle Arc (R = 180px, Gap = 120px) -->
+                <path d="M 240 440 A 180 180 0 0 1 600 440 Z" fill="url(#innerArcGrad)" />
+                <path d="M 240 440 A 180 180 0 0 1 600 440" fill="none" stroke="rgba(155, 81, 224, 0.65)" stroke-width="2" />
+            </svg>
+
+            <!-- Dynamic Orbiting Tech Logo Nodes -->
+            <div class="orbital-nodes-container" id="orbitalNodesContainer">
+                <!-- Dynamically populated via JS -->
+            </div>
+
+            <!-- Central Category Title inside inner semi-circle -->
+            <div class="orbital-center-hub" id="orbitalCenterHub">
+                <span class="center-hub-title" id="centerHubTitle">GenAI & Cloud</span>
+            </div>
+        </div>
+
+        <!-- Mobile-Optimized Pyramid Tech Showcase (3 in Line 1, 2 in Line 2, centered, tap for name) -->
+        <div class="mobile-tech-container" id="mobileTechContainer">
+            <div class="mobile-tech-row row-3" id="mobileTechRow1"></div>
+            <div class="mobile-tech-row row-2" id="mobileTechRow2"></div>
+            <div class="mobile-tech-label-badge" id="mobileTechLabelBadge">
+                <span id="mobileTechLabelText">GenAI & Cloud</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Thinking that moves the industry -->
+    <section class="thinking-industry">
+        <div class="section-header flex-header">
+            <div>
+                <span class="eyebrow">• THOUGHT LEADERSHIP & INSIGHTS</span>
+                <h2>Thinking that moves the industry</h2>
+                <p>Explore cutting-edge research, tech talks, and strategic whitepapers from our engineering and AI leaders powering global digital transformation.</p>
+            </div>
+            <a href="#" class="btn btn-purple">Explore All Insights</a>
+        </div>
+        <div class="thinking-grid">
+            <!-- Card 1: Tech Talk -->
+            <div class="thinking-card tech-talk-card">
+                <div class="card-img-container">
+                    <span class="tag tag-dark">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-right:4px; vertical-align:-1px;"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg>
+                        Tech Talk
+                    </span>
+                    <img src="image/techtalk.png" alt="Tech Talk: Multi-Agent AI Systems">
+                    <div class="card-img-overlay"></div>
+                </div>
+                <div class="thinking-card-body">
+                    <h3>Architecting Resilient Multi-Agent AI Systems for Enterprise Scale</h3>
+                    <p>Learn how modern cloud-native architectures harness generative AI workflows and autonomous agents to automate complex business processes.</p>
+                    <a href="#" class="learn-more">
+                        <span>Read Insight</span>
+                        <svg class="arrow-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Card 2: Video Card -->
+            <div class="thinking-card video-card" id="thinkingVideoCard">
+                <div class="card-img-container">
+                    <span class="tag tag-dark">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-right:4px; vertical-align:-1px;"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+                        Watch Video
+                    </span>
+                    <img src="image/video.png" alt="Video: 90-Day AI Transformation" class="video-poster-img">
+                    <video src="image/bg video.mp4" loop muted playsinline class="thinking-card-video" id="thinkingCardVideo"></video>
+                    <div class="video-play-overlay">
+                        <button class="video-play-btn" id="thinkingPlayBtn" aria-label="Play Video">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                        </button>
+                        <span class="video-duration">03:45</span>
+                    </div>
+                </div>
+                <div class="thinking-card-body">
+                    <h3>The 90-Day AI Transformation Blueprint: From Idea to Execution</h3>
+                    <p>Watch our tech leaders demonstrate how EXIQO AI Studio accelerates deployment from proof-of-concept to production ROI with OptimaAI platform.</p>
+                    <a href="#" class="learn-more">
+                        <span id="videoActionText">Watch Video</span>
+                        <svg class="arrow-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Card 3: White Paper -->
+            <div class="thinking-card whitepaper-card">
+                <div class="card-img-container">
+                    <span class="tag tag-dark">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-right:4px; vertical-align:-1px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                        White Paper
+                    </span>
+                    <img src="image/whitepaper.png" alt="White Paper: Product Modernization">
+                    <div class="card-img-overlay"></div>
+                </div>
+                <div class="thinking-card-body">
+                    <h3>Next-Gen Product Modernization: Decoupling Monoliths into Microservices</h3>
+                    <p>Discover strategic frameworks and actionable blueprints for modernizing legacy platforms into cloud-first microservices without disruption.</p>
+                    <a href="#" class="learn-more">
+                        <span>Download Paper</span>
+                        <svg class="arrow-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Other Services Section -->
+    <section class="other-services">
+        <div class="section-header flex-header">
+            <div>
+                <span class="eyebrow">• SPECIALIZED CAPABILITIES</span>
+                <h2>Our Other Services Powering Your<br>Product Engineering Journey</h2>
+                <p class="section-subtext">Complementary engineering capabilities to scale your digital architecture, optimize data ecosystems, and ensure resilient enterprise operations.</p>
+            </div>
+            
+        </div>
+        <div class="services-carousel" id="servicesCarousel">
+            <!-- Card 1: Cloud & DevOps -->
+            <div class="carousel-card">
+                <div class="icon-box">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z" />
+                    </svg>
+                </div>
+                <h3>Cloud & DevOps Engineering</h3>
+                <p>Accelerate continuous deployment with resilient multi-cloud architectures, Kubernetes orchestration, zero-downtime CI/CD pipelines, and automated FinOps.</p>
+                <a href="#" class="know-more">
+                    <span>Explore Cloud Services</span>
+                    <svg class="link-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+            </div>
+
+            <!-- Card 2: Data & AI -->
+            <div class="carousel-card">
+                <div class="icon-box">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="7" height="7" rx="1.5" />
+                        <rect x="14" y="3" width="7" height="7" rx="1.5" />
+                        <rect x="14" y="14" width="7" height="7" rx="1.5" />
+                        <rect x="3" y="14" width="7" height="7" rx="1.5" />
+                    </svg>
+                </div>
+                <h3>Data & Enterprise AI</h3>
+                <p>Transform raw data into real-time intelligence with scalable enterprise data lakes, predictive analytics, Databricks, and custom LLM workflows.</p>
+                <a href="#" class="know-more">
+                    <span>Explore Data & AI</span>
+                    <svg class="link-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+            </div>
+
+            <!-- Card 3: Automation & Digital Ops -->
+            <div class="carousel-card">
+                <div class="icon-box">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3" />
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                    </svg>
+                </div>
+                <h3>Automation & Digital Ops</h3>
+                <p>Eliminate manual operational bottlenecks using Intelligent Process Automation (IPA), robotic workflows, and self-healing infrastructure.</p>
+                <a href="#" class="know-more">
+                    <span>Explore Automation</span>
+                    <svg class="link-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+            </div>
+
+            <!-- Card 4: Quality Engineering -->
+            <div class="carousel-card">
+                <div class="icon-box">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                        <polyline points="22 4 12 14.01 9 11.01" />
+                    </svg>
+                </div>
+                <h3>Quality Engineering & QA</h3>
+                <p>Ensure zero-defect software releases through AI-powered test automation suites, performance stress testing, and continuous security audits.</p>
+                <a href="#" class="know-more">
+                    <span>Explore Quality Ops</span>
+                    <svg class="link-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pre-Footer Banner -->
+    <section class="pre-footer" id="preFooterSection">
+        <!-- MoltenMetal WebGL2 background -->
+        <div id="moltenMetalContainer" style="position:absolute;inset:0;width:100%;height:100%;overflow:hidden;z-index:0;"></div>
+        <div class="pre-footer-content" style="position:relative;z-index:1;">
+            <h2>Ready to Engineer Your<br>Digital Future with R Systems?</h2>
+            <a href="#" class="btn btn-white">Let's Start a Conversation</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <div class="footer-logo"><img src="image/rsi_logo.png" alt="RSi Logo" class="footer-logo-img"></div>
+                <p>RSI is a trusted software engineering and digital transformation services partner to global
+                    enterprises navigating technological change. RSI enables technology companies, SaaS platforms, and
+                    enterprises to solve real-world challenges, accelerate time to market, and scale AI-driven
+                    innovation across the full software development lifecycle and business automation.</p>
+            </div>
+        </div>
+        <div class="footer-links-grid">
+            <div class="link-column">
+                <h4>What We Do</h4>
+                <ul>
+                    <li><a href="#">Digital Product Engineering</a></li>
+                    <li><a href="#">Modernization Solutions</a></li>
+                    <li><a href="#">Cloud and DevOps</a></li>
+                    <li><a href="#">Data and AI</a></li>
+                    <li><a href="#">Automation and Digital Ops</a></li>
+                    <li><a href="#">Embedded Firmware</a></li>
+                    <li><a href="#">Quality Engineering</a></li>
+                    <li><a href="#">Mobile Experience Design</a></li>
+                    <li><a href="#">Packaged Services - Integration</a></li>
+                    <li><a href="#">Global Capability Center</a></li>
+                </ul>
+            </div>
+            <div class="link-column">
+                <h4>Who We Serve</h4>
+                <ul>
+                    <li><a href="#">Tech, Internet, and Platform</a></li>
+                    <li><a href="#">Healthcare</a></li>
+                    <li><a href="#">Manufacturing, Logistics and Automotive</a></li>
+                    <li><a href="#">Telecom, Media and Entertainment</a></li>
+                    <li><a href="#">Banking, Financial Services</a></li>
+                    <li><a href="#">Insurance Tech & Digital Engineering</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Public Services</a></li>
+                </ul>
+            </div>
+            <div class="link-column">
+                <h4>Who We Are</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Corporate Social Responsibility</a></li>
+                    <li><a href="#">Awards and Achievements</a></li>
+                    <li><a href="#">Factsheet</a></li>
+                    <li><a href="#">Our Subsidiaries</a></li>
+                    <li><a href="#">Newsroom</a></li>
+                </ul>
+            </div>
+            <div class="link-column">
+                <ul>
+                    <li><a href="#" class="highlight-link">Our Insights</a></li>
+                    <li><a href="#" class="highlight-link">Our Partners</a></li>
+                    <li><a href="#" class="highlight-link">Investors</a></li>
+                    <li><a href="#" class="highlight-link">Policy</a></li>
+                    <li><a href="#" class="highlight-link">Join Us</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="legal-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Use</a>
+                <a href="#">Safe Harbor Provision</a>
+            </div>
+            <div class="social-links">
+                <a href="#" aria-label="LinkedIn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                    </svg>
+                </a>
+                <a href="#" aria-label="X">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                </a>
+                <a href="#" aria-label="Facebook">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                </a>
+                <a href="#" aria-label="Instagram">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                </a>
+                <a href="#" aria-label="YouTube">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M23.498 6.163c-.272-.646-.78-1.154-1.428-1.327C20.128 4.3 12 4.3 12 4.3s-8.128 0-10.07.536C1.282 5.009.774 5.517.502 6.163.082 8.136 0 12 0 12s.082 3.864.502 5.837c.272.646.78 1.154 1.428 1.327C3.872 19.7 12 19.7 12 19.7s8.128 0 10.07-.536c.648-.173 1.156-.681 1.428-1.327.42-1.973.502-5.837.502-5.837s-.076-3.864-.5-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/LogoLoopApp.js" defer></script>
+    <script src="js/main.js" defer></script>
+    <script src="js/molten-metal.js"></script>
+    <script>
+      (function () {
+        var container = document.getElementById('moltenMetalContainer');
+        if (container && window.initMoltenMetal) {
+          window.initMoltenMetal(container, {
+            color1:           '#1a003a',
+            color2:           '#7B2FF7',
+            color3:           '#e8b4ff',
+            speed:            0.3,
+            scale:            3.5,
+            detail:           4,
+            glow:             1.8,
+            coreSize:         0.12,
+            swirl:            1.2,
+            fold:             -0.18,
+            blackPoint:       0.04,
+            brightness:       1.4,
+            colorMode:        'molten',
+            grain:            true,
+            grainIntensity:   0.04,
+            mouseInteraction: true,
+            mouseStrength:    0.25,
+            opacity:          1.0
+          });
+        }
+      })();
+    </script>
+</body>
+
+</html>
