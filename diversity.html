@@ -420,9 +420,208 @@
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .erg-card:hover .c3-watermark-logo {
+        .erg-card .c3-watermark-logo {
             opacity: 0.16;
             transform: rotate(0deg) scale(1.25);
+        }
+
+        /* Life @ R Systems Vertical Marquee Showcase Styles */
+        .life-at-rsi-section {
+            background: #ffffff;
+            padding: 6rem 2rem;
+            border-bottom: 1px solid #f1f5f9;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .life-marquee-wrapper {
+            height: 650px;
+            overflow: hidden;
+            position: relative;
+            border-radius: 24px;
+            padding: 0.6rem;
+            background: transparent;
+        }
+
+        .life-marquee-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 95px;
+            background: linear-gradient(180deg, #ffffff 15%, rgba(255, 255, 255, 0) 100%);
+            z-index: 100;
+            pointer-events: none;
+        }
+
+        .life-marquee-wrapper::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 95px;
+            background: linear-gradient(0deg, #ffffff 15%, rgba(255, 255, 255, 0) 100%);
+            z-index: 100;
+            pointer-events: none;
+        }
+
+        .life-marquee-col {
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+        }
+
+        .life-marquee-track {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .col-up .life-marquee-track {
+            animation: marqueeScrollUp 22s linear infinite;
+        }
+
+        .col-down .life-marquee-track {
+            animation: marqueeScrollDown 24s linear infinite;
+        }
+
+        .life-marquee-col:hover .life-marquee-track {
+            animation-play-state: paused;
+        }
+
+        @keyframes marqueeScrollUp {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-50%); }
+        }
+
+        @keyframes marqueeScrollDown {
+            0% { transform: translateY(-50%); }
+            100% { transform: translateY(0); }
+        }
+
+        .life-card-slot {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            perspective: 1200px;
+            -webkit-perspective: 1200px;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .life-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            transform-style: preserve-3d;
+            -webkit-transform-style: preserve-3d;
+            transition: transform 0.7s cubic-bezier(0.34, 1.25, 0.64, 1);
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+        }
+
+        .life-card-slot:hover {
+            z-index: 50;
+        }
+
+        .life-card-slot:hover .life-card-inner {
+            transform: rotateY(180deg);
+            box-shadow: 0 20px 45px rgba(104, 48, 236, 0.4);
+        }
+
+        /* Front Face: Crisp Full-Color Image */
+        .life-card-front {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            background: #0f172a;
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            transform: rotateY(0deg);
+            -webkit-transform: rotateY(0deg);
+        }
+
+        .life-card-front img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.98) saturate(1.05);
+            transition: transform 0.6s ease;
+        }
+
+        /* Back Face: Signature RSi Gradient Purple Card (Title Only) */
+        .life-card-back {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            transform: rotateY(180deg);
+            -webkit-transform: rotateY(180deg);
+            background: linear-gradient(135deg, #8656FE 0%, #5b16d6 100%);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            color: #ffffff;
+            box-shadow: inset 0 0 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .life-card-back-title {
+            color: #ffffff;
+            font-size: 1.08rem;
+            font-weight: 700;
+            line-height: 1.4;
+            margin: 0;
+            text-align: center;
+            letter-spacing: -0.01em;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.55rem;
+            flex-wrap: wrap;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .life-card-title-arrow {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.22);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: #ffffff;
+            flex-shrink: 0;
+            transition: transform 0.25s ease, background 0.25s ease;
+        }
+
+        .life-card-slot:hover .life-card-title-arrow {
+            background: rgba(255, 255, 255, 0.38);
+            transform: translate(2px, -2px);
+        }
+
+        @media (max-width: 1024px) {
+            .life-at-rsi-section div[style*="grid-template-columns: 280px"] {
+                grid-template-columns: 1fr !important;
+                gap: 2.5rem !important;
+            }
+            .life-marquee-wrapper {
+                height: 440px !important;
+            }
         }
 
         /* React Bits CircularGallery WebGL Container Styles */
@@ -1085,311 +1284,1292 @@
             color: #9b51e0;
         }
          
-        /* LEADERSHIP COMMITMENT SECTION */
+                /* LEADERSHIP COMMITMENT SECTION */
+
+        /* LEADERSHIP COMMITMENT SECTION (OUR VISION & COMMITMENT REDESIGN) */
+
         .ms-commitment-section {
-            padding: 6rem 2rem 5rem 2rem;
-            background: #ffffff;
+
+            background: #280241 url('image/vision_bg.png') no-repeat center center;
+
+            background-size: cover;
+
+            padding: 6.5rem 2rem;
+
+            position: relative;
+
+            overflow: hidden;
+
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+
         }
  
         .ms-commitment-container {
+
+            max-width: 1280px;
+
+            margin: 0 auto;
+
+            display: grid;
+
+            grid-template-columns: 1.15fr 0.85fr;
+
+            gap: 5rem;
+
+            align-items: center;
+
+            position: relative;
+
+            z-index: 3;
+
+        }
+ 
+        .ms-commitment-left {
+
+            color: #ffffff;
+
+            display: flex;
+
+            flex-direction: column;
+
+            z-index: 2;
+
+        }
+ 
+        .ms-commitment-eyebrow {
+
+            color: #dfb4ff; /* Light purple-pink eyebrow tint */
+
+            font-weight: 600;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.06em;
+
+            font-size: 0.88rem;
+
+            display: block;
+
+            margin-bottom: 2rem;
+
+        }
+ 
+        .ms-commitment-paragraph {
+
+            color: #ffffff;
+
+            font-size: 1.06rem;
+
+            line-height: 1.7;
+
+            margin: 0 0 1.5rem 0;
+
+            font-weight: 400;
+
+            opacity: 0.95;
+
+        }
+ 
+        .ms-commitment-paragraph:last-of-type {
+
+            margin-bottom: 0;
+
+        }
+ 
+        .ms-commitment-divider {
+
+            border: none;
+
+            border-top: 1.5px solid rgba(255, 255, 255, 0.65);
+
+            width: 220px;
+
+            margin: 2.5rem 0 2rem 0;
+
+        }
+ 
+        .ms-commitment-author-name {
+
+            font-size: 1.55rem;
+
+            font-weight: 600;
+
+            color: #ffffff;
+
+            margin: 0 0 0.3rem 0;
+
+            letter-spacing: -0.01em;
+
+        }
+ 
+        .ms-commitment-author-title {
+
+            font-size: 0.95rem;
+
+            color: #dfb4ff; /* Light purple-pink tint */
+
+            margin: 0;
+
+            font-weight: 500;
+
+        }
+ 
+        .ms-commitment-right {
+
+            position: relative;
+
+            height: 100%;
+
+            min-height: 520px;
+
+            display: flex;
+
+            align-items: flex-end;
+
+            justify-content: center;
+
+        }
+ 
+        .ms-commitment-cutout-img {
+
+            position: absolute;
+
+            bottom: -6.5rem; /* Bleed to the bottom edge of the padded section */
+
+            right: 0;
+
+            width: 110%;
+
+            max-width: 695px;
+
+            height: auto;
+
+            display: block;
+
+            z-index: 5;
+
+        }
+ 
+        /* Giant outline vector logo behind the photo */
+
+        .ms-commitment-logo-vector {
+
+            position: absolute;
+
+            right: -60px;
+
+            top: 20px;
+
+            width: 580px;
+
+            height: auto;
+
+            opacity: 0.12; /* Subtle thin outlines */
+
+            z-index: 1;
+
+            pointer-events: none;
+
+        }
+ 
+        @media (max-width: 992px) {
+
+            .ms-commitment-section {
+
+                padding: 5rem 2rem;
+
+            }
+
+            .ms-commitment-container {
+
+                grid-template-columns: 1fr;
+
+                gap: 3rem;
+
+                text-align: left;
+
+            }
+
+            .ms-commitment-right {
+
+                min-height: 380px;
+
+                justify-content: center;
+
+            }
+
+            .ms-commitment-cutout-img {
+
+                position: relative;
+
+                bottom: 0;
+
+                margin: 0 auto;
+
+                max-width: 360px;
+
+            }
+
+            .ms-commitment-logo-vector {
+
+                width: 420px;
+
+                right: 50%;
+
+                transform: translateX(50%);
+
+                top: -20px;
+
+            }
+
+        }
+
+ 
+         
+        /* VIDEO SERIES CAROUSEL OVERRIDES */
+        .ms-video-series-section {
+            background: #0d021f; /* Deepest dark violet */
+            padding: 6.5rem 2rem;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+ 
+        .ms-video-series-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.25fr 1fr;
+            gap: 5rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+ 
+        .ms-video-left {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+ 
+        /* Glowing background blobs behind the video card */
+        .ms-video-glow {
+            position: absolute;
+            width: 450px;
+            height: 450px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(134, 86, 254, 0.25) 0%, rgba(134, 86, 254, 0) 70%);
+            filter: blur(40px);
+            z-index: 1;
+            pointer-events: none;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+ 
+        .ms-video-card-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 580px;
+            aspect-ratio: 1.77; /* 16:9 Aspect Ratio matching standard video format */
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 35px 70px -15px rgba(0, 0, 0, 0.7);
+            z-index: 2;
+            background: #110825;
+            display: grid;
+            grid-template-columns: 1fr;
+        }
+ 
+        .ms-video-thumbnail-slide {
+            grid-area: 1 / 1 / 2 / 2;
+            opacity: 0;
+            transform: scale(0.98);
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+ 
+        .ms-video-thumbnail-slide.active {
+            opacity: 1;
+            transform: scale(1);
+            z-index: 3;
+        }
+ 
+        .ms-video-thumbnail-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+ 
+        .ms-video-thumbnail-slide:hover img {
+            transform: scale(1.03);
+        }
+ 
+        /* Glassmorphic Glowing Play Button */
+        .ms-video-play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(1);
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 1.5rem;
+            z-index: 5;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                        background-color 0.3s ease,
+                        box-shadow 0.3s ease,
+                        border-color 0.3s ease;
+        }
+ 
+        .ms-video-thumbnail-slide:hover .ms-video-play-btn {
+            transform: translate(-50%, -50%) scale(1.12);
+            background: rgba(134, 86, 254, 0.45);
+            border-color: rgba(134, 86, 254, 0.6);
+            box-shadow: 0 15px 35px rgba(134, 86, 254, 0.5);
+        }
+ 
+        .ms-video-play-btn svg {
+            margin-left: 4px; /* Align triangle visually center */
+            fill: #ffffff;
+            transition: transform 0.3s ease;
+        }
+ 
+        .ms-video-thumbnail-slide:hover .ms-video-play-btn svg {
+            transform: scale(1.05);
+        }
+ 
+        .ms-video-right {
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            gap: 1.75rem;
+            z-index: 2;
+        }
+ 
+        .ms-video-right h2 {
+            font-size: clamp(2rem, 3.5vw, 2.8rem);
+            font-weight: 300;
+            color: #ffffff;
+            line-height: 1.15;
+            margin: 0;
+            letter-spacing: -0.02em;
+        }
+ 
+        .ms-video-right p {
+            color: #b4acc3;
+            font-size: 1.08rem;
+            line-height: 1.65;
+            margin: 0;
+            max-width: 520px;
+        }
+ 
+        .ms-video-watch-btn {
+            align-self: flex-start;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.9rem 2.2rem;
+            border-radius: 30px;
+            background: #8b3ffc;
+            color: #ffffff;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 10px 25px rgba(139, 63, 252, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer;
+        }
+ 
+        .ms-video-watch-btn:hover {
+            background: #9b51e0;
+            color: #ffffff;
+            box-shadow: 0 15px 35px rgba(155, 81, 224, 0.45);
+            transform: translateY(-3px);
+        }
+ 
+        .ms-video-watch-btn svg {
+            transition: transform 0.3s ease;
+        }
+ 
+        .ms-video-watch-btn:hover svg {
+            transform: translateX(4px);
+        }
+ 
+        /* Slide indicators at the bottom */
+        .ms-video-indicator {
+            display: flex;
+            gap: 12px;
+            margin-top: 1rem;
+        }
+ 
+        .ms-video-indicator-bar {
+            width: 32px;
+            height: 4px;
+            border: none;
+            background: #ffffff;
+            opacity: 0.35;
+            cursor: pointer;
+            transition: width 0.4s ease, background-color 0.4s ease, opacity 0.4s ease;
+            border-radius: 2px;
+            padding: 0;
+        }
+ 
+        .ms-video-indicator-bar.active {
+            width: 48px;
+            background: #9b51e0;
+            opacity: 1;
+        }
+ 
+        /* Video Modal Styles */
+        .ms-video-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(13, 2, 31, 0.85);
+            backdrop-filter: blur(15px);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+ 
+        .ms-video-modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+ 
+        .ms-video-modal-content {
+            position: relative;
+            width: 90%;
+            max-width: 960px;
+            aspect-ratio: 1.77;
+            transform: scale(0.95);
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+ 
+        .ms-video-modal-overlay.active .ms-video-modal-content {
+            transform: scale(1);
+        }
+ 
+        .ms-video-iframe-container {
+            width: 100%;
+            height: 100%;
+        }
+ 
+        .ms-video-modal-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            background: none;
+            border: none;
+            color: #ffffff;
+            font-size: 2.5rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, color 0.3s ease;
+            outline: none;
+        }
+ 
+        .ms-video-modal-close:hover {
+            transform: rotate(90deg);
+            color: #9b51e0;
+        }
+ 
+        /* Responsive Mobile Video Styles */
+        @media (max-width: 992px) {
+            .ms-video-series-container {
+                grid-template-columns: 1fr;
+                gap: 3.5rem;
+                text-align: center;
+            }
+            .ms-video-watch-btn {
+                align-self: center;
+            }
+            .ms-video-indicator {
+                justify-content: center;
+            }
+            .ms-video-glow {
+                width: 320px;
+                height: 320px;
+            }
+            .ms-video-right p {
+                margin: 0 auto;
+            }
+            .ms-video-modal-close {
+                top: -40px;
+                right: 10px;
+                font-size: 2rem;
+            }
+        }
+ 
+        /* AWARDS & ACHIEVEMENTS SECTION */
+        .ms-awards-section {
+            background: #f8f9fd;
+            padding: 6.5rem 2rem;
+            position: relative;
+            border-bottom: 1px solid #f1f5f9;
+        }
+ 
+        .ms-awards-container {
             max-width: 1280px;
             margin: 0 auto;
             position: relative;
         }
  
-        .ms-commitment-card {
-            background: #131217; /* Dark charcoal base matching reference */
-            border-radius: 24px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            display: grid;
-            grid-template-columns: 1fr 340px; /* Swapped: Text left, Image right */
-            gap: 4rem;
-            padding: 4.5rem 0 4.5rem 4.5rem; /* No padding on the right to bleed elements */
-            align-items: center; /* Center content vertically */
+        .ms-awards-carousel-wrapper {
             position: relative;
-            margin-top: 5rem;
-            box-shadow: 0 30px 60px -15px rgba(15, 23, 42, 0.5);
-            overflow: hidden; /* Contain circles and cutout image strictly */
-            min-height: 480px;
-            transition: border-color 0.4s ease, box-shadow 0.4s ease;
-        }
- 
-        .ms-commitment-card:hover {
-            border-color: rgba(155, 81, 224, 0.3);
-            box-shadow: 0 35px 70px -10px rgba(15, 23, 42, 0.6);
-        }
- 
-        /* SVG Quote Decorator positioned in card background on the left */
-        .ms-quote-decor {
-            position: absolute;
-            left: 2.5rem;
-            top: 2.5rem;
-            color: #ffffff;
-            opacity: 0.03;
-            pointer-events: none;
-            transition: transform 0.5s ease, opacity 0.3s ease;
-            z-index: 1;
-        }
- 
-        .ms-commitment-card:hover .ms-quote-decor {
-            transform: scale(1.1) rotate(-5deg);
-            opacity: 0.05;
-        }
- 
-        /* 3D Floating Cutout Image Container */
-        .ms-commitment-img-container {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            right: 0;
-            width: 45%;
-            height: 100%;
-            z-index: 2;
+            width: calc(100% + 3rem);
+            margin-top: 2rem;
+            margin-left: -1.5rem;
+            margin-right: -1.5rem;
+            padding: 1.5rem 1.5rem 3.5rem 1.5rem;
             overflow: hidden;
-            display: flex;
-            align-items: flex-end;
-            justify-content: flex-end;
         }
  
-        /* Circular background shapes matching the reference banner */
-        .ms-commitment-circle-1 {
-            position: absolute;
-            top: 50%;
-            right: -80px; /* Locked to the right edge */
-            transform: translateY(-50%);
-            width: 480px;
-            height: 480px;
-            border-radius: 50%;
-            background: #8b3ffc; /* Bright violet */
-            z-index: 1;
-            pointer-events: none;
-            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-        }
- 
-        .ms-commitment-circle-2 {
-            position: absolute;
-            top: 55%;
-            right: 140px; /* Offset behind the primary circle */
-            transform: translateY(-50%);
-            width: 340px;
-            height: 340px;
-            border-radius: 50%;
-            background: #b175ff; /* Lighter purple */
-            z-index: 1;
-            pointer-events: none;
-            opacity: 0.55;
-            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-        }
- 
-        .ms-commitment-card:hover .ms-commitment-circle-1 {
-            transform: translateY(-50%) scale(1.03) translate(-10px, -5px);
-        }
- 
-        .ms-commitment-card:hover .ms-commitment-circle-2 {
-            transform: translateY(-50%) scale(1.05) translate(-15px, 5px);
-        }
- 
-        .ms-commitment-img {
-            position: absolute;
-            bottom: 0;
-            right: -100px;
-            height: 100%; /* Contained cleanly inside card vertical area */
-            width: auto;
-            max-width: 100%;
-            object-fit: contain;
-            object-position: right bottom; /* Force align to the far right edge of card */
-            z-index: 2;
-            filter: drop-shadow(-10px 10px 20px rgba(0, 0, 0, 0.45));
-            opacity: 0;
-            transform: translateX(30px);
-            transition: opacity 0.5s ease, transform 0.5s ease, filter 0.3s ease;
-            pointer-events: none;
-        }
- 
-        .ms-commitment-img.active {
-            opacity: 1;
-            transform: translateX(0);
-            pointer-events: auto;
-        }
- 
-        .ms-commitment-card:hover .ms-commitment-img.active {
-            transform: translateY(-5px) scale(1.01);
-        }
- 
-        /* Large banner heading on left */
-        .ms-commitment-card-title {
-            font-size: clamp(1.8rem, 3vw, 2.5rem);
-            font-weight: 750;
-            color: #ffffff;
-            line-height: 1.15;
-            margin: 0 0 1.25rem 0;
-            letter-spacing: -0.02em;
-        }
- 
-        .ms-commitment-card-title span {
-            color: #9b51e0; /* Highlight color */
-        }
- 
-        /* Carousel containers and slide transitions using Grid cell overlapping */
-        .ms-commitment-content-container {
-            color: #ffffff;
+        .ms-awards-carousel-track {
             display: grid;
             grid-template-columns: 1fr;
-            z-index: 2; /* Sit on top of mesh background */
             width: 100%;
-            position: relative;
         }
  
-        .ms-commitment-slide {
+        .ms-awards-slide {
             grid-area: 1 / 1 / 2 / 2;
             opacity: 0;
             pointer-events: none;
-            transform: translateY(15px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
-            display: flex;
-            flex-direction: column;
-            gap: 1.25rem;
+            transform: translateX(40px);
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            width: 100%;
         }
  
-        .ms-commitment-slide.active {
+        .ms-awards-slide.active {
             opacity: 1;
             pointer-events: auto;
-            transform: translateY(0);
+            transform: translateX(0);
+            z-index: 5;
+        }
+ 
+        .ms-awards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            width: 100%;
+        }
+ 
+        .ms-award-card {
+            background: #ffffff;
+            border-radius: 20px;
+            border: none;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+ 
+        .ms-award-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 22px 45px rgba(15, 23, 42, 0.12);
+        }
+ 
+        .ms-award-img-wrapper {
+            width: 140px;
+            height: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.5rem;
+            background: transparent;
+            border: none;
+            padding: 0;
+        }
+ 
+        .ms-award-img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+ 
+        .ms-award-card:hover .ms-award-img {
+            transform: scale(1.06);
+        }
+ 
+        .ms-award-text {
+            font-size: 0.98rem;
+            color: #334155;
+            line-height: 1.6;
+            margin: 0;
+            font-weight: 500;
+        }
+ 
+        /* Slide 3 (1 item layout centering) */
+        .ms-awards-slide[data-award-slide="2"] .ms-awards-grid {
+            display: flex;
+            justify-content: center;
+        }
+ 
+        .ms-awards-slide[data-award-slide="2"] .ms-award-card {
+            width: calc(33.333% - 1.33rem);
+            max-width: 400px;
+        }
+
+        /* RSI Voices Scroll-Driven 3D Stacked Carousel (Apple Profile Cover Card Style) */
+        .rsi-voices-scroll-section {
+            position: relative;
+            background: #ffffff;
+            color: #0f172a;
+            height: 320vh; /* Smooth scroll-distance for 5 cards */
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .rsi-voices-sticky-stage {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            z-index: 2;
+            padding: 2rem 1.5rem;
+        }
+
+        .rsi-voices-heading-container {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            z-index: 10;
+        }
+
+        .rsi-voices-stage-container {
+            position: relative;
+            width: 100%;
+            max-width: 360px;
+            height: 480px; /* Vertical aspect ratio matching provider.html cards */
+            perspective: 1600px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .rsi-voice-3d-card {
+            position: absolute;
+            inset: 0;
+            background: #ffffff;
+            border-radius: 36px;
+            padding: 6px;
+            border: 1px solid rgba(226, 232, 240, 0.9);
+            box-shadow: 0 14px 35px rgba(0, 0, 0, 0.06), 0 2px 8px rgba(0, 0, 0, 0.02);
+            transform-style: preserve-3d;
+            will-change: transform, opacity;
+            overflow: hidden;
+            transition: border-color 0.4s ease, box-shadow 0.4s ease;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .rsi-voice-3d-card.is-active {
+            border-color: rgba(155, 81, 224, 0.5);
+            box-shadow: 0 25px 60px rgba(155, 81, 224, 0.22), 0 0 0 1px rgba(155, 81, 224, 0.4);
+        }
+
+        .rsi-voice-photo-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border-radius: 30px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .rsi-voice-bg-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .rsi-voice-3d-card.is-active .rsi-voice-bg-img {
+            transform: scale(1.06);
+        }
+
+        .rsi-voice-top-badge {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            z-index: 4;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 0.35rem 0.85rem;
+            border-radius: 20px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: #7e22ce;
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .rsi-voice-card-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            top: 0;
+            background: linear-gradient(to top, rgba(255, 255, 255, 0.97) 0%, rgba(255, 255, 255, 0.88) 20%, rgba(255, 255, 255, 0.3) 40%, rgba(255, 255, 255, 0) 45%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.75rem 1.4rem;
             z-index: 3;
         }
- 
-        .ms-commitment-text {
-            color: #d1d5db;
-            font-size: 1.02rem;
-            line-height: 1.7;
-            margin: 0;
-            font-weight: 300;
-        }
- 
-        /* Creative pillar highlights inside quote text */
-        .ms-commitment-text strong {
-            color: #f3e8ff;
-            font-weight: 550;
-            background: rgba(155, 81, 224, 0.18);
-            padding: 0.1rem 0.35rem;
-            border-radius: 6px;
-            white-space: nowrap;
-        }
- 
-        .ms-commitment-author {
-            margin-top: 0.5rem;
-        }
- 
-        .ms-commitment-name {
-            font-size: 1.08rem;
-            font-weight: 600;
-            color: #ffffff;
-            margin: 0;
-            letter-spacing: -0.01em;
-        }
- 
-        .ms-commitment-title {
-            font-size: 0.88rem;
-            color: #94a3b8;
-            margin: 0.25rem 0 0.75rem 0;
-        }
- 
-        .ms-commitment-indicator {
+
+        .rsi-voice-title-row {
             display: flex;
-            gap: 8px;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 0.5rem;
+            margin-bottom: 0.4rem;
         }
- 
-        .ms-indicator-bar {
-            height: 6px;
-            border-radius: 3px;
-            border: none;
+
+        .rsi-voice-title-row h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin: 0;
+            line-height: 1.3;
+        }
+
+        .rsi-voice-check-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #9b51e0;
+            color: #ffffff;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .rsi-voice-card-desc {
+            color: #64748b;
+            font-size: 0.86rem;
+            line-height: 1.5;
+            margin: 0;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* Slide progress indicators */
+        .rsi-voices-progress-dots {
+            display: flex;
+            gap: 10px;
+            margin-top: 1.75rem;
+            z-index: 10;
+        }
+
+        .rsi-voices-dot {
+            width: 28px;
+            height: 4px;
+            border-radius: 2px;
+            background: #cbd5e1;
+            transition: all 0.4s ease;
             cursor: pointer;
-            padding: 0;
-            transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.4s ease;
         }
- 
-        .ms-indicator-bar.white {
-            width: 24px;
-            background: rgba(255, 255, 255, 0.3);
-        }
- 
-        .ms-indicator-bar.purple {
-            width: 24px;
-            background: rgba(155, 81, 224, 0.35);
-        }
- 
-        .ms-indicator-bar.white.active {
-            width: 48px;
-            background: #ffffff;
-        }
- 
-        .ms-indicator-bar.purple.active {
+
+        .rsi-voices-dot.active {
             width: 48px;
             background: #9b51e0;
         }
  
+        /* Carousel Navigation dots at the bottom */
+        .ms-awards-indicator {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 3rem;
+        }
+ 
+        .ms-awards-indicator-bar {
+            width: 32px;
+            height: 4px;
+            border: none;
+            background: #64748b;
+            opacity: 0.3;
+            cursor: pointer;
+            transition: width 0.4s ease, background-color 0.4s ease, opacity 0.4s ease;
+            border-radius: 2px;
+            padding: 0;
+        }
+ 
+        .ms-awards-indicator-bar.active {
+            width: 48px;
+            background: #9b51e0;
+            opacity: 1;
+        }
+ 
         @media (max-width: 992px) {
-            .ms-commitment-card {
+            .ms-awards-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+            .ms-awards-slide[data-award-slide="2"] .ms-awards-grid {
+                display: grid;
                 grid-template-columns: 1fr;
-                gap: 2.5rem;
-                padding: 2.5rem 2rem 2.5rem 2rem;
-                margin-top: 5rem;
             }
-            .ms-commitment-img-container {
-                order: 1; /* Image on top */
-                position: relative;
+            .ms-awards-slide[data-award-slide="2"] .ms-award-card {
                 width: 100%;
-                height: 320px;
-                min-height: auto;
-                margin-top: 0;
-                overflow: hidden;
-                border-radius: 16px;
-                background: #110f1c;
-            }
-            .ms-commitment-circle-1 {
-                width: 280px;
-                height: 280px;
-                top: 50%;
-                left: 50%;
-                transform: translate(-30%, -40%);
-            }
-            .ms-commitment-circle-2 {
-                width: 200px;
-                height: 200px;
-                top: 55%;
-                left: 50%;
-                transform: translate(-70%, -30%);
-            }
-            .ms-commitment-card:hover .ms-commitment-circle-1 {
-                transform: translate(-30%, -40%) scale(1.03);
-            }
-            .ms-commitment-card:hover .ms-commitment-circle-2 {
-                transform: translate(-70%, -30%) scale(1.05);
-            }
-            .ms-commitment-img {
-                position: absolute;
-                height: 100%;
-                bottom: 0;
-                right: 0;
-                left: 0;
-                margin: 0 auto;
-                display: block;
-                opacity: 0;
-                transform: scale(0.95);
-                transition: opacity 0.5s ease, transform 0.5s ease;
-            }
-            .ms-commitment-img.active {
-                opacity: 1;
-                transform: scale(1);
-            }
-            .ms-commitment-content-container {
-                order: 2; /* Text below */
-            }
-            /* Avoid nowrap wrapper breaks on mobile */
-            .ms-commitment-text strong {
-                white-space: normal;
+                max-width: none;
             }
         }
+ 
+        @media (max-width: 640px) {
+            .ms-awards-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+
+                /* OUR D&I PROJECTS SECTION */
+
+        .ms-projects-section {
+
+            background: #ffffff;
+
+            padding: 6.5rem 2rem;
+
+            position: relative;
+
+            border-bottom: 1px solid #f1f5f9;
+
+        }
+ 
+        .ms-projects-container {
+
+            max-width: 1280px;
+
+            margin: 0 auto;
+
+            position: relative;
+
+        }
+ 
+        .ms-projects-header-wrapper {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: flex-end;
+
+            margin-bottom: 3.5rem;
+
+        }
+ 
+        .ms-projects-header-wrapper .section-header {
+
+            margin-bottom: 0 !important;
+
+        }
+ 
+        .ms-projects-nav {
+
+            display: flex;
+
+            gap: 12px;
+
+        }
+ 
+        .ms-projects-nav-btn {
+
+            width: 48px;
+
+            height: 48px;
+
+            border-radius: 50%;
+
+            border: 1px solid rgba(226, 232, 240, 0.9);
+
+            background: #ffffff;
+
+            color: #1e293b;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            cursor: pointer;
+
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+
+            outline: none;
+
+            padding: 0;
+
+        }
+ 
+        .ms-projects-nav-btn:hover {
+
+            background: #9b51e0;
+
+            color: #ffffff;
+
+            border-color: #9b51e0;
+
+            transform: translateY(-2px);
+
+            box-shadow: 0 8px 20px rgba(155, 81, 224, 0.25);
+
+        }
+ 
+        .ms-projects-nav-btn:active {
+
+            transform: translateY(0);
+
+        }
+ 
+        .ms-projects-nav-btn svg {
+
+            transition: transform 0.3s ease;
+
+        }
+ 
+        .ms-projects-nav-btn:hover svg {
+
+            stroke: #ffffff;
+
+        }
+ 
+        .ms-projects-carousel-wrapper {
+
+            position: relative;
+
+            width: 100%;
+
+            overflow: hidden;
+
+        }
+ 
+        .ms-projects-track {
+
+            display: flex;
+
+            gap: 2rem;
+
+            overflow-x: auto;
+
+            scroll-behavior: smooth;
+
+            scroll-snap-type: x mandatory;
+
+            padding-bottom: 1.5rem; /* Room for shadow */
+
+            margin-bottom: -1.5rem;
+
+            -ms-overflow-style: none;  /* IE and Edge */
+
+            scrollbar-width: none;  /* Firefox */
+
+        }
+ 
+        .ms-projects-track::-webkit-scrollbar {
+
+            display: none; /* Chrome, Safari and Opera */
+
+        }
+ 
+        .ms-project-card {
+
+            flex: 0 0 calc(33.333% - 1.33rem);
+
+            scroll-snap-align: start;
+
+            min-width: 300px;
+
+            background: #ffffff;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            border: 1px solid rgba(226, 232, 240, 0.8);
+
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+
+            display: flex;
+
+            flex-direction: column;
+
+            height: auto;
+
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+
+                        box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+
+                        border-color 0.35s ease;
+
+        }
+ 
+        .ms-project-card:hover {
+
+            transform: translateY(-8px);
+
+            box-shadow: 0 20px 42px rgba(134, 86, 254, 0.08), 0 0 0 1px rgba(134, 86, 254, 0.15);
+
+            border-color: rgba(134, 86, 254, 0.25);
+
+        }
+ 
+        .ms-project-img-wrapper {
+
+            width: 100%;
+
+            aspect-ratio: 1.6;
+
+            overflow: hidden;
+
+            background: #f1f5f9;
+
+            position: relative;
+
+        }
+ 
+        .ms-project-logo-badge {
+
+            position: absolute;
+
+            top: 16px;
+
+            left: 16px;
+
+            z-index: 10;
+
+            background: rgba(255, 255, 255, 0.95);
+
+            padding: 6px 12px;
+
+            border-radius: 8px;
+
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border: 1px solid rgba(226, 232, 240, 0.8);
+
+        }
+ 
+        .ms-project-logo-badge img {
+
+            height: 16px;
+
+            width: auto;
+
+            display: block;
+
+        }
+ 
+        .ms-project-img {
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: cover;
+
+            transition: transform 0.5s ease;
+
+        }
+ 
+        .ms-project-card:hover .ms-project-img {
+
+            transform: scale(1.04);
+
+        }
+ 
+        .ms-project-body {
+
+            padding: 2.2rem 2rem;
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 0.8rem;
+
+            flex-grow: 1;
+
+        }
+ 
+        .ms-project-eyebrow {
+
+            font-size: 0.78rem;
+
+            font-weight: 600;
+
+            text-transform: uppercase;
+
+            color: #9b51e0;
+
+            letter-spacing: 0.06em;
+
+        }
+ 
+        .ms-project-title {
+
+            font-size: 1.28rem;
+
+            font-weight: 600;
+
+            color: #0f172a;
+
+            line-height: 1.35;
+
+            margin: 0 0 0.2rem 0;
+
+        }
+ 
+        .ms-project-desc {
+
+            font-size: 0.94rem;
+
+            color: #64748b;
+
+            line-height: 1.6;
+
+            margin: 0 0 1.2rem 0;
+
+            flex-grow: 1;
+
+        }
+ 
+        .ms-project-link {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 0.5rem;
+
+            color: #9b51e0;
+
+            font-weight: 600;
+
+            font-size: 0.92rem;
+
+            text-decoration: none;
+
+            transition: gap 0.3s ease, color 0.3s ease;
+
+            margin-top: auto;
+
+            width: fit-content;
+
+        }
+ 
+        .ms-project-link:hover {
+
+            color: #7c1ee0;
+
+            gap: 0.75rem;
+
+        }
+ 
+        .ms-project-link svg {
+
+            transition: transform 0.3s ease;
+
+        }
+ 
+        .ms-project-link:hover svg {
+
+            transform: translateX(2px);
+
+        }
+ 
+        @media (max-width: 992px) {
+
+            .ms-projects-header-wrapper {
+
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                gap: 1.5rem;
+
+            }
+
+            .ms-project-card {
+
+                flex: 0 0 calc(50% - 1rem);
+
+            }
+
+        }
+ 
+        @media (max-width: 640px) {
+
+            .ms-project-card {
+
+                flex: 0 0 100%;
+
+            }
+
+            .ms-projects-nav {
+
+                display: none; /* Hide navigation on mobile */
+
+            }
+
+        }
+
+ 
  
     </style>
 </head>
@@ -1413,32 +2593,40 @@
         </div>
     </div>
 
-    <!-- Transparent Overlay / Sticky Header (UNTOUCHED HEADER) -->
+    <!-- Transparent Overlay / Sticky Header -->
     <header class="header">
         <div class="logo">
-            <a href="#" class="logo-brand" aria-label="RSi Home">
+            <a href="index.html" class="logo-brand" aria-label="RSi Home">
                 <img src="image/rsi_logo.png" alt="RSi Logo" class="logo-img">
             </a>
         </div>
         <nav class="main-nav">
-            <a href="#" class="nav-link">ExiQO</a>
+            <a href="index.html" class="nav-link">ExiQO</a>
             
             <!-- What We Do with Dropdown Menu -->
             <div class="nav-item-dropdown">
-                <a href="#" class="nav-link dropdown-toggle">What We Do</a>
+                <a href="provider.html" class="nav-link dropdown-toggle">What We Do</a>
                 <div class="dropdown-menu">
-                    <a href="#" class="dropdown-item">Digital Product Engineering</a>
-                    <a href="#" class="dropdown-item">Cloud & Modernization</a>
-                    <a href="#" class="dropdown-item">Generative AI & Data</a>
+                    <a href="provider.html" class="dropdown-item">Healthcare Provider</a>
+                    <a href="microsoft.html" class="dropdown-item">Microsoft Partnership</a>
+                    <a href="provider.html" class="dropdown-item">Digital Product Engineering</a>
+                    <a href="microsoft.html" class="dropdown-item">Cloud & Modernization</a>
                 </div>
             </div>
             
-            <a href="#" class="nav-link">Who We Are</a>
-            <a href="#" class="nav-link">Insights</a>
-            <a href="#" class="nav-link">Careers</a>
+            <!-- Who We Are with Dropdown Menu -->
+            <div class="nav-item-dropdown">
+                <a href="diversity.html" class="nav-link dropdown-toggle">Who We Are</a>
+                <div class="dropdown-menu">
+                    <a href="diversity.html" class="dropdown-item">Diversity, Equity & Belonging</a>
+                </div>
+            </div>
+            
+            <a href="index.html" class="nav-link">Insights</a>
+            <a href="diversity.html" class="nav-link">Careers</a>
         </nav>
         <div class="header-right">
-            <a href="#" class="nav-link-secondary">Investors</a>
+            <a href="index.html" class="nav-link-secondary">Investors</a>
             <a href="#contact" class="nav-link-secondary">Contact Us</a>
             <button class="icon-btn search-btn" aria-label="Search">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1462,7 +2650,7 @@
         </button>
     </header>
 
-    <!-- Mobile Navigation Drawer Overlay & Drawer (UNTOUCHED) -->
+    <!-- Mobile Navigation Drawer Overlay & Drawer -->
     <div class="mobile-drawer-overlay" id="mobileDrawerOverlay"></div>
     <div class="mobile-nav-drawer" id="mobileNavDrawer">
         <div class="mobile-drawer-header">
@@ -1470,19 +2658,25 @@
             <button class="mobile-drawer-close" id="mobileDrawerClose" aria-label="Close Menu">✕</button>
         </div>
         <div class="mobile-drawer-links">
-            <a href="#" class="mobile-nav-link">ExiQO</a>
+            <a href="index.html" class="mobile-nav-link">ExiQO</a>
             <div class="mobile-dropdown-accordion">
                 <span class="mobile-nav-link">What We Do</span>
                 <div class="mobile-sub-links">
-                    <a href="#">Digital Product Engineering</a>
-                    <a href="#">Cloud & Modernization</a>
-                    <a href="#">Generative AI & Data</a>
+                    <a href="provider.html">Healthcare Provider</a>
+                    <a href="microsoft.html">Microsoft Partnership</a>
+                    <a href="provider.html">Digital Product Engineering</a>
+                    <a href="microsoft.html">Cloud & Modernization</a>
                 </div>
             </div>
-            <a href="#" class="mobile-nav-link">Who We Are</a>
-            <a href="#" class="mobile-nav-link">Insights</a>
-            <a href="#" class="mobile-nav-link">Careers</a>
-            <a href="#" class="mobile-nav-link">Investors</a>
+            <div class="mobile-dropdown-accordion">
+                <span class="mobile-nav-link">Who We Are</span>
+                <div class="mobile-sub-links">
+                    <a href="diversity.html">Diversity, Equity & Belonging</a>
+                </div>
+            </div>
+            <a href="index.html" class="mobile-nav-link">Insights</a>
+            <a href="diversity.html" class="mobile-nav-link">Careers</a>
+            <a href="index.html" class="mobile-nav-link">Investors</a>
             <a href="#contact" class="btn-mobile-contact">Contact Us</a>
         </div>
     </div>
@@ -1590,75 +2784,27 @@
             </div>
         </div>
     </section>
-    <!-- Leadership D&I Commitment Section -->
+    
+
+    <!-- Leadership D&I Vision & Commitment Section -->
     <section class="ms-commitment-section">
         <div class="ms-commitment-container">
-            <div class="section-header text-left" style="margin-bottom: 4.5rem; text-align: left;">
-                <span class="eyebrow" style="color: #9b51e0; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.88rem;">• OUR VISION & COMMITMENT</span>
-                <h2 style="font-size: clamp(2.2rem, 3.8vw, 3rem); font-weight: 300; color: #0f172a; margin-top: 0.4rem; line-height: 1.15; letter-spacing: -0.02em;">Fostering a Culture of Inclusion and Belonging</h2>
-                <p style="color: #64748b; font-size: 1.05rem; line-height: 1.6; margin-top: 0.75rem; max-width: 780px;">Our commitment to diversity, equity, and inclusion is driven by our leadership and woven into every aspect of our global operations.</p>
+            <!-- Left Column: Vision & Commitment Text -->
+            <div class="ms-commitment-left">
+                <span class="ms-commitment-eyebrow">• OUR VISION & COMMITMENT</span>
+                <p class="ms-commitment-paragraph">We believe that our strength comes from the diversity of thought and experience each team member brings to our global community. By fostering a culture that values diverse perspectives, we can engage with a variety of viewpoints and integrate them to support our mission. Diversity, equity, and inclusion aren't just values-they're essential to our creativity and success. This mindset helps us see the world from the perspectives of our stakeholders and adapt to its ongoing changes.</p>
+                <p class="ms-commitment-paragraph">We are committed to creating an environment where every voice is valued and respected. By embracing our differences, promoting fairness, and fostering belonging, we grow together and build a brighter future. Embracing diverse thinking not only helps us understand our business environment better but also strengthens our ability to execute our global strategy. Together, we're more creative and better prepared to succeed globally.</p>
+                
+                <hr class="ms-commitment-divider">
+ 
+                <div class="ms-commitment-author-name">Raluca Rusu</div>
+                <div class="ms-commitment-author-title">CEO, R Systems Europe</div>
             </div>
  
-            <div class="ms-commitment-card">
-                <!-- SVG Quote Decorator -->
-                <svg class="ms-quote-decor" width="120" height="120" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                </svg>
- 
-                <!-- Left Column: Carousel Content Container -->
-                <div class="ms-commitment-content-container">
-                    
-                    <!-- Slide 1 (Raluca Rusu) -->
-                    <div class="ms-commitment-slide active" data-slide="0">
-                        <h2 class="ms-commitment-card-title">Diversity & Inclusion in <span>Action</span></h2>
-                        <p class="ms-commitment-text">Diversity and Inclusion at RSI is woven into the fabric of who we are and how we operate every single day. We've learned that when people feel genuinely valued and included, they don't just perform better; they unlock their full potential, advance their careers with purpose, and ultimately drive both organizational and community success.</p>
-                        <p class="ms-commitment-text">Our approach is built on four foundational pillars: <strong>fostering inclusive leadership</strong>, <strong>building inclusive teams</strong>, <strong>establishing equitable processes</strong>, and providing the right D&I enablement. These pillars directly inform <strong>our leadership practices, collaboration styles, and decision-making</strong> at every level. The result is a workplace where diverse viewpoints are genuinely welcomed, where inclusion moves from policy to lived reality, and where every person has transparent access to equal <strong>opportunities</strong>.</p>
-                        <p class="ms-commitment-text">But we recognize our responsibility goes <strong>further</strong>. We see our <strong>internal commitment</strong> to inclusion as a catalyst for creating a more equitable society beyond our organization's walls.</p>
-                        
-                        <div class="ms-commitment-author" style="margin-top: 1.5rem;">
-                            <h4 class="ms-commitment-name" style="font-size: 1.15rem; font-weight: 700; color: #ffffff; margin: 0;">Raluca Rusu</h4>
-                            <div class="ms-commitment-title" style="font-size: 0.9rem; color: #94a3b8; margin: 0.15rem 0 0.5rem 0;">CEO, R Systems Europe</div>
-                        </div>
-                    </div>
- 
-                    <!-- Slide 2 (Danusia Jugastreanu) -->
-                    <div class="ms-commitment-slide" data-slide="1">
-                        <h2 class="ms-commitment-card-title">Fostering a Culture of <span>Inclusion</span></h2>
-                        <p class="ms-commitment-text">Diversity and Inclusion at RSI is woven into the fabric of who we are and how we operate every single day. We've learned that when people feel genuinely valued and included, they don't just perform better; they unlock their full potential, advance their careers with purpose, and ultimately drive both organizational and community success.</p>
-                        <p class="ms-commitment-text">Our approach is built on four foundational pillars: <strong>fostering inclusive leadership</strong>, <strong>building inclusive teams</strong>, <strong>establishing equitable processes</strong>, and providing the right D&I enablement. These pillars directly inform <strong>our leadership practices, collaboration styles, and decision-making</strong> at every level. The result is a workplace where diverse viewpoints are genuinely welcomed, where inclusion moves from policy to lived reality, and where every person has transparent access to equal <strong>opportunities</strong>.</p>
-                        <p class="ms-commitment-text">But we recognize our responsibility goes <strong>further</strong>. We see our <strong>internal commitment</strong> to inclusion as a catalyst for creating a more equitable society beyond our organization's walls.</p>
-                        
-                        <div class="ms-commitment-author" style="margin-top: 1.5rem;">
-                            <h4 class="ms-commitment-name" style="font-size: 1.15rem; font-weight: 700; color: #ffffff; margin: 0;">Danusia Jugastreanu</h4>
-                            <div class="ms-commitment-title" style="font-size: 0.9rem; color: #94a3b8; margin: 0.15rem 0 0.5rem 0;">Global Head of HR BP / D&I Leader</div>
-                        </div>
-                    </div>
- 
-                    <!-- Signature Link & Pagination Bars -->
-                    <div class="ms-commitment-footer" style="display: flex; justify-content: space-between; align-items: flex-end; margin-top: 2rem; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 1.5rem; z-index: 5; position: relative;">
-                        <div style="font-size: 0.85rem; color: #7b2ff7; font-weight: 600; letter-spacing: 0.05em;">rsystems.com</div>
-                        <div class="ms-commitment-indicator" style="display: flex; gap: 8px;">
-                            <button class="ms-indicator-bar white active" data-go="0" aria-label="Slide 1"></button>
-                            <button class="ms-indicator-bar purple" data-go="1" aria-label="Slide 2"></button>
-                        </div>
-                    </div>
- 
-                </div>
- 
-                <!-- Right Column Grid Spacer -->
-                <div style="pointer-events: none;"></div>
- 
-                <!-- Right: Absolute Image & Circle Background Container -->
-                <div class="ms-commitment-img-container">
-                    <div class="ms-commitment-circle-2"></div>
-                    <div class="ms-commitment-circle-1"></div>
-                    
-                    <!-- Image Slide 1 -->
-                    <img src="image/Raluca_Rusu_official-photo.png" alt="Raluca Rusu" class="ms-commitment-img active" data-img-slide="0">
-                    
-                    <!-- Image Slide 2 -->
-                    <img src="image/Danusia_Jugastreanu-cutout.png" alt="Danusia Jugastreanu" class="ms-commitment-img" data-img-slide="1">
-                </div>
+            <!-- Right Column: Cutout Photo -->
+            <div class="ms-commitment-right">
+                <!-- Cutout Photo -->
+                <img src="image/Raluca_Rusu_official-photo.png" alt="Raluca Rusu" class="ms-commitment-cutout-img">
             </div>
         </div>
     </section>
@@ -1736,8 +2882,217 @@
             </div>
     </section>
 
+
+    <!-- Our D&I Projects Section (Card Carousel matching WalkMe layout) -->
+    <section class="ms-projects-section">
+        <div class="ms-projects-container">
+            <!-- Header with Prev/Next buttons on the right -->
+            <div class="ms-projects-header-wrapper">
+                <div class="section-header text-left">
+                    <span class="eyebrow" style="color: #9b51e0; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.88rem;">• D&I PROJECTS</span>
+                    <h2 style="font-size: clamp(2.2rem, 3.8vw, 3rem); font-weight: 300; color: #0f172a; margin-top: 0.4rem; line-height: 1.15; letter-spacing: -0.02em;">Our D&I Projects</h2>
+                    <p style="color: #64748b; font-size: 1.05rem; line-height: 1.6; margin-top: 0.75rem; max-width: 680px;">Key initiatives and programs driving gender equality, community health, and inclusive enablement across our regional teams.</p>
+                </div>
+                
+                <div class="ms-projects-nav">
+                    <button id="msProjPrevBtn" class="ms-projects-nav-btn" aria-label="Previous project">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="19" y1="12" x2="5" y2="12"></line>
+                            <polyline points="12 19 5 12 12 5"></polyline>
+                        </svg>
+                    </button>
+                    <button id="msProjNextBtn" class="ms-projects-nav-btn" aria-label="Next project">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+ 
+            <!-- Carousel Wrapper & Track -->
+            <div class="ms-projects-carousel-wrapper">
+                <div class="ms-projects-track" id="msProjectsTrack">
+                    <!-- Project 1 -->
+                    <div class="ms-project-card">
+                        <div class="ms-project-img-wrapper">
+                            <div class="ms-project-logo-badge">
+                                <img src="image/rsi_logo.png" alt="RSi Logo">
+                            </div>
+                            <img src="image/di_photo_1.jpg" alt="Women's Health Camp" class="ms-project-img">
+                        </div>
+                        <div class="ms-project-body">
+                            <span class="ms-project-eyebrow">Health & Wellness</span>
+                            <h3 class="ms-project-title">Women's Health Camp</h3>
+                            <p class="ms-project-desc">Organized a Women's Health Awareness Session and Mammography Screening Camp at Noida office to support preventive health and early detection.</p>
+                            <a href="#" class="ms-project-link">
+                                <span>Learn More</span>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                            </a>
+                        </div>
+                    </div>
+ 
+                    <!-- Project 2 -->
+                    <div class="ms-project-card">
+                        <div class="ms-project-img-wrapper">
+                            <div class="ms-project-logo-badge">
+                                <img src="image/rsi_logo.png" alt="RSi Logo">
+                            </div>
+                            <img src="image/di_photo_2.jpg" alt="Women's Nutrition Workshop" class="ms-project-img">
+                        </div>
+                        <div class="ms-project-body">
+                            <span class="ms-project-eyebrow">Nutrition & Hygiene</span>
+                            <h3 class="ms-project-title">Women's Nutrition Workshop</h3>
+                            <p class="ms-project-desc">Hosted an interactive session focused on building healthy nutrition habits and hygiene practices to support long-term wellbeing.</p>
+                            <a href="#" class="ms-project-link">
+                                <span>Learn More</span>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                            </a>
+                        </div>
+                    </div>
+ 
+                    <!-- Project 3 -->
+                    <div class="ms-project-card">
+                        <div class="ms-project-img-wrapper">
+                            <div class="ms-project-logo-badge">
+                                <img src="image/rsi_logo.png" alt="RSi Logo">
+                            </div>
+                            <img src="image/di_photo_3.jpg" alt="Uplift Women in STEM" class="ms-project-img">
+                        </div>
+                        <div class="ms-project-body">
+                            <span class="ms-project-eyebrow">Careers & Tech</span>
+                            <h3 class="ms-project-title">Uplift Women in STEM</h3>
+                            <p class="ms-project-desc">Partnered with AIESEC Romania to mentor young women on tech careers and AI, working to close the gender gap in technology.</p>
+                            <a href="#" class="ms-project-link">
+                                <span>Learn More</span>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                            </a>
+                        </div>
+                    </div>
+ 
+                    <!-- Project 4 -->
+                    <div class="ms-project-card">
+                        <div class="ms-project-img-wrapper">
+                            <div class="ms-project-logo-badge">
+                                <img src="image/rsi_logo.png" alt="RSi Logo">
+                            </div>
+                            <img src="image/di_photo_4.jpg" alt="Youth Speak Forum" class="ms-project-img">
+                        </div>
+                        <div class="ms-project-body">
+                            <span class="ms-project-eyebrow">Talent & Mentorship</span>
+                            <h3 class="ms-project-title">Youth Speak Forum</h3>
+                            <p class="ms-project-desc">Mentored next-gen tech talents in Galați, opening doors to technology careers and building an inclusive pipeline of innovators.</p>
+                            <a href="#" class="ms-project-link">
+                                <span>Learn More</span>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                            </a>
+                        </div>
+                    </div>
+ 
+                    <!-- Project 5 -->
+                    <div class="ms-project-card">
+                        <div class="ms-project-img-wrapper">
+                            <div class="ms-project-logo-badge">
+                                <img src="image/rsi_logo.png" alt="RSi Logo">
+                            </div>
+                            <img src="image/di_photo_5.jpg" alt="Dastkar Artisan Exhibition" class="ms-project-img">
+                        </div>
+                        <div class="ms-project-body">
+                            <span class="ms-project-eyebrow">Art & Empowerment</span>
+                            <h3 class="ms-project-title">Dastkar Artisan Exhibition</h3>
+                            <p class="ms-project-desc">Partnered with Dastkar NGO to support traditional craftsmanship and empower women artisans with sustainable economic opportunities in Greater Noida.</p>
+                            <a href="#" class="ms-project-link">
+                                <span>Learn More</span>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                            </a>
+                        </div>
+                    </div>
+ 
+                    <!-- Project 6 -->
+                    <div class="ms-project-card">
+                        <div class="ms-project-img-wrapper">
+                            <div class="ms-project-logo-badge">
+                                <img src="image/rsi_logo.png" alt="RSi Logo">
+                            </div>
+                            <img src="image/di_photo_6.jpg" alt="Financial Wellbeing for Women" class="ms-project-img">
+                        </div>
+                        <div class="ms-project-body">
+                            <span class="ms-project-eyebrow">Financial Literacy</span>
+                            <h3 class="ms-project-title">Financial Wellbeing for Women</h3>
+                            <p class="ms-project-desc">Hosted an expert-led session helping female employees build financial literacy to make confident, independent future decisions.</p>
+                            <a href="#" class="ms-project-link">
+                                <span>Learn More</span>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                            </a>
+                        </div>
+                    </div>
+ 
+                    <!-- Project 7 -->
+                    <div class="ms-project-card">
+                        <div class="ms-project-img-wrapper">
+                            <div class="ms-project-logo-badge">
+                                <img src="image/rsi_logo.png" alt="RSi Logo">
+                            </div>
+                            <img src="image/di_photo_7.jpg" alt="How AI Can Accelerate Your Career" class="ms-project-img">
+                        </div>
+                        <div class="ms-project-body">
+                            <span class="ms-project-eyebrow">Careers & AI</span>
+                            <h3 class="ms-project-title">How AI Can Accelerate Your Career</h3>
+                            <p class="ms-project-desc">Delivered a practical session for Pune team members focused on leveraging AI tools to accelerate career growth and tech capabilities.</p>
+                            <a href="#" class="ms-project-link">
+                                <span>Learn More</span>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                            </a>
+                        </div>
+                    </div>
+ 
+                    <!-- Project 8 -->
+                    <div class="ms-project-card">
+                        <div class="ms-project-img-wrapper">
+                            <div class="ms-project-logo-badge">
+                                <img src="image/rsi_logo.png" alt="RSi Logo">
+                            </div>
+                            <img src="image/di_photo_8.jpg" alt="Leaders in Tech" class="ms-project-img">
+                        </div>
+                        <div class="ms-project-body">
+                            <span class="ms-project-eyebrow">Networking & Tech</span>
+                            <h3 class="ms-project-title">Leaders in Tech</h3>
+                            <p class="ms-project-desc">Proud partner of Leaders in Tech in Bucharest, helping connect engineering leaders and creating supportive paths for tech students.</p>
+                            <a href="#" class="ms-project-link">
+                                <span>Learn More</span>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                            </a>
+                        </div>
+                    </div>
+ 
+                    <!-- Project 9 -->
+                    <div class="ms-project-card">
+                        <div class="ms-project-img-wrapper">
+                            <div class="ms-project-logo-badge">
+                                <img src="image/rsi_logo.png" alt="RSi Logo">
+                            </div>
+                            <img src="image/di_photo_9.jpg" alt="Preventive Care" class="ms-project-img">
+                        </div>
+                        <div class="ms-project-body">
+                            <span class="ms-project-eyebrow">Health & Care</span>
+                            <h3 class="ms-project-title">Preventive Care</h3>
+                            <p class="ms-project-desc">Conducted a Pan India Health Camp across Greater Noida, Bengaluru, Chennai, and Mangaluru, serving over 339+ employees on Day 1.</p>
+                            <a href="#" class="ms-project-link">
+                                <span>Learn More</span>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+ 
+
+    
+
     <!-- Inspiring Women of RSI Section (React Bits CircularGallery 3D WebGL Component) -->
-    <section class="inspiring-women-section" style="background: #ffffff; padding: 5.5rem 2rem; border-bottom: 1px solid #f1f5f9; position: relative; overflow: hidden;">
+    <section class="inspiring-women-section" style="background: #ffffff; padding: 3rem 2rem 5.5rem 2rem; border-bottom: 1px solid #f1f5f9; position: relative; overflow: hidden;">
         <div style="max-width: 1280px; margin: 0 auto;">
             <!-- Left-Aligned Header Pattern (RSi Design System Style) -->
             <div class="section-header text-left" style="margin-bottom: 2.5rem; text-align: left;">
@@ -1761,155 +3116,609 @@
         </div>
     </section>
 
-    <!-- Service Offerings (Apple Interactive Showcase - Healthcare Offerings) -->
-    <section class="service-offerings">
-        <div class="service-offerings-header">
-            <span class="eyebrow">• HEALTHCARE SERVICE OFFERINGS</span>
-            <h2>Provider Service Offerings</h2>
-            <p>End-to-end healthcare digital engineering, interoperability, and clinical automation solutions designed for modern health systems.</p>
-        </div>
-
-        <div class="apple-showcase-container">
-            <!-- Left Side Interactive Accordion List -->
-            <div class="apple-accordion-list" id="appleAccordionList">
-                <!-- Populated dynamically with Healthcare items -->
-            </div>
-
-            <!-- Right Side Visual Stage Canvas -->
-            <div class="apple-stage-card">
-                <div class="apple-stage-img-wrapper">
-                    <span class="apple-stage-badge" id="appleStageBadge">Healthcare Capability</span>
-                    <img src="images/image-1.avif" alt="Service Showcase" id="appleStageImg" class="apple-stage-img">
-                    <div class="apple-stage-gradient-overlay"></div>
-                    <div class="apple-stage-bottom-overlay">
-                        <h3 class="apple-stage-bottom-title" id="appleStageTitle">Patient Workflows in EHR/EMR</h3>
-                        <div class="apple-stage-bottom-tags" id="appleStageTags"></div>
+     
+    <!-- In Good Company Video Series Carousel Section -->
+    <section class="ms-video-series-section">
+        <div class="ms-video-series-container">
+            <!-- Left Side: Interactive Video Card Carousel -->
+            <div class="ms-video-left">
+                <div class="ms-video-glow"></div>
+                <div class="ms-video-card-wrapper">
+                    <!-- Slide 1 Thumbnail -->
+                    <div class="ms-video-thumbnail-slide active" data-video-slide="0">
+                        <img src="image/episode1.png" alt="Gen Z: The New Generation of Women in Tech">
+                        <div class="ms-video-play-btn" aria-label="Play video">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8 5v14l11-7z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <!-- Slide 2 Thumbnail -->
+                    <div class="ms-video-thumbnail-slide" data-video-slide="1">
+                        <img src="image/episode2.png" alt="Women in Tech: A Journey Back to Work">
+                        <div class="ms-video-play-btn" aria-label="Play video">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8 5v14l11-7z" />
+                            </svg>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Collaborations Across the Technology Ecosystem Section (Matching R Systems Design System) -->
-    <section class="collaborations-section" style="padding: 5rem calc(max(2rem, (100% - 1280px) / 2 + 2rem)); background: #f8f9fd; border-top: 1px solid #f1f5f9;">
-        <div style="max-width: 1280px; margin: 0 auto;">
-            <!-- Standard Left-Aligned Section Header Pattern -->
-            <div class="section-header text-left" style="margin-bottom: 2.5rem; text-align: left;">
-                <span class="eyebrow" style="color: #9b51e0; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.88rem;">• STRATEGIC PARTNERSHIPS</span>
-                <h2 style="font-size: clamp(2.2rem, 3.8vw, 3rem); font-weight: 300; color: #0f172a; margin-top: 0.4rem; line-height: 1.15; letter-spacing: -0.02em;">Collaborations Across the Technology Ecosystem</h2>
-                <p style="color: #64748b; font-size: 1.05rem; line-height: 1.6; margin-top: 0.75rem; max-width: 780px;">Partnering with global cloud, AI, and enterprise automation leaders to deliver scalable, compliant healthcare digital solutions.</p>
-            </div>
-
-            <!-- Elevated Logo Cards Grid -->
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; max-width: 1100px;">
-                <div class="partner-logo-card" style="background: #ffffff; border-radius: 20px; padding: 2rem; border: 1px solid #e2e8f0; box-shadow: 0 10px 30px rgba(155, 81, 224, 0.05), 0 2px 6px rgba(0,0,0,0.02); display: flex; align-items: center; justify-content: center; height: 110px; transition: all 0.35s ease;">
-                    <img src="https://media.rsystems.com/wp-content/uploads/2024/01/Partner-Logos-200-x-90-01.jpg" alt="AWS Partner Logo" style="max-height: 55px; max-width: 180px; width: auto; object-fit: contain;">
+ 
+            <!-- Right Side: Content & Controls -->
+            <div class="ms-video-right">
+                <div>
+                    <span class="eyebrow" style="color: #9b51e0; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.88rem;">• VIDEO SERIES</span>
+                    <h2 style="font-size: clamp(2.2rem, 3.8vw, 3rem); font-weight: 300; color: #ffffff; margin-top: 0.4rem; line-height: 1.15; letter-spacing: -0.02em;">In Good Company: Voices That Shape Change</h2>
                 </div>
-                <div class="partner-logo-card" style="background: #ffffff; border-radius: 20px; padding: 2rem; border: 1px solid #e2e8f0; box-shadow: 0 10px 30px rgba(155, 81, 224, 0.05), 0 2px 6px rgba(0,0,0,0.02); display: flex; align-items: center; justify-content: center; height: 110px; transition: all 0.35s ease;">
-                    <img src="https://media.rsystems.com/wp-content/uploads/2024/11/Gold-Microsoft-Partner.png" alt="Gold Microsoft Partner Logo" style="max-height: 55px; max-width: 180px; width: auto; object-fit: contain;">
-                </div>
-                <div class="partner-logo-card" style="background: #ffffff; border-radius: 20px; padding: 2rem; border: 1px solid #e2e8f0; box-shadow: 0 10px 30px rgba(155, 81, 224, 0.05), 0 2px 6px rgba(0,0,0,0.02); display: flex; align-items: center; justify-content: center; height: 110px; transition: all 0.35s ease;">
-                    <img src="https://media.rsystems.com/wp-content/uploads/2024/11/automation-anywhere.png" alt="Automation Anywhere Partner Logo" style="max-height: 55px; max-width: 180px; width: auto; object-fit: contain;">
+                <p>A series dedicated to exploring the experiences, perspectives, and journeys of women at RSI.</p>
+                
+                <button id="msWatchVideoBtn" class="ms-video-watch-btn">
+                    <span>Watch Full Video</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </button>
+ 
+                <!-- Custom Pagination Dots -->
+                <div class="ms-video-indicator">
+                    <button class="ms-video-indicator-bar active" data-video-go="0" aria-label="View Episode 1"></button>
+                    <button class="ms-video-indicator-bar" data-video-go="1" aria-label="View Episode 2"></button>
                 </div>
             </div>
         </div>
     </section>
+ 
+    <!-- Video Modal overlay -->
+    <div id="msVideoModal" class="ms-video-modal-overlay">
+        <div class="ms-video-modal-content">
+            <button id="msVideoModalClose" class="ms-video-modal-close" aria-label="Close video player">&times;</button>
+            <div class="ms-video-iframe-container">
+                <video id="msModalVideoEl" controls playsinline style="width: 100%; height: 100%; border-radius: 12px; background: #000000; box-shadow: 0 20px 50px rgba(0,0,0,0.8);">
+                    <source src="image/bg video.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+    </div>
+ 
+    
+ 
 
-    <!-- EXIQO Section -->
-    <section class="exiqo-section">
-        <video autoplay loop muted playsinline poster="image/exiqo.png" class="exiqo-bg-video">
-            <source src="ful.mp4" type="video/mp4">
-        </video>
-        <div class="exiqo-video-overlay"></div>
-        <div class="exiqo-content">
-            <h2>EXIQO Healthcare AI Studio</h2>
-            <h3>Accelerating Clinical & Operational AI for Providers</h3>
-            <p>Transforming complex healthcare workflows with OptimaAI platform—delivering autonomous agentic workflows, predictive care analytics, and seamless EHR interoperability within 90 days.</p>
-            <a href="#contact" class="btn btn-white">Learn More About EXIQO</a>
+    <!-- Life @ R Systems Vertical Marquee Showcase Section -->
+    <section class="life-at-rsi-section">
+        <div style="max-width: 1320px; margin: 0 auto; display: grid; grid-template-columns: 340px 1fr; gap: 3.5rem; align-items: center;">
+            
+            <!-- Left Column: Title & Eyebrow -->
+            <div style="display: flex; flex-direction: column; gap: 1rem;">
+                <span class="eyebrow" style="color: #9b51e0; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.88rem;">• CULTURE & CELEBRATIONS</span>
+                <h2 style="font-size: clamp(2.4rem, 3.5vw, 3.2rem); font-weight: 300; color: #0f172a; line-height: 1.15; letter-spacing: -0.02em; margin: 0;">Life @ R Systems</h2>
+                <p style="color: #64748b; font-size: 1rem; line-height: 1.6; margin-top: 0.5rem;">Glimpses of our vibrant global culture, employee celebrations, sports tournaments, and community engagement across R Systems offices worldwide.</p>
+                <div style="margin-top: 1rem;">
+                    <a href="https://www.linkedin.com/company/r-systems/posts/" target="_blank" class="btn btn-purple" style="font-size: 0.9rem; padding: 0.75rem 1.4rem;">
+                        <span>Explore All Posts</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Center Column: 3 Vertical Marquee Columns (6 slots visible!) -->
+            <div class="life-marquee-wrapper">
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; height: 100%;">
+                    
+                    <!-- Vertical Column 1 (Scrolls Upwards) -->
+                    <div class="life-marquee-col col-up">
+                        <div class="life-marquee-track">
+                            <!-- Card 1 -->
+                            <div class="life-card-slot" onclick="window.open('https://www.linkedin.com/feed/update/urn:li:activity:7363188450763665408/?actorCompanyId=165636', '_blank')">
+                                <div class="life-card-inner">
+                                    <div class="life-card-front">
+                                        <img src="https://www.rsystems.com/wp-content/uploads/cache/remote/media-rsystems-com/976180824.jpg" alt="Independence Day Celebration, India">
+                                    </div>
+                                    <div class="life-card-back">
+                                        <h4 class="life-card-back-title">
+                                            <span>Independence Day Celebration, India</span>
+                                            <span class="life-card-title-arrow">
+                                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                                            </span>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card 2 -->
+                            <div class="life-card-slot" onclick="window.open('https://www.linkedin.com/feed/update/urn:li:activity:7366449248759857152/?actorCompanyId=165636', '_blank')">
+                                <div class="life-card-inner">
+                                    <div class="life-card-front">
+                                        <img src="https://www.rsystems.com/wp-content/uploads/cache/remote/media-rsystems-com/1669240964.jpg" alt="Chess Championship">
+                                    </div>
+                                    <div class="life-card-back">
+                                        <h4 class="life-card-back-title">
+                                            <span>Chess Championship</span>
+                                            <span class="life-card-title-arrow">
+                                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                                            </span>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card 3 -->
+                            <div class="life-card-slot" onclick="window.open('https://www.linkedin.com/feed/update/urn:li:activity:7381658376323272704/?actorCompanyId=165636', '_blank')">
+                                <div class="life-card-inner">
+                                    <div class="life-card-front">
+                                        <img src="https://www.rsystems.com/wp-content/uploads/cache/remote/media-rsystems-com/1914378994.jpg" alt="Navratri Celebration - India">
+                                    </div>
+                                    <div class="life-card-back">
+                                        <h4 class="life-card-back-title">
+                                            <span>Navratri Celebration - India</span>
+                                            <span class="life-card-title-arrow">
+                                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                                            </span>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card 4 -->
+                            <div class="life-card-slot" onclick="window.open('https://www.linkedin.com/feed/update/urn:li:activity:7384551214593519616/?actorCompanyId=165636', '_blank')">
+                                <div class="life-card-inner">
+                                    <div class="life-card-front">
+                                        <img src="https://www.rsystems.com/wp-content/uploads/cache/remote/media-rsystems-com/1263344699.jpg" alt="Bucharest Marathon">
+                                    </div>
+                                    <div class="life-card-back">
+                                        <h4 class="life-card-back-title">
+                                            <span>Bucharest Marathon</span>
+                                            <span class="life-card-title-arrow">
+                                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                                            </span>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Loop Copies -->
+                            <div class="life-card-slot" onclick="window.open('https://www.linkedin.com/feed/update/urn:li:activity:7363188450763665408/?actorCompanyId=165636', '_blank')">
+                                <div class="life-card-inner">
+                                    <div class="life-card-front">
+                                        <img src="https://www.rsystems.com/wp-content/uploads/cache/remote/media-rsystems-com/976180824.jpg" alt="Independence Day Celebration, India">
+                                    </div>
+                                    <div class="life-card-back">
+                                        <h4 class="life-card-back-title">
+                                            <span>Independence Day Celebration, India</span>
+                                            <span class="life-card-title-arrow">
+                                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                                            </span>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="life-card-slot" onclick="window.open('https://www.linkedin.com/feed/update/urn:li:activity:7366449248759857152/?actorCompanyId=165636', '_blank')">
+                                <div class="life-card-inner">
+                                    <div class="life-card-front">
+                                        <img src="https://www.rsystems.com/wp-content/uploads/cache/remote/media-rsystems-com/1669240964.jpg" alt="Chess Championship">
+                                    </div>
+                                    <div class="life-card-back">
+                                        <h4 class="life-card-back-title">
+                                            <span>Chess Championship</span>
+                                            <span class="life-card-title-arrow">
+                                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                                            </span>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Vertical Column 2 (Scrolls Downwards - Offset) -->
+                    <div class="life-marquee-col col-down" style="padding-top: 2.5rem;">
+                        <div class="life-marquee-track">
+                            <!-- Card 5 -->
+                            <div class="life-card-slot" onclick="window.open('https://www.linkedin.com/feed/update/urn:li:activity:7377318552485302272/?actorCompanyId=165636', '_blank')">
+                                <div class="life-card-inner">
+                                    <div class="life-card-front">
+                                        <img src="https://www.rsystems.com/wp-content/uploads/cache/remote/media-rsystems-com/4203552095.jpg" alt="Programmers' Day - Bucharest">
+                                    </div>
+                                    <div class="life-card-back">
+                                        <h4 class="life-card-back-title">
+                                            <span>Programmers' Day - Bucharest</span>
+                                            <span class="life-card-title-arrow">
+                                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                                            </span>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card 6 -->
+                            <div class="life-card-slot" onclick="window.open('https://www.linkedin.com/feed/update/urn:li:activity:7387450320500641792/?actorCompanyId=165636', '_blank')">
+                                <div class="life-card-inner">
+                                    <div class="life-card-front">
+                                        <img src="https://www.rsystems.com/wp-content/uploads/cache/remote/media-rsystems-com/3816846806.jpg" alt="Diwali Celebration, India">
+                                    </div>
+                                    <div class="life-card-back">
+                                        <h4 class="life-card-back-title">
+                                            <span>Diwali Celebration, India</span>
+                                            <span class="life-card-title-arrow">
+                                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                                            </span>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card 7 -->
+                            <div class="life-card-slot" onclick="window.open('https://www.linkedin.com/feed/update/urn:li:activity:7409489973403484160', '_blank')">
+                                <div class="life-card-inner">
+                                    <div class="life-card-front">
+                                        <img src="https://www.rsystems.com/wp-content/uploads/cache/remote/media-rsystems-com/2666405938.jpg" alt="Cricket Tournament">
+                                    </div>
+                                    <div class="life-card-back">
+                                        <h4 class="life-card-back-title">
+                                            <span>Cricket Tournament</span>
+                                            <span class="life-card-title-arrow">
+                                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                                            </span>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card 8 -->
+                            <div class="life-card-slot" onclick="window.open('https://www.linkedin.com/feed/update/urn:li:activity:7399514808804442112/?actorCompanyId=165636', '_blank')">
+                                <div class="life-card-inner">
+                                    <div class="life-card-front">
+                                        <img src="https://www.rsystems.com/wp-content/uploads/cache/remote/media-rsystems-com/2666540204.jpg" alt="Cyber Security Month Celebration">
+                                    </div>
+                                    <div class="life-card-back">
+                                        <h4 class="life-card-back-title">
+                                            <span>Cyber Security Month Celebration</span>
+                                            <span class="life-card-title-arrow">
+                                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                                            </span>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Loop Copies -->
+                            <div class="life-card-slot" onclick="window.open('https://www.linkedin.com/feed/update/urn:li:activity:7377318552485302272/?actorCompanyId=165636', '_blank')">
+                                <div class="life-card-inner">
+                                    <div class="life-card-front">
+                                        <img src="https://www.rsystems.com/wp-content/uploads/cache/remote/media-rsystems-com/4203552095.jpg" alt="Programmers' Day - Bucharest">
+                                    </div>
+                                    <div class="life-card-back">
+                                        <h4 class="life-card-back-title">
+                                            <span>Programmers' Day - Bucharest</span>
+                                            <span class="life-card-title-arrow">
+                                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                                            </span>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="life-card-slot" onclick="window.open('https://www.linkedin.com/feed/update/urn:li:activity:7387450320500641792/?actorCompanyId=165636', '_blank')">
+                                <div class="life-card-inner">
+                                    <div class="life-card-front">
+                                        <img src="https://www.rsystems.com/wp-content/uploads/cache/remote/media-rsystems-com/3816846806.jpg" alt="Diwali Celebration, India">
+                                    </div>
+                                    <div class="life-card-back">
+                                        <h4 class="life-card-back-title">
+                                            <span>Diwali Celebration, India</span>
+                                            <span class="life-card-title-arrow">
+                                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                                            </span>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Vertical Column 3 (Scrolls Upwards) -->
+                    <div class="life-marquee-col col-up">
+                        <div class="life-marquee-track">
+                            <!-- Card 9 -->
+                            <div class="life-card-slot" onclick="window.open('https://www.linkedin.com/feed/update/urn:li:activity:7357017191927455744/?actorCompanyId=165636', '_blank')">
+                                <div class="life-card-inner">
+                                    <div class="life-card-front">
+                                        <img src="https://www.rsystems.com/wp-content/uploads/cache/remote/media-rsystems-com/2120837985.jpg" alt="Coffee with Nitesh - Noida, India">
+                                    </div>
+                                    <div class="life-card-back">
+                                        <h4 class="life-card-back-title">
+                                            <span>Coffee with Nitesh - Noida, India</span>
+                                            <span class="life-card-title-arrow">
+                                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                                            </span>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card 10 -->
+                            <div class="life-card-slot" onclick="window.open('https://www.linkedin.com/feed/update/urn:li:activity:7382342370475802625/?actorCompanyId=165636', '_blank')">
+                                <div class="life-card-inner">
+                                    <div class="life-card-front">
+                                        <img src="https://www.rsystems.com/wp-content/uploads/cache/remote/media-rsystems-com/3661064724.jpg" alt="Dandiya Night - India">
+                                    </div>
+                                    <div class="life-card-back">
+                                        <h4 class="life-card-back-title">
+                                            <span>Dandiya Night - India</span>
+                                            <span class="life-card-title-arrow">
+                                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                                            </span>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card 11 -->
+                            <div class="life-card-slot" onclick="window.open('https://www.linkedin.com/feed/update/urn:li:activity:7395083106543808512/?actorCompanyId=165636', '_blank')">
+                                <div class="life-card-inner">
+                                    <div class="life-card-front">
+                                        <img src="https://www.rsystems.com/wp-content/uploads/cache/remote/media-rsystems-com/2929277004.jpg" alt="Halloween Celebration">
+                                    </div>
+                                    <div class="life-card-back">
+                                        <h4 class="life-card-back-title">
+                                            <span>Halloween Celebration</span>
+                                            <span class="life-card-title-arrow">
+                                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                                            </span>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Loop Copies -->
+                            <div class="life-card-slot" onclick="window.open('https://www.linkedin.com/feed/update/urn:li:activity:7357017191927455744/?actorCompanyId=165636', '_blank')">
+                                <div class="life-card-inner">
+                                    <div class="life-card-front">
+                                        <img src="https://www.rsystems.com/wp-content/uploads/cache/remote/media-rsystems-com/2120837985.jpg" alt="Coffee with Nitesh - Noida, India">
+                                    </div>
+                                    <div class="life-card-back">
+                                        <h4 class="life-card-back-title">
+                                            <span>Coffee with Nitesh - Noida, India</span>
+                                            <span class="life-card-title-arrow">
+                                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                                            </span>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="life-card-slot" onclick="window.open('https://www.linkedin.com/feed/update/urn:li:activity:7382342370475802625/?actorCompanyId=165636', '_blank')">
+                                <div class="life-card-inner">
+                                    <div class="life-card-front">
+                                        <img src="https://www.rsystems.com/wp-content/uploads/cache/remote/media-rsystems-com/3661064724.jpg" alt="Dandiya Night - India">
+                                    </div>
+                                    <div class="life-card-back">
+                                        <h4 class="life-card-back-title">
+                                            <span>Dandiya Night - India</span>
+                                            <span class="life-card-title-arrow">
+                                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                                            </span>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
         </div>
     </section>
 
+    <!-- Awards & Achievements Section -->
+    <section class="ms-awards-section">
+        <div class="ms-awards-container">
+            <!-- Header Pattern (RSi Design System Style) -->
+            <div class="section-header text-left" style="margin-bottom: 3.5rem; text-align: left;">
+                <span class="eyebrow" style="color: #9b51e0; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.88rem;">• AWARDS & ACHIEVEMENTS</span>
+                <h2 style="font-size: clamp(2.2rem, 3.8vw, 3rem); font-weight: 300; color: #0f172a; margin-top: 0.4rem; line-height: 1.15; letter-spacing: -0.02em;">Awards & Achievements</h2>
+                <p style="color: #64748b; font-size: 1.05rem; line-height: 1.6; margin-top: 0.75rem; max-width: 780px;">Recognized globally for our commitment to diversity, technology innovation, and organizational excellence.</p>
+            </div>
+ 
+            <!-- Awards Carousel Wrapper -->
+            <div class="ms-awards-carousel-wrapper">
+                <div class="ms-awards-carousel-track">
+                    <!-- Slide 1: Cards 1, 2, 3 -->
+                    <div class="ms-awards-slide active" data-award-slide="0">
+                        <div class="ms-awards-grid">
+                            <div class="ms-award-card">
+                                <div class="ms-award-img-wrapper">
+                                    <img src="image/A1.png" alt="Award Image 1" class="ms-award-img">
+                                </div>
+                                <p class="ms-award-text">Recognized at the Financial Express AICONIC Awards 2026 with Silver</p>
+                            </div>
+                            <div class="ms-award-card">
+                                <div class="ms-award-img-wrapper">
+                                    <img src="image/A2.jpg" alt="Award Image 2" class="ms-award-img">
+                                </div>
+                                <p class="ms-award-text">Recognized at the Financial Express AICONIC Awards 2026 with Silver</p>
+                            </div>
+                            <div class="ms-award-card">
+                                <div class="ms-award-img-wrapper">
+                                    <img src="image/A3.jpg" alt="Award Image 3" class="ms-award-img">
+                                </div>
+                                <p class="ms-award-text">Recognized at the Financial Express AICONIC Awards 2026 with Silver</p>
+                            </div>
+                        </div>
+                    </div>
+ 
+                    <!-- Slide 2: Cards 4, 5, 6 -->
+                    <div class="ms-awards-slide" data-award-slide="1">
+                        <div class="ms-awards-grid">
+                            <div class="ms-award-card">
+                                <div class="ms-award-img-wrapper">
+                                    <img src="image/A4.png" alt="Award Image 4" class="ms-award-img">
+                                </div>
+                                <p class="ms-award-text">Recognized at the Financial Express AICONIC Awards 2026 with Silver</p>
+                            </div>
+                            <div class="ms-award-card">
+                                <div class="ms-award-img-wrapper">
+                                    <img src="image/A5.jpg" alt="Award Image 5" class="ms-award-img">
+                                </div>
+                                <p class="ms-award-text">Recognized at the Financial Express AICONIC Awards 2026 with Silver</p>
+                            </div>
+                            <div class="ms-award-card">
+                                <div class="ms-award-img-wrapper">
+                                    <img src="image/A6.jpg" alt="Award Image 6" class="ms-award-img">
+                                </div>
+                                <p class="ms-award-text">Recognized at the Financial Express AICONIC Awards 2026 with Silver</p>
+                            </div>
+                        </div>
+                    </div>
+ 
+                    <!-- Slide 3: Card 7 (Centered Single Item Layout) -->
+                    <div class="ms-awards-slide" data-award-slide="2">
+                        <div class="ms-awards-grid">
+                            <div class="ms-award-card">
+                                <div class="ms-award-img-wrapper">
+                                    <img src="image/A7.png" alt="Award Image 7" class="ms-award-img">
+                                </div>
+                                <p class="ms-award-text">Recognized at the Financial Express AICONIC Awards 2026 with Silver</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+ 
+                <!-- Custom Pagination Dots -->
+                <div class="ms-awards-indicator">
+                    <button class="ms-awards-indicator-bar active" data-award-go="0" aria-label="View Awards Slide 1"></button>
+                    <button class="ms-awards-indicator-bar" data-award-go="1" aria-label="View Awards Slide 2"></button>
+                    <button class="ms-awards-indicator-bar" data-award-go="2" aria-label="View Awards Slide 3"></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RSI Voices Scroll-Driven 3D Stacked Carousel Section (Apple Profile Cover Card Style) -->
+    <section id="rsiVoicesScrollSection" class="rsi-voices-scroll-section">
+        <div class="rsi-voices-sticky-stage">
+            <!-- Header Pattern -->
+            <div class="rsi-voices-heading-container">
+                <span class="eyebrow" style="color: #9b51e0; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.88rem;">• INSIGHTS & STORIES</span>
+                <h2 style="font-size: clamp(2.2rem, 3.8vw, 3rem); font-weight: 300; color: #0f172a; margin-top: 0.4rem; line-height: 1.15; letter-spacing: -0.02em;">RSI Voices</h2>
+                <p style="color: #64748b; font-size: 1.05rem; line-height: 1.6; margin-top: 0.75rem; max-width: 680px; margin-left: auto; margin-right: auto;">Perspectives, tech talks, and stories from our engineering leaders and innovators worldwide.</p>
+            </div>
+
+            <!-- 3D Stage Container -->
+            <div class="rsi-voices-stage-container">
+                <!-- Card 1 -->
+                <div class="rsi-voice-3d-card" onclick="window.open('https://www.rsystems.com/rsystems-voices/two-decades-of-progress-raluca-rusus-perspective-on-womens-leadership-in-tech/', '_blank')">
+                    <div class="rsi-voice-photo-inner">
+                        <img src="https://media.rsystems.com/wp-content/uploads/2025/05/raluca-664x832-1.jpg" alt="Two Decades of Progress" class="rsi-voice-bg-img">
+                        <span class="rsi-voice-top-badge">Women Leadership</span>
+                        <div class="rsi-voice-card-overlay">
+                            <div class="rsi-voice-title-row">
+                                <h3>Two Decades of Progress: Raluca Rusu’s Perspective</h3>
+                                <span class="rsi-voice-check-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span>
+                            </div>
+                            <p class="rsi-voice-card-desc">Raluca Rusu’s perspective on women’s leadership, tech transformation, and progress at R Systems.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="rsi-voice-3d-card" onclick="window.open('https://www.rsystems.com/rsystems-voices/getting-started-with-cursor-an-ai-powered-code-editor/', '_blank')">
+                    <div class="rsi-voice-photo-inner">
+                        <img src="https://media.rsystems.com/wp-content/uploads/2026/07/Raluca-Stan2.png" alt="Getting Started with Cursor" class="rsi-voice-bg-img">
+                        <span class="rsi-voice-top-badge">Tech Talks</span>
+                        <div class="rsi-voice-card-overlay">
+                            <div class="rsi-voice-title-row">
+                                <h3>Getting Started with Cursor</h3>
+                                <span class="rsi-voice-check-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span>
+                            </div>
+                            <p class="rsi-voice-card-desc">An AI-powered code editor elevating developer productivity & code intelligence.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="rsi-voice-3d-card" onclick="window.open('https://www.rsystems.com/rsystems-voices/agentic-rag-for-enterprise-solutions/', '_blank')">
+                    <div class="rsi-voice-photo-inner">
+                        <img src="https://media.rsystems.com/wp-content/uploads/2026/07/Matei-Bejan-2.png" alt="Agentic RAG for Enterprise Solutions" class="rsi-voice-bg-img">
+                        <span class="rsi-voice-top-badge">Tech Talks</span>
+                        <div class="rsi-voice-card-overlay">
+                            <div class="rsi-voice-title-row">
+                                <h3>Agentic RAG for Enterprise</h3>
+                                <span class="rsi-voice-check-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span>
+                            </div>
+                            <p class="rsi-voice-card-desc">Building autonomous retrieval-augmented generation architectures for enterprise AI.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="rsi-voice-3d-card" onclick="window.open('https://www.rsystems.com/rsystems-voices/cloud-ai-automation-in-action-turning-technology-into-business-impact/', '_blank')">
+                    <div class="rsi-voice-photo-inner">
+                        <img src="https://media.rsystems.com/wp-content/uploads/2026/04/DSC07506-mobile.png" alt="Cloud, AI & Automation in Action" class="rsi-voice-bg-img">
+                        <span class="rsi-voice-top-badge">Tech Talks</span>
+                        <div class="rsi-voice-card-overlay">
+                            <div class="rsi-voice-title-row">
+                                <h3>Cloud, AI & Automation</h3>
+                                <span class="rsi-voice-check-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span>
+                            </div>
+                            <p class="rsi-voice-card-desc">Turning cutting-edge technology into measurable business impact & ROI.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="rsi-voice-3d-card" onclick="window.open('https://www.rsystems.com/rsystems-voices/everything-is-green-until-its-not-the-gray-zone-of-ai-observability/', '_blank')">
+                    <div class="rsi-voice-photo-inner">
+                        <img src="https://media.rsystems.com/wp-content/uploads/2026/03/498-x-624.png" alt="The Gray Zone of AI Observability" class="rsi-voice-bg-img">
+                        <span class="rsi-voice-top-badge">Tech Talks</span>
+                        <div class="rsi-voice-card-overlay">
+                            <div class="rsi-voice-title-row">
+                                <h3>Gray Zone of AI Observability</h3>
+                                <span class="rsi-voice-check-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span>
+                            </div>
+                            <p class="rsi-voice-card-desc">Navigating production AI monitoring challenges, system drift, and model observability.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dots Indicator -->
+            <div class="rsi-voices-progress-dots">
+                <div class="rsi-voices-dot active" data-voice-idx="0"></div>
+                <div class="rsi-voices-dot" data-voice-idx="1"></div>
+                <div class="rsi-voices-dot" data-voice-idx="2"></div>
+                <div class="rsi-voices-dot" data-voice-idx="3"></div>
+                <div class="rsi-voices-dot" data-voice-idx="4"></div>
+            </div>
+        </div>
+    </section>
+ 
+
+    <!-- Service Offerings (Apple Interactive Showcase - Healthcare Offerings) -->
+   
+
+    
+   
     
 
     
+
+    
+
+    <!-- Great Place To Work Certification Section -->
+    <section class="gptw-section" style="padding: 5.5rem calc(max(2rem, (100% - 1280px) / 2 + 2rem)); background: #ffffff; border-top: 1px solid #f1f5f9;">
+        <div style="max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 4rem; align-items: center;">
+            <!-- Left Text Content -->
+            <div class="gptw-content">
+                <span style="color: #f43f5e; font-weight: 700; font-size: 0.88rem; text-transform: uppercase; letter-spacing: 0.06em; display: block; margin-bottom: 0.5rem;">#GPTWCERTIFIED</span>
+                <h2 style="font-size: clamp(2.2rem, 3.8vw, 3rem); font-weight: 300; color: #9b51e0; margin-top: 0.3rem; line-height: 1.15; letter-spacing: -0.02em;">RSI is ‘Great Place To Work’® Certified™</h2>
+                <p style="color: #64748b; font-size: 1.05rem; line-height: 1.6; margin: 1.25rem 0 2rem 0; max-width: 640px;">We are Great Place To Work® Certified™ in 6 countries with a full-time workforce - India, the US, Canada, Mexico, Poland, and Moldova - each country individually acknowledging RSI as a preferred employer.</p>
+                <a href="https://www.rsystems.com/join-us" target="_blank" class="btn btn-purple" >
+                    <span>Explore Careers</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+            </div>
+
+            <!-- Right Badges & Confetti Image -->
+            <div class="gptw-image-wrapper" style="text-align: center;">
+                <img src="image/gptw.png" alt="Great Place To Work Certified" style="max-width: 520px; width: 100%; height: auto; object-fit: contain; filter: drop-shadow(0 10px 25px rgba(0,0,0,0.06)); transition: transform 0.4s ease;">
+            </div>
+        </div>
+    </section>
 
     <!-- Healthcare Thought Leadership & Insights Section -->
-    <section class="thinking-industry">
-        <div class="section-header flex-header">
-            <div>
-                <span class="eyebrow">• THOUGHT LEADERSHIP & INSIGHTS</span>
-                <h2>Thinking that moves the healthcare industry</h2>
-                <p>Explore cutting-edge research, tech talks, and strategic whitepapers from our engineering and AI leaders powering digital health transformation.</p>
-            </div>
-            <a href="#" class="btn btn-purple">Explore All Insights</a>
-        </div>
-        <div class="thinking-grid">
-            <!-- Card 1: Blog -->
-            <div class="thinking-card tech-talk-card">
-                <div class="card-img-container">
-                    <span class="tag tag-dark">
-                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-right:4px; vertical-align:-1px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/></svg>
-                        Healthcare Blog
-                    </span>
-                    <img src="image/whitepaper.png" alt="FHIR Integration">
-                    <div class="card-img-overlay"></div>
-                </div>
-                <div class="thinking-card-body">
-                    <h3>Can AI Help Healthcare Organizations Become FHIR-Ready Without Large Middleware Investments?</h3>
-                    <p>Discover how generative AI and automated schema mapping enable health systems to achieve HL7 FHIR compliance without expensive middleware overhead.</p>
-                    <a href="#" class="learn-more">
-                        <span>Read Article</span>
-                        <svg class="arrow-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Card 2: Case Study -->
-            <div class="thinking-card video-card" id="thinkingVideoCard">
-                <div class="card-img-container">
-                    <span class="tag tag-dark">
-                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-right:4px; vertical-align:-1px;"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
-                        Case Study Video
-                    </span>
-                    <img src="image/video.png" alt="RPM Case Study" class="video-poster-img">
-                    <video src="image/bg video.mp4" loop muted playsinline class="thinking-card-video" id="thinkingCardVideo"></video>
-                    <div class="video-play-overlay">
-                        <button class="video-play-btn" id="thinkingPlayBtn" aria-label="Play Video">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                        </button>
-                        <span class="video-duration">04:12</span>
-                    </div>
-                </div>
-                <div class="thinking-card-body">
-                    <h3>Modernizing Legacy Infrastructure for a Global Healthcare Provider with Cloud-Native Architecture</h3>
-                    <p>Watch how R Systems transformed legacy clinical data pipelines into cloud-native microservices, cutting readmission rates and boosting operational efficiency.</p>
-                    <a href="#" class="learn-more">
-                        <span id="videoActionText">Watch Video</span>
-                        <svg class="arrow-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Card 3: POV Paper -->
-            <div class="thinking-card whitepaper-card">
-                <div class="card-img-container">
-                    <span class="tag tag-dark">
-                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-right:4px; vertical-align:-1px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-                        POV Blueprint
-                    </span>
-                    <img src="image/techtalk.png" alt="Clinical Quality Software">
-                    <div class="card-img-overlay"></div>
-                </div>
-                <div class="thinking-card-body">
-                    <h3>100% Traceability, 0% Guesswork: How AI & Smarter Ops Unlock New Healthcare Quality Standards</h3>
-                    <p>Explore actionable strategies for implementing AI-driven quality management systems (QMS) and automated testing across healthcare IT environments.</p>
-                    <a href="#" class="learn-more">
-                        <span>Download POV</span>
-                        <svg class="arrow-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                    </a>
-                </div>
-            </div>
-        </div>
+    <section class="thinking-industry" style="padding-top: 0;">
+        
 
         <!-- Promotional Banner Cards (Why RSI & Join Us) -->
         <div class="promo-banners-container">
@@ -1942,29 +3751,6 @@
             </a>
         </div>
     </section>
-
-    <!-- Great Place To Work Certification Section -->
-    <section class="gptw-section" style="padding: 5.5rem calc(max(2rem, (100% - 1280px) / 2 + 2rem)); background: #ffffff; border-top: 1px solid #f1f5f9;">
-        <div style="max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 4rem; align-items: center;">
-            <!-- Left Text Content -->
-            <div class="gptw-content">
-                <span style="color: #f43f5e; font-weight: 700; font-size: 0.88rem; text-transform: uppercase; letter-spacing: 0.06em; display: block; margin-bottom: 0.5rem;">#GPTWCERTIFIED</span>
-                <h2 style="font-size: clamp(2.2rem, 3.8vw, 3rem); font-weight: 300; color: #9b51e0; margin-top: 0.3rem; line-height: 1.15; letter-spacing: -0.02em;">RSI is ‘Great Place To Work’® Certified™</h2>
-                <p style="color: #64748b; font-size: 1.05rem; line-height: 1.6; margin: 1.25rem 0 2rem 0; max-width: 640px;">We are Great Place To Work® Certified™ in 6 countries with a full-time workforce - India, the US, Canada, Mexico, Poland, and Moldova - each country individually acknowledging RSI as a preferred employer.</p>
-                <a href="https://www.rsystems.com/join-us" target="_blank" class="btn btn-purple" >
-                    <span>Explore Careers</span>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                </a>
-            </div>
-
-            <!-- Right Badges & Confetti Image -->
-            <div class="gptw-image-wrapper" style="text-align: center;">
-                <img src="image/gptw.png" alt="Great Place To Work Certified" style="max-width: 520px; width: 100%; height: auto; object-fit: contain; filter: drop-shadow(0 10px 25px rgba(0,0,0,0.06)); transition: transform 0.4s ease;">
-            </div>
-        </div>
-    </section>
-
-    <!-- Healthcare Contact Section -->
     
 
     <!-- Pre-Footer Banner (UNTOUCHED PRE-FOOTER) -->
@@ -2076,6 +3862,8 @@
         </div>
     </footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="js/LogoLoopApp.js" defer></script>
     <script src="js/main.js" defer></script>
     <script src="js/molten-metal.js"></script>
@@ -2658,17 +4446,302 @@
           });
         }
 
+         
+        function initVideoSeriesCarousel() {
+          const section = document.querySelector(".ms-video-series-section");
+          if (!section) return;
+          
+          const slides = section.querySelectorAll(".ms-video-thumbnail-slide");
+          const indicators = section.querySelectorAll(".ms-video-indicator-bar");
+          const watchBtn = document.getElementById("msWatchVideoBtn");
+          const modal = document.getElementById("msVideoModal");
+          const modalClose = document.getElementById("msVideoModalClose");
+          const videoEl = document.getElementById("msModalVideoEl");
+ 
+          let currentIdx = 0;
+          let intervalId = null;
+ 
+          function setSlide(targetIdx) {
+            currentIdx = targetIdx;
+            slides.forEach((slide, idx) => {
+              if (idx === targetIdx) {
+                slide.classList.add("active");
+              } else {
+                slide.classList.remove("active");
+              }
+            });
+            indicators.forEach((bar, idx) => {
+              if (idx === targetIdx) {
+                bar.classList.add("active");
+              } else {
+                bar.classList.remove("active");
+              }
+            });
+          }
+ 
+          // Click handler for indicators
+          indicators.forEach(bar => {
+            bar.addEventListener("click", function() {
+              const targetIdx = parseInt(this.getAttribute("data-video-go"));
+              setSlide(targetIdx);
+              resetTimer();
+            });
+          });
+ 
+          // Click handler for video thumbnails
+          slides.forEach(slide => {
+            slide.addEventListener("click", function() {
+              openVideo();
+            });
+          });
+ 
+          if (watchBtn) {
+            watchBtn.addEventListener("click", function() {
+              openVideo();
+            });
+          }
+ 
+          function openVideo() {
+            if (!modal || !videoEl) return;
+            videoEl.currentTime = 0;
+            modal.classList.add("active");
+            videoEl.play().catch(e => console.log("Video autoplay prevented:", e));
+          }
+ 
+          function closeVideo() {
+            if (!modal || !videoEl) return;
+            modal.classList.remove("active");
+            videoEl.pause();
+          }
+ 
+          if (modalClose) modalClose.addEventListener("click", closeVideo);
+          if (modal) {
+            modal.addEventListener("click", function(e) {
+              if (e.target === modal) {
+                closeVideo();
+              }
+            });
+          }
+ 
+          // Autoplay timer
+          function startTimer() {
+            intervalId = setInterval(() => {
+              const nextIdx = (currentIdx + 1) % slides.length;
+              setSlide(nextIdx);
+            }, 6000);
+          }
+ 
+          function resetTimer() {
+            clearInterval(intervalId);
+            startTimer();
+          }
+ 
+          // Pause auto-sliding on hover
+          section.addEventListener("mouseenter", () => clearInterval(intervalId));
+          section.addEventListener("mouseleave", startTimer);
+ 
+          startTimer();
+        }
+ 
+        function initAwardsCarousel() {
+          const section = document.querySelector(".ms-awards-section");
+          if (!section) return;
+ 
+          const slides = section.querySelectorAll(".ms-awards-slide");
+          const indicators = section.querySelectorAll(".ms-awards-indicator-bar");
+          let currentIdx = 0;
+          let intervalId = null;
+ 
+          function setSlide(targetIdx) {
+            currentIdx = targetIdx;
+            slides.forEach((slide, idx) => {
+              if (idx === targetIdx) {
+                slide.classList.add("active");
+              } else {
+                slide.classList.remove("active");
+              }
+            });
+            indicators.forEach((bar, idx) => {
+              if (idx === targetIdx) {
+                bar.classList.add("active");
+              } else {
+                bar.classList.remove("active");
+              }
+            });
+          }
+ 
+          indicators.forEach(bar => {
+            bar.addEventListener("click", function() {
+              const targetIdx = parseInt(this.getAttribute("data-award-go"));
+              setSlide(targetIdx);
+              resetTimer();
+            });
+          });
+ 
+          function startTimer() {
+            intervalId = setInterval(() => {
+              const nextIdx = (currentIdx + 1) % slides.length;
+              setSlide(nextIdx);
+            }, 6000);
+          }
+ 
+          function resetTimer() {
+            clearInterval(intervalId);
+            startTimer();
+          }
+ 
+          section.addEventListener("mouseenter", () => clearInterval(intervalId));
+          section.addEventListener("mouseleave", startTimer);
+ 
+          startTimer();
+        }
+ 
+        function initRSIVoicesScroll() {
+          const section = document.getElementById("rsiVoicesScrollSection");
+          if (!section) return;
+
+          const cards = Array.from(section.querySelectorAll(".rsi-voice-3d-card"));
+          const dots = Array.from(section.querySelectorAll(".rsi-voices-dot"));
+          const n = cards.length;
+          if (n === 0) return;
+
+          let ticking = false;
+
+          function position(active) {
+            cards.forEach((el, i) => {
+              if (!el) return;
+              const delta = i - active;
+              const abs = Math.min(Math.abs(delta), 3);
+              const isActiveCard = Math.abs(delta) < 0.45;
+
+              const xPercent = delta * 68;
+              const zVal = -abs * 135;
+              const rotY = Math.max(-55, Math.min(55, delta * -22));
+              const scaleVal = 1 - abs * 0.08;
+              const opacityVal = 1 - Math.min(Math.abs(delta), 2.2) / 2.2;
+              const zIndexVal = 30 - Math.round(abs * 3);
+
+              el.style.transform = `translate3d(${xPercent}%, 0px, ${zVal}px) rotateY(${rotY}deg) scale(${scaleVal})`;
+              el.style.opacity = opacityVal;
+              el.style.zIndex = zIndexVal;
+
+              if (isActiveCard) {
+                el.classList.add("is-active");
+              } else {
+                el.classList.remove("is-active");
+              }
+            });
+
+            dots.forEach((dot, idx) => {
+              if (Math.round(active) === idx) {
+                dot.classList.add("active");
+              } else {
+                dot.classList.remove("active");
+              }
+            });
+          }
+
+          function updateOnScroll() {
+            const rect = section.getBoundingClientRect();
+            const totalScrollable = section.offsetHeight - window.innerHeight;
+            if (totalScrollable <= 0) return;
+            const currentScroll = -rect.top;
+            const progress = Math.max(0, Math.min(1, currentScroll / totalScrollable));
+            position(progress * (n - 1));
+            ticking = false;
+          }
+
+          function requestUpdate() {
+            if (!ticking) {
+              requestAnimationFrame(updateOnScroll);
+              ticking = true;
+            }
+          }
+
+          window.addEventListener("scroll", requestUpdate, { passive: true });
+          window.addEventListener("resize", requestUpdate, { passive: true });
+          updateOnScroll();
+
+          dots.forEach((dot, idx) => {
+            dot.addEventListener("click", function() {
+              const totalScrollable = section.offsetHeight - window.innerHeight;
+              const targetTop = window.pageYOffset + section.getBoundingClientRect().top + (idx / (n - 1)) * totalScrollable;
+              window.scrollTo({ top: targetTop, behavior: "smooth" });
+            });
+          });
+        }
+
+        function initProjectsCarousel() {
+          const track = document.getElementById("msProjectsTrack");
+          const prevBtn = document.getElementById("msProjPrevBtn");
+          const nextBtn = document.getElementById("msProjNextBtn");
+          if (!track || !prevBtn || !nextBtn) return;
+ 
+          function getScrollAmount() {
+            const card = track.querySelector(".ms-project-card");
+            if (!card) return 300;
+            return card.offsetWidth + 32;
+          }
+ 
+          prevBtn.addEventListener("click", () => {
+            track.scrollBy({
+              left: -getScrollAmount(),
+              behavior: "smooth"
+            });
+          });
+ 
+          nextBtn.addEventListener("click", () => {
+            track.scrollBy({
+              left: getScrollAmount(),
+              behavior: "smooth"
+            });
+          });
+ 
+          function updateNavButtons() {
+            const scrollLeft = track.scrollLeft;
+            const maxScroll = track.scrollWidth - track.clientWidth;
+            
+            if (scrollLeft <= 5) {
+              prevBtn.style.opacity = "0.3";
+              prevBtn.style.pointerEvents = "none";
+            } else {
+              prevBtn.style.opacity = "1";
+              prevBtn.style.pointerEvents = "auto";
+            }
+ 
+            if (scrollLeft >= maxScroll - 5) {
+              nextBtn.style.opacity = "0.3";
+              nextBtn.style.pointerEvents = "none";
+            } else {
+              nextBtn.style.opacity = "1";
+              nextBtn.style.pointerEvents = "auto";
+            }
+          }
+ 
+          track.addEventListener("scroll", updateNavButtons);
+          setTimeout(updateNavButtons, 200);
+          window.addEventListener("resize", updateNavButtons);
+        }
+ 
         // Run after main.js initializes
         window.addEventListener("DOMContentLoaded", function () {
           setTimeout(initHealthcareOfferings, 100);
           initUseCaseCarousel();
           initCircularGallery();
+          initVideoSeriesCarousel();
+          initAwardsCarousel();
+          initRSIVoicesScroll();
+          initProjectsCarousel();
         });
 
         // Backup init on load
         window.addEventListener("load", function() {
           initHealthcareOfferings();
           initCircularGallery();
+          initVideoSeriesCarousel();
+          initAwardsCarousel();
+          initRSIVoicesScroll();
+          initProjectsCarousel();
         });
 
         // Initialize Molten Metal Pre-Footer
