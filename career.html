@@ -10,6 +10,1050 @@
     <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
     <script src="https://unpkg.com/ogl@0.0.116/dist/ogl.umd.js"></script>
+    <style>
+        /* Career AI White Impact Section */
+        .career-ai-section {
+            background: #f8f9ff;
+            padding: 5.5rem 2rem;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .career-ai-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 0.95fr 1.05fr;
+            gap: 4.5rem;
+            align-items: center;
+        }
+
+        .career-ai-left {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .career-ai-img-wrap {
+            position: relative;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+        }
+
+        .girl-bg-mask-video-wrap {
+                position: absolute;
+                top: -10%;
+                left: -20%;
+                width: 115%;
+                height: 100%;
+                mask-image: url('image/r-system.svg');
+                -webkit-mask-image: url('image/r-system.svg');
+                mask-size: contain;
+                -webkit-mask-size: contain;
+                mask-repeat: no-repeat;
+                -webkit-mask-repeat: no-repeat;
+                mask-position: center bottom;
+                -webkit-mask-position: center bottom;
+                z-index: 1;
+                overflow: hidden;
+                pointer-events: none;
+        }
+
+        .girl-bg-mask-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+            transform: scale(1.15);
+        }
+
+        .career-ai-img {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 440px;
+            height: auto;
+            display: block;
+            object-fit: contain;
+        }
+
+        .career-ai-stats-row {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 1.5rem;
+            padding-bottom: 1.5rem;
+        }
+
+        .career-stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .career-stat-number {
+            font-size: clamp(2.6rem, 4vw, 3.4rem);
+            font-weight: 300;
+            color: #9b51e0;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        .career-stat-label {
+            font-size: 0.92rem;
+            color: #475569;
+            font-weight: 400;
+            margin-top: 0.3rem;
+            line-height: 1.35;
+        }
+
+        .career-ai-right {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .career-ai-text-lead {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            color: #334155;
+            font-weight: 400;
+            margin-bottom: 1.25rem;
+        }
+
+        .career-ai-heading {
+            font-size: clamp(2rem, 3.2vw, 2.6rem);
+            font-weight: 300;
+            color: #0f172a;
+            line-height: 1.15;
+            margin-top: 1rem;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.02em;
+        }
+
+        .career-ai-list {
+            list-style: none;
+            padding: 0;
+            margin: 1.25rem 0 2rem 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+        }
+
+        .career-ai-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.85rem;
+            font-size: 1.02rem;
+            line-height: 1.6;
+            color: #334155;
+        }
+
+        .career-ai-list li strong {
+            color: #0f172a;
+            font-weight: 600;
+        }
+
+        .list-bullet-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #9b51e0;
+            color: #ffffff;
+            font-size: 0.78rem;
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-top: 0.2rem;
+        }
+
+        .career-ai-text-body {
+            font-size: 1.08rem;
+            line-height: 1.75;
+            color: #475569;
+            font-weight: 400;
+            margin-bottom: 2.5rem;
+        }
+
+        .career-ai-select-group {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+
+        .career-select-wrapper {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            min-width: 220px;
+        }
+
+        .career-location-select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            width: 100%;
+            padding: 0.85rem 2.8rem 0.85rem 1.4rem;
+            border-radius: 50px;
+            border: 1px solid #cbd5e1;
+            background: #ffffff;
+            color: #1e293b;
+            font-size: 0.98rem;
+            font-weight: 500;
+            font-family: inherit;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+        }
+
+        .career-location-select:hover,
+        .career-location-select:focus {
+            border-color: #9b51e0;
+            box-shadow: 0 6px 16px rgba(155, 81, 224, 0.15);
+        }
+
+        .career-select-wrapper .select-chevron {
+            position: absolute;
+            right: 1.2rem;
+            color: #64748b;
+            pointer-events: none;
+            transition: color 0.3s ease;
+        }
+
+        .career-location-select:hover + .select-chevron,
+        .career-location-select:focus + .select-chevron {
+            color: #9b51e0;
+        }
+
+        .hero-1-right {
+            position: absolute !important;
+            right: 2rem !important;
+            top: 52% !important;
+            transform: translateY(-50%) !important;
+            width: 48vw !important;
+            max-width: 680px !important;
+            height: 82% !important;
+            z-index: 1 !important;
+            pointer-events: none;
+            display: flex !important;
+            justify-content: flex-end !important;
+            align-items: center !important;
+        }
+
+        .hero-static-img {
+            width: 110%;
+            height: 100%;
+            object-fit: contain;
+            object-position: right center;
+            display: block;
+        }
+
+        .career-ai-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.85rem 1.8rem;
+            border-radius: 50px;
+            background: #9b51e0;
+            color: #ffffff;
+            font-size: 0.98rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 8px 20px rgba(155, 81, 224, 0.25);
+        }
+
+        .career-ai-btn:hover {
+            background: #8537cc;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(155, 81, 224, 0.35);
+        }
+
+        .career-ai-btn svg {
+            transition: transform 0.3s ease;
+        }
+
+        .career-ai-btn:hover svg {
+            transform: translateX(3px);
+        }
+
+        @media (max-width: 992px) {
+            .career-ai-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            .career-ai-stats-row {
+                flex-wrap: wrap;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .career-ai-left-group {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+        }
+
+        /* EXIQO Custom Career Section Styling */
+        .exiqo-eyebrow {
+            display: inline-block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #c084fc;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+        }
+
+        .exiqo-content {
+            max-width: 680px !important;
+        }
+
+        .exiqo-content h2 {
+            font-size: clamp(2.2rem, 3.8vw, 3.2rem) !important;
+            font-weight: 300 !important;
+            color: #ffffff !important;
+            line-height: 1.15 !important;
+            margin-bottom: 0.75rem !important;
+            letter-spacing: -0.02em !important;
+        }
+
+        .exiqo-lead {
+            font-size: 1.08rem;
+            line-height: 1.65;
+            color: #e2e8f0;
+            font-weight: 400;
+            margin-bottom: 1.75rem;
+        }
+
+        .exiqo-features-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 2.25rem 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+        }
+
+        .exiqo-feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.85rem;
+            padding: 0.2rem 0;
+            background: transparent;
+            border: none;
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+        }
+
+        .exiqo-icon-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #a855f7 0%, #7e22ce 100%);
+            color: #ffffff;
+            font-size: 0.78rem;
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-top: 0.2rem;
+            box-shadow: 0 4px 12px rgba(168, 85, 247, 0.35);
+        }
+
+        .exiqo-feature-text {
+            font-size: 1rem;
+            line-height: 1.55;
+            color: #cbd5e1;
+            font-weight: 400;
+        }
+
+        .exiqo-feature-text strong {
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        /* Career Impact Feature Rows Section */
+        .career-impact-features {
+            background: #ffffff;
+            padding: 6.5rem 2rem;
+            position: relative;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .career-impact-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 6rem;
+        }
+
+        .career-impact-card {
+            background: transparent;
+            border-radius: 0;
+            padding: 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4.5rem;
+            align-items: center;
+            border: none;
+            box-shadow: none;
+        }
+
+        .career-impact-text h2 {
+            font-size: clamp(2.2rem, 3.8vw, 3.2rem);
+            font-weight: 300;
+            color: #9b51e0;
+            line-height: 1.15;
+            margin-bottom: 1.25rem;
+            letter-spacing: -0.02em;
+        }
+
+        .career-impact-text p {
+            font-size: 1.08rem;
+            line-height: 1.75;
+            color: #475569;
+            font-weight: 400;
+            margin: 0;
+        }
+
+        .career-impact-media {
+            width: 100%;
+            height: 100%;
+            min-height: 340px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-radius: 24px;
+            position: relative;
+            box-shadow: 0 16px 36px rgba(15, 23, 42, 0.07);
+        }
+
+        .career-impact-img {
+            width: 100%;
+            height: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            display: block;
+            border-radius: 24px;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .career-impact-media:hover .career-impact-img {
+            transform: scale(1.03);
+        }
+
+        @media (max-width: 992px) {
+            .career-impact-card,
+            .career-impact-card.reverse {
+                grid-template-columns: 1fr;
+                padding: 2.5rem 2rem;
+                gap: 2.5rem;
+            }
+            .career-impact-card.reverse .career-impact-media {
+                order: 2;
+            }
+            .career-impact-card.reverse .career-impact-text {
+                order: 1;
+            }
+        }
+
+        /* S.C.A.L.E Culture Section */
+        .scale-culture-section {
+            background: url('image/scale-bg.png') no-repeat center center;
+            background-size: cover;
+            padding: 6.5rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scale-culture-container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .scale-glass-stage {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 32px;
+            padding: 4rem 3rem 4rem 3.5rem;
+            display: grid;
+            grid-template-columns: 0.78fr 1.22fr;
+            gap: 2rem;
+            align-items: center;
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .scale-left-content {
+            color: #ffffff;
+        }
+
+        .scale-title {
+            font-size: clamp(2.8rem, 4.5vw, 4rem);
+            font-weight: 300;
+            color: #ffffff;
+            letter-spacing: 0.04em;
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+        }
+
+        .scale-subtitle {
+            font-size: 1.25rem;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 2rem;
+        }
+
+        .scale-points-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+        }
+
+        .scale-points-list li {
+            font-size: 1.05rem;
+            color: rgba(255, 255, 255, 0.9);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .scale-bullet {
+            color: #f472b6;
+            font-size: 1.2rem;
+        }
+
+        .scale-right-stage {
+            position: relative;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-left: -2rem;
+        }
+
+        .scale-cards-wrapper {
+            position: relative;
+            width: 100%;
+            height: 440px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 1000px;
+        }
+
+        .scale-card {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+            transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 410px;
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0.7);
+            pointer-events: none;
+            cursor: pointer;
+        }
+
+        .scale-card.active {
+            background: #ffffff;
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+            pointer-events: auto;
+            z-index: 3;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .scale-card.prev {
+            opacity: 0.38;
+            transform: translate(-98%, -50%) scale(0.82);
+            z-index: 1;
+            filter: blur(1.5px);
+            pointer-events: auto;
+        }
+
+        .scale-card.next {
+            opacity: 0.38;
+            transform: translate(-10%, -50%) scale(0.82);
+            z-index: 1;
+            filter: blur(1.5px);
+            pointer-events: auto;
+        }
+
+        .scale-card-img-wrap {
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .scale-card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            padding: 1rem;
+            border-radius: 30px;
+        }
+
+        .scale-card-body {
+            padding: 1rem;
+        }
+
+        .scale-card-body h4 {
+            font-size: 1.35rem;
+            font-weight: 500;
+            color: #1e293b;
+            margin-bottom: 0.6rem;
+        }
+
+        .scale-card-body p {
+            font-size: 0.98rem;
+            line-height: 1.6;
+            color: #64748b;
+            margin-bottom: 1.25rem;
+        }
+
+        .scale-read-more {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #9b51e0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .scale-read-more:hover {
+            color: #7e22ce;
+        }
+
+        .scale-slider-dots {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-top: 2rem;
+        }
+
+        .scale-dot {
+            width: 24px;
+            height: 4px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.3);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .scale-dot.active {
+            background: #ffffff;
+            width: 36px;
+        }
+
+        @media (max-width: 992px) {
+            .scale-glass-stage {
+                grid-template-columns: 1fr;
+                padding: 3rem 2rem;
+                gap: 3rem;
+            }
+        }
+
+        /* RSI Voices Scroll-Driven 3D Stacked Carousel (Apple Profile Cover Card Style) */
+        .rsi-voices-scroll-section {
+            position: relative;
+            background: #ffffff;
+            color: #0f172a;
+            height: 320vh; /* Smooth scroll-distance for 5 cards */
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .rsi-voices-sticky-stage {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            z-index: 2;
+            padding: 2rem 1.5rem;
+        }
+
+        .rsi-voices-heading-container {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            z-index: 10;
+        }
+
+        .rsi-voices-stage-container {
+            position: relative;
+            width: 100%;
+            max-width: 360px;
+            height: 480px;
+            perspective: 1600px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .rsi-voice-3d-card {
+            position: absolute;
+            inset: 0;
+            background: #ffffff;
+            border-radius: 36px;
+            padding: 6px;
+            border: 1px solid rgba(226, 232, 240, 0.9);
+            box-shadow: 0 14px 35px rgba(0, 0, 0, 0.06), 0 2px 8px rgba(0, 0, 0, 0.02);
+            transform-style: preserve-3d;
+            will-change: transform, opacity;
+            overflow: hidden;
+            transition: border-color 0.4s ease, box-shadow 0.4s ease;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .rsi-voice-3d-card.is-active {
+            border-color: rgba(155, 81, 224, 0.5);
+            box-shadow: 0 25px 60px rgba(155, 81, 224, 0.22), 0 0 0 1px rgba(155, 81, 224, 0.4);
+        }
+
+        .rsi-voice-photo-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border-radius: 30px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .rsi-voice-bg-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .rsi-voice-3d-card.is-active .rsi-voice-bg-img {
+            transform: scale(1.06);
+        }
+
+        .rsi-voice-top-badge {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            z-index: 4;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 0.35rem 0.85rem;
+            border-radius: 20px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: #7e22ce;
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .rsi-voice-card-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            top: 0;
+            background: linear-gradient(to top, rgba(255, 255, 255, 0.97) 0%, rgba(255, 255, 255, 0.88) 20%, rgba(255, 255, 255, 0.3) 40%, rgba(255, 255, 255, 0) 45%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.75rem 1.4rem;
+            z-index: 3;
+        }
+
+        .rsi-voice-title-row {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 0.5rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .rsi-voice-title-row h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin: 0;
+            line-height: 1.3;
+        }
+
+        .rsi-voice-check-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #9b51e0;
+            color: #ffffff;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .rsi-voice-card-desc {
+            color: #64748b;
+            font-size: 0.86rem;
+            line-height: 1.5;
+            margin: 0;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .rsi-voices-progress-dots {
+            display: flex;
+            gap: 10px;
+            margin-top: 1.75rem;
+            z-index: 10;
+        }
+
+        .rsi-voices-dot {
+            width: 28px;
+            height: 4px;
+            border-radius: 2px;
+            background: #cbd5e1;
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .rsi-voices-dot.active {
+            width: 48px;
+            background: #9b51e0;
+        }
+
+        /* React Bits CircularGallery WebGL Container Styles */
+        .circular-gallery {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            cursor: grab;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .circular-gallery:active {
+            cursor: grabbing;
+        }
+
+        .circular-gallery canvas {
+            display: block;
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+        /* Real-Life Success Stories (RSI Style & Equal Proportion Cards) */
+        .rsi-ref-testimonials-section {
+            background: #f8fafc;
+            padding: 5.5rem 2rem;
+            position: relative;
+            border-top: 1px solid #e2e8f0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .rsi-ref-testimonials-container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .rsi-ref-testimonials-header {
+            text-align: center;
+            margin-bottom: 4.5rem;
+        }
+
+        .rsi-ref-eyebrow {
+            color: #9b51e0;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        .rsi-ref-testimonials-header h2 {
+            font-size: clamp(2rem, 3.5vw, 2.75rem);
+            font-weight: 300;
+            color: #0f172a;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            margin: 0;
+            max-width: 760px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .rsi-ref-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.75rem;
+            align-items: stretch;
+        }
+
+        @media (max-width: 1100px) {
+            .rsi-ref-cards-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 4.5rem 1.75rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .rsi-ref-cards-grid {
+                grid-template-columns: 1fr;
+                gap: 5rem;
+            }
+        }
+
+        .rsi-ref-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+            padding: 0 1.75rem 2rem 1.75rem;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            height: 100%;
+        }
+
+        .rsi-ref-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(155, 81, 224, 0.4);
+            box-shadow: 0 20px 40px rgba(155, 81, 224, 0.12), 0 4px 12px rgba(15, 23, 42, 0.04);
+        }
+
+        .rsi-ref-avatar-box {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-top: -45px;
+            margin-bottom: 1.25rem;
+            box-shadow: 0 10px 22px rgba(15, 23, 42, 0.1);
+            border: 3.5px solid #ffffff;
+            background: #e2e8f0;
+            flex-shrink: 0;
+            transition: transform 0.35s ease;
+        }
+
+        .rsi-ref-card:hover .rsi-ref-avatar-box {
+            transform: scale(1.05);
+        }
+
+        .rsi-ref-avatar-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .rsi-ref-card-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            flex-grow: 1;
+        }
+
+        .rsi-ref-card-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .rsi-ref-card-content h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #0f172a;
+            margin: 0;
+            letter-spacing: -0.01em;
+        }
+
+        .rsi-ref-role {
+            font-size: 0.84rem;
+            color: #64748b;
+            margin-top: 0.2rem;
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        .rsi-ref-quote-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            flex-grow: 1;
+        }
+
+        .rsi-ref-quote {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #475569;
+            margin: 0;
+            font-weight: 400;
+            font-style: italic;
+        }
+
+        .rsi-read-more-btn {
+            background: transparent;
+            border: none;
+            color: #9b51e0;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 0.4rem 0.85rem;
+            margin-top: 1.25rem;
+            border-radius: 20px;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .rsi-read-more-btn:hover {
+            color: #7b2ff7;
+            background: #f3e8ff;
+        }
+    </style>
 </head>
 
 <body>
@@ -128,34 +1172,446 @@
         </div>
 
         <div class="hero-1-right">
-            <div class="hero-mask-container">
-                <video autoplay loop muted playsinline class="hero-mask-video">
-                    <source src="image/loop-hero.mp4" type="video/mp4">
-                    <source src="loop-hero.mp4" type="video/mp4">
-                </video>
+            <img src="image/career-hero.png" alt="R Systems Career AI Hero" class="hero-static-img">
+        </div>
+    </section>
+
+    <!-- Career AI White Impact Section -->
+    <section class="career-ai-section">
+        <div class="career-ai-container">
+            <!-- Left Column: Girl Image with R Logo Video Mask Background -->
+            <div class="career-ai-left">
+                <div class="career-ai-img-wrap">
+                    <!-- Video background masked with R Systems Logo SVG -->
+                    <div class="girl-bg-mask-video-wrap">
+                        <video autoplay loop muted playsinline class="girl-bg-mask-video">
+                            <source src="image/girl-bg.mp4" type="video/mp4">
+                            <source src="loop-hero.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <!-- Foreground Girl Image Cutout -->
+                    <img src="image/girl-numbers.png" alt="R Systems Workforce & Global Reach" class="career-ai-img">
+                </div>
+            </div>
+
+            <!-- Right Column: Stats Row, Narrative Copy & Dropdown CTA -->
+            <div class="career-ai-right">
+                <div class="career-ai-stats-row">
+                    <div class="career-stat-item">
+                        <span class="career-stat-number">5300+</span>
+                        <span class="career-stat-label">Workforce</span>
+                    </div>
+                    <div class="career-stat-item">
+                        <span class="career-stat-number">30</span>
+                        <span class="career-stat-label">Offices worldwide</span>
+                    </div>
+                    <div class="career-stat-item">
+                        <span class="career-stat-number">22</span>
+                        <span class="career-stat-label">Delivery centers</span>
+                    </div>
+                </div>
+
+                <p class="career-ai-text-lead">
+                    As AI is reshaping how enterprises compete, operate, and grow, at RSI, we’re not watching that happen, we’re engineering it.
+                </p>
+                <p class="career-ai-text-body">
+                    We are an AI-first, engineering-led technology partner. Our teams design intelligent systems, build AI-powered platforms, and solve real enterprise challenges at scale — work that reaches millions of users worldwide. If you want to make an impact, this is where you belong.
+                </p>
+
+                <!-- Location Dropdown Selector & View Jobs Button -->
+                <div class="career-ai-select-group">
+                    <div class="career-select-wrapper">
+                        <select id="careerLocationSelect" class="career-location-select" aria-label="Select Location">
+                            <option value="https://careers.rsystems.com/rsystems/">All Locations</option>
+                            <option value="https://eu.rsystems.com/about-us/careers/">Jobs in Europe</option>
+                            <option value="https://pages.rsystems.com/pune-branch-careers">Jobs in Pune</option>
+                        </select>
+                        <svg class="select-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </div>
+                    <a href="https://careers.rsystems.com/rsystems/" target="_blank" id="careerViewJobsBtn" class="career-ai-btn">
+                        <span>View Jobs</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Warm Glassmorphism Banner Section (Under Hero Section) -->
-    <section class="glass-banner-section">
-        <video autoplay loop muted playsinline class="glass-banner-video">
-            <source src="image/loop-hero.mp4" type="video/mp4">
-            <source src="loop-hero.mp4" type="video/mp4">
+    <!-- EXIQO Section -->
+    <section class="exiqo-section">
+        <video autoplay loop muted playsinline poster="image/exiqo.png" class="exiqo-bg-video">
+            <source src="ful.mp4" type="video/mp4">
         </video>
-        
-        <!-- Frosted Glassmorphism Overlay Layer -->
-        <div class="glass-banner-overlay"></div>
+        <div class="exiqo-video-overlay"></div>
+        <div class="exiqo-content">
+            <span class="exiqo-eyebrow">• EXIQO AI STUDIO</span>
+            <h2>How we build AI</h2>
+            <p class="exiqo-lead">EXIQO – the AI studio from RSI – is the core of how we build AI here. Inside EXIQO, engineers work with:</p>
 
-        <div class="glass-banner-content">
-            <h2>Accelerating Digital Innovation From concept to deployment, we create future-ready products that drive growth, efficiency, and business value.</h2>
-            <a href="#contact" class="btn-talk-expert">Talk to an expert</a>
+            <ul class="exiqo-features-list">
+                <li class="exiqo-feature-item">
+                    <span class="exiqo-icon-badge">✓</span>
+                    <div class="exiqo-feature-text">
+                        <strong>AI-native engineering teams</strong> (yes, people + AI working together daily) of <strong>1,400+ AI-validated practitioners</strong>.
+                    </div>
+                </li>
+                <li class="exiqo-feature-item">
+                    <span class="exiqo-icon-badge">✓</span>
+                    <div class="exiqo-feature-text">
+                        <strong>Our own optimaAI ecosystem</strong> of <strong>150+ digital agents</strong>, reusable accelerators, and structured AI engineering methodologies.
+                    </div>
+                </li>
+                <li class="exiqo-feature-item">
+                    <span class="exiqo-icon-badge">✓</span>
+                    <div class="exiqo-feature-text">
+                        <strong>Built-in governance</strong> (so things don’t go rogue).
+                    </div>
+                </li>
+                <li class="exiqo-feature-item">
+                    <span class="exiqo-icon-badge">✓</span>
+                    <div class="exiqo-feature-text">
+                        <strong>Human-in-the-loop systems</strong> (because blind automation ≠ smart automation).
+                    </div>
+                </li>
+            </ul>
+
+            <a href="#" class="btn btn-white">Learn more about EXIQO</a>
         </div>
     </section>
 
-    <!-- Hero Section 2 White Creative Layout (Reference Image Match) -->
-    
+    <!-- Career Impact Feature Cards Section -->
+    <section class="career-impact-features">
+        <div class="career-impact-container">
+            <!-- Card 1: Growth through real engineering challenges -->
+            <div class="career-impact-card">
+                <div class="career-impact-text">
+                    <h2>Growth through real engineering challenges</h2>
+                    <p>Careers at RSI are non-linear by design. You’ll work across enterprise-scale challenges, take real ownership, and build the kind of experience that compounds. We invest in that through hands-on delivery, mentorship, internal learning programs, and direct exposure to AI-first ways of working. But mostly, you grow by doing on projects that are live, consequential, and built to last.</p>
+                </div>
+                <div class="career-impact-media">
+                    <img src="image/team-auditorium.jpg" alt="R Systems Team Growth & Collaboration" class="career-impact-img">
+                </div>
+            </div>
 
+            <!-- Card 2: Global scale. Real impact. -->
+            <div class="career-impact-card reverse">
+                <div class="career-impact-media">
+                    <img src="image/global-network.png" alt="R Systems Global Network & Enterprise Reach" class="career-impact-img">
+                </div>
+                <div class="career-impact-text">
+                    <h2>Global scale. Real impact.</h2>
+                    <p>RSI teams operate across North America, Europe, and Asia. The work is global; the ownership is local. Whether you’re architecting AI systems, modernizing enterprise platforms, or engineering digital products used by millions, your contribution is visible, and it counts.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- S.C.A.L.E Culture Glassmorphic Showcase Section -->
+    <section class="scale-culture-section">
+        <div class="scale-culture-container">
+            <div class="scale-glass-stage">
+                <!-- Left Side: S.C.A.L.E Acronym & Culture Points -->
+                <div class="scale-left-content">
+                    <h2 class="scale-title">S.C.A.L.E</h2>
+                    <h3 class="scale-subtitle">How we work together</h3>
+                    <ul class="scale-points-list">
+                        <li><span class="scale-bullet">•</span> Shipping Applied Innovation</li>
+                        <li><span class="scale-bullet">•</span> Co-creation</li>
+                        <li><span class="scale-bullet">•</span> Adaptive Growth</li>
+                        <li><span class="scale-bullet">•</span> Learning Relentlessly</li>
+                        <li><span class="scale-bullet">•</span> Ethical Impact</li>
+                    </ul>
+                </div>
+
+                <!-- Right Side: Interactive Cards Stage / Carousel -->
+                <div class="scale-right-stage">
+                    <div class="scale-cards-wrapper" id="scaleCardsWrapper">
+                        <!-- Card 1: CSR -->
+                        <div class="scale-card active" data-index="0">
+                            <div class="scale-card-img-wrap">
+                                <img src="https://media.rsystems.com/wp-content/uploads/2025/10/csr-imag-1-1.png" alt="CSR" class="scale-card-img">
+                            </div>
+                            <div class="scale-card-body">
+                                <h4>CSR</h4>
+                                <p>Our commitment to giving back drives everything we do.</p>
+                                <a href="https://www.rsystems.com/corporate-social-responsibility/" target="_blank" class="scale-read-more">Read More &rarr;</a>
+                            </div>
+                        </div>
+
+                        <!-- Card 2: Diversity & Inclusion -->
+                        <div class="scale-card" data-index="1">
+                            <div class="scale-card-img-wrap">
+                                <img src="https://media.rsystems.com/wp-content/uploads/2026/07/diversity-1.jpg" alt="Diversity & Inclusion" class="scale-card-img">
+                            </div>
+                            <div class="scale-card-body">
+                                <h4>Diversity &amp; Inclusion</h4>
+                                <p>We thrive on diverse perspectives and inclusive collaboration.</p>
+                                <a href="https://www.rsystems.com/diversity-equity-and-inclusion/" target="_blank" class="scale-read-more">Read More &rarr;</a>
+                            </div>
+                        </div>
+
+                        <!-- Card 3: Awards -->
+                        <div class="scale-card" data-index="2">
+                            <div class="scale-card-img-wrap">
+                                <img src="https://media.rsystems.com/wp-content/uploads/2026/07/awards-1.jpg" alt="Awards" class="scale-card-img">
+                            </div>
+                            <div class="scale-card-body">
+                                <h4>Awards</h4>
+                                <p>Recognition of our dedication to excellence and innovation.</p>
+                                <a href="https://www.rsystems.com/award-and-achievements/" target="_blank" class="scale-read-more">Read More &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slider Indicators -->
+                    <div class="scale-slider-dots" id="scaleSliderDots">
+                        <button class="scale-dot active" data-slide="0" aria-label="Slide 1"></button>
+                        <button class="scale-dot" data-slide="1" aria-label="Slide 2"></button>
+                        <button class="scale-dot" data-slide="2" aria-label="Slide 3"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Real-Life Success Stories / Testimonials Section (Matching Reference Design without Stars) -->
+    <section id="real-life-success" class="rsi-ref-testimonials-section">
+        <div class="rsi-ref-testimonials-container">
+            <!-- Centered Header -->
+            <div class="rsi-ref-testimonials-header">
+                <span class="rsi-ref-eyebrow">Testimonials</span>
+                <h2>Real Stories. Extraordinary Journeys.</h2>
+            </div>
+
+            <!-- 4 Floating Avatar Overlap Cards Row -->
+            <div class="rsi-ref-cards-grid">
+                <!-- Card 1: Mihai Scornea -->
+                <div class="rsi-ref-card">
+                    <div class="rsi-ref-avatar-box">
+                        <img src="https://media.rsystems.com/wp-content/uploads/2026/07/Mihai-Scornea.png" alt="Mihai Scornea">
+                    </div>
+                    <div class="rsi-ref-card-content">
+                        <div class="rsi-ref-card-info">
+                            <h3>Mihai Scornea</h3>
+                            <span class="rsi-ref-role">Senior Engineering Mentor</span>
+                        </div>
+                        <div class="rsi-ref-quote-box">
+                            <p class="rsi-ref-quote">
+                                <span class="rsi-quote-short">"My journey at RSI has been one of continuous growth, not only as an engineer but also as a mentor. I've been trusted with challenging projects..."</span>
+                                <span class="rsi-quote-full" style="display: none;">"My journey at RSI has been one of continuous growth, not only as an engineer but also as a mentor. I've been trusted with challenging projects, encouraged to take initiative, and given the opportunity to help others develop by sharing my knowledge and supporting new colleagues. Seeing people grow through what I've taught them has been one of the most rewarding parts of my career. It's a place where you're encouraged to make an impact, keep learning, and help shape the success of those around you."</span>
+                            </p>
+                            <button class="rsi-read-more-btn" onclick="toggleReadMore(this)">Read more &rarr;</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Kumar Gaurav -->
+                <div class="rsi-ref-card">
+                    <div class="rsi-ref-avatar-box">
+                        <img src="https://media.rsystems.com/wp-content/uploads/2026/07/Kumar-Gaurav_1368x912_careers-page.png" alt="Kumar Gaurav">
+                    </div>
+                    <div class="rsi-ref-card-content">
+                        <div class="rsi-ref-card-info">
+                            <h3>Kumar Gaurav</h3>
+                            <span class="rsi-ref-role">Lead Software Engineer</span>
+                        </div>
+                        <div class="rsi-ref-quote-box">
+                            <p class="rsi-ref-quote">
+                                <span class="rsi-quote-short">"In March 2019, I joined RSI, and since then, the company has been igniting a transformative and growth-filled chapter in my career..."</span>
+                                <span class="rsi-quote-full" style="display: none;">"In March 2019, I joined RSI, and since then, the company has been igniting a transformative and growth-filled chapter in my career. This voyage has been a thrilling rollercoaster ride, teeming with many experiences, challenges, and significant personal development. I am overflowing with gratitude and enthusiasm for the incredible experiences and personal growth I have encountered during these years."</span>
+                            </p>
+                            <button class="rsi-read-more-btn" onclick="toggleReadMore(this)">Read more &rarr;</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Cristiana Iavorschi -->
+                <div class="rsi-ref-card">
+                    <div class="rsi-ref-avatar-box">
+                        <img src="https://media.rsystems.com/wp-content/uploads/2026/07/Cristiana_Iavorschi_official-photo-1.jpg" alt="Cristiana Iavorschi">
+                    </div>
+                    <div class="rsi-ref-card-content">
+                        <div class="rsi-ref-card-info">
+                            <h3>Cristiana Iavorschi</h3>
+                            <span class="rsi-ref-role">Client Solutions Specialist</span>
+                        </div>
+                        <div class="rsi-ref-quote-box">
+                            <p class="rsi-ref-quote">
+                                <span class="rsi-quote-short">"The thing I like most about working at RSI is that I never get bored. It’s an extraordinary dynamic place where I can always learn..."</span>
+                                <span class="rsi-quote-full" style="display: none;">"The thing I like most about working at RSI is that I never get bored. It’s an extraordinary dynamic place where I can always learn and do something new, whether that’s interacting with the client or finding out-of-the-box solutions. And when a challenge comes along, you have to adapt, come out of your comfort zone and discover new ways of thinking. This can be challenging, but it also brings great satisfaction."</span>
+                            </p>
+                            <button class="rsi-read-more-btn" onclick="toggleReadMore(this)">Read more &rarr;</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4: Piotr Sokolowski -->
+                <div class="rsi-ref-card">
+                    <div class="rsi-ref-avatar-box">
+                        <img src="https://media.rsystems.com/wp-content/uploads/2026/07/Piotr-Sokolowski.jpg" alt="Piotr Sokolowski">
+                    </div>
+                    <div class="rsi-ref-card-content">
+                        <div class="rsi-ref-card-info">
+                            <h3>Piotr Sokolowski</h3>
+                            <span class="rsi-ref-role">20+ Years Tech Veteran</span>
+                        </div>
+                        <div class="rsi-ref-quote-box">
+                            <p class="rsi-ref-quote">
+                                <span class="rsi-quote-short">"Some would say that 20+ years working for the same company is a long time. But you would be surprised how fast they pass by..."</span>
+                                <span class="rsi-quote-full" style="display: none;">"Some would say that 20+ years working for the same company is a long time. But you would be surprised how fast they pass by when there are so many different projects you can work on, so many interesting people and opportunities for you to grow! It never stops being challenging and rewarding at the same time."</span>
+                            </p>
+                            <button class="rsi-read-more-btn" onclick="toggleReadMore(this)">Read more &rarr;</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Great Place To Work Certification Section -->
+    <section class="gptw-section" style="padding: 5.5rem calc(max(2rem, (100% - 1280px) / 2 + 2rem)); background: #ffffff; border-top: 1px solid #f1f5f9;">
+        <div style="max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 4rem; align-items: center;">
+            <!-- Left Text Content -->
+            <div class="gptw-content">
+                <span style="color: #f43f5e; font-weight: 700; font-size: 0.88rem; text-transform: uppercase; letter-spacing: 0.06em; display: block; margin-bottom: 0.5rem;">#GPTWCERTIFIED</span>
+                <h2 style="font-size: clamp(2.2rem, 3.8vw, 3rem); font-weight: 300; color: #9b51e0; margin-top: 0.3rem; line-height: 1.15; letter-spacing: -0.02em;">RSI is ‘Great Place To Work’® Certified™</h2>
+                <p style="color: #64748b; font-size: 1.05rem; line-height: 1.6; margin: 1.25rem 0 2rem 0; max-width: 640px;">We are Great Place To Work® Certified™ in 6 countries with a full-time workforce - India, the US, Canada, Mexico, Poland, and Moldova - each country individually acknowledging RSI as a preferred employer.</p>
+                <a href="https://www.rsystems.com/join-us" target="_blank" class="btn btn-purple" >
+                    <span>Explore Careers</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+            </div>
+
+            <!-- Right Badges & Confetti Image -->
+            <div class="gptw-image-wrapper" style="text-align: center;">
+                <img src="image/gptw.png" alt="Great Place To Work Certified" style="max-width: 520px; width: 100%; height: auto; object-fit: contain; filter: drop-shadow(0 10px 25px rgba(0,0,0,0.06)); transition: transform 0.4s ease;">
+            </div>
+        </div>
+    </section>
+
+    <!-- RSI Voices Scroll-Driven 3D Stacked Carousel Section -->
+    <section id="rsiVoicesScrollSection" class="rsi-voices-scroll-section">
+        <div class="rsi-voices-sticky-stage">
+            <!-- Header Pattern -->
+            <div class="rsi-voices-heading-container">
+                <span class="eyebrow" style="color: #9b51e0; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.88rem;">• INSIGHTS & STORIES</span>
+                <h2 style="font-size: clamp(2.2rem, 3.8vw, 3rem); font-weight: 300; color: #0f172a; margin-top: 0.4rem; line-height: 1.15; letter-spacing: -0.02em;">RSI Voices</h2>
+                <p style="color: #64748b; font-size: 1.05rem; line-height: 1.6; margin-top: 0.75rem; max-width: 680px; margin-left: auto; margin-right: auto;">Perspectives, tech talks, and stories from our engineering leaders and innovators worldwide.</p>
+            </div>
+
+            <!-- 3D Stage Container -->
+            <div class="rsi-voices-stage-container">
+                <!-- Card 1 -->
+                <div class="rsi-voice-3d-card" onclick="window.open('https://www.rsystems.com/rsystems-voices/two-decades-of-progress-raluca-rusus-perspective-on-womens-leadership-in-tech/', '_blank')">
+                    <div class="rsi-voice-photo-inner">
+                        <img src="https://media.rsystems.com/wp-content/uploads/2025/05/raluca-664x832-1.jpg" alt="Two Decades of Progress" class="rsi-voice-bg-img">
+                        <span class="rsi-voice-top-badge">Women Leadership</span>
+                        <div class="rsi-voice-card-overlay">
+                            <div class="rsi-voice-title-row">
+                                <h3>Two Decades of Progress: Raluca Rusu’s Perspective</h3>
+                                <span class="rsi-voice-check-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span>
+                            </div>
+                            <p class="rsi-voice-card-desc">Raluca Rusu’s perspective on women’s leadership, tech transformation, and progress at R Systems.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="rsi-voice-3d-card" onclick="window.open('https://www.rsystems.com/rsystems-voices/getting-started-with-cursor-an-ai-powered-code-editor/', '_blank')">
+                    <div class="rsi-voice-photo-inner">
+                        <img src="https://media.rsystems.com/wp-content/uploads/2026/07/Raluca-Stan2.png" alt="Getting Started with Cursor" class="rsi-voice-bg-img">
+                        <span class="rsi-voice-top-badge">Tech Talks</span>
+                        <div class="rsi-voice-card-overlay">
+                            <div class="rsi-voice-title-row">
+                                <h3>Getting Started with Cursor</h3>
+                                <span class="rsi-voice-check-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span>
+                            </div>
+                            <p class="rsi-voice-card-desc">An AI-powered code editor elevating developer productivity & code intelligence.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="rsi-voice-3d-card" onclick="window.open('https://www.rsystems.com/rsystems-voices/agentic-rag-for-enterprise-solutions/', '_blank')">
+                    <div class="rsi-voice-photo-inner">
+                        <img src="https://media.rsystems.com/wp-content/uploads/2026/07/Matei-Bejan-2.png" alt="Agentic RAG for Enterprise Solutions" class="rsi-voice-bg-img">
+                        <span class="rsi-voice-top-badge">Tech Talks</span>
+                        <div class="rsi-voice-card-overlay">
+                            <div class="rsi-voice-title-row">
+                                <h3>Agentic RAG for Enterprise</h3>
+                                <span class="rsi-voice-check-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span>
+                            </div>
+                            <p class="rsi-voice-card-desc">Building autonomous retrieval-augmented generation architectures for enterprise AI.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="rsi-voice-3d-card" onclick="window.open('https://www.rsystems.com/rsystems-voices/cloud-ai-automation-in-action-turning-technology-into-business-impact/', '_blank')">
+                    <div class="rsi-voice-photo-inner">
+                        <img src="https://media.rsystems.com/wp-content/uploads/2026/04/DSC07506-mobile.png" alt="Cloud, AI & Automation in Action" class="rsi-voice-bg-img">
+                        <span class="rsi-voice-top-badge">Tech Talks</span>
+                        <div class="rsi-voice-card-overlay">
+                            <div class="rsi-voice-title-row">
+                                <h3>Cloud, AI & Automation</h3>
+                                <span class="rsi-voice-check-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span>
+                            </div>
+                            <p class="rsi-voice-card-desc">Turning cutting-edge technology into measurable business impact & ROI.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="rsi-voice-3d-card" onclick="window.open('https://www.rsystems.com/rsystems-voices/everything-is-green-until-its-not-the-gray-zone-of-ai-observability/', '_blank')">
+                    <div class="rsi-voice-photo-inner">
+                        <img src="https://media.rsystems.com/wp-content/uploads/2026/03/498-x-624.png" alt="The Gray Zone of AI Observability" class="rsi-voice-bg-img">
+                        <span class="rsi-voice-top-badge">Tech Talks</span>
+                        <div class="rsi-voice-card-overlay">
+                            <div class="rsi-voice-title-row">
+                                <h3>Gray Zone of AI Observability</h3>
+                                <span class="rsi-voice-check-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></span>
+                            </div>
+                            <p class="rsi-voice-card-desc">Navigating production AI monitoring challenges, system drift, and model observability.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dots Indicator -->
+            <div class="rsi-voices-progress-dots">
+                <div class="rsi-voices-dot active" data-voice-idx="0"></div>
+                <div class="rsi-voices-dot" data-voice-idx="1"></div>
+                <div class="rsi-voices-dot" data-voice-idx="2"></div>
+                <div class="rsi-voices-dot" data-voice-idx="3"></div>
+                <div class="rsi-voices-dot" data-voice-idx="4"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Inspiring Women of RSI Section (React Bits CircularGallery 3D WebGL Component) -->
+    <section class="inspiring-women-section" style="background: #ffffff; padding: 5.5rem 2rem; border-bottom: 1px solid #f1f5f9; position: relative; overflow: hidden;">
+        <div style="max-width: 1280px; margin: 0 auto;">
+            <!-- Left-Aligned Header Pattern -->
+            <div class="section-header text-left" style="margin-bottom: 2.5rem; text-align: left;">
+                <span class="eyebrow" style="color: #9b51e0; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.88rem;">• INSPIRING WOMEN OF RSI</span>
+                <h2 style="font-size: clamp(2.2rem, 3.8vw, 3rem); font-weight: 300; color: #0f172a; margin-top: 0.4rem; line-height: 1.15; letter-spacing: -0.02em;">Inspiring Women of RSI</h2>
+                <p style="color: #64748b; font-size: 1.05rem; line-height: 1.65; margin-top: 0.75rem; max-width: 780px;">Each woman at RSI brings her own perspective, strength, and story. Get to know the faces behind the transformation and what keeps them moving forward.</p>
+            </div>
+
+            <!-- React Bits CircularGallery WebGL Stage Canvas Container -->
+            <div style="height: 510px; position: relative; width: 100%; border-radius: 24px; overflow: hidden; background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%); border: 1px solid rgba(226, 232, 240, 0.9); box-shadow: inset 0 0 35px rgba(134, 86, 254, 0.04);">
+                <div id="circularGalleryContainer" class="circular-gallery" style="width: 100%; height: 100%; position: absolute; top: 0; left: 0;"></div>
+            </div>
+
+            <!-- Bottom Action Link -->
+            <div style="margin-top: 2.5rem; text-align: center;">
+                <a href="https://www.rsystems.com/inspiring-women-of-r-systems/" target="_blank" class="btn btn-purple">
+                    <span>Learn More About Inspiring Women of RSI</span>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+            </div>
+        </div>
+    </section>
     <!-- Case Study Section -->
     <section class="case-studies">
         <div class="case-glow-orb-1"></div>
@@ -590,7 +2046,503 @@
     <script src="js/LogoLoopApp.js" defer></script>
     <script src="js/main.js" defer></script>
     <script src="js/molten-metal.js"></script>
+    <script src="js/ogl.umd.js"></script>
     <script>
+      (function() {
+        const select = document.getElementById("careerLocationSelect");
+        const btn = document.getElementById("careerViewJobsBtn");
+        if (select && btn) {
+          select.addEventListener("change", function() {
+            btn.href = this.value;
+            this.blur();
+          });
+        }
+      })();
+
+      (function() {
+        const cards = document.querySelectorAll('.scale-card');
+        const dots = document.querySelectorAll('.scale-dot');
+        if (!cards.length || !dots.length) return;
+        let currentIndex = 0;
+        let timer = null;
+        const total = cards.length;
+
+        function updateCarousel(index) {
+          currentIndex = (index + total) % total;
+          const prevIndex = (currentIndex - 1 + total) % total;
+          const nextIndex = (currentIndex + 1) % total;
+
+          cards.forEach((card, i) => {
+            card.classList.remove('active', 'prev', 'next');
+            if (i === currentIndex) {
+              card.classList.add('active');
+            } else if (i === prevIndex) {
+              card.classList.add('prev');
+            } else if (i === nextIndex) {
+              card.classList.add('next');
+            }
+          });
+
+          dots.forEach((dot, i) => {
+            dot.classList.toggle('active', i === currentIndex);
+          });
+        }
+
+        function startAutoPlay() {
+          clearInterval(timer);
+          timer = setInterval(() => {
+            updateCarousel(currentIndex + 1);
+          }, 4000);
+        }
+
+        dots.forEach((dot, i) => {
+          dot.addEventListener('click', () => {
+            updateCarousel(i);
+            startAutoPlay();
+          });
+        });
+
+        cards.forEach((card, i) => {
+          card.addEventListener('click', () => {
+            if (i !== currentIndex) {
+              updateCarousel(i);
+              startAutoPlay();
+            }
+          });
+        });
+
+        updateCarousel(0);
+        startAutoPlay();
+      })();
+
+      (function initRSIVoicesScroll() {
+        const section = document.getElementById("rsiVoicesScrollSection");
+        if (!section) return;
+
+        const cards = Array.from(section.querySelectorAll(".rsi-voice-3d-card"));
+        const dots = Array.from(section.querySelectorAll(".rsi-voices-dot"));
+        const n = cards.length;
+        if (n === 0) return;
+
+        let ticking = false;
+
+        function position(active) {
+          cards.forEach((el, i) => {
+            if (!el) return;
+            const delta = i - active;
+            const abs = Math.min(Math.abs(delta), 3);
+            const isActiveCard = Math.abs(delta) < 0.45;
+
+            const xPercent = delta * 68;
+            const zVal = -abs * 135;
+            const rotY = Math.max(-55, Math.min(55, delta * -22));
+            const scaleVal = 1 - abs * 0.08;
+            const opacityVal = 1 - Math.min(Math.abs(delta), 2.2) / 2.2;
+            const zIndexVal = 30 - Math.round(abs * 3);
+
+            el.style.transform = `translate3d(${xPercent}%, 0px, ${zVal}px) rotateY(${rotY}deg) scale(${scaleVal})`;
+            el.style.opacity = opacityVal;
+            el.style.zIndex = zIndexVal;
+
+            if (isActiveCard) {
+              el.classList.add("is-active");
+            } else {
+              el.classList.remove("is-active");
+            }
+          });
+
+          dots.forEach((dot, idx) => {
+            if (Math.round(active) === idx) {
+              dot.classList.add("active");
+            } else {
+              dot.classList.remove("active");
+            }
+          });
+        }
+
+        function updateOnScroll() {
+          const rect = section.getBoundingClientRect();
+          const totalScrollable = section.offsetHeight - window.innerHeight;
+          if (totalScrollable <= 0) return;
+          const currentScroll = -rect.top;
+          const progress = Math.max(0, Math.min(1, currentScroll / totalScrollable));
+          position(progress * (n - 1));
+          ticking = false;
+        }
+
+        function requestUpdate() {
+          if (!ticking) {
+            requestAnimationFrame(updateOnScroll);
+            ticking = true;
+          }
+        }
+
+        window.addEventListener("scroll", requestUpdate, { passive: true });
+        window.addEventListener("resize", requestUpdate, { passive: true });
+        updateOnScroll();
+
+        dots.forEach((dot, idx) => {
+          dot.addEventListener("click", function() {
+            const totalScrollable = section.offsetHeight - window.innerHeight;
+            const targetTop = window.pageYOffset + section.getBoundingClientRect().top + (idx / (n - 1)) * totalScrollable;
+            window.scrollTo({ top: targetTop, behavior: "smooth" });
+          });
+        });
+      })();
+
+      // React Bits CircularGallery WebGL Component Implementation
+      function initCircularGallery() {
+        const container = document.getElementById("circularGalleryContainer");
+        const OGL = window.ogl || window.OGL;
+        if (!container || !OGL) return;
+
+        const items = [
+          { image: "image/Slide1.png", text: "" },
+          { image: "image/Slide2.png", text: "" },
+          { image: "image/Slide3.png", text: "" },
+          { image: "image/Slide4.png", text: "" },
+          { image: "image/Slide5.png", text: "" },
+          { image: "image/Slide6.png", text: "" }
+        ];
+
+        function debounce(func, wait) {
+          let timeout;
+          return function (...args) {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => func.apply(this, args), wait);
+          };
+        }
+
+        function lerp(p1, p2, t) {
+          return p1 + (p2 - p1) * t;
+        }
+
+        class Media {
+          constructor({ geometry, gl, image, index, length, renderer, scene, screen, text, viewport, bend, textColor = '#ffffff', borderRadius = 0.05, font }) {
+            this.extra = 0;
+            this.geometry = geometry;
+            this.gl = gl;
+            this.image = image;
+            this.index = index;
+            this.length = length;
+            this.renderer = renderer;
+            this.scene = scene;
+            this.screen = screen;
+            this.text = text;
+            this.viewport = viewport;
+            this.bend = bend;
+            this.textColor = textColor;
+            this.borderRadius = borderRadius;
+            this.font = font;
+            this.createShader();
+            this.createMesh();
+            this.onResize();
+          }
+
+          createShader() {
+            const canvas = document.createElement("canvas");
+            canvas.width = 800;
+            canvas.height = 600;
+            const ctx = canvas.getContext("2d");
+            ctx.fillStyle = "#8656FE";
+            ctx.fillRect(0, 0, 800, 600);
+
+            const texture = new OGL.Texture(this.gl, { generateMipmaps: false, image: canvas });
+
+            this.program = new OGL.Program(this.gl, {
+              depthTest: false,
+              depthWrite: false,
+              vertex: `
+                precision highp float;
+                attribute vec3 position;
+                attribute vec2 uv;
+                uniform mat4 modelViewMatrix;
+                uniform mat4 projectionMatrix;
+                uniform float uTime;
+                uniform float uSpeed;
+                varying vec2 vUv;
+                void main() {
+                  vUv = uv;
+                  vec3 p = position;
+                  p.z = (sin(p.x * 4.0 + uTime) * 1.5 + cos(p.y * 2.0 + uTime) * 1.5) * (0.1 + uSpeed * 0.5);
+                  gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
+                }
+              `,
+              fragment: `
+                precision highp float;
+                uniform vec2 uImageSizes;
+                uniform vec2 uPlaneSizes;
+                uniform sampler2D tMap;
+                uniform float uBorderRadius;
+                varying vec2 vUv;
+
+                float roundedBoxSDF(vec2 p, vec2 b, float r) {
+                  vec2 d = abs(p) - b;
+                  return length(max(d, vec2(0.0))) + min(max(d.x, d.y), 0.0) - r;
+                }
+
+                void main() {
+                  float imgAspect = (uImageSizes.x > 0.0 && uImageSizes.y > 0.0) ? (uImageSizes.x / uImageSizes.y) : 1.0;
+                  float planeAspect = (uPlaneSizes.x > 0.0 && uPlaneSizes.y > 0.0) ? (uPlaneSizes.x / uPlaneSizes.y) : 1.0;
+                  
+                  vec2 ratio = vec2(
+                    max(planeAspect / imgAspect, 1.0),
+                    max(imgAspect / planeAspect, 1.0)
+                  );
+                  vec2 uv = vec2(
+                    vUv.x * ratio.x + (1.0 - ratio.x) * 0.5,
+                    vUv.y * ratio.y + (1.0 - ratio.y) * 0.5
+                  );
+                  vec4 color = texture2D(tMap, uv);
+
+                  float d = roundedBoxSDF(vUv - 0.5, vec2(0.5 - uBorderRadius), uBorderRadius);
+                  float edgeSmooth = 0.002;
+                  float alpha = 1.0 - smoothstep(-edgeSmooth, edgeSmooth, d);
+
+                  gl_FragColor = vec4(color.rgb, alpha * color.a);
+                }
+              `,
+              uniforms: {
+                tMap: { value: texture },
+                uPlaneSizes: { value: [10, 10] },
+                uImageSizes: { value: [800, 600] },
+                uSpeed: { value: 0 },
+                uTime: { value: 100 * Math.random() },
+                uBorderRadius: { value: this.borderRadius }
+              },
+              transparent: true
+            });
+
+            const img = new Image();
+            img.src = this.image;
+            const updateTex = () => {
+              texture.image = img;
+              texture.needsUpdate = true;
+              if (img.naturalWidth && img.naturalHeight) {
+                this.program.uniforms.uImageSizes.value = [img.naturalWidth, img.naturalHeight];
+              }
+            };
+            if (img.complete) {
+              updateTex();
+            } else {
+              img.onload = updateTex;
+            }
+          }
+
+          createMesh() {
+            this.plane = new OGL.Mesh(this.gl, { geometry: this.geometry, program: this.program });
+            this.plane.setParent(this.scene);
+          }
+
+          update(scroll, direction) {
+            this.plane.position.x = this.x - scroll.current - this.extra;
+            const x = this.plane.position.x;
+            const H = this.viewport.width / 2;
+
+            if (this.bend === 0) {
+              this.plane.position.y = 0;
+              this.plane.rotation.z = 0;
+            } else {
+              const B_abs = Math.abs(this.bend);
+              const R = (H * H + B_abs * B_abs) / (2 * B_abs);
+              const effectiveX = Math.min(Math.abs(x), H);
+              const arc = R - Math.sqrt(R * R - effectiveX * effectiveX);
+              if (this.bend > 0) {
+                this.plane.position.y = -arc;
+                this.plane.rotation.z = -Math.sign(x) * Math.asin(effectiveX / R);
+              } else {
+                this.plane.position.y = arc;
+                this.plane.rotation.z = Math.sign(x) * Math.asin(effectiveX / R);
+              }
+            }
+
+            this.speed = scroll.current - scroll.last;
+            this.program.uniforms.uTime.value += 0.04;
+            this.program.uniforms.uSpeed.value = this.speed;
+
+            const planeOffset = this.plane.scale.x / 2;
+            const viewportOffset = this.viewport.width / 2;
+            this.isBefore = this.plane.position.x + planeOffset < -viewportOffset;
+            this.isAfter = this.plane.position.x - planeOffset > viewportOffset;
+            if (direction === "right" && this.isBefore) {
+              this.extra -= this.widthTotal;
+              this.isBefore = this.isAfter = false;
+            }
+            if (direction === "left" && this.isAfter) {
+              this.extra += this.widthTotal;
+              this.isBefore = this.isAfter = false;
+            }
+          }
+
+          onResize({ screen, viewport } = {}) {
+            if (screen) this.screen = screen;
+            if (viewport) this.viewport = viewport;
+            this.scale = this.screen.height / 1300;
+            this.plane.scale.y = (this.viewport.height * (850 * this.scale)) / this.screen.height;
+            this.plane.scale.x = this.plane.scale.y * 1.0;
+            this.plane.program.uniforms.uPlaneSizes.value = [this.plane.scale.x, this.plane.scale.y];
+            this.padding = 1.35;
+            this.width = this.plane.scale.x + this.padding;
+            this.widthTotal = this.width * this.length;
+            this.x = this.width * this.index;
+          }
+        }
+
+        class CircularGalleryApp {
+          constructor(container, { items, bend = 3, textColor = '#ffffff', borderRadius = 0.05, scrollSpeed = 2, scrollEase = 0.05 }) {
+            this.container = container;
+            this.scrollSpeed = scrollSpeed;
+            this.scroll = { ease: scrollEase, current: 0, target: 0, last: 0 };
+            this.onCheckDebounce = debounce(this.onCheck.bind(this), 200);
+            this.createRenderer();
+            this.createCamera();
+            this.createScene();
+            this.onResize();
+            this.createGeometry();
+            this.createMedias(items, bend, textColor, borderRadius);
+            this.update();
+            this.addEventListeners();
+          }
+
+          createRenderer() {
+            this.renderer = new OGL.Renderer({ alpha: true, antialias: true, dpr: Math.min(window.devicePixelRatio || 1, 2) });
+            this.gl = this.renderer.gl;
+            this.gl.clearColor(0, 0, 0, 0);
+            this.container.appendChild(this.gl.canvas);
+          }
+
+          createCamera() {
+            this.camera = new OGL.Camera(this.gl);
+            this.camera.fov = 45;
+            this.camera.position.z = 20;
+          }
+
+          createScene() {
+            this.scene = new OGL.Transform();
+          }
+
+          createGeometry() {
+            this.planeGeometry = new OGL.Plane(this.gl, { heightSegments: 50, widthSegments: 100 });
+          }
+
+          createMedias(items, bend, textColor, borderRadius) {
+            const galleryItems = items && items.length ? items : [];
+            this.mediasImages = galleryItems.concat(galleryItems).concat(galleryItems);
+            this.medias = this.mediasImages.map((data, index) => {
+              return new Media({
+                geometry: this.planeGeometry,
+                gl: this.gl,
+                image: data.image,
+                index,
+                length: this.mediasImages.length,
+                renderer: this.renderer,
+                scene: this.scene,
+                screen: this.screen,
+                text: data.text,
+                viewport: this.viewport,
+                bend,
+                textColor,
+                borderRadius
+              });
+            });
+          }
+
+          onTouchDown(e) {
+            this.isDown = true;
+            this.scroll.position = this.scroll.current;
+            this.start = e.touches ? e.touches[0].clientX : e.clientX;
+          }
+
+          onTouchMove(e) {
+            if (!this.isDown) return;
+            const x = e.touches ? e.touches[0].clientX : e.clientX;
+            const distance = (this.start - x) * (this.scrollSpeed * 0.025);
+            this.scroll.target = this.scroll.position + distance;
+          }
+
+          onTouchUp() {
+            this.isDown = false;
+            this.onCheck();
+          }
+
+          onWheel(e) {
+            const delta = e.deltaY || e.wheelDelta || e.detail;
+            this.scroll.target += (delta > 0 ? this.scrollSpeed : -this.scrollSpeed) * 0.2;
+            this.onCheckDebounce();
+          }
+
+          onCheck() {
+            if (!this.medias || !this.medias[0]) return;
+            const width = this.medias[0].width;
+            const itemIndex = Math.round(Math.abs(this.scroll.target) / width);
+            const item = width * itemIndex;
+            this.scroll.target = this.scroll.target < 0 ? -item : item;
+          }
+
+          onResize() {
+            if (!this.container) return;
+            this.screen = { width: this.container.clientWidth, height: this.container.clientHeight };
+            this.renderer.setSize(this.screen.width, this.screen.height);
+            this.camera.perspective({ aspect: this.screen.width / this.screen.height });
+            const fov = (this.camera.fov * Math.PI) / 180;
+            const height = 2 * Math.tan(fov / 2) * this.camera.position.z;
+            const width = height * this.camera.aspect;
+            this.viewport = { width, height };
+            if (this.medias) {
+              this.medias.forEach(media => media.onResize({ screen: this.screen, viewport: this.viewport }));
+            }
+          }
+
+          update() {
+            if (!this.isDown) {
+              if (this.isHovered) {
+                this.scroll.target += 0.002;
+              } else {
+                this.scroll.target += 0.016;
+              }
+            }
+            this.scroll.current = lerp(this.scroll.current, this.scroll.target, this.scroll.ease);
+            const direction = this.scroll.current > this.scroll.last ? "right" : "left";
+            if (this.medias) {
+              this.medias.forEach(media => media.update(this.scroll, direction));
+            }
+            this.renderer.render({ scene: this.scene, camera: this.camera });
+            this.scroll.last = this.scroll.current;
+            this.raf = window.requestAnimationFrame(this.update.bind(this));
+          }
+
+          addEventListeners() {
+            window.addEventListener("resize", this.onResize.bind(this));
+            this.container.addEventListener("mouseenter", () => { this.isHovered = true; });
+            this.container.addEventListener("mouseleave", () => { this.isHovered = false; });
+            this.container.addEventListener("wheel", this.onWheel.bind(this), { passive: true });
+            this.container.addEventListener("mousedown", this.onTouchDown.bind(this));
+            window.addEventListener("mousemove", this.onTouchMove.bind(this));
+            window.addEventListener("mouseup", this.onTouchUp.bind(this));
+            this.container.addEventListener("touchstart", this.onTouchDown.bind(this), { passive: true });
+            window.addEventListener("touchmove", this.onTouchMove.bind(this), { passive: true });
+            window.addEventListener("touchend", this.onTouchUp.bind(this));
+          }
+        }
+
+        new CircularGalleryApp(container, {
+          items,
+          bend: 3,
+          textColor: '#ffffff',
+          borderRadius: 0.05,
+          scrollSpeed: 2,
+          scrollEase: 0.05
+        });
+      }
+
+      window.addEventListener("DOMContentLoaded", function () {
+        initCircularGallery();
+      });
+
+      window.addEventListener("load", function () {
+        initCircularGallery();
+      });
+
       (function () {
         var container = document.getElementById('moltenMetalContainer');
         if (container && window.initMoltenMetal) {
@@ -616,6 +2568,21 @@
           });
         }
       })();
+
+      function toggleReadMore(btn) {
+        const box = btn.parentElement;
+        const shortEl = box.querySelector('.rsi-quote-short');
+        const fullEl = box.querySelector('.rsi-quote-full');
+        if (fullEl.style.display === 'none') {
+          fullEl.style.display = 'inline';
+          shortEl.style.display = 'none';
+          btn.innerHTML = 'Read less &larr;';
+        } else {
+          fullEl.style.display = 'none';
+          shortEl.style.display = 'inline';
+          btn.innerHTML = 'Read more &rarr;';
+        }
+      }
     </script>
 </body>
 
